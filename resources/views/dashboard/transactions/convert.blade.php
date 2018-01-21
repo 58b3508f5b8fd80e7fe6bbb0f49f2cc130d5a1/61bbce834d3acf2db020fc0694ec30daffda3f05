@@ -29,18 +29,27 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-material form-material-lg form-material-info floating">
-                                    <input class="form-control form-control-lg text-center" id="pnm" name="pnm"
-                                           type="text">
-                                    <label for="pnm"><i class="si si-fire"></i> Enter Amount</label>
+                                    <input class="form-control form-control-lg text-center" id="{{$for}}" name="{{$for}}"
+                                           type="text" required>
+                                    <label for="{{$for}}"><i class="si si-fire"></i> Enter Amount</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-material form-material-lg form-material-success floating">
-                                    <input class="form-control form-control-lg text-center" id="ngn" name="ngn"
+                                    <input class="form-control form-control-lg text-center" id="curr" name="curr"
                                            type="text" readonly>
-                                    <label for="ngn">&#8358; Value</label>
+                                    <label for="curr">@if($for=='pnm')<i class="si si-fire"></i>@else &#8358; @endif  Value</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="form-material form-material-lg form-material-success floating">
+                                    <input class="form-control form-control-lg text-center" id="pin" name="pin"
+                                           type="password">
+                                    <label for="pin"><i class="si si-lock"></i> Enter Pin</label>
                                 </div>
                             </div>
                         </div>

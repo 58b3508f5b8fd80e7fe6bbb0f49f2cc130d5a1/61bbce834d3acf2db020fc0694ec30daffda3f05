@@ -12,9 +12,83 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('site.about-us');
+});
+
+Route::get('/about-us', function () {
+    return view('site.about-us');
+});
+Route::get('/account-opening', function () {
+    return view('site.account-opening');
+});
+Route::get('/contacts', function () {
+    return view('site.contacts');
+});
+Route::get('/flags', function () {
+    return view('site.flags_matrix');
+});
+Route::get('/hlight-bg', function () {
+    return view('site.hlight_bg');
+});
+Route::get('/icon-logo', function () {
+    return view('site.icon-logo');
+});
+Route::get('/index', function () {
+    return view('site.index');
+});
+Route::get('/index-2', function () {
+    return view('site.index-2');
+});
+Route::get('/index-3', function () {
+    return view('site.index-3');
+});
+Route::get('/index-4', function () {
+    return view('site.index-4');
+});
+Route::get('/index-5', function () {
+    return view('site.index-5');
+});
+Route::get('/index-7', function () {
+    return view('site.index-7');
+});
+Route::get('/null', function () {
+    return view('site.null');
+});
+Route::get('/numa', function () {
+    return view('site.numa');
+});
+Route::get('/savings', function () {
+    return view('site.savings');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/register', function(\Illuminate\Http\Request $request){
+    if($request->session()->has('user'))
+        return view('auth.register');
+    return redirect('/join');
+});
+
+Route::get('/join', 'Auth\RegisterController@showJoinForm');
+
+Route::post('/register', 'Auth\RegisterController@join');
+Route::put('/register', 'Auth\RegisterController@register');
+
+Route::middleware(['auth'])
+    ->group(function () {
+        // drg >> "get" routes arranged alphabetically
+        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/dashboard','HomeController@index');
+        // drg >> transactions
+        Route::get('/transaction/{for}/{action}','TransactionController@index');
+        Route::get('/transaction/{id}','TransactionController@viewTransaction');
+        Route::get('/transactions','TransactionController@viewTransactions');
+        Route::get('/settings','SettingsController@index');
+        Route::get('/statistics','HomeController@statistics');
+        // drg >> "post" routes arranged alphabetically
+        Route::post('/transaction/{for}/{action}','TransactionController@process');
+        Route::post('/settings','SettingsController@index');
+    });
+
+
+

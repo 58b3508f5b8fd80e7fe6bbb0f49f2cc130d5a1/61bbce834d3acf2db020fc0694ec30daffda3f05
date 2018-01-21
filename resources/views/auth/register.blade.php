@@ -11,64 +11,111 @@
     </div>
     <div class="row justify-content-center px-5">
         <div class="col-sm-8 col-md-6 col-xl-4">
-            <form class="js-validation-signup" action="https://demo.pixelcave.com/codebase/be_pages_auth_all.php"
+            <form class="js-validation-signup" action="{{url('/register')}}"
                   method="post">
-                <div class="form-group row">
-                    <div class="col-12">
+                <input type="hidden" name="_method" value="PUT">
+                {{csrf_field()}}
+                <input name="find" type="hidden" value="{{session('user')->id+1147}}">
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}  row">
+                    <div class="col-6 col-xs-4">
                         <div class="form-material floating">
-                            <input class="form-control" id="name" name="name" type="text">
-                            <label for="name">Username</label>
+                            <input class="form-control" id="name" name="acc_number" type="text"
+                                   value="{{session('user')->account_number}}" readonly>
+                            <label for="name">Account Number</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xs-8">
+                        <div class="form-material floating">
+                            <input class="form-control" id="name" name="wallet" type="text"
+                                   value="{{session('user')->wallet_address}}" readonly>
+                            <label for="name">Wallet Address</label>
                         </div>
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} row">
+                <div class="form-group{{ $errors->has('name') ? ' is-invalid' : '' }}  row">
                     <div class="col-12">
                         <div class="form-material floating">
-                            <input class="form-control" id="email" name="email" type="email">
+                            <input class="form-control" id="name" name="name" type="text" value="{{old('name')}}"
+                                   required>
+                            <label for="name">Username</label>
+                        </div>
+                        @if ($errors->has('name'))
+                            <span class="invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </span>
+                        @endif
+                    </div>
+
+                </div>
+                <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }} row">
+                    <div class="col-12">
+                        <div class="form-material floating">
+                            <input class="form-control" id="email" name="email" type="email" value="{{old('email')}}"
+                                   required>
                             <label for="email">Email</label>
                         </div>
                         @if ($errors->has('email'))
                             <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                {{ $errors->first('eail') }}
+                            </span>
                         @endif
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-12">
+                <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }} row">
+                    <div class="col-6">
                         <div class="form-material floating">
-                            <input class="form-control" id="password" name="password" type="password">
+                            <input class="form-control" id="password" name="password" type="password" required>
                             <label for="password">Password</label>
                         </div>
                         @if ($errors->has('password'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                            <span class="invalid-feedback">
+                                {{ $errors->first('password') }}
+                            </span>
                         @endif
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-12">
+
+                    <div class="col-6">
                         <div class="form-material floating">
                             <input class="form-control" id="password-confirm" name="password_confirmation"
-                                   type="password">
-                            <label for="password-confirm">Password Confirmation</label>
+                                   type="password" required>
+                            <label for="password-confirm">Confirm Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }} row">
+                    <div class="col-6">
+                        <div class="form-material floating">
+                            <input class="form-control" id="pin" name="pin" type="password" maxlength="4" required>
+                            <label for="pin">Pin</label>
+                        </div>
+                        @if ($errors->has('pin'))
+                            <span class="invalid-feedback">
+                                {{ $errors->first('pin') }}
+                            </span>
+                        @endif
+                    </div>
+                    <div class="col-6">
+                        <div class="form-material floating">
+                            <input class="form-control" id="pin-confirm" name="pin_confirmation"
+                                   type="password" required>
+                            <label for="pin-confirm">Confirm Pin</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row text-center">
                     <div class="col-12">
                         <label class="css-control css-control-primary css-checkbox">
-                            <input class="css-control-input" id="signup-terms" name="signup-terms" type="checkbox">
+                            <input class="css-control-input" id="signup-terms" name="signup-terms" type="checkbox"
+                                   required>
                             <span class="css-control-indicator"></span>
-                            I agree to Terms &amp; Conditions
+                            I agree to Terms & Conditions
                         </label>
                     </div>
                 </div>
                 <div class="form-group row gutters-tiny">
                     <div class="col-12 mb-10">
                         <button type="submit" class="btn btn-block btn-hero btn-noborder btn-rounded btn-alt-success">
-                            <i class="si si-user-follow mr-10"></i> Sign Up
+                            <i class="si si-user-follow mr-10"></i> Register
                         </button>
                     </div>
                     <div class="col-6">

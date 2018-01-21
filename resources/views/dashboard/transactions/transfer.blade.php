@@ -30,7 +30,7 @@
                             <div class="col-md-12">
                                 <div class="form-material form-material-lg form-material-info floating">
                                     <input class="form-control form-control-lg text-center" id="pnm" name="pnm"
-                                           type="text">
+                                           type="text" required>
                                     <label for="pnm"><i class="si si-fire"></i> Enter Amount</label>
                                 </div>
                             </div>
@@ -38,9 +38,18 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-material form-material-lg form-material-success floating">
-                                    <input class="form-control form-control-lg text-center" id="ngn" name="ngn"
-                                           type="text" readonly>
-                                    <label for="ngn">&#8358; Value</label>
+                                    <input class="form-control form-control-lg text-center" id="wallet" name="wallet"
+                                           type="text" required>
+                                    <label for="wallet"><i class ="si si-user"></i> Enter Wallet ID</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="form-material form-material-lg form-material-success floating">
+                                    <input class="form-control form-control-lg text-center" id="pin" name="pin"
+                                           type="password" required>
+                                    <label for="pin"><i class="si si-lock"></i> Enter Pin</label>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +59,7 @@
                                         class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
                                         data-toggle="click-ripple"><span
                                             style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"
-                                            class="click-ripple animate"></span>Danger
+                                            class="click-ripple animate"></span>Transfer
                                 </button>
                             </div>
                         </div>
