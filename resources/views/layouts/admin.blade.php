@@ -58,7 +58,7 @@
                         <ul class="list-inline mt-10">
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase"
-                                   href="be_pages_generic_profile.html">{{Auth::user()->first_name or 'user'}}</a>
+                                   href="be_pages_generic_profile.html">{{Auth::user()->first_name }}</a>
                             </li>
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark" data-toggle="layout"
@@ -91,6 +91,9 @@
                                         class="sidebar-mini-hide"> Users</span></a>
                             <ul>
                                 <li>
+                                    <a href="{{url('/admin/users/admin')}}">View Admins</a>
+                                </li>
+                                <li>
                                     <a href="{{url('/admin/users/all')}}">View all Users</a>
                                 </li>
                                 <li>
@@ -100,7 +103,16 @@
                                     <a href="{{url('/admin/users/unregistered')}}">View Unregistered Users</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/admin/users/suspend')}}">Suspend User</a>
+                                    <a href="{{url('/admin/users/unregistered')}}">View Active Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/users/unregistered')}}">View Suspended Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/users/suspended')}}">Suspended Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/users/blocked')}}">Blocked Users</a>
                                 </li>
                             </ul>
                         </li>
@@ -146,12 +158,16 @@
                         data-action="sidebar_toggle">
                     <i class="fa fa-navicon"></i>
                 </button>
+                <button type="button" class="btn btn-circle btn-dual-secondary" data-toggle="layout"
+                        data-action="header_search_on">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
             <div class="content-header-section">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{Auth::user()->first_name or 'user'}}<i class="fa fa-angle-down ml-5"></i>
+                        {{Auth::user()->first_name }}<i class="fa fa-angle-down ml-5"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right min-width-150"
                          aria-labelledby="page-header-user-dropdown">
@@ -181,7 +197,26 @@
                 </div>
             </div>
         </div>
-
+        <div id="page-header-search" class="overlay-header">
+            <div class="content-header content-header-fullrow">
+                <form action="{{url('/admin/search')}}" method="get">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-secondary" data-toggle="layout" data-action="header_search_off">
+                        <i class="fa fa-times"></i>
+                        </button>
+                        </span>
+                        <input class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input"
+                               name="search" type="text">
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn btn-secondary">
+                        <i class="fa fa-search"></i>
+                        </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
 
     </header>
     <main id="main-container">

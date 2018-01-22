@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-
+@section('title', 'Login')
 @section('content')
     <div class="bg-gd-dusk">
         <div class="hero-static content content-full bg-white js-appear-enabled animated fadeIn" data-toggle="appear">
