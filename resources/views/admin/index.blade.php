@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('title','Dashboard')
 @section('content')
     <div class="content">
@@ -10,7 +10,7 @@
                             <i class="si si-bag fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000"
-                             data-to="1500"><i class="si si-fire"></i>{{$currentValue}}</div>
+                             data-to="1500"><i class="si si-fire"></i>{{$currentValue or 0}}</div>
                         <div class="font-size-sm font-w600 text-uppercase text-muted">Value per PNM</div>
                     </div>
                 </a>
@@ -23,7 +23,7 @@
                         </div>
                         <div class="font-size-h3 font-w600"><span class="js-count-to-enabled" data-toggle="countTo"
                                                                   data-speed="1000" data-to="780"><i
-                                        class="si si-fire"></i>{{$transferredPNM}}</span></div>
+                                        class="si si-fire"></i>{{$transferredPNM or 0}}</span></div>
                         <div class="font-size-sm font-w600 text-uppercase text-muted">PNM Transferred</div>
                     </div>
                 </a>
@@ -35,7 +35,7 @@
                             <i class="si si-envelope-open fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000"
-                             data-to="15"><i class="si si-fire"></i>{{$convertedPNM}}</div>
+                             data-to="15"><i class="si si-fire"></i>{{$convertedPNM or 0}}</div>
                         <div class="font-size-sm font-w600 text-uppercase text-muted">PNM Converted</div>
                     </div>
                 </a>
@@ -47,12 +47,13 @@
                             <i class="si si-users fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000"
-                             data-to="4252"><i class="si si-fire"></i>{{$withdrawnPNM}}</div>
+                             data-to="4252"><i class="si si-fire"></i>{{$withdrawnPNM or 0}}</div>
                         <div class="font-size-sm font-w600 text-uppercase text-muted">PNM Withdrawn</div>
                     </div>
                 </a>
             </div>
         </div>
+        {{--
         <div class="row gutters-tiny">
             <div class="col-6">
                 <a class="block block-transparent text-center bg-primary" href="javascript:void(0)">
@@ -61,7 +62,7 @@
                     </div>
                     <div class="block-content">
                         <p class="font-size-h1 text-white">
-                            <strong><i class="si si-fire"></i>{{$totalPNM}}</strong>
+                            <strong><i class="si si-fire"></i>{{$totalPNM or 0}}</strong>
                         </p>
                     </div>
                 </a>
@@ -108,7 +109,7 @@
                     </div>
                     <div class="block-content">
                         <p class="font-size-h1 text-white">
-                            <strong>&#8358;{{$totalNGN}}</strong>
+                            <strong>&#8358;{{$totalNGN or 0}}</strong>
                         </p>
                     </div>
                 </a>
@@ -137,6 +138,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
     </div>
 @endsection

@@ -47,7 +47,7 @@
                                 <label class="css-control css-control-primary css-checkbox">
                                     <input class="css-control-input" id="remember" name="remember"  {{ old('remember') ? 'checked' : '' }} type="checkbox">
                                     <span class="css-control-indicator"></span>
-                                    I agree to Terms &amp; Conditions
+                                    Remember me
                                 </label>
                             </div>
                         </div>

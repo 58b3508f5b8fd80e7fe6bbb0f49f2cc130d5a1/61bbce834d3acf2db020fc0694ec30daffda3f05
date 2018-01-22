@@ -16,7 +16,7 @@
                 <input type="hidden" name="_method" value="PUT">
                 {{csrf_field()}}
                 <input name="find" type="hidden" value="{{session('user')->id+1147}}">
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}  row">
+                <div class="form-group{{ $errors->has('account') ? ' is-invalid' : '' }}  row">
                     <div class="col-6 col-xs-4">
                         <div class="form-material floating">
                             <input class="form-control" id="name" name="acc_number" type="text"
@@ -55,13 +55,13 @@
                             <label for="email">Email</label>
                         </div>
                         @if ($errors->has('email'))
-                            <span class="help-block">
-                                {{ $errors->first('eail') }}
+                            <span class="invalid-feedback">
+                                {{ $errors->first('email') }}
                             </span>
                         @endif
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }} row">
+                <div class="form-group{{ $errors->has('password') ? ' is-invalid' : '' }} row">
                     <div class="col-6">
                         <div class="form-material floating">
                             <input class="form-control" id="password" name="password" type="password" required>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('email') ? ' is-invalid' : '' }} row">
+                <div class="form-group{{ $errors->has('pin') ? ' is-invalid' : '' }} row">
                     <div class="col-6">
                         <div class="form-material floating">
                             <input class="form-control" id="pin" name="pin" type="password" maxlength="4" required>

@@ -63,9 +63,11 @@ Route::get('/savings', function () {
 
 Auth::routes();
 
-Route::get('/register', function(\Illuminate\Http\Request $request){
-    if($request->session()->has('user'))
+Route::get('/register', function (\Illuminate\Http\Request $request) {
+    if ($request->session()->has('user')) {
+        $request->session()->reflash();
         return view('auth.register');
+    }
     return redirect('/join');
 });
 
@@ -74,21 +76,40 @@ Route::get('/join', 'Auth\RegisterController@showJoinForm');
 Route::post('/register', 'Auth\RegisterController@join');
 Route::put('/register', 'Auth\RegisterController@register');
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'isUser'])
     ->group(function () {
         // drg >> "get" routes arranged alphabetically
         Route::get('/home', 'HomeController@index')->name('home');
-        Route::get('/dashboard','HomeController@index');
+        Route::get('/dashboard', 'HomeController@index');
         // drg >> transactions
-        Route::get('/transaction/{for}/{action}','TransactionController@index');
-        Route::get('/transaction/{id}','TransactionController@viewTransaction');
-        Route::get('/transactions','TransactionController@viewTransactions');
-        Route::get('/settings','SettingsController@index');
-        Route::get('/statistics','HomeController@statistics');
+        Route::get('/transaction/{for}/{action}',
+            'TransactionController@index');
+        Route::get('/transaction/{id}',
+            'TransactionController@viewTransaction');
+        Route::get('/transactions', 'TransactionController@viewTransactions');
+        Route::get('/settings', 'SettingsController@index');
+        Route::get('/statistics', 'HomeController@statistics');
         // drg >> "post" routes arranged alphabetically
-        Route::post('/transaction/{for}/{action}','TransactionController@process');
-        Route::post('/settings','SettingsController@index');
+        Route::post('/transaction/{for}/{action}',
+            'TransactionController@process');
+        Route::post('/settings', 'SettingsController@index');
     });
 
+Route::middleware(['auth', 'isAdmin'])
+    ->group(function () {
+        Route::namespace('Admin')->group(function () {
+            Route::prefix('/admin')->group(function () {
+                Route::get('', 'AdminController@index');
+                // drg >> transaction functions
+                Route::get('/transactions/share', 'AdminTransactionsController@viewShare');
+                Route::get('/transactions/ngn', 'AdminTransactionsController@viewNgn');
+                Route::get('/transactions/withdrawal', 'AdminTransactionsController@viewWithdrawal');
 
+                // drg >> new functions
+                Route::get('/add/user','AdminAddController@viewAddUser');
+                Route::get('/add/admin','AdminAddController@viewAddAdmin');
+                Route::get('/add/pnm','AdminAddController@viewAddPnm');
+            });
 
+        });
+    });

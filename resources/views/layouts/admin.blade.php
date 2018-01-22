@@ -58,7 +58,7 @@
                         <ul class="list-inline mt-10">
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase"
-                                   href="be_pages_generic_profile.html">{{Auth::user()->first_name}}</a>
+                                   href="be_pages_generic_profile.html">{{Auth::user()->first_name or 'user'}}</a>
                             </li>
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark" data-toggle="layout"
@@ -79,41 +79,60 @@
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
                         <li>
-                            <a href="{{url('/dashboard')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                            <a href="{{url('/admin/dashboard')}}"><i class="fa fa-dashboard"></i><span
+                                        class="sidebar-mini-hide">Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="{{url('/statistics')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Statistics</span></a>
-                        </li>
-                        <li class="nav-main-heading"><span class="sidebar-mini-visible">PNM</span><span
-                                    class="sidebar-mini-hidden">PNM</span></li>
-                        <li>
-                            <a href="{{url('transaction/pnm/convert')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Convert PNM</span></a>
+                            <a href="{{url('/admin/statistics')}}"><i class="fa fa-line-chart"></i><span
+                                        class="sidebar-mini-hide">Statistics</span></a>
                         </li>
                         <li>
-                            <a href="{{url('transaction/pnm/transfer')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Transfer PNM</span></a>
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-users"></i><span
+                                        class="sidebar-mini-hide"> Users</span></a>
+                            <ul>
+                                <li>
+                                    <a href="{{url('/admin/users/all')}}">View all Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/users/registered')}}">View Registered Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/users/unregistered')}}">View Unregistered Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/users/suspend')}}">Suspend User</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="{{url('transaction/pnm/withdraw')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Withdraw PNM</span></a>
-                        </li>
-
-                        <li class="nav-main-heading"><span class="sidebar-mini-visible">NGN</span><span
-                                    class="sidebar-mini-hidden">NGN</span></li>
-                        <li>
-                            <a href="{{url('transaction/ngn/convert')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Convert NGN</span></a>
-                        </li>
-                        <li>
-                            <a href="{{url('transaction/ngn/withdraw')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Withdraw NGN</span></a>
-                        </li>
-                        <li class="nav-main-heading"><span class="sidebar-mini-visible">Usage</span><span
-                                    class="sidebar-mini-hidden">Usage</span></li>
-                        <li>
-                            <a href="{{url('/transactions')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Transactions History</span></a>
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-plus"></i><span
+                                        class="sidebar-mini-hide"> Add New</span></a>
+                            <ul>
+                                <li>
+                                    <a href="{{url('/admin/add/user')}}">New User</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/add/admin')}}">New Admin</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/add/pnm')}}">PNM</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="{{url('/faq')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">FAQs</span></a>
-                        </li>
-                        <li>
-                            <a href="{{url('/settings')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Settings</span></a>
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-fire"></i><span
+                                        class="sidebar-mini-hide"> Transactions</span></a>
+                            <ul>
+                                <li>
+                                    <a href="{{url('/admin/transactions/share')}}">Share PNM</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/transactions/ngn')}}">Approve NGN Payments</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/transactions/withdrawal')}}">Approve Withdrawal Requests</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -132,7 +151,7 @@
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{Auth::user()->first_name}}<i class="fa fa-angle-down ml-5"></i>
+                        {{Auth::user()->first_name or 'user'}}<i class="fa fa-angle-down ml-5"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right min-width-150"
                          aria-labelledby="page-header-user-dropdown">
@@ -172,8 +191,8 @@
         <div class="content py-20 font-size-xs clearfix">
             <div class="float-right">
                 <i class="fa fa-gear fa-spin text-success"></i> Designed by <a class="font-w600"
-                                                                    href="{{config('app.designerWebsite')}}"
-                                                                    target="_blank">{{config('app.designer')}}</a>
+                                                                               href="{{config('app.designerWebsite')}}"
+                                                                               target="_blank">{{config('app.designer')}}</a>
             </div>
             <div class="float-left">
                 <a class="font-w600" href="{{url('/')}}" target="_blank"></a>{{ config('app.name') }} &copy; <span
