@@ -13,7 +13,7 @@ class AdminUserController extends Controller
     //
     public function viewActiveUsers()
     {
-        $data['action'] = 'suspended';
+        $data['action'] = 'active';
         $data['users'] = User::where('type', 'user')->where('status', 'active')
             ->get();
         return view('admin.users', $data);
@@ -52,7 +52,8 @@ class AdminUserController extends Controller
     public function viewUnregisteredUsers()
     {
         $data['action'] = 'unregistered';
-        $data['users'] = User::where('status', 'unregistered')->get();
+        $data['users'] = User_meta::where('status', 'unregistered')
+            ->orWhere('status', 'pending')->get();
         return view('admin.users', $data);
     }
 

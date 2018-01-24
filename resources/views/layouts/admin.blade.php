@@ -103,16 +103,13 @@
                                     <a href="{{url('/admin/users/unregistered')}}">View Unregistered Users</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/admin/users/unregistered')}}">View Active Users</a>
+                                    <a href="{{url('/admin/users/active')}}">View Active Users</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/admin/users/unregistered')}}">View Suspended Users</a>
+                                    <a href="{{url('/admin/users/suspended')}}">View Suspended Users</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/admin/users/suspended')}}">Suspended Users</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/users/blocked')}}">Blocked Users</a>
+                                    <a href="{{url('/admin/users/blocked')}}">View Blocked Users</a>
                                 </li>
                             </ul>
                         </li>
@@ -239,6 +236,7 @@
 <script src="{{asset('js/codebase.min-1.4.js')}}"></script>
 <script src="{{asset('js/chart.bundle.min.js')}}"></script>
 <script src="{{asset('js/be_pages_dashboard.js')}}"></script>
+@yield('scripts')
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>

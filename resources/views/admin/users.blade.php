@@ -85,7 +85,7 @@
                     <div class="block">
                         <div class="alert alert-warning">
                             <h2>No data to display</h2>
-                            <p>Sorry, but there are no transactions to display from the database.</p>
+                            <p>Sorry, but there are no users to display from the database.</p>
                         </div>
                     </div>
                 </div>

@@ -115,6 +115,7 @@ Route::middleware(['auth', 'isAdmin'])
                 Route::get('/add/pnm', 'AdminAddController@viewAddPnm');
 
                 // drg >> users functions
+                Route::get('users/active', 'AdminUserController@viewActiveUsers');
                 Route::get('users/admin', 'AdminUserController@viewAdmins');
                 Route::get('users/all', 'AdminUserController@viewAllUsers');
                 Route::get('users/blocked', 'AdminUserController@viewBlockedUsers');
@@ -124,6 +125,11 @@ Route::middleware(['auth', 'isAdmin'])
                     'AdminUserController@viewUnregisteredUsers');
                 Route::get('users/suspended',
                     'AdminUserController@viewSuspendedUsers');
+
+                // drg >> handling add functions
+                Route::post('/add/user', 'AdminAddController@addUser');
+                Route::post('/add/admin', 'AdminAddController@viewAddAdmin');
+                Route::post('/add/pnm', 'AdminAddController@viewAddPnm');
 
                 // drg >> search
                 Route::post('/search');
