@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Transaction;
 use App\User_meta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AdminAddController extends Controller
 {
     //
+    public function __construct(AdminController $details)
+    {
+        $this->details = $details;
+    }
+
     protected function validateUser(array $data)
     {
         return Validator::make($data, [
@@ -49,6 +57,43 @@ class AdminAddController extends Controller
             'idcard_location'       => 'required|string|unique:users|max:255',
             'passport_location'     => 'required|string|unique:users|max:255',
         ]);
+    }
+
+    public function addPNM(Request $request)
+    {
+        $value = $this->details->getCurrentValue();
+        $pnm = $request->input('amount');
+        $pin = $request->input('pin');
+
+        $data['action'] = 'new PNM';
+        $checkPin = Hash::check($pin, Auth::user()->pin);
+        if ($checkPin) {
+            $ngn = $pnm * (int)$value;
+            $description = "Admin added $pnm PNM worth $ngn NGN";
+            $type = "admin-holding";
+            $transaction = new Transaction();
+            $transactionID = md5(Auth::user()->wallet_id . $pnm . $ngn
+                . date('YFlHisuA'));
+            $transaction->transaction_id = $transactionID;
+            $transaction->from = Auth::user()->name;
+            $transaction->to = Auth::user()->wallet_id;
+            $transaction->amount = $pnm;
+            $transaction->value = $value;
+            $transaction->description = $description;
+            $transaction->type = $type;
+            $transaction->status = 'successful';
+            $transaction->remark = 'credit';
+            $transaction->save();
+            if ($transaction->save()) {
+                $data['alert'] = 'success';
+                $data['message'] = "Your transaction was successful";
+            }
+        } elseif (!$checkPin) {
+            $data['alert'] = 'danger';
+            $data['message'] = "Sorry, the pin you entered was incorrect";
+        }
+
+        return view('admin.newPNM', $data);
     }
 
     public function addUser(Request $request)
@@ -147,7 +192,8 @@ class AdminAddController extends Controller
         var_dump($details);
     }
 
-    public function viewAddUser($data = array()) {
+    public function viewAddUser($data = array())
+    {
         $data['action'] = 'new user';
         return view('admin.newUser', $data);
     }
@@ -159,7 +205,8 @@ class AdminAddController extends Controller
 
     public function viewAddPnm()
     {
-
+        $data['action'] = 'new PNM';
+        return view('admin.newPNM', $data);
     }
 
 }

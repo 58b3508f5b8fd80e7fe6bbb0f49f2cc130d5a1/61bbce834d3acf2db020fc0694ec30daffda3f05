@@ -16,8 +16,7 @@
                 <div class="col-sm-12 col-lg-12">
                     <div class="block">
                         <div class="alert alert-{{$alert}}">
-                            <h2>Status Message</h2>
-                            <p>{{$message}}</p>
+                            <h2>{{$message}}</h2>
                         </div>
                     </div>
                 </div>

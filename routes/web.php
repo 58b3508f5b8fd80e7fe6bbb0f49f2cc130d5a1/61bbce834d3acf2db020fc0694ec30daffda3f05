@@ -129,7 +129,7 @@ Route::middleware(['auth', 'isAdmin'])
                 // drg >> handling add functions
                 Route::post('/add/user', 'AdminAddController@addUser');
                 Route::post('/add/admin', 'AdminAddController@viewAddAdmin');
-                Route::post('/add/pnm', 'AdminAddController@viewAddPnm');
+                Route::post('/add/pnm', 'AdminAddController@addPNM');
 
                 // drg >> search
                 Route::post('/search');

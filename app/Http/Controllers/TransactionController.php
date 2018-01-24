@@ -233,7 +233,7 @@ class TransactionController extends Controller
                 . date('YFlHisuA'));
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->name;
-            $transaction->to = Auth::user()->wallet_address;
+            $transaction->to = Auth::user()->wallet_id;
             $transaction->amount = $pnm;
             $transaction->value = $value;
             $transaction->description = $description;
