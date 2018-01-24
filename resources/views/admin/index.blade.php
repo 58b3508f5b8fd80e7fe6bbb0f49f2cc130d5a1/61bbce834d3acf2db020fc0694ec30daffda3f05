@@ -10,8 +10,8 @@
                             <i class="si si-bag fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000"
-                             data-to="1500"><i class="si si-fire"></i>{{$currentValue or 0}}</div>
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Value per PNM</div>
+                             data-to="1500"><i class="si si-fire"></i>{{$sharedPNM or 0}}</div>
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Shared PNM</div>
                     </div>
                 </a>
             </div>
@@ -23,8 +23,8 @@
                         </div>
                         <div class="font-size-h3 font-w600"><span class="js-count-to-enabled" data-toggle="countTo"
                                                                   data-speed="1000" data-to="780"><i
-                                        class="si si-fire"></i>{{$transferredPNM or 0}}</span></div>
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">PNM Transferred</div>
+                                        class="si si-fire"></i>{{$transactionCommission or 0}}</span></div>
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Transaction Commission</div>
                     </div>
                 </a>
             </div>
@@ -35,8 +35,8 @@
                             <i class="si si-envelope-open fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000"
-                             data-to="15"><i class="si si-fire"></i>{{$convertedPNM or 0}}</div>
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">PNM Converted</div>
+                             data-to="15"><i class="si si-fire"></i>{{$totalReserve or 0}}</div>
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Total Reserve</div>
                     </div>
                 </a>
             </div>
@@ -47,8 +47,8 @@
                             <i class="si si-users fa-3x text-body-bg-dark"></i>
                         </div>
                         <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000"
-                             data-to="4252"><i class="si si-fire"></i>{{$withdrawnPNM or 0}}</div>
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">PNM Withdrawn</div>
+                             data-to="4252"><i class="si si-fire"></i>{{$totalReserveValue or 0}}</div>
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Total Reserve Value</div>
                     </div>
                 </a>
             </div>

@@ -101,6 +101,12 @@ Route::middleware(['auth', 'isAdmin'])
             Route::prefix('/admin')->group(function () {
                 Route::get('', 'AdminController@index');
                 Route::get('/dashboard', 'AdminController@index');
+
+                // drg >> add functions
+                Route::get('/add/user', 'AdminAddController@viewAddUser');
+                Route::get('/add/admin', 'AdminAddController@viewAddAdmin');
+                Route::get('/add/pnm', 'AdminAddController@viewAddPnm');
+
                 // drg >> transaction functions
                 Route::get('/transactions/share',
                     'AdminTransactionsController@viewShare');
@@ -109,16 +115,13 @@ Route::middleware(['auth', 'isAdmin'])
                 Route::get('/transactions/withdrawal',
                     'AdminTransactionsController@viewWithdrawal');
 
-                // drg >> add functions
-                Route::get('/add/user', 'AdminAddController@viewAddUser');
-                Route::get('/add/admin', 'AdminAddController@viewAddAdmin');
-                Route::get('/add/pnm', 'AdminAddController@viewAddPnm');
-
                 // drg >> users functions
-                Route::get('users/active', 'AdminUserController@viewActiveUsers');
+                Route::get('users/active',
+                    'AdminUserController@viewActiveUsers');
                 Route::get('users/admin', 'AdminUserController@viewAdmins');
                 Route::get('users/all', 'AdminUserController@viewAllUsers');
-                Route::get('users/blocked', 'AdminUserController@viewBlockedUsers');
+                Route::get('users/blocked',
+                    'AdminUserController@viewBlockedUsers');
                 Route::get('users/registered',
                     'AdminUserController@viewRegisteredUsers');
                 Route::get('users/unregistered',
@@ -130,6 +133,14 @@ Route::middleware(['auth', 'isAdmin'])
                 Route::post('/add/user', 'AdminAddController@addUser');
                 Route::post('/add/admin', 'AdminAddController@viewAddAdmin');
                 Route::post('/add/pnm', 'AdminAddController@addPNM');
+
+                // drg >> handling transaction functions
+                Route::post('/transactions/share',
+                    'AdminTransactionsController@sharePNM');
+                Route::post('/transactions/ngn',
+                    'AdminTransactionsController@approveNgn');
+                Route::post('/transactions/withdrawal',
+                    'AdminTransactionsController@approveWithdrawal');
 
                 // drg >> search
                 Route::post('/search');

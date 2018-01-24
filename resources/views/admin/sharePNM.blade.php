@@ -1,14 +1,14 @@
 @extends('layouts.admin')
-@section('title', title_case($action).' users')
+@section('title', title_case($action))
 @section('content')
     <nav class="breadcrumb bg-white push">
         <a class="breadcrumb-item" href="{{url('/admin')}}">Admin</a>
-        <span class="breadcrumb-item active">View {{title_case($action)}} Users</span>
+        <span class="breadcrumb-item active">{{title_case($action)}}</span>
     </nav>
     <div class="block">
         <div class="block-header block-header-default">
-            <h3 class="block-title">Users
-                <small>Viewing {{title_case($action)}}</small>
+            <h3 class="block-title">Transactions
+                <small>Transaction {{title_case($action)}}</small>
             </h3>
         </div>
         <div class="col-12 col-lg-4 col-md-6 col-xs-8" style="float: none; margin: auto;">
@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="block-content">
-                <form action="http://127.0.0.1:8000/transaction/pnm/transfer" method="post" class="text-center">
-                    <input name="_token" value="YhMRJ5749NSM7bvQvhojJg3uBJSR8JhmVCRkZGIY" type="hidden">
+                <form action="{{url('/admin/transactions/share')}}" method="post" class="text-center">
+                    {{csrf_field()}}
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="form-material form-material-lg form-material-info floating">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <button style="overflow: hidden; position: relative; z-index: 1;" type="button"
+                            <button style="overflow: hidden; position: relative; z-index: 1;" type="submit"
                                     class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
                                     data-toggle="click-ripple"><span
                                         style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"

@@ -6,13 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Setting;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     //
     public function index()
     {
-        return view('admin.index');
+        $data['totalReserve'] = $this->getTotalReserve();
+        $data['totalReserveValue'] = $this->getTotalReserveValue();
+        $data['transactionCommission'] = $this->getTransactionCommission();
+        $data['sharedPNM'] = $this->getSharedPNM();
+        return view('admin.index', $data);
     }
 
     public function getCurrentValue()
@@ -21,27 +26,62 @@ class AdminController extends Controller
         return $value;
     }
 
-    public function getPNMReserve()
+    public function getCheckProfitStart()
     {
-        $pnm = Transaction::where('from', Auth::user()->wallet_id)
-            ->where('type', 'pnm-ngn')->where('remark', 'debit')
+        $start = Setting::where('name', 'check_profit_start')->value('value');
+        return $start;
+    }
+
+    public function getCheckSharedStart()
+    {
+        $start = Setting::where('name', 'check_shared_start')->value('value');
+        return $start;
+    }
+
+    public function getTotalReserve()
+    {
+        $transactionCommission = $this->getTransactionCommission();
+        $addedPNM = Transaction::where('from', Auth::user()->name)
+            ->where('to', Auth::user()->wallet_id)
+            ->where('type', 'admin-holding')->where('remark', 'credit')
+            ->where('status', 'successful')
             ->sum('amount');
-        return $pnm;
+        $sharedPNM = $this->getSharedPNM();
+        $credit = $transactionCommission + $addedPNM;
+        $reserve = $credit - $sharedPNM;
+        return $reserve;
     }
 
     public function getSharedPNM()
     {
+
         $pnm = Transaction::where('from', Auth::user()->wallet_id)
-            ->where('type', 'pnm-pnm')->where('remark', 'debit')
+            ->where('type', 'holding-pnm')->where('status', 'successful')
             ->sum('amount');
         return $pnm;
     }
 
-    public function getPNM()
+    public function getTransactionCommission()
     {
-        $pnm = Transaction::where('from', Auth::user()->wallet_id)
-            ->where('type', 'pnm-user')->where('remark', 'debit')
+        $start = $this->getCheckProfitStart();
+        $pnm = Transaction::where('type', 'pnm-holding')
+            ->where('remark', 'debit')
+            ->whereDate('updated_at', ">", $start)
+            ->where('status', 'successful')
             ->sum('amount');
         return $pnm;
+    }
+
+    public function getTotalReserveValue()
+    {
+        $reserve = $this->getTotalReserve();
+        $value = $this->getCurrentValue();
+        $reserveValue = $reserve * $value;
+        return $reserveValue;
+    }
+
+    public function sharePNM()
+    {
+
     }
 }
