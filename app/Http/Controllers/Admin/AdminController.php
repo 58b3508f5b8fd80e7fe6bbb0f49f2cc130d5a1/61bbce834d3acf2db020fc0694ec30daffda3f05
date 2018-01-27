@@ -65,6 +65,7 @@ class AdminController extends Controller
     {
         $start = $this->getCheckProfitStart();
         $pnm = Transaction::where('type', 'pnm-holding')
+            ->where('to', 'holding')
             ->where('remark', 'debit')
             ->whereDate('updated_at', ">", $start)
             ->where('status', 'successful')

@@ -7,12 +7,14 @@
             <small>{!! $title!!}</small>
         </h2>
         <div class="block">
-            @if(isset($success) && isset($message))
-                <div class="alert alert-success animation-hatch"><h3>{{$success}}</h3>
-                    <p>{{$message}}</p></div>
-            @elseif(isset($failed) && isset($message))
-                <div class="alert alert-danger animation-hatch"><h3>{{$failed}}</h3>
-                    <p>{{$message}}</p></div>
+            @if(isset($message))
+                <div class="block-content">
+                    <div class="block">
+                        <div class="alert alert-{{$alert}}">
+                            <p style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
+                        </div>
+                    </div>
+                </div>
             @endif
             <div class="col-12 col-lg-4 col-md-6 col-xs-8" style="float: none; margin: auto;">
                 <div class="block-header block-header-default">
@@ -29,7 +31,7 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-material form-material-lg form-material-info floating">
-                                    <input class="form-control form-control-lg text-center" id="pnm" name="pnm"
+                                    <input class="form-control form-control-lg text-center" id="pnm" name="amount"
                                            type="text">
                                     <label for="pnm">@if($for=='pnm')<i class="si si-fire"></i>@else &#8358; @endif Enter Amount</label>
                                 </div>
@@ -46,7 +48,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <button style="overflow: hidden; position: relative; z-index: 1;" type="button"
+                                <button style="overflow: hidden; position: relative; z-index: 1;" type="submit"
                                         class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
                                         data-toggle="click-ripple"><span
                                             style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"
@@ -66,7 +68,7 @@
                     <h2 class="modal-title">Wallet <i class="fa fa-angle-double-right text-danger"></i> Card</h2>
                 </div>
                 <div class="modal-body">
-                    <form id="transaction-confirm" action="{{url('/transactions/card')}}" method="post">
+                    <form id="transaction-confirm" action='{{url("/transactions/$for/$action")}}' method="post">
                         {{csrf_field()}}
                         <fieldset>
                             <legend>Confirm your transaction</legend>
@@ -90,7 +92,7 @@
                             </div>
                             <input type="hidden" id="amount" name="amount" required>
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="user-settings-password">Enter
+                                <label class="col-md-4 control-label" for="password">Enter
                                     Password</label>
                                 <div class="col-md-8">
                                     <input type="password" id="password" name="password"
@@ -109,7 +111,7 @@
         </div>
     </div>
 @endsection
-@section('script')
+@section('scripts')
     <script>
         function confirmTransaction() {
             var amount = $('#transfer').val();
@@ -117,5 +119,8 @@
             $('#modal-transaction').modal('show');
 
         }
+        @if(isset($message))
+        alert('{{$message}}');
+        @endif
     </script>
 @endsection

@@ -1,4 +1,7 @@
-<!doctype html>
+@php
+    $data= session('stats');
+@endphp
+        <!doctype html>
 <!--[if lte IE 9]>
 <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -74,43 +77,53 @@
                                 </a>
                             </li>
                         </ul>
+
                     </div>
                 </div>
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
                         <li>
-                            <a href="{{url('/dashboard')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                            <a href="{{url('/dashboard')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="{{url('/statistics')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Statistics</span></a>
+                            <a href="{{url('/statistics')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Statistics</span></a>
                         </li>
                         <li class="nav-main-heading"><span class="sidebar-mini-visible">PNM</span><span
                                     class="sidebar-mini-hidden">PNM</span></li>
                         <li>
-                            <a href="{{url('transaction/pnm/convert')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Convert PNM</span></a>
+                            <a href="{{url('transaction/pnm/convert')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Convert PNM</span></a>
                         </li>
                         <li>
-                            <a href="{{url('transaction/pnm/transfer')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Transfer PNM</span></a>
+                            <a href="{{url('transaction/pnm/transfer')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Transfer PNM</span></a>
                         </li>
                         <li>
-                            <a href="{{url('transaction/pnm/withdraw')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Withdraw PNM</span></a>
+                            <a href="{{url('transaction/pnm/withdraw')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Withdraw PNM</span></a>
                         </li>
 
                         <li class="nav-main-heading"><span class="sidebar-mini-visible">NGN</span><span
                                     class="sidebar-mini-hidden">NGN</span></li>
                         <li>
-                            <a href="{{url('transaction/ngn/convert')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Convert NGN</span></a>
+                            <a href="{{url('transaction/ngn/convert')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Convert NGN</span></a>
                         </li>
                         <li>
-                            <a href="{{url('transaction/ngn/withdraw')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Withdraw NGN</span></a>
+                            <a href="{{url('transaction/ngn/withdraw')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Withdraw NGN</span></a>
                         </li>
                         <li class="nav-main-heading"><span class="sidebar-mini-visible">Usage</span><span
                                     class="sidebar-mini-hidden">Usage</span></li>
                         <li>
-                            <a href="{{url('/transactions')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Transactions History</span></a>
+                            <a href="{{url('/transactions')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">Transactions History</span></a>
                         </li>
                         <li>
-                            <a href="{{url('/faq')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">FAQs</span></a>
+                            <a href="{{url('/faq')}}"><i class="si si-compass"></i><span
+                                        class="sidebar-mini-hide">FAQs</span></a>
                         </li>
                         <li>
                             <a href="{{url('/settings')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Settings</span></a>
@@ -127,6 +140,22 @@
                         data-action="sidebar_toggle">
                     <i class="fa fa-navicon"></i>
                 </button>
+                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+                    <i class="fa fa-user"></i> Wallet ID: <span class="text-primary">{{Auth::user()->wallet_id}}</span>
+                </button>
+                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+                    <i class="fa fa-line-chart"></i> Value per PNM: <span class="text-danger">{{$data['currentValue'] or 0}}
+                        NGN</span>
+                </button>
+                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+                    <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM'] or 0}}
+                        PNM</span>
+                </button>
+                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+                    &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM'] * $data['currentValue']}}
+                        NGN</span>
+                </button>
+
             </div>
             <div class="content-header-section">
                 <div class="btn-group" role="group">
@@ -172,8 +201,8 @@
         <div class="content py-20 font-size-xs clearfix">
             <div class="float-right">
                 <i class="fa fa-gear fa-spin text-success"></i> Designed by <a class="font-w600"
-                                                                    href="{{config('app.designerWebsite')}}"
-                                                                    target="_blank">{{config('app.designer')}}</a>
+                                                                               href="{{config('app.designerWebsite')}}"
+                                                                               target="_blank">{{config('app.designer')}}</a>
             </div>
             <div class="float-left">
                 <a class="font-w600" href="{{url('/')}}" target="_blank"></a>{{ config('app.name') }} &copy; <span
@@ -185,6 +214,8 @@
 <script src="{{asset('js/codebase.min-1.4.js')}}"></script>
 <script src="{{asset('js/chart.bundle.min.js')}}"></script>
 <script src="{{asset('js/be_pages_dashboard.js')}}"></script>
+@yield('scripts')
+
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>

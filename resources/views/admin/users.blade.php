@@ -46,11 +46,11 @@
                                 <td>{{$i}}</td>
                                 <td class="font-w600">{{$user->first_name." ".$user->last_name}}
                                 </td>
-                                @if(isset($user->wallet_address))
-                                    <td><a href="{{url('admin/view/user/'.$user->wallet_address)}}">{{$user->name}}</a></td>
-                                    <td><a href="{{url('admin/view/user/'.$user->wallet_address)}}">{{$user->wallet_id}}</a>
+                                @if($action=='registered' || $action=='unregistered')
+                                    <td><a href="{{url('admin/view/user/'.$user->wallet_address)}}">{{$user->wallet_address}}</a></td>
+                                    <td><a href="{{url('admin/view/user/'.$user->wallet_address)}}">{{$user->private_key}}</a>
                                     </td>
-                                @elseif(isset($user->wallet_id))
+                                @else
                                     <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->name}}</a></td>
                                     <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->wallet_id}}</a>
                                     </td>

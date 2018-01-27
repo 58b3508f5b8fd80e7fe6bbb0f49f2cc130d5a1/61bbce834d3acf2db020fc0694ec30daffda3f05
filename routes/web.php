@@ -76,7 +76,7 @@ Route::get('/join', 'Auth\RegisterController@showJoinForm');
 Route::post('/register', 'Auth\RegisterController@join');
 Route::put('/register', 'Auth\RegisterController@register');
 
-Route::middleware(['auth', 'isUser'])
+Route::middleware(['auth', 'isUser', 'flashStats'])
     ->group(function () {
         // drg >> "get" routes arranged alphabetically
         Route::get('/home', 'HomeController@index')->name('home');
@@ -95,7 +95,7 @@ Route::middleware(['auth', 'isUser'])
         Route::post('/settings', 'SettingsController@index');
     });
 
-Route::middleware(['auth', 'isAdmin'])
+Route::middleware(['auth', 'isAdmin', 'flashStats'])
     ->group(function () {
         Route::namespace('Admin')->group(function () {
             Route::prefix('/admin')->group(function () {

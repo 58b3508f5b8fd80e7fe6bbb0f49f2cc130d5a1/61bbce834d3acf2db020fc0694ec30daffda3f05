@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\FlashStats;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -61,5 +62,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'isUser' => IsUser::class,
         'isAdmin' => IsAdmin::class,
+        'flashStats' => FlashStats::class,
     ];
 }

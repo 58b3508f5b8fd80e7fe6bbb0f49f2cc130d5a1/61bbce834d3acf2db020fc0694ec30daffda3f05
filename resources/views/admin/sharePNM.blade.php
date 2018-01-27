@@ -11,6 +11,16 @@
                 <small>Transaction {{title_case($action)}}</small>
             </h3>
         </div>
+        @if(isset($message))
+            <div class="block-content">
+                <div class="block">
+                    <div class="alert alert-{{$alert}}">
+                        <p style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="col-12 col-lg-4 col-md-6 col-xs-8" style="float: none; margin: auto;">
             <div class="block-header block-header-default">
                 <h3 class="block-title text-center"><i class="si si-fire"></i> PNM to User <i class="si si-user"></i>
@@ -65,4 +75,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        @if(isset($message))
+        alert('{{$message}}');
+        @endif
+    </script>
 @endsection

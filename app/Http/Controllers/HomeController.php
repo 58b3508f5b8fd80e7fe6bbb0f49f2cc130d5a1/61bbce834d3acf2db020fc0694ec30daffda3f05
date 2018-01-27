@@ -52,12 +52,13 @@ class HomeController extends Controller
 //            ->where('status', 'successful')
 //            ->sum('amount');
         $credit = Transaction::where('to', Auth::user()->wallet_id)
-            ->where('remark', 'credit')
             ->where('status', 'successful')
             ->sum('amount');
         $debit = Transaction::where('from', Auth::user()->wallet_id)
-            ->where('remark', 'debit')
-            ->where('status', 'successful')
+            ->where('remark', 'debit')->where(function ($query) {
+                $query->where('status', 'successful')
+                    ->orWhere('status', 'requested');
+            })
             ->sum('amount');
         $total = $credit - $debit;
         return $total;
@@ -69,7 +70,10 @@ class HomeController extends Controller
             ->where('status', 'successful')
             ->sum(DB::raw("amount*value"));
         $debit = Transaction::where('from', Auth::user()->name)
-            ->where('status', 'successful')
+            ->where(function ($query) {
+                $query->where('status', 'successful')
+                    ->orWhere('status', 'requested');
+            })
             ->sum(DB::raw("amount*value"));
 //        ->select(DB::raw("sum(`amount`* `value`) as aggrega"))->get();
 

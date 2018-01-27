@@ -7,12 +7,14 @@
             <small>{!! $title!!}</small>
         </h2>
         <div class="block">
-            @if(isset($success) && isset($message))
-                <div class="alert alert-success animation-hatch"><h3>{{$success}}</h3>
-                    <p>{{$message}}</p></div>
-            @elseif(isset($failed) && isset($message))
-                <div class="alert alert-danger animation-hatch"><h3>{{$failed}}</h3>
-                    <p>{{$message}}</p></div>
+            @if(isset($message))
+                <div class="block-content">
+                    <div class="block">
+                        <div class="alert alert-{{$alert}}">
+                            <p style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
+                        </div>
+                    </div>
+                </div>
             @endif
             <div class="col-12 col-lg-4 col-md-6 col-xs-8" style="float: none; margin: auto;">
                 <div class="block-header block-header-default">
@@ -29,18 +31,18 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-material form-material-lg form-material-info floating">
-                                    <input class="form-control form-control-lg text-center" id="{{$for}}" name="{{$for}}"
+                                    <input class="form-control form-control-lg text-center" id="amount" name="amount"
                                            type="text" required>
-                                    <label for="{{$for}}"><i class="si si-fire"></i> Enter Amount</label>
+                                    <label for="amount">@if($for=='pnm')<i class="si si-fire"></i>@else &#8358; @endif Enter Amount</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-material form-material-lg form-material-success floating">
-                                    <input class="form-control form-control-lg text-center" id="curr" name="curr"
+                                    <input class="form-control form-control-lg text-center" id="value" name="value"
                                            type="text" readonly>
-                                    <label for="curr">@if($for=='pnm')<i class="si si-fire"></i>@else &#8358; @endif  Value</label>
+                                    <label for="value">@if($for=='ngn')<i class="si si-fire"></i>@else &#8358; @endif  Value</label>
                                 </div>
                             </div>
                         </div>
@@ -55,11 +57,11 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <button style="overflow: hidden; position: relative; z-index: 1;" type="button"
+                                <button style="overflow: hidden; position: relative; z-index: 1;" type="submit"
                                         class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
                                         data-toggle="click-ripple"><span
                                             style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"
-                                            class="click-ripple animate"></span>Danger
+                                            class="click-ripple animate"></span>Convert
                                 </button>
                             </div>
                         </div>
@@ -118,13 +120,29 @@
         </div>
     </div>
 @endsection
-@section('script')
+@section('scripts')
     <script>
+        var value = {{$value}};
+        var action = '{{$for}}';
+        var amount = 0;
         function confirmTransaction() {
             var amount = $('#transfer').val();
             $('#amount').val(amount);
             $('#modal-transaction').modal('show');
 
         }
+
+        setInterval(function () {
+            if (action == 'pnm'){
+                amount = $('#amount').val()*value;
+            }
+            if (action == 'ngn'){
+                amount = $('#amount').val()/value;
+            }
+            $('#value').val(amount);
+        },1000);
+        @if(isset($message))
+        alert('{{$message}}');
+        @endif
     </script>
 @endsection
