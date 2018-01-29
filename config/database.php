@@ -1,6 +1,6 @@
 <?php
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-if ( isset ( $url [ "host" ] ) && isset ( $url [ "port" ] ) && isset ( $url [ "user" ] ) && isset ( $url [ "pass" ] ) &&
+if ( isset ( $url [ "host" ] )&& isset ( $url [ "user" ] ) && isset ( $url [ "pass" ] ) &&
     isset ( $url [ "path" ] ) )
 {
     $server = $url["host"];
@@ -11,11 +11,11 @@ if ( isset ( $url [ "host" ] ) && isset ( $url [ "port" ] ) && isset ( $url [ "u
     $conn = new mysqli($server, $username, $password, $db);
 } else
 {
-    $host = env ( 'DB_HOST' );
+    $server = env ( 'DB_HOST' );
     $port = env ( 'DB_PORT' );
     $username = env ( 'DB_USERNAME' );
     $password = env ( 'DB_PASSWORD' );
-    $database = env ( 'DB_DATABASE' );
+    $db = env ( 'DB_DATABASE' );
     $conn = env ( 'DB_CONNECTION' );
 }
 
@@ -60,7 +60,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => $host,
+            'host' => $server,
             'port' => $port,
             'database' => $database,
             'username' => $username,
