@@ -48,6 +48,9 @@ Route::get('/index-4', function () {
 Route::get('/index-5', function () {
     return view('site.index-5');
 });
+Route::get('/index-6', function () {
+    return view('site.index-6');
+});
 Route::get('/index-7', function () {
     return view('site.index-7');
 });

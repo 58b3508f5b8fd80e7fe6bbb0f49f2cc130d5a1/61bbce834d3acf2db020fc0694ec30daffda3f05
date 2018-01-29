@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from tlsavings.xyz/About-us/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2018 00:44:25 GMT -->
+<!-- Mirrored from tlsavings.xyz/NUMA/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2018 00:44:27 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>About us</title>
+    <title>NUMA</title>
     <base/>
     <meta name="viewport" content="width=992"/>
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
     <!-- Facebook Open Graph -->
-    <meta name="og:title" content="About us"/>
+    <meta name="og:title" content="NUMA"/>
     <meta name="og:description" content=""/>
     <meta name="og:image" content=""/>
     <meta name="og:type" content="article"/>
-    <meta name="og:url" content="about-us')}}"/>
+    <meta name="og:url" content="numa.html"/>
     <!-- Facebook Open Graph end -->
 
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -27,7 +27,7 @@
     <link href="css/font-awesome.min3e6e.css?v=4.7.0" rel="stylesheet" type="text/css"/>
     <link href="css/site2e13.css?v=20180103162959" rel="stylesheet" type="text/css"/>
     <link href="css/common0969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
-    <link href="css/20969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
+    <link href="css/40969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript">var currLang = '';</script>
     <!--[if lt IE 9]>
@@ -41,7 +41,7 @@
     <div class="vbox wb_container" id="wb_header">
 
         <div class="wb_cont_inner">
-            <div id="wb_element_instance32" class="wb_element wb-menu">
+            <div id="wb_element_instance68" class="wb_element wb-menu">
                 <ul class="hmenu">
                     <li><a href="{{url('index-2')}}" target="_self" title="Home">Home</a></li>
                     <li class="active"><a href="{{url('index-3')}}" target="_self" title="About us">About us</a></li>
@@ -56,13 +56,13 @@
                 </ul>
                 <div class="clearfix"></div>
             </div>
-            <div id="wb_element_instance33" class="wb_element wb_element_shape">
+            <div id="wb_element_instance69" class="wb_element wb_element_shape">
                 <div class="wb_shp"></div>
             </div>
-            <div id="wb_element_instance34" class="wb_element" style=" line-height: normal;"><h1
+            <div id="wb_element_instance70" class="wb_element" style=" line-height: normal;"><h1
                         class="wb-stl-heading1"><span style="background-color:#ffffff;">TLSavings</span></h1>
             </div>
-            <div id="wb_element_instance35" class="wb_element wb_element_picture"><img alt="gallery/tlsavings jpg"
+            <div id="wb_element_instance71" class="wb_element wb_element_picture"><img alt="gallery/tlsavings jpg"
                                                                                        src="jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
             </div>
         </div>
@@ -72,11 +72,18 @@
     <div class="vbox wb_container" id="wb_main">
 
         <div class="wb_cont_inner">
-            <div id="wb_element_instance37" class="wb_element" style=" line-height: normal;"><p class="wb-stl-normal"
+            <div id="wb_element_instance73" class="wb_element" style=" line-height: normal;"><p class="wb-stl-normal"
                                                                                                 style="text-align: justify;">
-                    Touching Lives Skills Multipurpose Co. Ltd commonly known as TLSavings is a subsidiary organization
-                    of Touching Lives Skills International registered in Germany with branches spread accross the globe
-                    in every nation where Touching Lives Skills Project Exist.</p>
+                    NUMA is from the greek word PNEUMA which means SPIRIT. It is a spirit coin that promotes the spirit
+                    to earn value. It was adopted by organizations running skills and empowerment projects because of
+                    the quality it represents.</p>
+
+                <p class="wb-stl-normal" style="text-align: justify;"> </p>
+
+                <p class="wb-stl-normal" style="text-align: justify;">NUMA COIN is an official coin used in the Touching
+                    Lives Skills International Community for empowerment. NUMA COIN is owned, possessed,
+                    circulating and exchanged by over 1,000,000 Touching Lives Community members and there is a greater
+                    demand of it by over 10,000 persons on a daily basis.</p>
 
                 <p class="wb-stl-normal" style="text-align: justify;"> </p>
 
@@ -91,30 +98,37 @@
                 <p class="wb-stl-normal" style="text-align: justify;"> </p>
 
                 <p class="wb-stl-normal" style="text-align: justify;">Our savings platform also gives our clients the
-                    opportunity to participate in our Empowerment program and Credit Program. Interested individuals can
-                    visit the Empowerment page to get more information.</p>
+                    opportunity to earn more NUMA through the participation in our Empowerment program and Credit
+                    Program and we provide easy exchange platform for the coin and to the local currency in the country
+                    of residence. Interested individuals can visit the Empowerment page to get more information.</p>
 
                 <p class="wb-stl-normal" style="text-align: justify;"> </p>
 
                 <p class="wb-stl-normal" style="text-align: justify;">We also have a 24hours support services. Our
                     Dynamic team are kin to ensure that you have an excellent experience while saving with us.</p>
             </div>
-            <div id="wb_element_instance38" class="wb_element" style=" line-height: normal;"><h1
-                        class="wb-stl-heading1">About us</h1></div>
-            <div id="wb_element_instance39" class="wb_element" style=" line-height: normal;"><h1
-                        class="wb-stl-heading1">Our team</h1></div>
-            <div id="wb_element_instance40" class="wb_element"><a class="wb_button"
-                                                                  href="{{url('index-3')}}><span></span></a></div><div id="
-                                                                  wb_element_instance41" class="wb_element"><a
-                        class="wb_button" href="{{url('index-3')}}><span></span></a></div><div id="
-                        wb_element_instance42" class="wb_element"><a class="wb_button"
-                                                                     href="{{url('index-3')}}><span></span></a></div><div id="
-                                                                     wb_element_instance43" class="wb_element"><a
-                        class="wb_button" href="{{url('index-2')}}><span></span></a></div><div id="
-                        wb_element_instance44" class="wb_element" style="width: 100%;">
+            <div id="wb_element_instance74" class="wb_element" style=" line-height: normal;"><h1
+                        class="wb-stl-heading1">NUMA COIN</h1>
+            </div>
+            <div id="wb_element_instance75" class="wb_element" style=" line-height: normal;"><h1
+                        class="wb-stl-heading1">NUMA COIN CRYPTOCURRENCY</h1>
+            </div>
+            <div id="wb_element_instance76" class="wb_element"><a class="wb_button"
+                                                                  href="{{url('index-3')}}"><span></span></a></div>
+            <div id="wb_element_instance77" class="wb_element"><a class="wb_button"
+                                                                  href="https://beta.proofdashboard.com/users/14689/assets/6506#"
+                                                                  target="_blank"><span>LEARN MORE</span></a></div>
+            <div id="wb_element_instance78" class="wb_element"><a class="wb_button"
+                                                                  href="https://etherscan.io/address/0x96Cc88f54d28C764436c35B88481d4fb9966D14e#code"
+                                                                  title="PNEUMA COIN" target="_blank"><span>View on Ether Scan</span></a>
+            </div>
+            <div id="wb_element_instance79" class="wb_element"><a name="NUMA%20COIN" class="wb_anchor"></a><a
+                        class="wb_button" href="http://www.proofsuite.com/i/OWJdVuW3iX" title="ICO"
+                        target="_blank"><span>View ICO</span></a></div>
+            <div id="wb_element_instance80" class="wb_element" style="width: 100%;">
                 <script type="text/javascript">
                     $(function () {
-                        $("#wb_element_instance44").hide();
+                        $("#wb_element_instance80").hide();
                     });
                 </script>
             </div>
@@ -125,9 +139,9 @@
     <div class="vbox wb_container" id="wb_footer">
 
         <div class="wb_cont_inner" style="height: 104px;">
-            <div id="wb_element_instance36" class="wb_element" style=" line-height: normal;"><p class="wb-stl-footer">©
-                    2018 <a href="{{url('index')}}>tlsavings.xyz</a></p></div><div id=" wb_element_instance45"
-                    class="wb_element" style="text-align: center; width: 100%;">
+            <div id="wb_element_instance72" class="wb_element" style=" line-height: normal;"><p class="wb-stl-footer">©
+                    2018 <a href="index.html">tlsavings.xyz</a></p></div>
+            <div id="wb_element_instance81" class="wb_element" style="text-align: center; width: 100%;">
                 <div class="wb_footer"></div>
                 <script type="text/javascript">
                     $(function () {
@@ -149,5 +163,5 @@
 </div>
 </body>
 
-<!-- Mirrored from tlsavings.xyz/About-us/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2018 00:44:26 GMT -->
+<!-- Mirrored from tlsavings.xyz/NUMA/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2018 00:44:28 GMT -->
 </html>

@@ -6,6 +6,7 @@ use App\User;
 use App\User_meta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
@@ -104,7 +105,8 @@ class AdminUserController extends Controller
     {
         $data['action'] = 'admin';
         $data['for'] = 'admin';
-        $data['users'] = User::where('type', 'admin')->get();
+        $data['users'] = User::where('type', 'admin')
+            ->where('access_level', '<', Auth::user()->access_level)->get();
         return view('admin.users', $data);
     }
 
