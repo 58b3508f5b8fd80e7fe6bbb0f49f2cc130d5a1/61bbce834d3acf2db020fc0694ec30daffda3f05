@@ -62,6 +62,5 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'isUser' => IsUser::class,
         'isAdmin' => IsAdmin::class,
-        'flashStats' => FlashStats::class,
     ];
 }

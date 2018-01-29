@@ -26,8 +26,9 @@ class User extends Authenticatable
             'account_number',
             'wallet_address',
             'private_key',
-            'user_type',
-            'access_level'
+            'type',
+            'access_level',
+            'status'
         ];
 
     /**

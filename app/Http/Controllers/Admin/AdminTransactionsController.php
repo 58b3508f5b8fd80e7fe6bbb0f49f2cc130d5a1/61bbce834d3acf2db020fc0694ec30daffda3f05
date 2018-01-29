@@ -8,35 +8,110 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 
 class AdminTransactionsController extends Controller
 {
     //
-    public function __construct(AdminController $details)
+
+    public function admin()
     {
-        $this->details = $details;
+        return new AdminController();
     }
 
-
-    public function viewNgn()
+    public function verifyWithdrawal(Request $request)
     {
+
+        $id = $request->input('id');
+        $action = $request->input('action');
+        $type = $request->input('type');
+        $for = $request->input('for');
+        $transaction = Transaction::find($id - 1127);
+        $message = '';
+
+        switch ($action) {
+            case('approve'):
+                $transaction->status = 'successful';
+                $message
+                    = 'Transaction has been approved successfully.';
+                break;
+            case('revoke'):
+                $transaction->status = 'failed';
+                $message = 'The transaction has been revoked';
+                break;
+        }
+
+        if ($transaction->save()) {
+            if ($for == 'verified') {
+                $data['withdrawals'] = $this->getVerified($type);
+            } elseif ($for == 'requested') {
+                $data['withdrawals'] = $this->getWithdrawals($type);
+            }
+            $data['value'] = $this->admin()->getCurrentValue();
+            $data['action'] = $action;
+            $html = View::make('admin.partials.withdrawal', $data);
+            $html = $html->render();
+
+            return response()->json([
+                'status'  => 'success',
+                'message' => $message,
+                'html'    => $html
+            ]);
+        }
+
+
+        return response()->json([
+            'status'  => 'failed',
+            'message' => 'Sorry, an error occurred.'
+        ]);
+
 
     }
 
-    public function viewShare()
+    public function getVerified($action)
     {
-        $data['action'] = 'share PNM';
-        return view('admin.sharePNM', $data);
+        $withdrawals = array();
+        $status = '';
+        switch ($action) {
+            case 'pnm':
+                $withdrawals = Transaction::where('type', 'pnm-wallet')
+                    ->where('status', '<>', 'requested')
+                    ->orderBy('updated_at', 'desc')->get();
+                break;
+            case 'ngn':
+                $withdrawals = Transaction::where('type', 'ngn-bank')
+                    ->where('status', '<>', $status)
+                    ->orderBy('updated_at', 'desc')->get();
+                break;
+            default:
+                break;
+        }
+        return $withdrawals;
     }
 
-    public function viewWithdrawal()
+    public function getWithdrawals($action)
     {
-
+        $withdrawals = array();
+        switch ($action) {
+            case 'pnm':
+                $withdrawals = Transaction::where('type', 'pnm-wallet')
+                    ->where('status', 'requested')
+                    ->orderBy('updated_at', 'desc')->get();
+                break;
+            case 'ngn':
+                $withdrawals = Transaction::where('type', 'ngn-bank')
+                    ->where('status', 'requested')
+                    ->orderBy('updated_at', 'desc')->get();
+                break;
+            default:
+                break;
+        }
+        return $withdrawals;
     }
 
     public function sharePNM(Request $request)
     {
-        $value = $this->details->getCurrentValue();
+        $value = $this->admin()->getCurrentValue();
         $pnm = $request->input('pnm');
         $pin = $request->input('pin');
         $wallet = $request->input('wallet');
@@ -72,10 +147,39 @@ class AdminTransactionsController extends Controller
                 $data['message'] = "Sorry, the pin you entered was incorrect";
             } elseif (!$isUser) {
                 $data['alert'] = 'danger';
-                $data['message'] = "Sorry, the wallet id was not traced to any user";
+                $data['message']
+                    = "Sorry, the wallet id was not traced to any user";
             }
         }
 
         return view('admin.newPNM', $data);
     }
+
+    public function viewShare()
+    {
+        $data['action'] = 'share PNM';
+        return view('admin.sharePNM', $data);
+    }
+
+    public function viewVerified($action)
+    {
+        $data = array();
+        $data['withdrawals'] = $this->getVerified($action);
+        $data['value'] = $this->admin()->getCurrentValue();
+        $data['type'] = 'verified';
+        $data['action'] = $action;
+        return view('admin.withdrawals', $data);
+    }
+
+    public function viewWithdrawal($action)
+    {
+        $data = array();
+        $data['withdrawals'] = $this->getWithdrawals($action);
+        $data['value'] = $this->admin()->getCurrentValue();
+        $data['type'] = 'requested';
+        $data['action'] = $action;
+        return view('admin.withdrawals', $data);
+    }
+
+
 }

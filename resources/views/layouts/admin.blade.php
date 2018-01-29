@@ -10,7 +10,6 @@
     <meta name="description"
           content="{{config('description')}}">
     <meta name="author" content="{{config('app.name')}}">
-    <meta name="robots" content="noindex, nofollow">
     <meta property="og:title" content="@yield('title')">
     <meta property="og:site_name" content="{{config('app.description')}}">
     <meta property="og:description"
@@ -18,6 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="shortcut icon" href="{{asset('png/favicon.png')}}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{asset('png/favicon-192x192.png')}}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('png/apple-touch-icon-180x180.png')}}">
@@ -136,10 +136,16 @@
                                     <a href="{{url('/admin/transactions/share')}}">Share PNM</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/admin/transactions/ngn')}}">Approve NGN Payments</a>
+                                    <a href="{{url('/admin/transactions/withdrawal/pnm')}}">Approve PNM Withdrawals</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/admin/transactions/withdrawal')}}">Approve Withdrawal Requests</a>
+                                    <a href="{{url('/admin/transactions/withdrawal/ngn')}}">Approve NGN Withdrawal</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/transactions/verified/pnm')}}">Verified PNM Withdrawals</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/admin/transactions/verified/ngn')}}">Verified NGN Withdrawal</a>
                                 </li>
                             </ul>
                         </li>

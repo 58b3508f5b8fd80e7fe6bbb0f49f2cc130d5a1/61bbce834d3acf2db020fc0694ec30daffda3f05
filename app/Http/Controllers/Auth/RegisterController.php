@@ -71,18 +71,23 @@ class RegisterController extends Controller
         $user = User_meta::where('id', $data['find'] - 1147)
             ->where('account_number', $data['acc_number'])
             ->where('wallet_address', $data['wallet'])->firstOrFail();
-
+        $changeStatus = User_meta::find($data['find'] - 1147);
+        $changeStatus->status = 'registered';
+        $changeStatus->save();
         return User::create([
-            'first_name' => $user->first_name,
-            'last_name'  => $user->last_name,
-            'wallet_id'  => md5($user->wallet_address . $data['email']),
-            'name'       => $data['name'],
-            'email'      => $data['email'],
-            'password'   => bcrypt($data['password']),
-            'pin'        => bcrypt($data['pin']),
-            'account_number'=>$user->account_number,
-            'wallet_address'=>$user->wallet_address,
-            'private_key'=>$user->private_key,
+            'first_name'     => $user->first_name,
+            'last_name'      => $user->last_name,
+            'wallet_id'      => md5($user->wallet_address . $data['email']),
+            'name'           => $data['name'],
+            'email'          => $data['email'],
+            'password'       => bcrypt($data['password']),
+            'pin'            => bcrypt($data['pin']),
+            'account_number' => $user->account_number,
+            'wallet_address' => $user->wallet_address,
+            'private_key'    => $user->private_key,
+            'type'           => 'user',
+            'status'         => 'active',
+            'access_level'   => 1
         ]);
     }
 
@@ -139,7 +144,8 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)

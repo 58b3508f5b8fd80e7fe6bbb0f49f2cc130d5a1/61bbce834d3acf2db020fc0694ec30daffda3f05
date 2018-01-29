@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Transaction;
+use App\User;
 use App\User_meta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -59,6 +60,14 @@ class AdminAddController extends Controller
         ]);
     }
 
+    public function validateAdmin(array $data)
+    {
+        return Validator::make($data, [
+            'name'  => 'required|string|unique:users|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+    }
+
     public function addPNM(Request $request)
     {
         $value = $this->details->getCurrentValue();
@@ -96,10 +105,49 @@ class AdminAddController extends Controller
         return view('admin.newPNM', $data);
     }
 
+    public function addAdmin(Request $request)
+    {
+        $details = $request->all();
+        $this->validateAdmin($details)->validate();
+        $isAcc = true;
+        $acc_no = '';
+        while ($isAcc) {
+            $acc_no = rand(1, 100000);
+            $isAcc = User::where('account_number', $acc_no)->first();
+        }
+        $admin = User::create([
+            'first_name'     => $details['first_name'],
+            'last_name'      => $details['last_name'],
+            'wallet_id'      => md5($details['email']),
+            'name'           => $details['name'],
+            'email'          => $details['email'],
+            'password'       => bcrypt(md5($details['email'])),
+            'pin'            => bcrypt('1234'),
+            'account_number' => $acc_no,
+            'wallet_address' => md5($details['email']),
+            'private_key'    => md5($details['email']),
+            'type'           => 'admin',
+            'status'         => 'active',
+            'access_level'   => $details['level'],
+        ]);
+
+        if ($admin) {
+            $data['alert'] = 'success';
+            $data['message'] = "New Admin was created successfully";
+
+        } else {
+            $data['alert'] = 'danger';
+            $data['message'] = "There was an error in creating the admin";
+
+        }
+        $data['action'] = 'new admin';
+        return view('admin.newAdmin', $data);
+    }
+
     public function addUser(Request $request)
     {
         $details = $request->all();
-        //$this->validateUser($details->validate());
+        //$this->validateUser($details)->validate();
         array_push($details, $this->uploadFiles($request));
         $user = $this->createUsers($details);
         if ($user) {
@@ -200,7 +248,8 @@ class AdminAddController extends Controller
 
     public function viewAddAdmin()
     {
-
+        $data['action'] = 'new admin';
+        return view('admin.newAdmin', $data);
     }
 
     public function viewAddPnm()

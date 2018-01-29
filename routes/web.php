@@ -76,7 +76,7 @@ Route::get('/join', 'Auth\RegisterController@showJoinForm');
 Route::post('/register', 'Auth\RegisterController@join');
 Route::put('/register', 'Auth\RegisterController@register');
 
-Route::middleware(['auth', 'isUser', 'flashStats'])
+Route::middleware(['auth', 'isUser'])
     ->group(function () {
         // drg >> "get" routes arranged alphabetically
         Route::get('/home', 'HomeController@index')->name('home');
@@ -89,13 +89,17 @@ Route::middleware(['auth', 'isUser', 'flashStats'])
         Route::get('/transactions', 'TransactionController@viewTransactions');
         Route::get('/settings', 'SettingsController@index');
         Route::get('/statistics', 'HomeController@statistics');
+        Route::get('/settings', 'SettingsController@index');
+        Route::get('/settings/{action}', 'SettingsController@index');
         // drg >> "post" routes arranged alphabetically
         Route::post('/transaction/{for}/{action}',
             'TransactionController@process');
-        Route::post('/settings', 'SettingsController@index');
+        Route::post('/settings/password', 'SettingsController@changePassword');
+        Route::post('/settings/pin', 'SettingsController@changePin');
+
     });
 
-Route::middleware(['auth', 'isAdmin', 'flashStats'])
+Route::middleware(['auth', 'isAdmin'])
     ->group(function () {
         Route::namespace('Admin')->group(function () {
             Route::prefix('/admin')->group(function () {
@@ -110,10 +114,10 @@ Route::middleware(['auth', 'isAdmin', 'flashStats'])
                 // drg >> transaction functions
                 Route::get('/transactions/share',
                     'AdminTransactionsController@viewShare');
-                Route::get('/transactions/ngn',
-                    'AdminTransactionsController@viewNgn');
-                Route::get('/transactions/withdrawal',
+                Route::get('/transactions/withdrawal/{action}',
                     'AdminTransactionsController@viewWithdrawal');
+                Route::get('/transactions/verified/{action}',
+                    'AdminTransactionsController@viewVerified');
 
                 // drg >> users functions
                 Route::get('users/active',
@@ -131,16 +135,15 @@ Route::middleware(['auth', 'isAdmin', 'flashStats'])
 
                 // drg >> handling add functions
                 Route::post('/add/user', 'AdminAddController@addUser');
-                Route::post('/add/admin', 'AdminAddController@viewAddAdmin');
+                Route::post('/add/admin', 'AdminAddController@addAdmin');
                 Route::post('/add/pnm', 'AdminAddController@addPNM');
+                Route::post('/users/verify', 'AdminUserController@verifyUser');
 
                 // drg >> handling transaction functions
                 Route::post('/transactions/share',
                     'AdminTransactionsController@sharePNM');
-                Route::post('/transactions/ngn',
-                    'AdminTransactionsController@approveNgn');
                 Route::post('/transactions/withdrawal',
-                    'AdminTransactionsController@approveWithdrawal');
+                    'AdminTransactionsController@verifyWithdrawal');
 
                 // drg >> search
                 Route::post('/search');

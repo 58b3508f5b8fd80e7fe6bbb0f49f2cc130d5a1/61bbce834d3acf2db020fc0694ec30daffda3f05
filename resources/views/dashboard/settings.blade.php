@@ -1,158 +1,159 @@
-@extends('layouts.dashboard')
-@section('title', 'Dashboard')
+@extends('layouts.app')
+@section('title', 'Settings')
 @section('content')
-    <div id="page-content">
-        <div class="content-header">
-            <div class="header-section">
-                <h1><i class="fa fa-eye"></i> Transactions<br>
-                    <small>Make a transfer from Wallet to Card</small>
-                </h1>
-            </div>
-        </div>
-        <ul class="breadcrumb breadcrumb-top">
-            <li>Transactions</li>
-            <li>Transfer</li>
-            <li><a href="{{url('/transactions/card')}}">Wallet to card</a></li>
-        </ul>
-        <div class="block">
-            @if(isset($success) && isset($message))
-                <div class="alert alert-success animation-hatch"><h3>{{$success}}</h3>
-                    <p>{{$message}}</p></div>
-            @elseif(isset($failed) && isset($message))
-                    <div class="alert alert-danger animation-hatch"><h3>{{$failed}}</h3>
-                        <p>{{$message}}</p></div>
-            @endif
-            <div>
-                <form action="{{url('/settings/profile')}}" method="post" enctype="multipart/form-data"
-                      class="form-horizontal form-bordered">
-                    {{csrf_field()}}
-                    <fieldset>
-                        <legend>Vital Info</legend>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Referral ID</label>
-                            <div class="col-md-8">
-                                <a class="form-control-static" href="javascript:void(0)"
-                                   onclick="copyToClipboard('#referral-link')"><i class="fa fa-link"></i>
-                                    <span id="referral-link">{{url('register')}}
-                                        /{{Auth::user()->user_id}}</span></a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="user-settings-email">Email</label>
-                            <div class="col-md-8">
-                                <p class="form-control-static">{{ Auth::user()->email }}</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="referrer">Referrer ID</label>
-                            <div class="col-md-8">
-                                <p class="form-control-static">{{ Auth::user()->referrer_id }}</p>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Personal info</legend>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="fname">First Name</label>
-                            <div class="col-md-8">
-                                <input type="text" id="fname" name="fname"
-                                       class="form-control" placeholder="Enter your first name" value="{{Auth::user()
-                                       ->first_name}}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="fname">Last Name</label>
-                            <div class="col-md-8">
-                                <input type="text" id="lname" name="lname"
-                                       class="form-control" placeholder="Enter your last name" value="{{Auth::user()
-                                       ->last_name}}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="pnumber">Phone Number</label>
-                            <div class="col-md-8">
-                                <input type="text" id="pnumber" name="pnumber"
-                                       class="form-control" placeholder="Enter your phone number" value="{{Auth::user()
-                                       ->phone_number}}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="maddress">Mailing Address</label>
-                            <div class="col-md-8">
-                                <input type="text" id="maddress" name="maddress"
-                                       class="form-control" placeholder="Enter your mailing address" value="{{Auth::user()
-                                       ->mailing_address}}">
 
-                            </div>
+    <div class="content">
+        <h2 class="content-heading">
+            Settings
+        </h2>
+        <div>
+            @if(isset($message))
+                <div class="block-content">
+                    <div class="block">
+                        <div class="alert alert-{{$alert}}">
+                            <p style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="saddress">Street address</label>
-                            <div class="col-md-8">
-                                <input type="text" id="saddress" name="saddress"
-                                       class="form-control" placeholder="Enter your street address"
-                                       value="{{Auth::user()
-                                       ->street_address}}">
-                            </div>
+                    </div>
+                </div>
+            @endif
+            <div class="col-md-6 pull-left">
+                <div class="block">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-center">Change Password</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-wrench"></i>
+                            </button>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="country">Country</label>
-                            <div class="col-md-8">
-                                <input type="text" id="country" name="country"
-                                       class="form-control" placeholder="Enter your country" value="{{Auth::user()
-                                       ->country}}">
-                            </div>
+                    </div>
+                    <div class="block-content">
+
+                        <form action="{{url('settings/password')}}" method="post">
+                            {{csrf_field()}}
+                            <fieldset class="col-md-10 col-md-offset-1">
+                                <legend>Password Update</legend>
+                                <form action='{{url("/settings/password")}}' method="post" class="text-center">
+                                    {{csrf_field()}}
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-material form-material-lg form-material-primary floating">
+                                                <input class="form-control form-control-lg text-center" id="current"
+                                                       name="current_password"
+                                                       type="password">
+                                                <label for="current"> Current Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-material form-material-lg form-material-success floating">
+                                                <input class="form-control form-control-lg text-center" id="password"
+                                                       name="new_password"
+                                                       type="password" required>
+                                                <label for="password"><i class="si si-lock"></i> New Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-material form-material-lg form-material-danger floating">
+                                                <input class="form-control form-control-lg text-center" id="confirm-password"
+                                                       name="confirm_password"
+                                                       type="password" required>
+                                                <label for="confirm-password"><i class="si si-lock"></i> Confirm
+                                                    Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <button style="overflow: hidden; position: relative; z-index: 1;"
+                                                    type="submit"
+                                                    class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
+                                                    data-toggle="click-ripple"><span
+                                                        style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"
+                                                        class="click-ripple animate"></span>Update Password
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pull-left">
+                <div class="block">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-center">Change Pin</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-wrench"></i>
+                            </button>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="city">City</label>
-                            <div class="col-md-8">
-                                <input type="text" id="city" name="city"
-                                       class="form-control" placeholder="Enter your city" value="{{Auth::user()
-                                       ->city}}">
-                            </div>
-                        </div>
-                        <div class="form-group form-actions">
-                            <div class="col-xs-12 text-right">
-                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-                <form action="{{url('settings/password')}}" method="post" class="form-horizontal form-bordered">
-                    {{csrf_field()}}
-                    <fieldset>
-                        <legend>Password Update</legend>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="current-password">Current Password</label>
-                            <div class="col-md-8">
-                                <input type="password" id="current-password" name="current_password"
-                                       class="form-control" placeholder="Enter your current password" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="new-password">New Password</label>
-                            <div class="col-md-8">
-                                <input type="password" id="new-password" name="new_password" required
-                                       class="form-control" placeholder="Please choose a complex one..">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="confirm-password">Confirm New
-                                Password</label>
-                            <div class="col-md-8">
-                                <input type="password" id="confirm-password" name="confirm_password" required
-                                       class="form-control" placeholder="..and confirm it!">
-                            </div>
-                        </div>
-                        <div class="form-group form-actions">
-                            <div class="col-xs-12 text-right">
-                                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                    </div>
+                    <div class="block-content">
+
+                        <form action="{{url('settings/pin')}}" method="post">
+                            {{csrf_field()}}
+                            <fieldset class="col-md-10 col-md-offset-1">
+                                <legend>Pin Update</legend>
+                                <form action='{{url("/settings/pin")}}' method="post" class="text-center">
+                                    {{csrf_field()}}
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-material form-material-lg form-material-primary floating">
+                                                <input class="form-control form-control-lg text-center" id="current"
+                                                       name="current_pin"
+                                                       type="password">
+                                                <label for="current"> Current Pin</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-material form-material-lg form-material-success floating">
+                                                <input class="form-control form-control-lg text-center" id="pin"
+                                                       name="new_pin"
+                                                       type="password" required>
+                                                <label for="pin"><i class="si si-lock"></i> New Pin</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-material form-material-lg form-material-danger floating">
+                                                <input class="form-control form-control-lg text-center" id="confirm-pin"
+                                                       name="confirm_pin"
+                                                       type="password" required>
+                                                <label for="confirm-pin"><i class="si si-lock"></i> Confirm Pin</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <button style="overflow: hidden; position: relative; z-index: 1;"
+                                                    type="submit"
+                                                    class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
+                                                    data-toggle="click-ripple"><span
+                                                        style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"
+                                                        class="click-ripple animate"></span>Update Pin
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        @if(isset($message))
+        alert('{{$message}}');
+        @endif
+    </script>
 @endsection
