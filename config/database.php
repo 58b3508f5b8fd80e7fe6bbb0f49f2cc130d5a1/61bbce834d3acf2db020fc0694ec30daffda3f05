@@ -7,12 +7,12 @@ if ( isset ( $url [ "host" ] )&& isset ( $url [ "user" ] ) && isset ( $url [ "pa
     $username = $url["user"];
     $password = $url["pass"];
     $db = substr($url["path"], 1);
-
+    $port = env ( 'DB_PORT', '3306' );
     $conn = new mysqli($server, $username, $password, $db);
 } else
 {
     $server = env ( 'DB_HOST' );
-    $port = env ( 'DB_PORT' );
+    $port = env ( 'DB_PORT', '3306' );
     $username = env ( 'DB_USERNAME' );
     $password = env ( 'DB_PASSWORD' );
     $db = env ( 'DB_DATABASE' );
@@ -62,7 +62,7 @@ return [
             'driver' => 'mysql',
             'host' => $server,
             'port' => $port,
-            'database' => $database,
+            'database' => $db,
             'username' => $username,
             'password' => $password,
             'unix_socket' => env('DB_SOCKET', ''),
