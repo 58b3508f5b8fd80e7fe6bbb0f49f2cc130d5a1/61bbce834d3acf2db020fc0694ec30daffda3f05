@@ -1,4 +1,23 @@
 <?php
+$url = parse_url ( getenv ( "DATABASE_URL" ) );
+if ( isset ( $url [ "host" ] ) && isset ( $url [ "port" ] ) && isset ( $url [ "user" ] ) && isset ( $url [ "pass" ] ) &&
+    isset ( $url [ "path" ] ) )
+{
+    $host = $url [ "host" ];
+    $port = $url [ "port" ];
+    $username = $url [ "user" ];
+    $password = $url [ "pass" ];
+    $database = substr ( $url [ "path" ], 1 );
+    $connection = 'mysql';
+} else
+{
+    $host = env ( 'DB_HOST' );
+    $port = env ( 'DB_PORT' );
+    $username = env ( 'DB_USERNAME' );
+    $password = env ( 'DB_PASSWORD' );
+    $database = env ( 'DB_DATABASE' );
+    $connection = env ( 'DB_CONNECTION' );
+}
 
 return [
 
@@ -41,11 +60,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => $host,
+            'port' => $port,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

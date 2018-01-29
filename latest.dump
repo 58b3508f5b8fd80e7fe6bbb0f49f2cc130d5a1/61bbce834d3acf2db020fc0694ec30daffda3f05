@@ -1,0 +1,246 @@
+-- MySQL dump 10.16  Distrib 10.1.22-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 127.0.0.1    Database: tlsavings
+-- ------------------------------------------------------
+-- Server version	10.1.22-MariaDB-
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `settings`
+--
+
+DROP TABLE IF EXISTS `settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `description` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `settings`
+--
+
+LOCK TABLES `settings` WRITE;
+/*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+INSERT INTO `settings` VALUES (1,'current_pnm_value','Current PNM Value','400','This is the equivalent of one PNM in NGN','2018-01-19 11:14:32','2018-01-19 11:14:32'),(2,'check_profit_start','Check Profit Start','2018-01-24 07:56:19','Date to start commision check','2018-01-24 07:55:18','2018-01-24 07:55:18'),(3,'ngn_withdrawal_charge','Withdrawal Charge','300','This is the charge for each withdrawal','2018-01-24 07:55:18','2018-01-24 07:55:18'),(4,'ngn_conversion_charge','NGN Conversion Charge','200','This is the charge for each NGN conversion to PNM','2018-01-24 07:58:11','2018-01-24 07:58:11'),(5,'check_shared_start','Check Shared Start','2018-01-24 07:56:19','Date to start shared PNM check','2018-01-24 08:36:41','2018-01-24 08:36:41'),(6,'withdrawal_limit','Withdrawal Limit','50000','This is the withdrawal limit per transaction ','2018-01-24 12:51:03','2018-01-24 12:51:03'),(7,'pnm_withdrawal_charge','Charge for PNM Withdrawals','0.5','This is the charge for PNM withdrawals','2018-01-26 10:23:45','2018-01-26 10:23:45'),(8,'pnm_transfer_charge','Charge for PNM Transfer','1','This is the charge for each PNM transfer','2018-01-27 07:36:03','2018-01-27 07:36:03'),(9,'pnm_conversion_charge','NGN Conversion Charge','1','This is the charge for each NGN conversion to PNM','2018-01-24 07:58:11','2018-01-24 07:58:11');
+/*!40000 ALTER TABLE `settings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `transaction_id` varchar(32) NOT NULL,
+  `from` varchar(45) NOT NULL,
+  `to` varchar(45) NOT NULL,
+  `amount` float NOT NULL DEFAULT '0',
+  `value` float DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `status` enum('pending','requested','successful','failed') NOT NULL DEFAULT 'pending',
+  `remark` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions`
+--
+
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (1,'0ad7c1690be2b23530f016bc4fec3975','super','78278190',400000,400,'Admin added 400000 PNM worth 160000000 NGN','admin-holding','successful','credit','2018-01-24 08:57:24','2018-01-24 08:57:24'),(3,'d2eed5a68385e64b81e25df800e92826','78278190','e3c17ffb35d0d6c2b098bd967e40e170',5000,400,'Admin shared 5000 PNM worth 2000000 NGN','holding-pnm','successful','credit','2018-01-24 09:34:31','2018-01-24 09:34:31'),(10,'cc0e75387f4997b12cac13e265f5bfb1','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',950,400,'Conversion of 950 PNM to 380000 NGN','pnm-ngn','successful','debit','2018-01-24 13:56:49','2018-01-24 13:56:49'),(11,'cc0e75387f4997b12cac13e265f5bfb1','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 950 PNM conversion','pnm-holding','successful','debit','2018-01-24 13:56:49','2018-01-24 13:56:49'),(12,'2828fcedb5b497b0dfb022a0fbd5fcf9','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',420,400,'Conversion of 420 PNM to 168000 NGN','pnm-ngn','successful','debit','2018-01-24 14:00:57','2018-01-24 14:00:57'),(13,'2828fcedb5b497b0dfb022a0fbd5fcf9','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 420 PNM conversion','pnm-holding','successful','debit','2018-01-24 14:00:57','2018-01-24 14:00:57'),(14,'954979e8b51bbebc27f22340be305fd1','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',420,400,'Conversion of 420 PNM to 168000 NGN','pnm-ngn','successful','debit','2018-01-24 14:05:07','2018-01-24 14:05:07'),(15,'954979e8b51bbebc27f22340be305fd1','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 420 PNM conversion','pnm-holding','successful','debit','2018-01-24 14:05:07','2018-01-24 14:05:07'),(16,'204daadefd7e490c356d552db09b9677','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',200,400,'Conversion of 200 PNM to 80000 NGN','pnm-ngn','successful','debit','2018-01-24 14:05:22','2018-01-24 14:05:22'),(17,'204daadefd7e490c356d552db09b9677','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 200 PNM conversion','pnm-holding','successful','debit','2018-01-24 14:05:22','2018-01-24 14:05:22'),(18,'2d20eab836bf3e1bf16fe2117251a55d','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',200,400,'Conversion of 200 PNM to 80000 NGN','pnm-ngn','successful','debit','2018-01-24 14:06:25','2018-01-24 14:06:25'),(19,'2d20eab836bf3e1bf16fe2117251a55d','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 200 PNM conversion','pnm-holding','successful','debit','2018-01-24 14:06:25','2018-01-24 14:06:25'),(20,'4be48e2b489eccdd1bda309c4349f0a0','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',200,400,'Conversion of 200 PNM to 80000 NGN','pnm-ngn','successful','debit','2018-01-24 14:09:14','2018-01-24 14:09:14'),(21,'4be48e2b489eccdd1bda309c4349f0a0','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 200 PNM conversion','pnm-holding','successful','debit','2018-01-24 14:09:14','2018-01-24 14:09:14'),(22,'9f25d3f3309442b6e309522a81cbdda4','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',200,400,'Conversion of 200 PNM to 80000 NGN','pnm-ngn','successful','debit','2018-01-24 14:09:46','2018-01-24 14:09:46'),(23,'9f25d3f3309442b6e309522a81cbdda4','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 200 PNM conversion','pnm-holding','successful','debit','2018-01-24 14:09:46','2018-01-24 14:09:46'),(24,'a71da9ee3c2796b542eef944f76eeeac','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',200,400,'Conversion of 200 PNM to 80000 NGN','pnm-ngn','successful','debit','2018-01-24 14:10:01','2018-01-24 14:10:01'),(25,'a71da9ee3c2796b542eef944f76eeeac','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 200 PNM conversion','pnm-holding','successful','debit','2018-01-24 14:10:01','2018-01-24 14:10:01'),(26,'3ec3dadf3923f88676c8ce95adfe870e','nvictor','e3c17ffb35d0d6c2b098bd967e40e170',125,400,'Conversion of 50000 NGN to 125 PNM','ngn-pnm','successful','credit','2018-01-24 15:31:55','2018-01-24 15:31:55'),(27,'2e044884a20d4fc5c0796049a029cccc','nvictor','e3c17ffb35d0d6c2b098bd967e40e170',75,400,'Conversion of 30000 NGN to 75 PNM','ngn-pnm','successful','credit','2018-01-24 15:34:25','2018-01-24 15:34:25'),(28,'c8e6e76cbdf6fdbdf093d0e257f6affe','nvictor','e3c17ffb35d0d6c2b098bd967e40e170',75,400,'Conversion of 30000 NGN to 75 PNM','ngn-pnm','successful','credit','2018-01-24 15:35:15','2018-01-24 15:35:15'),(29,'cad60a72c2fe0f3f16a9e401bb85b1d8','nvictor','e3c17ffb35d0d6c2b098bd967e40e170',500,400,'Conversion of 200000 NGN to 500 PNM','ngn-pnm','successful','credit','2018-01-24 15:36:19','2018-01-24 15:36:19'),(30,'46784d839245901748a794bbd3370207','78278190','e3c17ffb35d0d6c2b098bd967e40e170',1000,400,'Admin shared 1000 PNM worth 400000 NGN','holding-pnm','successful','credit','2018-01-26 09:46:57','2018-01-26 09:46:57'),(31,'ec84602e7093eac73641b70515da335b','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',300,400,'Conversion of 300 PNM to 120000 NGN','pnm-ngn','successful','debit','2018-01-26 09:50:07','2018-01-26 09:50:07'),(32,'ec84602e7093eac73641b70515da335b','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 300 PNM conversion','pnm-holding','successful','debit','2018-01-26 09:50:07','2018-01-26 09:50:07'),(33,'abbde4b1a1d620fc8c155abd0f9ceb6d','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',1000,400,'Conversion of 1000 PNM to 400000 NGN','pnm-ngn','successful','debit','2018-01-26 09:57:55','2018-01-26 09:57:55'),(34,'abbde4b1a1d620fc8c155abd0f9ceb6d','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 1000 PNM conversion','pnm-holding','successful','debit','2018-01-26 09:57:55','2018-01-26 09:57:55'),(35,'37d45ba5ae2e980318670409d565a744','nvictor','e3c17ffb35d0d6c2b098bd967e40e170',750,400,'Conversion of 300000 NGN to 750 PNM','ngn-pnm','successful','credit','2018-01-26 10:00:00','2018-01-26 10:00:00'),(36,'eaf51d45c0ec08ed6accc2fe1d116b65','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',3000,400,'Conversion of 3000 PNM to 1200000 NGN','pnm-ngn','successful','debit','2018-01-26 10:41:21','2018-01-26 10:41:21'),(37,'eaf51d45c0ec08ed6accc2fe1d116b65','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 3000 PNM conversion','pnm-holding','successful','debit','2018-01-26 10:41:21','2018-01-26 10:41:21'),(38,'d01d662d806e8c696eae3d789876fe61','e3c17ffb35d0d6c2b098bd967e40e170','nvictor',20,400,'Conversion of 20 PNM to 8000 NGN','pnm-ngn','successful','debit','2018-01-26 10:46:00','2018-01-26 10:46:00'),(39,'d01d662d806e8c696eae3d789876fe61','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'200 NGN (0.5 PNM) commission charge for 20 PNM conversion','pnm-holding','successful','debit','2018-01-26 10:46:01','2018-01-26 10:46:01'),(40,'80d64589815e099a9a184941a42782d7','e3c17ffb35d0d6c2b098bd967e40e170','82233bce59652cf3cc0eb7a03f3109d1',50,400,'Withdrawal request for 50 PNM','pnm-wallet','successful','debit','2018-01-26 10:49:31','2018-01-27 19:06:55'),(41,'80d64589815e099a9a184941a42782d7','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'0.5 commission charge for 50 PNM withdrawal','pnm-holding','requested','debit','2018-01-26 10:49:31','2018-01-26 10:49:31'),(42,'19b2e0cb79380f34342de109cdded240','e3c17ffb35d0d6c2b098bd967e40e170','82233bce59652cf3cc0eb7a03f3109d1',50,400,'Withdrawal request for 50 PNM','pnm-wallet','successful','debit','2018-01-26 10:51:20','2018-01-28 08:08:09'),(43,'19b2e0cb79380f34342de109cdded240','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'0.5 commission charge for 50 PNM withdrawal','pnm-holding','requested','debit','2018-01-26 10:51:20','2018-01-26 10:51:20'),(44,'f1a01cd8e224b0b189587fc183cb88ae','e3c17ffb35d0d6c2b098bd967e40e170','82233bce59652cf3cc0eb7a03f3109d1',50,400,'Withdrawal request for 50 PNM','pnm-wallet','failed','debit','2018-01-26 10:53:50','2018-01-28 08:08:12'),(45,'f1a01cd8e224b0b189587fc183cb88ae','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.5,400,'0.5 commission charge for 50 PNM withdrawal','pnm-holding','requested','debit','2018-01-26 10:53:50','2018-01-26 10:53:50'),(46,'a6c901a1e99c84f19c104a6c3aa8084e','nvictor','user',300,400,'Withdrawal request for 120000 NGN','ngn-bank','requested','debit','2018-01-26 11:01:46','2018-01-26 11:01:46'),(47,'a6c901a1e99c84f19c104a6c3aa8084e','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.75,400,'300 NGN (0.75 PNM) commission charge for 120000 NGN withdrawal','pnm-holding','requested','debit','2018-01-26 11:01:46','2018-01-26 11:01:46'),(48,'902777b173d02131a91e014717df8a5d','nvictor','user',1250,400,'Withdrawal request for 500000 NGN','ngn-bank','requested','debit','2018-01-26 11:02:04','2018-01-26 11:02:04'),(49,'902777b173d02131a91e014717df8a5d','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.75,400,'300 NGN (0.75 PNM) commission charge for 500000 NGN withdrawal','pnm-holding','requested','debit','2018-01-26 11:02:04','2018-01-26 11:02:04'),(50,'d2963066b88c0136819ff5acf261cb93','nvictor','user',750,400,'Withdrawal request for 300000 NGN','ngn-bank','requested','debit','2018-01-27 07:26:36','2018-01-27 07:26:36'),(51,'d2963066b88c0136819ff5acf261cb93','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.75,400,'300 NGN (0.75 PNM) commission charge for 300000 NGN withdrawal','pnm-holding','requested','debit','2018-01-27 07:26:36','2018-01-27 07:26:36'),(52,'6a5f3e15cf3ba7f36bfe945ec11989ba','nvictor','user',1000,400,'Withdrawal request for 400000 NGN','ngn-bank','successful','debit','2018-01-27 07:27:01','2018-01-29 08:20:56'),(53,'6a5f3e15cf3ba7f36bfe945ec11989ba','e3c17ffb35d0d6c2b098bd967e40e170','holding',0.75,400,'300 NGN (0.75 PNM) commission charge for 400000 NGN withdrawal','pnm-holding','requested','debit','2018-01-27 07:27:01','2018-01-27 07:27:01'),(54,'058e8e2e54e1302d16210404d3d1eddd','e3c17ffb35d0d6c2b098bd967e40e170','3bbbf24a3f315371b13c24adb12892ef',55,400,'55 PNM transfer from $2y$10$elAQsgXGJKvCohg3JrLdKeH1VjJ5QClwF9iy5LgPmHGG3QxvuFoIG to 3bbbf24a3f315371b13c24adb12892ef','pnm-pnm','successful','debit','2018-01-27 07:59:48','2018-01-27 07:59:48'),(55,'058e8e2e54e1302d16210404d3d1eddd','e3c17ffb35d0d6c2b098bd967e40e170','holding',1,400,'1 commission charge for 55 PNM transfer','pnm-holding','successful','debit','2018-01-27 07:59:48','2018-01-27 07:59:48');
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_metas`
+--
+
+DROP TABLE IF EXISTS `user_metas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_metas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `other_name` varchar(255) DEFAULT NULL,
+  `wallet_address` varchar(40) NOT NULL,
+  `private_key` varchar(64) NOT NULL,
+  `account_number` varchar(185) NOT NULL,
+  `residential_address` text,
+  `dob` date DEFAULT NULL,
+  `marital_status` enum('single','married','divorced') DEFAULT NULL,
+  `gender` enum('male','female') DEFAULT NULL,
+  `contact_address` text,
+  `phone_no` varchar(45) DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `lga` varchar(255) DEFAULT NULL,
+  `id_card_type` varchar(255) DEFAULT NULL,
+  `id_card_no` varchar(255) DEFAULT NULL,
+  `bvn` varchar(255) DEFAULT NULL,
+  `occupation` varchar(255) DEFAULT NULL,
+  `form_location` varchar(255) DEFAULT NULL,
+  `signature_location` varchar(255) DEFAULT NULL,
+  `utility_bill_location` varchar(255) DEFAULT NULL,
+  `idcard_location` varchar(255) DEFAULT NULL,
+  `passport_location` varchar(255) DEFAULT NULL,
+  `nok_contact_address` varchar(255) DEFAULT NULL,
+  `nok_email` varchar(255) DEFAULT NULL,
+  `nok_gender` enum('male','female') DEFAULT NULL,
+  `nok_dob` date DEFAULT NULL,
+  `nok_phone_no` varchar(255) DEFAULT NULL,
+  `nok_relationship` varchar(255) DEFAULT NULL,
+  `next_of_kin` varchar(255) DEFAULT NULL,
+  `spouse_name` varchar(255) DEFAULT NULL,
+  `mother_maiden_name` varchar(255) DEFAULT NULL,
+  `office_phone_no` varchar(255) DEFAULT NULL,
+  `landmark` varchar(255) DEFAULT NULL,
+  `status` enum('registered','unregistered','pending') NOT NULL DEFAULT 'pending',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_metas_private_key_uindex` (`private_key`),
+  UNIQUE KEY `user_metas_account_number_uindex` (`account_number`),
+  UNIQUE KEY `user_metas_wallet_address_uindex` (`wallet_address`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_metas`
+--
+
+LOCK TABLES `user_metas` WRITE;
+/*!40000 ALTER TABLE `user_metas` DISABLE KEYS */;
+INSERT INTO `user_metas` VALUES (1,'Victor','Ndu','Kachi','82233bce59652cf3cc0eb7a03f3109d1','5746315cf4199ce7ab9c73406c16b031','0024664078',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2221485738',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'registered','2018-01-20 13:07:22','2018-01-20 13:07:22'),(2,'Mendos','Naibada','David','44ad0667d0b8f8c8cc15dc3164b073e4','f6b8e717f69f4cdf796a6c1cdd19a527','0312322122','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2135532123',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'registered','2018-01-21 01:36:02','2018-01-21 01:36:02'),(3,'Celestine','Onyemaechi','Ndu','jshkjhgsvd5678923=uisdjk887ujdms','kjhgsvd5678923hkejhgh98378kj','9367738765','256 Abak Road',NULL,'single',NULL,'22 Rd B Close Block 3 flat 2','08035024563','Nigerian','Imo','Ahiazu Mbaise','NYSC','AD/17A','300282773892','Free Lancer','/tmp/php0Uymik','/tmp/phpwzVIJK','/tmp/phpwdkdbb','/tmp/phpiurICB','/tmp/phpmEtm41','Aguneze Mbaise','nduovictor@gmail.com',NULL,NULL,NULL,'Son','Ndu Victor','Florenence Ahuruchioke Ndu','Osuagwu','0495039293','Empire Filling Station','pending','2018-01-23 23:12:18','2018-01-23 23:12:18'),(6,'Celestine','Onyemaechi','Ndu','jshkjhgsvd5678923=uisdjk887ujd','kjhgsvd5678923hkejhgh98378','9367738766','256 Abak Road',NULL,'single',NULL,'22 Rd B Close Block 3 flat 2','08035024563','Nigerian','Imo','Ahiazu Mbaise','NYSC','AD/17A','300282773892','Free Lancer','/tmp/phpOlkpbv','/tmp/phpmJMx6B','/tmp/phpeL5M1I','/tmp/phpg222WP','/tmp/phpCLEqSW','Aguneze Mbaise','nduovictor@gmail.com',NULL,NULL,NULL,'Son','Ndu Victor','Florenence Ahuruchioke Ndu','Osuagwu','0495039293','Empire Filling Station','pending','2018-01-23 23:35:10','2018-01-23 23:35:10'),(7,'Celestine','Onyemaechi','Ndu','jshkjhgsssd678923s23uisdjk887ujd','kjhgsvd5678923hkejhgh98378dskk','9367738723','256 Abak Road',NULL,'single',NULL,'22 Rd B Close Block 3 flat 2','08035024563','Nigerian','Imo','Ahiazu Mbaise','NYSC','AD/17A','300282773892','Free Lancer','/tmp/phpkj1YFh','/tmp/php0bOytC','/tmp/phpS6nfhX','/tmp/phpSrNW4h','/tmp/phpWkTLSC','Aguneze Mbaise','nduovictor@gmail.com',NULL,NULL,NULL,'Son','Ndu Victor','Florenence Ahuruchioke Ndu','Osuagwu','0495039293','Empire Filling Station','pending','2018-01-23 23:54:50','2018-01-23 23:54:50');
+/*!40000 ALTER TABLE `user_metas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `name` varchar(185) NOT NULL,
+  `email` varchar(185) NOT NULL,
+  `wallet_id` varchar(40) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `pin` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `account_number` varchar(45) NOT NULL,
+  `wallet_address` varchar(45) NOT NULL,
+  `private_key` varchar(45) NOT NULL,
+  `type` enum('user','admin') NOT NULL DEFAULT 'user',
+  `access_level` enum('5','4','3','2','1') NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` enum('active','pending','blocked') DEFAULT 'pending',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_private_key_uindex` (`private_key`),
+  UNIQUE KEY `users_account_number_uindex` (`account_number`),
+  UNIQUE KEY `users_name_uindex` (`name`),
+  UNIQUE KEY `users_email_uindex` (`email`),
+  UNIQUE KEY `users_wallet_id_uindex` (`wallet_id`),
+  UNIQUE KEY `users_wallet_address_uindex` (`wallet_address`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Victor','Ndu','nvictor','nduovictor@gmail.com','e3c17ffb35d0d6c2b098bd967e40e170','$2y$10$P/R4IT5G/Oi1Oh2cAYNYaeJdHKqKVQbZuNyj218vNo2oZElsqUY0i','$2y$10$jcggVFyoawgqEs2HiDjRXeufHhlTnE9Phl/tBggkb4X.Jwc5pCxgi','LbGPRPhRRWiAlKJuXQbR3YMmoEBoDFVTlXTjXjdyqBdPQn0yKdhtFFdBNYEc','0024664078','82233bce59652cf3cc0eb7a03f3109d1','5746315cf4199ce7ab9c73406c16b031','user','1','2018-01-20 20:10:16','2018-01-29 08:23:09','pending'),(3,'Mendos','Naibada','mendo','tweenmailer@gmail.com','3bbbf24a3f315371b13c24adb12892ef','$2y$10$P/R4IT5G/Oi1Oh2cAYNYaeJdHKqKVQbZuNyj218vNo2oZElsqUY0i','$2y$10$vn2VXuZNEYDHocJgMZJPVOL0STFoVfdkLxXTg1WlUqfffaFzslAbi','lBqdY3buPt6ChfAFf7J3cKRgYEcucYMCbYEcWafFU9znsCeB2mmnYWX7GikC','0312322122','44ad0667d0b8f8c8cc15dc3164b073e4','f6b8e717f69f4cdf796a6c1cdd19a527','user','1','2018-01-21 10:19:06','2018-01-22 14:31:04','blocked'),(4,'Super','Admin','super','admin@tlsavings.com','78278190','$2y$10$P/R4IT5G/Oi1Oh2cAYNYaeJdHKqKVQbZuNyj218vNo2oZElsqUY0i','$2y$10$vn2VXuZNEYDHocJgMZJPVOL0STFoVfdkLxXTg1WlUqfffaFzslAbi','k0gbTxqvy6sJbwhpVHnbUby5Yx84J0X9Mfp4MCyZKTUWq0rf384fOATWv2CN','0000000000','3293489208','124354542','admin','4','2018-01-21 10:57:29','2018-01-29 08:20:19','active'),(5,'senior','admin','senior','senior@tlsavings.com','85a02bb8b94225382329504e6ce876be','$2y$10$L9bgwHzznwsEn9/faKvbN.jJXmccfo65jW4.hie44TPYI9Vxdri0K','$2y$10$p9eQtxYmvvGy73fY.E/MNOE8Wff0JK6b0QhjF8XPjV8ndEtt8QIF.',NULL,'2457','85a02bb8b94225382329504e6ce876be','85a02bb8b94225382329504e6ce876be','admin','3','2018-01-28 11:03:06','2018-01-28 11:07:37','active'),(6,'senior101','Community','senior1','senior101@tlsavings.com','7acd0f0dd0bb86c223baca42c3661252','$2y$10$pJoaEcwsduqUMCcNzTddKeKLRef8J8rqWqwuOPLzu8cUCM2scJVdC','$2y$10$OmXQQS/RTbgzskFYqErHM.h5aTtHSRKQY2a1w638Ehnva3A7BwFEm',NULL,'1327','7acd0f0dd0bb86c223baca42c3661252','7acd0f0dd0bb86c223baca42c3661252','admin','3','2018-01-28 11:04:50','2018-01-29 08:20:23','active'),(7,'junior','Victo','junior','junior@tlsavings.com','e4912a5ac66434edb3b0005929775f6d','$2y$10$NmgKn28dhO8k7xbN6GJPY.XGBU8FsGmdVJwxC151mwb3/UsFcuLtu','$2y$10$gpzg9wYT6VhKHzfHjxROFO5z91CS9o0BEsAuMmjKck9A63iqbi7Vq',NULL,'2826','e4912a5ac66434edb3b0005929775f6d','e4912a5ac66434edb3b0005929775f6d','admin','3','2018-01-28 11:10:39','2018-01-28 11:10:39','active');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-01-29 13:58:07
