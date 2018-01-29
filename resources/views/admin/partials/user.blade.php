@@ -51,8 +51,7 @@
                             <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->name}}</a></td>
                             <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->wallet_id}}</a>
                             </td>
-                        @endif
-                        <td>{{$user->account_number}}</td>
+                        @endif<td>{{$user->account_number}}</td>
                         <td>
                             <span class="badge {{$badge}}">{{$user->status}}</span>
                         </td>
