@@ -76,7 +76,7 @@ Route::get('/join', 'Auth\RegisterController@showJoinForm');
 Route::post('/register', 'Auth\RegisterController@join');
 Route::put('/register', 'Auth\RegisterController@register');
 
-Route::middleware(['auth', 'isUser'])
+Route::middleware(['auth', 'isUser', 'isVerified'])
     ->group(function () {
         // drg >> "get" routes arranged alphabetically
         Route::get('/home', 'HomeController@index')->name('home');
@@ -99,7 +99,7 @@ Route::middleware(['auth', 'isUser'])
 
     });
 
-Route::middleware(['auth', 'isAdmin'])
+Route::middleware(['auth', 'isAdmin', 'isVerified'])
     ->group(function () {
         Route::namespace('Admin')->group(function () {
             Route::prefix('/admin')->group(function () {
@@ -152,11 +152,31 @@ Route::middleware(['auth', 'isAdmin'])
                 Route::post('/search');
 
                 // drg >> handling settings functions
-                Route::post('/settings/app', 'AdminSettingsController@updateSettings');
-                Route::post('/settings/password', 'AdminSettingsController@changePassword');
-                Route::post('/settings/pin', 'AdminSettingsController@changePin');
+                Route::post('/settings/app',
+                    'AdminSettingsController@updateSettings');
+                Route::post('/settings/password',
+                    'AdminSettingsController@changePassword');
+                Route::post('/settings/pin',
+                    'AdminSettingsController@changePin');
 
             });
 
+        });
+
+    });
+
+Route::middleware(['auth', 'isUser'])
+    ->group(function () {
+        Route::get('/blocked', function () {
+            if (\Illuminate\Support\Facades\Auth::user()->status =='blocked') {
+                return view('errors.blocked');
+            }
+            return redirect('/home');
+        });
+        Route::get('/pending', function () {
+            if (\Illuminate\Support\Facades\Auth::user()->status =='pending') {
+                return view('errors.pending');
+            }
+            return redirect('/home');
         });
     });

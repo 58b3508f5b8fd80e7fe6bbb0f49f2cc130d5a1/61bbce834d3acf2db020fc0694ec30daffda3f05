@@ -63,7 +63,7 @@
                                         title="Edit {{$user->first_name}}">
                                     <i class="fa fa-pencil"></i>
                                 </button>
-                                @if($user->status=='blocked')
+                                @if($user->status=='blocked' || $user->status=='pending')
                                     <button data-original-title="Delete" type="button"
                                             class="btn btn-sm btn-alt-success"
                                             data-toggle="tooltip"
