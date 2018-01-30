@@ -40,7 +40,7 @@
                             <i class="fa fa-times text-danger"></i>
                         </button>
                         <div class="content-header-item">
-                            <a class="link-effect font-w700" href="index-2.html')}}">
+                            <a class="link-effect font-w700" href="javascript:void(0)">
                                 <i class="si si-fire text-primary"></i>
                                 <span class="font-size-xl text-dual-primary-dark">{{config('app.name')}}</span>
                             </a>
@@ -52,13 +52,13 @@
                         <img class="img-avatar img-avatar32" src="{{asset('png/default-user.png')}}" alt="">
                     </div>
                     <div class="sidebar-mini-hidden-b text-center">
-                        <a class="img-link" href="be_pages_generic_profile.html">
+                        <a class="img-link" href="javascript:void(0)">
                             <img class="img-avatar" src="{{asset('png/default-user.png')}}" alt="">
                         </a>
                         <ul class="list-inline mt-10">
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase"
-                                   href="be_pages_generic_profile.html">{{Auth::user()->first_name }}</a>
+                                   href="#">{{Auth::user()->first_name }}</a>
                             </li>
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark" data-toggle="layout"
@@ -82,10 +82,10 @@
                             <a href="{{url('/admin/dashboard')}}"><i class="fa fa-dashboard"></i><span
                                         class="sidebar-mini-hide">Dashboard</span></a>
                         </li>
-                        <li>
+                        {{--<li>
                             <a href="{{url('/admin/statistics')}}"><i class="fa fa-line-chart"></i><span
                                         class="sidebar-mini-hide">Statistics</span></a>
-                        </li>
+                        </li>--}}
                         <li>
                             <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-users"></i><span
                                         class="sidebar-mini-hide"> Users</span></a>
@@ -149,6 +149,10 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="{{url('/admin/settings')}}"><i class="fa fa-line-chart"></i><span
+                                        class="sidebar-mini-hide">Settings</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -174,6 +178,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right min-width-150"
                          aria-labelledby="page-header-user-dropdown">
+{{--
                         <a class="dropdown-item" href="be_pages_generic_profile.html">
                             <i class="si si-user mr-5"></i> Profile
                         </a>
@@ -186,7 +191,8 @@
                             <i class="si si-note mr-5"></i> Invoices
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout"
+--}}
+                        <a class="dropdown-item" href="{{url('/admin/settings')}}" data-toggle="layout"
                            data-action="side_overlay_toggle">
                             <i class="si si-wrench mr-5"></i> Settings
                         </a>

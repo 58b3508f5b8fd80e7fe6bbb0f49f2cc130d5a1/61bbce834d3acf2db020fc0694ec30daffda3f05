@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('site.about-us');
+    return view('site.index-2');
 });
 
 Route::get('/about-us', function () {
@@ -32,9 +32,6 @@ Route::get('/hlight-bg', function () {
 });
 Route::get('/icon-logo', function () {
     return view('site.icon-logo');
-});
-Route::get('/index', function () {
-    return view('site.index');
 });
 Route::get('/index-2', function () {
     return view('site.index-2');
@@ -114,6 +111,9 @@ Route::middleware(['auth', 'isAdmin'])
                 Route::get('/add/admin', 'AdminAddController@viewAddAdmin');
                 Route::get('/add/pnm', 'AdminAddController@viewAddPnm');
 
+                // drg >> settings functions
+                Route::get('settings', 'AdminSettingsController@index');
+
                 // drg >> transaction functions
                 Route::get('/transactions/share',
                     'AdminTransactionsController@viewShare');
@@ -150,6 +150,12 @@ Route::middleware(['auth', 'isAdmin'])
 
                 // drg >> search
                 Route::post('/search');
+
+                // drg >> handling settings functions
+                Route::post('/settings/app', 'AdminSettingsController@updateSettings');
+                Route::post('/settings/password', 'AdminSettingsController@changePassword');
+                Route::post('/settings/pin', 'AdminSettingsController@changePin');
+
             });
 
         });

@@ -28,7 +28,7 @@ class HomeController extends Controller
         $data['totalPNM'] = $this->getTotalPNM();
         $data['totalNGN'] = $this->getTotalNGN();
         $data['currentValue'] = $this->getCurrentValue();
-        $data['transferredPNM'] = $this->getWithDrawnPNM();
+        $data['transferredPNM'] = $this->getTransferredPNM();
         $data['convertedPNM'] = $this->getConvertedPNM();
         $data['withdrawnPNM'] = $this->getWithDrawnPNM();
 
@@ -98,7 +98,7 @@ class HomeController extends Controller
     public function getTransferredPNM()
     {
         $pnm = Transaction::where('from', Auth::user()->wallet_id)
-            ->where('type', 'pnm-pnm')->where('remark', 'debit')
+            ->where('type', 'pnm-pnm')
             ->sum('amount');
         return $pnm;
     }
