@@ -77,83 +77,9 @@
                     </div>
                 </div>
                 <div class="content-side content-side-full">
-                    <ul class="nav-main">
-                        <li>
-                            <a href="{{url('/admin/dashboard')}}"><i class="fa fa-dashboard"></i><span
-                                        class="sidebar-mini-hide">Dashboard</span></a>
-                        </li>
-                        {{--<li>
-                            <a href="{{url('/admin/statistics')}}"><i class="fa fa-line-chart"></i><span
-                                        class="sidebar-mini-hide">Statistics</span></a>
-                        </li>--}}
-                        <li>
-                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-users"></i><span
-                                        class="sidebar-mini-hide"> Users</span></a>
-                            <ul>
-                                <li>
-                                    <a href="{{url('/admin/users/admin')}}">View Admins</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/users/all')}}">View all Users</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/users/registered')}}">View Registered Users</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/users/unregistered')}}">View Unregistered Users</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/users/active')}}">View Active Users</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/users/suspended')}}">View Suspended Users</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/users/blocked')}}">View Blocked Users</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-plus"></i><span
-                                        class="sidebar-mini-hide"> Add New</span></a>
-                            <ul>
-                                <li>
-                                    <a href="{{url('/admin/add/user')}}">New User</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/add/admin')}}">New Admin</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/add/pnm')}}">PNM</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-fire"></i><span
-                                        class="sidebar-mini-hide"> Transactions</span></a>
-                            <ul>
-                                <li>
-                                    <a href="{{url('/admin/transactions/share')}}">Share PNM</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/transactions/withdrawal/pnm')}}">Approve PNM Withdrawals</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/transactions/withdrawal/ngn')}}">Approve NGN Withdrawal</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/transactions/verified/pnm')}}">Verified PNM Withdrawals</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/admin/transactions/verified/ngn')}}">Verified NGN Withdrawal</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{url('/admin/settings')}}"><i class="fa fa-line-chart"></i><span
-                                        class="sidebar-mini-hide">Settings</span></a>
-                        </li>
-                    </ul>
+                    @includeWhen(Auth::user()->access_level==2,'admin.partials.adminaccess.admin')
+                    @includeWhen(Auth::user()->access_level==3,'admin.partials.adminaccess.seniorAdmin')
+                    @includeWhen(Auth::user()->access_level>=4,'admin.partials.adminaccess.superAdmin')
                 </div>
             </div>
         </div>
@@ -178,24 +104,26 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right min-width-150"
                          aria-labelledby="page-header-user-dropdown">
-{{--
-                        <a class="dropdown-item" href="be_pages_generic_profile.html">
-                            <i class="si si-user mr-5"></i> Profile
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between"
-                           href="be_pages_generic_inbox.html">
-                            <span><i class="si si-envelope-open mr-5"></i> Inbox</span>
-                            <span class="badge badge-primary">3</span>
-                        </a>
-                        <a class="dropdown-item" href="be_pages_generic_invoice.html">
-                            <i class="si si-note mr-5"></i> Invoices
-                        </a>
-                        <div class="dropdown-divider"></div>
---}}
-                        <a class="dropdown-item" href="{{url('/admin/settings')}}" data-toggle="layout"
-                           data-action="side_overlay_toggle">
-                            <i class="si si-wrench mr-5"></i> Settings
-                        </a>
+                        {{--
+                                                <a class="dropdown-item" href="be_pages_generic_profile.html">
+                                                    <i class="si si-user mr-5"></i> Profile
+                                                </a>
+                                                <a class="dropdown-item d-flex align-items-center justify-content-between"
+                                                   href="be_pages_generic_inbox.html">
+                                                    <span><i class="si si-envelope-open mr-5"></i> Inbox</span>
+                                                    <span class="badge badge-primary">3</span>
+                                                </a>
+                                                <a class="dropdown-item" href="be_pages_generic_invoice.html">
+                                                    <i class="si si-note mr-5"></i> Invoices
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                        --}}
+                        @if(Auth::user()->access_level >= 4)
+                            <a class="dropdown-item" href="{{url('/admin/settings')}}" data-toggle="layout"
+                               data-action="side_overlay_toggle">
+                                <i class="si si-wrench mr-5"></i> Settings
+                            </a>
+                        @endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -211,7 +139,8 @@
                 <form action="{{url('/admin/search')}}" method="get">
                     <div class="input-group">
                         <span class="input-group-btn">
-                        <button type="button" class="btn btn-secondary" data-toggle="layout" data-action="header_search_off">
+                        <button type="button" class="btn btn-secondary" data-toggle="layout"
+                                data-action="header_search_off">
                         <i class="fa fa-times"></i>
                         </button>
                         </span>

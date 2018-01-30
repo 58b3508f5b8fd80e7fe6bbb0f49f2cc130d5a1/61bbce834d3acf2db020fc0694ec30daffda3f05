@@ -19,7 +19,9 @@
                         ID @endif</th>
                     <th>Account No.</th>
                     <th>Status</th>
-                    <th class="text-center">Actions</th>
+                    @if(Auth::user()->access_level>=3)
+                        <th class="text-center">Actions</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -51,38 +53,41 @@
                             <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->name}}</a></td>
                             <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->wallet_id}}</a>
                             </td>
-                        @endif<td>{{$user->account_number}}</td>
+                        @endif
+                        <td>{{$user->account_number}}</td>
                         <td>
                             <span class="badge {{$badge}}">{{$user->status}}</span>
                         </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button data-original-title="Edit" type="button"
-                                        class="btn btn-sm btn-alt-primary"
-                                        data-toggle="tooltip"
-                                        title="Edit {{$user->first_name}}">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                @if($user->status=='blocked' || $user->status=='pending')
-                                    <button data-original-title="Delete" type="button"
-                                            class="btn btn-sm btn-alt-success"
+                        @if(Auth::user()->access_level>=3)
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <button data-original-title="Edit" type="button"
+                                            class="btn btn-sm btn-alt-primary"
                                             data-toggle="tooltip"
-                                            title="Approve {{$user->first_name}}"
-                                            onclick="verifyUser({{($user->id+1107)}}, 'approve')">
-                                        <i class="fa fa-check"></i>
+                                            title="Edit {{$user->first_name}}">
+                                        <i class="fa fa-pencil"></i>
                                     </button>
-                                @endif
-                                @if($user->status=='active')
-                                    <button data-original-title="Delete" type="button"
-                                            class="btn btn-sm btn-alt-danger"
-                                            data-toggle="tooltip"
-                                            title="Block {{$user->first_name}}"
-                                            onclick="verifyUser({{($user->id+1107)}}, 'block')">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                @endif
-                            </div>
-                        </td>
+                                    @if($user->status=='blocked' || $user->status=='pending')
+                                        <button data-original-title="Delete" type="button"
+                                                class="btn btn-sm btn-alt-success"
+                                                data-toggle="tooltip"
+                                                title="Approve {{$user->first_name}}"
+                                                onclick="verifyUser({{($user->id+1107)}}, 'approve')">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    @endif
+                                    @if($user->status=='active')
+                                        <button data-original-title="Delete" type="button"
+                                                class="btn btn-sm btn-alt-danger"
+                                                data-toggle="tooltip"
+                                                title="Block {{$user->first_name}}"
+                                                onclick="verifyUser({{($user->id+1107)}}, 'block')">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    @endif
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>
