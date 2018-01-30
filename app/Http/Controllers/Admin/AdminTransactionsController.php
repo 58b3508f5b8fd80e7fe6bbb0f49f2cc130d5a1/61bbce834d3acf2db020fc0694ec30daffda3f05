@@ -80,7 +80,7 @@ class AdminTransactionsController extends Controller
                 break;
             case 'ngn':
                 $withdrawals = Transaction::where('type', 'ngn-bank')
-                    ->where('status', '<>', $status)
+                    ->where('status', '<>', 'requested')
                     ->orderBy('updated_at', 'desc')->get();
                 break;
             default:
@@ -94,14 +94,26 @@ class AdminTransactionsController extends Controller
         $withdrawals = array();
         switch ($action) {
             case 'pnm':
-                $withdrawals = Transaction::where('type', 'pnm-wallet')
-                    ->where('status', 'requested')
-                    ->orderBy('updated_at', 'desc')->get();
+                $withdrawals = Transaction::leftJoin('users', 'users.wallet_id',
+                    '=', 'transactions.from')
+                    ->leftJoin('user_metas', 'user_metas.wallet_address',
+                        '=', 'users.wallet_address')
+                    ->where('transactions.type', 'pnm-wallet')
+                    ->where('transactions.status', 'requested')
+                    ->select("transactions.*", "user_metas.bank_name",
+                        "user_metas.wallet_address", "user_metas.bank_acc_no")
+                    ->orderBy('transactions.updated_at', 'desc')->get();
                 break;
             case 'ngn':
-                $withdrawals = Transaction::where('type', 'ngn-bank')
-                    ->where('status', 'requested')
-                    ->orderBy('updated_at', 'desc')->get();
+                $withdrawals = Transaction::leftJoin('users', 'users.name',
+                    '=', 'transactions.from')
+                    ->leftJoin('user_metas', 'user_metas.wallet_address',
+                        '=', 'users.wallet_address')
+                    ->where('transactions.type', 'ngn-bank')
+                    ->where('transactions.status', 'requested')
+                    ->select("transactions.*", "user_metas.bank_name",
+                        "user_metas.wallet_address", "user_metas.bank_acc_no")
+                    ->orderBy('transactions.updated_at', 'desc')->get();
                 break;
             default:
                 break;

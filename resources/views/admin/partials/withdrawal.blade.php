@@ -10,20 +10,26 @@
                 <th class="text-center">S/No.</th>
                 <th class="text-center">Withdrawal ID</th>
                 @if($action == 'pnm')
-                    <td>PNM</td>
+                    <th>PNM</th>
                 @elseif($action == 'ngn')
-                    <td>NGN</td>
+                    <th>NGN</th>
                 @endif
                 <th>From</th>
                 <th>To</th>
                 <th>Type</th>
+                @if($action == 'pnm')
+                    <th>Wallet Address</th>
+                @elseif($action == 'ngn')
+                    <th>Bank Name</th>
+                    <th>Acc. Number</th>
+                @endif
                 <th>Status</th>
                 <th>Date</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @php $i=1; @endphp
+            @php $i=0; @endphp
             @foreach($withdrawals as $withdrawal)
                 @php
                     $i++;
@@ -37,7 +43,7 @@
                 <tr>
                     <td>{{$i}}</td>
                     <td>
-                        <a href="{{url('withdrawal/'.$withdrawal->transaction_id)}}">{{$withdrawal->transaction_id}}</a>
+                        <a href="javascript:void (0)">{{$withdrawal->transaction_id}}</a>
                     </td>
                     @if($action == 'pnm')
                         <td>{{$withdrawal->amount}}</td>
@@ -47,6 +53,12 @@
                     <td>{{$withdrawal->from}}</td>
                     <td>{{$withdrawal->to}}</td>
                     <td>{{$withdrawal->type}}</td>
+                    @if($action == 'pnm')
+                        <td>{{$withdrawal->wallet_address}}</td>
+                    @elseif($action == 'ngn')
+                        <td>{{$withdrawal->bank_name}}</td>
+                        <td>{{$withdrawal->bank_acc_no}}</td>
+                    @endif
                     <td class="text-center">
                         <span class="badge {{$badge}}">{{$withdrawal->status}}</span>
                     </td>
@@ -74,7 +86,6 @@
                     </td>
 
                 </tr>
-                @php $i++; @endphp
             @endforeach
             </tbody>
         </table>
