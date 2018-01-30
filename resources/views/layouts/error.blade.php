@@ -35,6 +35,9 @@
         </div>
     </main>
 </div>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>
 <script src="{{asset('js/codebase.min-1.4.js')}}"></script>
 </body>
 
