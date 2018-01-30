@@ -103,62 +103,80 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
     ->group(function () {
         Route::namespace('Admin')->group(function () {
             Route::prefix('/admin')->group(function () {
-                Route::get('', 'AdminController@index');
-                Route::get('/dashboard', 'AdminController@index');
+                Route::middleware(['adminLevel'])
+                    ->group(function () {
 
-                // drg >> add functions
-                Route::get('/add/user', 'AdminAddController@viewAddUser');
-                Route::get('/add/admin', 'AdminAddController@viewAddAdmin');
-                Route::get('/add/pnm', 'AdminAddController@viewAddPnm');
+                        Route::get('', 'AdminController@index');
+                        Route::get('/dashboard', 'AdminController@index');
+                        // drg >> transaction functions
+                        Route::get('/transactions/verified/{action}',
+                            'AdminTransactionsController@viewVerified');
+                        // drg >> add functions
+                        Route::get('/add/user',
+                            'AdminAddController@viewAddUser');
+                        // drg >> users functions
+                        Route::get('users/active',
+                            'AdminUserController@viewActiveUsers');
+                        Route::get('users/all',
+                            'AdminUserController@viewAllUsers');
+                        Route::get('users/blocked',
+                            'AdminUserController@viewBlockedUsers');
+                        Route::get('users/registered',
+                            'AdminUserController@viewRegisteredUsers');
+                        Route::get('users/unregistered',
+                            'AdminUserController@viewUnregisteredUsers');
+                        Route::get('users/suspended',
+                            'AdminUserController@viewSuspendedUsers');
 
-                // drg >> settings functions
-                Route::get('settings', 'AdminSettingsController@index');
+                        // drg >> settings functions
+                        Route::get('settings', 'AdminSettingsController@index');
 
-                // drg >> transaction functions
-                Route::get('/transactions/share',
-                    'AdminTransactionsController@viewShare');
-                Route::get('/transactions/withdrawal/{action}',
-                    'AdminTransactionsController@viewWithdrawal');
-                Route::get('/transactions/verified/{action}',
-                    'AdminTransactionsController@viewVerified');
 
-                // drg >> users functions
-                Route::get('users/active',
-                    'AdminUserController@viewActiveUsers');
-                Route::get('users/admin', 'AdminUserController@viewAdmins');
-                Route::get('users/all', 'AdminUserController@viewAllUsers');
-                Route::get('users/blocked',
-                    'AdminUserController@viewBlockedUsers');
-                Route::get('users/registered',
-                    'AdminUserController@viewRegisteredUsers');
-                Route::get('users/unregistered',
-                    'AdminUserController@viewUnregisteredUsers');
-                Route::get('users/suspended',
-                    'AdminUserController@viewSuspendedUsers');
+                        // drg >> search
+                        Route::post('/search');
 
-                // drg >> handling add functions
-                Route::post('/add/user', 'AdminAddController@addUser');
-                Route::post('/add/admin', 'AdminAddController@addAdmin');
-                Route::post('/add/pnm', 'AdminAddController@addPNM');
-                Route::post('/users/verify', 'AdminUserController@verifyUser');
 
-                // drg >> handling transaction functions
-                Route::post('/transactions/share',
-                    'AdminTransactionsController@sharePNM');
-                Route::post('/transactions/withdrawal',
-                    'AdminTransactionsController@verifyWithdrawal');
+                        Route::post('/settings/password',
+                            'AdminSettingsController@changePassword');
+                        Route::post('/settings/pin',
+                            'AdminSettingsController@changePin');
 
-                // drg >> search
-                Route::post('/search');
+                        Route::middleware(['seniorAdminLevel'])
+                            ->group(function () {
 
-                // drg >> handling settings functions
-                Route::post('/settings/app',
-                    'AdminSettingsController@updateSettings');
-                Route::post('/settings/password',
-                    'AdminSettingsController@changePassword');
-                Route::post('/settings/pin',
-                    'AdminSettingsController@changePin');
+                                Route::get('/transactions/withdrawal/{action}',
+                                    'AdminTransactionsController@viewWithdrawal');
+                                Route::get('/transactions/share',
+                                    'AdminTransactionsController@viewShare');
+                                // drg >> handling transaction functions
+                                Route::post('/transactions/withdrawal',
+                                    'AdminTransactionsController@verifyWithdrawal');
+                                Route::post('/transactions/share',
+                                    'AdminTransactionsController@sharePNM');
+                                Route::post('/add/user',
+                                    'AdminAddController@addUser');
+                                Route::post('/users/verify',
+                                    'AdminUserController@verifyUser');
+                                Route::middleware(['superAdminLevel'])
+                                    ->group(function () {
+                                        // drg >> add functions
+                                        Route::get('users/admin',
+                                            'AdminUserController@viewAdmins');
+                                        Route::get('/add/admin',
+                                            'AdminAddController@viewAddAdmin');
+                                        Route::get('/add/pnm',
+                                            'AdminAddController@viewAddPnm');
 
+                                        // drg >> handling settings functions
+                                        Route::post('/settings/app',
+                                            'AdminSettingsController@updateSettings');
+                                        Route::post('/add/admin',
+                                            'AdminAddController@addAdmin');
+                                        Route::post('/add/pnm',
+                                            'AdminAddController@addPNM');
+                                    });
+                            });
+                    });
             });
 
         });
@@ -168,13 +186,13 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
 Route::middleware(['auth', 'isUser'])
     ->group(function () {
         Route::get('/blocked', function () {
-            if (\Illuminate\Support\Facades\Auth::user()->status =='blocked') {
+            if (\Illuminate\Support\Facades\Auth::user()->status == 'blocked') {
                 return view('errors.blocked');
             }
             return redirect('/home');
         });
         Route::get('/pending', function () {
-            if (\Illuminate\Support\Facades\Auth::user()->status =='pending') {
+            if (\Illuminate\Support\Facades\Auth::user()->status == 'pending') {
                 return view('errors.pending');
             }
             return redirect('/home');

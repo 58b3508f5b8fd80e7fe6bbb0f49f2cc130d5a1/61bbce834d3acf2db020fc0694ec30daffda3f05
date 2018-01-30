@@ -2,10 +2,12 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\FlashStats;
+use App\Http\Middleware\AdminLevel;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use App\Http\Middleware\IsVerified;
+use App\Http\Middleware\SeniorAdminLevel;
+use App\Http\Middleware\SuperAdminLevel;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,5 +69,9 @@ class Kernel extends HttpKernel
             'isUser'     => IsUser::class,
             'isAdmin'    => IsAdmin::class,
             'isVerified' => IsVerified::class,
+            'adminLevel'=> AdminLevel::class,
+            'seniorAdminLevel'=>SeniorAdminLevel::class,
+            'superAdminLevel'=>SuperAdminLevel::class,
+
         ];
 }
