@@ -106,7 +106,7 @@ class HomeController extends Controller
     public function getWithDrawnPNM()
     {
         $pnm = Transaction::where('from', Auth::user()->wallet_id)
-            ->where('type', 'pnm-user')->where('remark', 'debit')
+            ->where('type', 'pnm-wallet')->where('remark', 'debit')
             ->sum('amount');
         return $pnm;
     }

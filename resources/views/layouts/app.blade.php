@@ -140,22 +140,6 @@
                         data-action="sidebar_toggle">
                     <i class="fa fa-navicon"></i>
                 </button>
-                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-                    <i class="fa fa-user"></i> Wallet ID: <span class="text-primary">{{Auth::user()->wallet_id}}</span>
-                </button>
-                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-                    <i class="fa fa-line-chart"></i> Value per PNM: <span class="text-danger">{{$data['currentValue'] or 0}}
-                        NGN</span>
-                </button>
-                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-                    <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM'] or 0}}
-                        PNM</span>
-                </button>
-                <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-                    &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM'] * $data['currentValue']}}
-                        NGN</span>
-                </button>
-
             </div>
             <div class="content-header-section">
                 <div class="btn-group" role="group">
@@ -165,19 +149,9 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right min-width-150"
                          aria-labelledby="page-header-user-dropdown">
-                        <a class="dropdown-item" href="be_pages_generic_profile.html">
-                            <i class="si si-user mr-5"></i> Profile
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between"
-                           href="be_pages_generic_inbox.html">
-                            <span><i class="si si-envelope-open mr-5"></i> Inbox</span>
-                            <span class="badge badge-primary">3</span>
-                        </a>
-                        <a class="dropdown-item" href="be_pages_generic_invoice.html">
-                            <i class="si si-note mr-5"></i> Invoices
-                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)" data-toggle="layout"
+                        <a class="dropdown-item" href="{{url('/settings
+                        ')}}" data-toggle="layout"
                            data-action="side_overlay_toggle">
                             <i class="si si-wrench mr-5"></i> Settings
                         </a>
@@ -195,6 +169,23 @@
 
     </header>
     <main id="main-container">
+        <div class="btn-group-justified">
+        <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+            <i class="fa fa-user"></i> Wallet ID: <span class="text-primary">{{Auth::user()->wallet_id}}</span>
+        </button>
+        <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+            <i class="fa fa-line-chart"></i> Value per PNM: <span class="text-danger">{{$data['currentValue'] or 0}}
+                NGN</span>
+        </button>
+        <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+            <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM'] or 0}}
+                PNM</span>
+        </button>
+        <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+            &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM'] * $data['currentValue']}}
+                NGN</span>
+        </button>
+        </div>
         @yield('content')
     </main>
     <footer id="page-footer" class="opacity-0">
