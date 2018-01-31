@@ -64,11 +64,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            {{config('mail.username')}}<br>
+                            <div>{{config('mail.username')}}<br>
                             {{config('mail.password')}}
                             {{config('mail.host')}}<br>
                             {{config('mail.driver')}}<br>
                             {{config('mail.encryption')}}<br>
+                                <p>Just show some stuff</p>
+                            </div>
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Reset Password
