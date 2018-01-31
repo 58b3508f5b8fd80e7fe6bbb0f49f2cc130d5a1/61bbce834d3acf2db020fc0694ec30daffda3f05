@@ -204,8 +204,8 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
-    'aliases' => [
+    'sendgrid'  => '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',
+    'aliases'   => [
 
         'App'          => Illuminate\Support\Facades\App::class,
         'Artisan'      => Illuminate\Support\Facades\Artisan::class,
