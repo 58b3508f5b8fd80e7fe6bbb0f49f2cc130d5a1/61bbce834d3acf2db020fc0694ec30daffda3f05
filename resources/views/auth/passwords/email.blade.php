@@ -35,7 +35,13 @@
                                 @endif
                             </div>
                         </div>
-
+                        <div>{{config('mail.username')}}<br>
+                            {{config('mail.password')}}
+                            {{config('mail.host')}}<br>
+                            {{config('mail.driver')}}<br>
+                            {{config('mail.encryption')}}<br>
+                            <p>Just show some stuff</p>
+                        </div>
                         <div class="form-group row gutters-tiny">
                             <div class="col-12 mb-10">
                                 <button type="submit"
