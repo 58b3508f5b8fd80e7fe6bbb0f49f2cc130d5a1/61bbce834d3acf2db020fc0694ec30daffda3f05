@@ -22,6 +22,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="{{asset('png/favicon-192x192.png')}}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('png/apple-touch-icon-180x180.png')}}">
     <link rel="stylesheet" id="css-main" href="{{asset('css/tlsavings.min.css')}}">
+    @yield('style')
 </head>
 <body>
 <div id="page-container" class="sidebar-o side-scroll page-header-modern main-content-boxed">
@@ -49,11 +50,11 @@
                 </div>
                 <div class="content-side content-side-full content-side-user px-10 align-parent">
                     <div class="sidebar-mini-visible-b align-v animated fadeIn">
-                        <img class="img-avatar img-avatar32" src="{{asset('png/default-user.png')}}" alt="">
+                        <img class="img-avatar img-avatar32" src="{{asset(Auth::user()->avatar)}}" alt="">
                     </div>
                     <div class="sidebar-mini-hidden-b text-center">
                         <a class="img-link" href="javascript:void(0)">
-                            <img class="img-avatar" src="{{asset('png/default-user.png')}}" alt="">
+                            <img class="img-avatar" src="{{asset(Auth::user()->avatar)}}" alt="">
                         </a>
                         <ul class="list-inline mt-10">
                             <li class="list-inline-item">
@@ -174,6 +175,7 @@
         </div>
     </footer>
 </div>
+
 <script src="{{asset('js/codebase.min-1.4.js')}}"></script>
 <script src="{{asset('js/chart.bundle.min.js')}}"></script>
 <script src="{{asset('js/be_pages_dashboard.js')}}"></script>

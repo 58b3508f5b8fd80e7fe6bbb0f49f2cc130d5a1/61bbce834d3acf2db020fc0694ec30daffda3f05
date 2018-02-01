@@ -44,14 +44,14 @@
                         </td>
                         @if($action=='registered' || $action=='unregistered')
                             <td>
-                                <a href="{{url('admin/view/user/'.$user->wallet_address)}}">{{$user->wallet_address}}</a>
+                                <a href="javascript:void(0)">{{$user->wallet_address}}</a>
                             </td>
                             <td>
-                                <a href="{{url('admin/view/user/'.$user->wallet_address)}}">{{$user->private_key}}</a>
+                                <a href="javascript:void(0)">{{$user->private_key}}</a>
                             </td>
                         @else
-                            <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->name}}</a></td>
-                            <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->wallet_id}}</a>
+                            <td><a href="javascript:void(0)">{{$user->name}}</a></td>
+                            <td><a href="javascript:void(0)">{{$user->wallet_id}}</a>
                             </td>
                         @endif
                         <td>@if($type=='admin') {{ $user->access_level }} @else {{$user->account_number}} @endif</td>
@@ -68,23 +68,25 @@
                                             onclick="viewEditUser({{($user->id+9407)}},'{{$type}}')">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-                                    @if($user->status=='blocked' || $user->status=='pending')
-                                        <button data-original-title="Delete" type="button"
-                                                class="btn btn-sm btn-alt-success"
-                                                data-toggle="tooltip"
-                                                title="Approve {{$user->first_name}}"
-                                                onclick="verifyUser({{($user->id+1107)}}, 'approve')">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                    @endif
-                                    @if($user->status=='active')
-                                        <button data-original-title="Delete" type="button"
-                                                class="btn btn-sm btn-alt-danger"
-                                                data-toggle="tooltip"
-                                                title="Block {{$user->first_name}}"
-                                                onclick="verifyUser({{($user->id+1107)}}, 'block')">
-                                            <i class="fa fa-times"></i>
-                                        </button>
+                                    @if(!in_array($action,['registered','unregistered']))
+                                        @if($user->status=='blocked' || $user->status=='pending')
+                                            <button data-original-title="Delete" type="button"
+                                                    class="btn btn-sm btn-alt-success"
+                                                    data-toggle="tooltip"
+                                                    title="Approve {{$user->first_name}}"
+                                                    onclick="verifyUser({{($user->id+1107)}}, 'approve')">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                        @endif
+                                        @if($user->status=='active')
+                                            <button data-original-title="Delete" type="button"
+                                                    class="btn btn-sm btn-alt-danger"
+                                                    data-toggle="tooltip"
+                                                    title="Block {{$user->first_name}}"
+                                                    onclick="verifyUser({{($user->id+1107)}}, 'block')">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        @endif
                                     @endif
                                 </div>
                             </td>

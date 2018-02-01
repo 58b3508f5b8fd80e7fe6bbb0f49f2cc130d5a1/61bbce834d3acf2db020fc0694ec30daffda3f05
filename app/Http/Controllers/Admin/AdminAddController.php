@@ -22,41 +22,44 @@ class AdminAddController extends Controller
     protected function validateUser(array $data)
     {
         return Validator::make($data, [
-            'first_name'            => 'required|string|unique:users|max:255',
-            'last_name'             => 'required|string|unique:users|max:255',
-            'other_name'            => 'required|string|unique:users|max:255',
-            'account_number'        => 'required|string|unique:users|max:255',
-            'wallet_address'        => 'required|string|unique:users|max:255',
-            'private_key'           => 'required|string|unique:users|max:255',
-            'dob'                   => 'required|string|unique:users|max:255',
-            'marital_status'        => 'required|string|unique:users|max:255',
-            'mega-gender-group'     => 'required|string|unique:users|max:255',
-            'phone_no'              => 'required|string|unique:users|max:255',
-            'nationality'           => 'required|string|unique:users|max:255',
-            'state'                 => 'required|string|unique:users|max:255',
-            'lga'                   => 'required|string|unique:users|max:255',
-            'residential_address'   => 'required|string|unique:users|max:255',
-            'contact_address'       => 'required|string|unique:users|max:255',
-            'id_card_type'          => 'required|string|unique:users|max:255',
-            'id_card_no'            => 'required|string|unique:users|max:255',
-            'bvn'                   => 'required|string|unique:users|max:255',
-            'occupation'            => 'required|string|unique:users|max:255',
-            'next_of_kin'           => 'required|string|unique:users|max:255',
-            'nok_relationship'      => 'required|string|unique:users|max:255',
-            'nok_contact_address'   => 'required|string|unique:users|max:255',
-            'nok_dob'               => 'required|string|unique:users|max:255',
-            'nok_gender'            => 'required|string|unique:users|max:255',
-            'nok_phone_no'          => 'required|string|unique:users|max:255',
-            'nok_email'             => 'required|string|unique:users|max:255',
-            'spouse_name'           => 'required|string|unique:users|max:255',
-            'mother_maiden_name'    => 'required|string|unique:users|max:255',
-            'office_phone_no'       => 'required|string|unique:users|max:255',
-            'landmark'              => 'required|string|unique:users|max:255',
-            'form_location'         => 'required|string|unique:users|max:255',
-            'signature_location'    => 'required|string|unique:users|max:255',
-            'utility_bill_location' => 'required|string|unique:users|max:255',
-            'idcard_location'       => 'required|string|unique:users|max:255',
-            'passport_location'     => 'required|string|unique:users|max:255',
+            'first_name'            => 'required|string|max:255',
+            'last_name'             => 'string|max:255',
+            'other_name'            => 'max:255',
+            'account_number'        => 'required|string|unique:user_metas|max:10',
+            'wallet_address'        => 'required|string|unique:user_metas|max:255',
+            'private_key'           => 'required|string|unique:user_metas|max:255',
+            'dob'                   => 'required|date|max:255',
+            'marital_status'        => 'required|string|max:255',
+            'gender'                => 'required|string|max:255',
+            'phone_no'              => 'required|string|unique:user_metas|max:255',
+            'nationality'           => 'required|string|max:255',
+            'state'                 => 'required|string|max:255',
+            'lga'                   => 'required|string|max:255',
+            'residential_address'   => 'required|string|max:255',
+            'contact_address'       => 'required|string|max:255',
+            'id_card_type'          => 'required|string|max:255',
+            'id_card_no'            => 'required|unique:user_metas|max:255',
+            'bvn'                   => 'required|numeric|unique:user_metas',
+            'bank_name'             => 'string|max:255',
+            'bank_acc_name'         => 'string|max:255',
+            'bank_acc_no'           => 'numeric|unique:user_metas',
+            'occupation'            => 'required|string|max:255',
+            'next_of_kin'           => 'required|string|max:255',
+            'nok_relationship'      => 'required|string|max:255',
+            'nok_contact_address'   => 'required|string|max:255',
+            'nok_dob'               => 'required|date|max:255',
+            'nok_gender'            => 'required|string|max:255',
+            'nok_phone_no'          => 'required|string|max:255',
+            'nok_email'             => 'required|string|max:255',
+            'spouse_name'           => 'required|string|max:255',
+            'mother_maiden_name'    => 'required|string|max:255',
+            'office_phone_no'       => 'required|string|max:255',
+            'landmark'              => 'required|string|max:255',
+            'form_location'         => 'required|image',
+            'signature_location'    => 'required|image',
+            'utility_bill_location' => 'required|image',
+            'idcard_location'       => 'required|image',
+            'passport_location'     => 'required|image',
         ]);
     }
 
@@ -118,7 +121,7 @@ class AdminAddController extends Controller
         $admin = User::create([
             'first_name'     => $details['first_name'],
             'last_name'      => $details['last_name'],
-            'wallet_id'      => md5($details['email'].date('YmdHis')),
+            'wallet_id'      => md5($details['email'] . date('YmdHis')),
             'name'           => $details['name'],
             'email'          => $details['email'],
             'password'       => bcrypt(md5($details['email'])),
@@ -147,8 +150,39 @@ class AdminAddController extends Controller
     public function addUser(Request $request)
     {
         $details = $request->all();
-        //$this->validateUser($details)->validate();
-        array_push($details, $this->uploadFiles($request));
+        $this->validateUser($details)->validate();
+
+        if ($request->hasFile('form_location')
+            && $request->hasFile('signature_location')
+            && $request->hasFile('utility_bill_location')
+            && $request->hasFile('idcard_location')
+            && $request->hasFile('passport_location')
+        ) {
+            $formImage = $request->file('form_location');
+            $signatureImage = $request->file('signature_location');
+            $utilityImage = $request->file('utility_bill_location');
+            $idcardImage = $request->file('idcard_location');
+            $passportImage = $request->file('passport_location');
+            if ($formImage->isValid() && $signatureImage->isValid()
+                && $utilityImage->isValid()
+                && $idcardImage->isValid()
+                && $passportImage->isValid()
+            ) {
+                $details['form_location'] = str_replace('public',
+                    'storage', $signatureImage->store('public/images/forms'));
+                $details['signature_location'] = str_replace('public',
+                    'storage',
+                    $signatureImage->store('public/images/signatures'));
+                $details['utility_bill_location'] = str_replace('public',
+                    'storage',
+                    $utilityImage->store('public/images/utility_bills'));
+                $details['idcard_location'] = str_replace('public', 'storage',
+                    $idcardImage->store('public/images/idcards'));
+                $details['passport_location'] = str_replace('public', 'storage',
+                    $passportImage->store('public/images/passport'));
+            }
+        }
+
         $user = $this->createUsers($details);
         if ($user) {
             $data['alert'] = 'success';
@@ -172,9 +206,9 @@ class AdminAddController extends Controller
             'account_number'        => $data['account_number'],
             'wallet_address'        => $data['wallet_address'],
             'private_key'           => $data['private_key'],
-            //'dob'                   => date_create_from_format('Y-M-d',$data['dob']),
+            'dob'                   => date_create($data['dob']),
             'marital_status'        => $data['marital_status'],
-            //'gender'     => $data['mega-gender-group'],
+            'gender'                => $data['gender'],
             'phone_no'              => $data['phone_no'],
             'nationality'           => $data['nationality'],
             'state'                 => $data['state'],
@@ -184,13 +218,16 @@ class AdminAddController extends Controller
             'id_card_type'          => $data['id_card_type'],
             'id_card_no'            => $data['id_card_no'],
             'bvn'                   => $data['bvn'],
+            'bank_name'             => $data['bank_name'],
+            'bank_acc_name'         => $data['bank_acc_name'],
+            'bank_acc_no'           => $data['bank_acc_no'],
             'occupation'            => $data['occupation'],
             'next_of_kin'           => $data['next_of_kin'],
             'nok_relationship'      => $data['nok_relationship'],
             'nok_contact_address'   => $data['nok_contact_address'],
-            //'nok_dob'               => date_create_from_format('Y-M-d',$data['nok_dob']),
-            //'nok_gender'            => $data['nok_gender'],
-            'nok_phone_no'          => $data['nok_phone_number'],
+            'nok_dob'               => date_create($data['nok_dob']),
+            'nok_gender'            => $data['nok_gender'],
+            'nok_phone_no'          => $data['nok_phone_no'],
             'nok_email'             => $data['nok_email'],
             'spouse_name'           => $data['spouse_name'],
             'mother_maiden_name'    => $data['mother_maiden_name'],
@@ -207,37 +244,8 @@ class AdminAddController extends Controller
     public function uploadFiles(Request $request)
     {
         $details = array();
-        if ($request->hasFile('form_location')
-            && $request->hasFile('signature_location')
-            && $request->hasFile('utility_bill_location')
-            && $request->hasFile('idcard_location')
-            && $request->hasFile('passport_location')
-        ) {
-            $formImage = $request->file('form_location');
-            $signatureImage = $request->file('signature_location');
-            $utilityImage = $request->file('utility_bill_location');
-            $idcardImage = $request->file('idcard_location');
-            $passportImage = $request->file('passport_location');
-            if ($formImage->isValid() && $signatureImage->isValid()
-                && $utilityImage->isValid()
-                && $idcardImage->isValid()
-                && $passportImage->isValid()
-            ) {
-                $details['form_location'] = str_replace('public', 'storage',
-                    $formImage->store('public/images/forms'));
-                $details['signature_location'] = str_replace('public',
-                    'storage',
-                    $signatureImage->store('public/images/signatures'));
-                $details['utility_bill_location'] = str_replace('public',
-                    'storage',
-                    $utilityImage->store('public/images/utility_bills'));
-                $details['idcard_location'] = str_replace('public', 'storage',
-                    $idcardImage->store('public/images/idcards'));
-                $details['form_location'] = str_replace('public', 'storage',
-                    $passportImage->store('public/images/profile'));
-            }
-        }
-        var_dump($details);
+
+        return $details;
     }
 
     public function viewAddUser($data = array())

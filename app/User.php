@@ -28,7 +28,8 @@ class User extends Authenticatable
             'private_key',
             'type',
             'access_level',
-            'status'
+            'status',
+            'avatar'
         ];
 
     /**
