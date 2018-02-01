@@ -118,7 +118,7 @@ class AdminAddController extends Controller
         $admin = User::create([
             'first_name'     => $details['first_name'],
             'last_name'      => $details['last_name'],
-            'wallet_id'      => md5($details['email']),
+            'wallet_id'      => md5($details['email'].date('YmdHis')),
             'name'           => $details['name'],
             'email'          => $details['email'],
             'password'       => bcrypt(md5($details['email'])),

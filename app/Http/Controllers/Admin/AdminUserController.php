@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\View;
 class AdminUserController extends Controller
 {
     //
+
     public function verifyUser(Request $request)
     {
         $id = $request->input('id');
@@ -34,6 +35,7 @@ class AdminUserController extends Controller
 
         if ($admin->save()) {
 
+            $data['type'] = 'user';
             switch ($for) {
                 case 'active':
                     $data['users'] = User::where('type', 'user')
@@ -41,7 +43,9 @@ class AdminUserController extends Controller
                         ->get();
                     break;
                 case 'admin':
+                    $data['type'] = 'admin';
                     $data['users'] = User::where('type', 'admin')
+                        ->where('access_level', '<', Auth::user()->access_level)
                         ->get();
                     break;
                 case 'all':
@@ -95,7 +99,7 @@ class AdminUserController extends Controller
     public function viewActiveUsers()
     {
         $data['action'] = 'active';
-        $data['for'] = 'user';
+        $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->where('status', 'active')
             ->get();
         return view('admin.users', $data);
@@ -104,7 +108,7 @@ class AdminUserController extends Controller
     public function viewAdmins()
     {
         $data['action'] = 'admin';
-        $data['for'] = 'admin';
+        $data['type'] = 'admin';
         $data['users'] = User::where('type', 'admin')
             ->where('access_level', '<', Auth::user()->access_level)->get();
         return view('admin.users', $data);
@@ -113,7 +117,7 @@ class AdminUserController extends Controller
     public function viewAllUsers()
     {
         $data['action'] = 'all';
-        $data['for'] = 'user';
+        $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->orderBy('status')
             ->orderBy('first_name')->get();
         return view('admin.users', $data);
@@ -122,7 +126,7 @@ class AdminUserController extends Controller
     public function viewBlockedUsers()
     {
         $data['action'] = 'blocked';
-        $data['for'] = 'user';
+        $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->where('status', 'blocked')
             ->get();
         return view('admin.users', $data);
@@ -131,7 +135,7 @@ class AdminUserController extends Controller
     public function viewRegisteredUsers()
     {
         $data['action'] = 'registered';
-        $data['for'] = 'user';
+        $data['type'] = 'user';
         $data['users'] = User_meta::where('status', 'registered')->get();
         return view('admin.users', $data);
     }
@@ -139,7 +143,7 @@ class AdminUserController extends Controller
     public function viewUnregisteredUsers()
     {
         $data['action'] = 'unregistered';
-        $data['for'] = 'user';
+        $data['type'] = 'user';
         $data['users'] = User_meta::where('status', 'unregistered')
             ->orWhere('status', 'pending')->get();
         return view('admin.users', $data);
@@ -148,7 +152,7 @@ class AdminUserController extends Controller
     public function viewSuspendedUsers()
     {
         $data['action'] = 'suspended';
-        $data['for'] = 'user';
+        $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->where('status', 'pending')
             ->get();
         return view('admin.users', $data);

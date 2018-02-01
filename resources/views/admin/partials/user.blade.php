@@ -17,7 +17,7 @@
                             Username @endif</th>
                     <th>@if($action=='registered' || $action=='unregistered')Private Key @else Wallet
                         ID @endif</th>
-                    <th>Account No.</th>
+                    <th>@if($type=='admin') Level @else Account No. @endif</th>
                     <th>Status</th>
                     @if(Auth::user()->access_level>=3)
                         <th class="text-center">Actions</th>
@@ -54,7 +54,7 @@
                             <td><a href="{{url('admin/view/user/'.$user->wallet_id)}}">{{$user->wallet_id}}</a>
                             </td>
                         @endif
-                        <td>{{$user->account_number}}</td>
+                        <td>@if($type=='admin') {{ $user->access_level }} @else {{$user->account_number}} @endif</td>
                         <td>
                             <span class="badge {{$badge}}">{{$user->status}}</span>
                         </td>
@@ -64,7 +64,8 @@
                                     <button data-original-title="Edit" type="button"
                                             class="btn btn-sm btn-alt-primary"
                                             data-toggle="tooltip"
-                                            title="Edit {{$user->first_name}}">
+                                            title="Edit {{$user->first_name}}"
+                                            onclick="viewEditUser({{($user->id+9407)}},'{{$type}}')">
                                         <i class="fa fa-pencil"></i>
                                     </button>
                                     @if($user->status=='blocked' || $user->status=='pending')

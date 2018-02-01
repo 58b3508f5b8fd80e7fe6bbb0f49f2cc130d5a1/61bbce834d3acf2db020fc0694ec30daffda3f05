@@ -157,6 +157,10 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminAddController@addUser');
                                 Route::post('/users/verify',
                                     'AdminUserController@verifyUser');
+                                Route::post('/edit/user',
+                                    'AdminEditController@viewuser');
+                                Route::put('/edit/user',
+                                    'AdminEditController@editUser');
                                 Route::middleware(['superAdminLevel'])
                                     ->group(function () {
                                         // drg >> add functions
@@ -174,6 +178,10 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                             'AdminAddController@addAdmin');
                                         Route::post('/add/pnm',
                                             'AdminAddController@addPNM');
+                                        Route::post('/edit/viewadmin',
+                                            'AdminEditController@getAdmin');
+                                        Route::post('/edit/admin',
+                                            'AdminEditController@editAdmin');
                                     });
                             });
                     });
