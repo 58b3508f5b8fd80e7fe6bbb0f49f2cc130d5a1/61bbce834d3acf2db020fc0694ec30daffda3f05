@@ -86,10 +86,10 @@
                             <a href="{{url('/dashboard')}}"><i class="si si-compass"></i><span
                                         class="sidebar-mini-hide">Dashboard</span></a>
                         </li>
-                        <li>
+                       {{-- <li>
                             <a href="{{url('/statistics')}}"><i class="si si-compass"></i><span
                                         class="sidebar-mini-hide">Statistics</span></a>
-                        </li>
+                        </li>--}}
                         <li class="nav-main-heading"><span class="sidebar-mini-visible">PNM</span><span
                                     class="sidebar-mini-hidden">PNM</span></li>
                         <li>
