@@ -40,6 +40,7 @@
             }
         });
 
+        @if($type=='admin')
         function viewEditUser(id, type) {
             var data = {
                 'id': id,
@@ -52,8 +53,6 @@
                 alert('Sorry, an error occurred');
             });
         }
-
-        @if($type=='admin')
         function editUser() {
 
             var data = {
@@ -91,7 +90,7 @@
                 'access_level': $('input[name=level]').val(),
             };
 
-            $.post('/admin/edit/admin', data, function (result) {
+            $.post('/admin/edit/user', data, function (result) {
                 $('#user').html(result.html);
                 $('#user-modal').modal('show');
             }).fail(function () {

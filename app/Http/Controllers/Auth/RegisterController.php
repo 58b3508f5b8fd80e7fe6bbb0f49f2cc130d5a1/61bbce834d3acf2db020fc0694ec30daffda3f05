@@ -88,7 +88,8 @@ class RegisterController extends Controller
             'private_key'    => $user->private_key,
             'type'           => 'user',
             'status'         => 'active',
-            'access_level'   => 1
+            'avatar'         => $user->passport_location,
+            'access_level'   => '1'
         ]);
     }
 
@@ -110,7 +111,7 @@ class RegisterController extends Controller
         $accountExists = User_meta::where('account_number', $accountNumber)
             ->first();
         $accountPending = User_meta::where('account_number', $accountNumber)
-            ->where('status', 'pending')->first();
+            ->where('status', 'unregistered')->first();
         $checkAccount = User_meta::where('account_number', $accountNumber)
             ->where('wallet_address', 'like', "%$wallet%")
             ->first();

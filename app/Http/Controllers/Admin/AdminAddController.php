@@ -238,6 +238,7 @@ class AdminAddController extends Controller
             'utility_bill_location' => $data['utility_bill_location'],
             'idcard_location'       => $data['idcard_location'],
             'passport_location'     => $data['passport_location'],
+            'status'                => 'unregistered'
         ]);
     }
 

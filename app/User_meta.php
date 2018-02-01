@@ -46,6 +46,7 @@ class User_meta extends Model
             'signature_location',
             'utility_bill_location',
             'idcard_location',
-            'passport_location'
+            'passport_location',
+            'status',
         ];
 }
