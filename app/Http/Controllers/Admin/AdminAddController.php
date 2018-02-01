@@ -168,18 +168,18 @@ class AdminAddController extends Controller
                 && $idcardImage->isValid()
                 && $passportImage->isValid()
             ) {
-                $details['form_location'] = str_replace('public',
-                    'storage', $signatureImage->store('public/images/forms'));
-                $details['signature_location'] = str_replace('public',
-                    'storage',
-                    $signatureImage->store('public/images/signatures'));
-                $details['utility_bill_location'] = str_replace('public',
-                    'storage',
-                    $utilityImage->store('public/images/utility_bills'));
-                $details['idcard_location'] = str_replace('public', 'storage',
-                    $idcardImage->store('public/images/idcards'));
-                $details['passport_location'] = str_replace('public', 'storage',
-                    $passportImage->store('public/images/passport'));
+                /*$details['form_location'] = str_replace('public',
+                    'storage', $signatureImage->store('public/images/forms'));*/
+                $details['form_location']
+                    = $signatureImage->store('tlssavings/public/images/forms');
+                $details['signature_location']
+                    = $signatureImage->store('tlssavings/public/images/signatures');
+                $details['utility_bill_location']
+                    = $utilityImage->store('tlssavings/public/images/utility_bills');
+                $details['idcard_location']
+                    = $idcardImage->store('tlssavings/public/images/idcards');
+                $details['passport_location']
+                    = $passportImage->store('tlssavings/public/images/passport');
             }
         }
 
