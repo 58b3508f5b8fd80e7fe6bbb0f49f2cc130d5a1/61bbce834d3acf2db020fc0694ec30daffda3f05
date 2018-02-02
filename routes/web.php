@@ -155,6 +155,8 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminTransactionsController@sharePNM');
                                 Route::post('/add/user',
                                     'AdminAddController@addUser');
+                                Route::post('/add/user/getlgas',
+                                    'AdminAddController@getLGAs');
                                 Route::post('/users/verify',
                                     'AdminUserController@verifyUser');
                                 Route::post('/edit/user',

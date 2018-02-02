@@ -43,7 +43,7 @@
                             <i class="fa fa-times text-danger"></i>
                         </button>
                         <div class="content-header-item">
-                            <a class="link-effect font-w700" href="index-2.html')}}">
+                            <a class="link-effect font-w700" href="#'">
                                 <i class="si si-fire text-primary"></i>
                                 <span class="font-size-xl text-dual-primary-dark">{{config('app.name')}}</span>
                             </a>
@@ -52,16 +52,16 @@
                 </div>
                 <div class="content-side content-side-full content-side-user px-10 align-parent">
                     <div class="sidebar-mini-visible-b align-v animated fadeIn">
-                        <img class="img-avatar img-avatar32" src="{{asset(Auth::user()->avatar)}}" alt="">
+                        <img class="img-avatar img-avatar32" src="{{Storage::url(Auth::user()->avatar)}}" alt="">
                     </div>
                     <div class="sidebar-mini-hidden-b text-center">
-                        <a class="img-link" href="be_pages_generic_profile.html">
-                            <img class="img-avatar" src="{{asset(Auth::user()->avatar)}}" alt="">
+                        <a class="img-link" href="#">
+                            <img class="img-avatar" src="{{Storage::url(Auth::user()->avatar)}}" alt="">
                         </a>
                         <ul class="list-inline mt-10">
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark font-size-xs font-w600 text-uppercase"
-                                   href="be_pages_generic_profile.html">{{Auth::user()->first_name}}</a>
+                                   href="#">{{Auth::user()->first_name}}</a>
                             </li>
                             <li class="list-inline-item">
                                 <a class="link-effect text-dual-primary-dark" data-toggle="layout"

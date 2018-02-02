@@ -1,3 +1,44 @@
+<?php
+$states = [
+    'Abia',
+    'Adamawa',
+    'Anambra',
+    'Akwa Ibom',
+    'Bauchi',
+    'Bayelsa',
+    'Benue',
+    'Borno',
+    'Cross River',
+    'Delta',
+    'Ebonyi',
+    'Enugu',
+    'Edo',
+    'Ekiti',
+    'Gombe',
+    'Imo',
+    'Jigawa',
+    'Kaduna',
+    'Kano',
+    'Katsina',
+    'Kebbi',
+    'Kogi',
+    'Kwara',
+    'Lagos',
+    'Nasarawa',
+    'Niger',
+    'Ogun',
+    'Ondo',
+    'Osun',
+    'Oyo',
+    'Plateau',
+    'Rivers',
+    'Sokoto',
+    'Taraba',
+    'Yobe',
+    'Zamfara',
+];
+
+?>
 @extends('layouts.admin')
 @section('title', title_case($action).' users')
 @section('style')
@@ -128,17 +169,19 @@
                         <div class="form-group{{ $errors->has('marital_status') ? ' is-invalid' : '' }} row">
                             <label class="col-12">Marital Status</label>
                             <div class="col-12">
-                                <label class="css-control css-control-primary css-radio" >
+                                <label class="css-control css-control-primary css-radio">
                                     <input class="css-control-input" name="marital_status" type="radio"
-                                           value="single" id="single" @if(old('marital_status')=='single') checked @endif>
+                                           value="single" id="single"
+                                           @if(old('marital_status')=='single') checked @endif>
                                     <span class="css-control-indicator"></span> Single
                                 </label>
-                                <label class="css-control css-control-primary css-radio" >
+                                <label class="css-control css-control-primary css-radio">
                                     <input class="css-control-input" name="marital_status" type="radio"
-                                           value="married" id="married" @if(old('marital_status')=='married') checked @endif>
+                                           value="married" id="married"
+                                           @if(old('marital_status')=='married') checked @endif>
                                     <span class="css-control-indicator"></span> Married
                                 </label>
-                                <label class="css-control css-control-primary css-radio" >
+                                <label class="css-control css-control-primary css-radio">
                                     <input class="css-control-input" name="marital_status" type="radio"
                                            value="divorced" id="divorced"
                                            @if(old('marital_status')=='divorced') checked @endif>
@@ -156,7 +199,7 @@
                             <div class="col-12">
                                 <label class="css-control css-control-primary css-radio mr-10">
                                     <input class="css-control-input" name="gender" type="radio" value="female"
-                                    @if(old('gender')=='female') checked @endif>
+                                           @if(old('gender')=='female') checked @endif>
                                     <span class="css-control-indicator"></span> Female
                                 </label>
                                 <label class="css-control css-control-primary css-radio">
@@ -210,13 +253,13 @@
                             <div class="col-12">
                                 <label for="mega-state">State</label>
                                 <select class="form-control form-control-lg" id="mega-state" name="state">
-                                    <option>Imo</option>
+                                    <optgroup label="">
+                                        <option selected disabled>Select state</option>
+                                        @foreach($states as $state)
+                                            <option @if (old('state')== $state) selected @endif>{{$state}}</option>
+                                        @endforeach
+                                    </optgroup>
                                 </select>
-                                @if ($errors->has('state'))
-                                    <span class="invalid-feedback">
-                                        {{ $errors->first('state') }}
-                                    </span>
-                                @endif
                             </div>
                         </div>
                     </div>
@@ -225,7 +268,7 @@
                             <div class="col-12">
                                 <label for="mega-lga">LGA</label>
                                 <select class="form-control form-control-lg" id="mega-lga" name="lga">
-                                    <option>Ahiazu Mbaise</option>
+                                    <option selected disabled>Select LGA</option>
                                 </select>
                                 @if ($errors->has('lga'))
                                     <span class="invalid-feedback">
@@ -724,6 +767,12 @@
             }
         });
 
+        $("#mega-state").change(function () {
+            var data = {'state': $('#mega-state').val()};
+            $.post('/admin/add/user/getlgas', data, function (result) {
+                $('#mega-lga').html(result.html);
+            });
+        });
         $(function () {
 
             // We can attach the `fileselect` event to all file inputs on the page
@@ -779,15 +828,6 @@
         $("#passportlocation").change(function () {
             filePreview(this, '#passportImage');
         });
-
-
-        /*var x = document.getElementById("user-form");
-        var txt = "";
-        var i;
-        for (i = 0; i < x.length; i++) {
-            txt = txt + x.elements[i].getAttribute('name') + "<br>";
-        }
-        document.getElementById("demo").innerHTML = txt;*/
 
     </script>
 @endsection
