@@ -16,6 +16,13 @@
                     </div>
                 </div>
             @endif
+            <div class="block-content">
+                    <div class="block">
+                        <div class="alert alert-warning">
+                            <p style="font-size:1.5rem; font-weight: bold;">Please note that this withdrawal might take {{$duration}}.</p>
+                        </div>
+                    </div>
+                </div>
             <div class="col-12 col-lg-4 col-md-6 col-xs-8" style="float: none; margin: auto;">
                 <div class="block-header block-header-default">
                     <h3 class="block-title text-center">{!! $heading !!}</h3>

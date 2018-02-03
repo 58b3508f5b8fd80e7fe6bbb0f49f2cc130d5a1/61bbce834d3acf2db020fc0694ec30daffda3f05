@@ -37,6 +37,8 @@ class TransactionController extends Controller
                         $data['title'] = "Withdraw NGN to Bank";
                         $data['heading']
                             = "<i class='si si-fire'></i> NGN to Bank <i class='fa fa-institution'></i>";
+                        $data['duration']= Setting::where('name', 'ngn_withdrawal_duration')
+                            ->value('value');
                         break;
                 }
                 break;
@@ -56,6 +58,8 @@ class TransactionController extends Controller
                         $data['title'] = "Withdraw PNM to Wallet";
                         $data['heading']
                             = "<i class='si si-fire'></i> PNM to Wallet <i class='si si-briefcase'></i>";
+                        $data['duration']= Setting::where('name', 'pnm_withdrawal_duration')
+                            ->value('value');
                         break;
                 }
                 break;

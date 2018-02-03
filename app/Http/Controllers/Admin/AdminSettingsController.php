@@ -13,7 +13,7 @@ class AdminSettingsController extends Controller
     //
     public function index()
     {
-        $data['settings'] = Setting::all();
+        $data['settings'] = Setting::all()->sortBy('title');
         return view('admin.settings', $data);
     }
 
