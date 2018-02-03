@@ -163,6 +163,10 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminEditController@viewuser');
                                 Route::put('/edit/user',
                                     'AdminEditController@editUser');
+                                Route::post('/edit/viewuser',
+                                    'AdminEditController@getUser');
+                                Route::post('/edit/user',
+                                    'AdminEditController@editUser');
                                 Route::middleware(['superAdminLevel'])
                                     ->group(function () {
                                         // drg >> add functions

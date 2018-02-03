@@ -150,6 +150,7 @@ class AdminAddController extends Controller
     public function addUser(Request $request)
     {
         $details = $request->all();
+
         $this->validateUser($details)->validate();
 
         if ($request->hasFile('form_location')

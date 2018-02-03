@@ -3,12 +3,12 @@
         <form class="js-validation-signup" id = "editForm" action="{{url('/admin/edit/admin')}}"
               method="post" onsubmit="editUser(); return false;">
             {{csrf_field()}}
-            <input type="hidden" value="{{$user['id']+1427}}" name="id" id="id">
+            <input type="hidden" value="{{$admin['id']+1427}}" name="id" id="id">
             <div class="form-group{{ $errors->has('first_name') ? ' is-invalid' : '' }}  row">
                 <div class="col-12">
                     <div class="form-material">
                         <input class="form-control" id="first_name" name="first_name" type="text"
-                               value="{{$user['first_name']}}"
+                               value="{{$admin['first_name']}}"
                                required>
                         <label for="first_name">First Name</label>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="form-material">
                         <input class="form-control" id="last_name" name="last_name" type="text"
-                               value="{{$user['last_name']}}"
+                               value="{{$admin['last_name']}}"
                                required>
                         <label for="name">Last Name</label>
                     </div>
@@ -39,7 +39,7 @@
                 <div class="col-12">
                     <div class="form-material">
                         <input class="form-control" id="email" name="email" type="email"
-                               value="{{$user['email']}}"
+                               value="{{$admin['email']}}"
                                required>
                         <label for="email">Email</label>
                     </div>
@@ -55,8 +55,8 @@
                     <div class="form-material">
                         <select class="form-control" id="level" name="level">
                             <option disabled></option>
-                            <option value="3" @if($user['access_level']==3) selected @endif>Senior Admin</option>
-                            <option value="2" @if($user['access_level']==2) selected @endif>Admin</option>
+                            <option value="3" @if($admin['access_level']==3) selected @endif>Senior Admin</option>
+                            <option value="2" @if($admin['access_level']==2) selected @endif>Admin</option>
                         </select>
                         <label for="level">Access Level</label>
                     </div>
