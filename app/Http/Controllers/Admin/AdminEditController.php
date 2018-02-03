@@ -38,40 +38,51 @@ class AdminEditController extends Controller
     {
         $details = $request->all();
         $for = $request->input('for');
-        $id = (int) $request->input('id') - 1427;
+        $id = (int)$request->input('id') - 1427;
         $userMeta = User_meta::find($id);
+
         if ($request->hasFile('form_location')
-            && $request->hasFile('signature_location')
-            && $request->hasFile('utility_bill_location')
-            && $request->hasFile('idcard_location')
-            && $request->hasFile('passport_location')
+            && $request->file('form_location')->isValid()
         ) {
-            $formImage = $request->file('form_location');
-            $signatureImage = $request->file('signature_location');
-            $utilityImage = $request->file('utility_bill_location');
-            $idcardImage = $request->file('idcard_location');
-            $passportImage = $request->file('passport_location');
-            if ($formImage->isValid() && $signatureImage->isValid()
-                && $utilityImage->isValid()
-                && $idcardImage->isValid()
-                && $passportImage->isValid()
-            ) {
-//                $details['form_location'] = str_replace('public',
-//                    'storage', $signatureImage->store('public/images/forms'));
-                $details['form_location']
-                    = $signatureImage->store('tlssavings/public/images/forms');
-                $details['signature_location']
-                    = $signatureImage->store('tlssavings/public/images/signatures');
-                $details['utility_bill_location']
-                    = $utilityImage->store('tlssavings/public/images/utility_bills');
-                $details['idcard_location']
-                    = $idcardImage->store('tlssavings/public/images/idcards');
-                $details['passport_location']
-                    = $passportImage->store('tlssavings/public/images/passport');
-            }
+            $userMeta->form_location = $request->file('form_location')
+                ->store('tlssavings/app/images/forms');
+        }
+
+        if ($request->hasFile('signature_location')
+            && $request->file('signature_location')->isValid()
+        ) {
+            $userMeta->signature_location = $request->file('signature_location')
+                ->store('tlssavings/app/images/forms');
+        }
+
+        if ($request->hasFile('utility_bill_location')
+            && $request->file('utility_bill_location')->isValid()
+        ) {
+            $userMeta->utility_bill_location
+                = $request->file('utility_bill_location')
+                ->store('tlssavings/app/images/forms');
+        }
+
+        if ($request->hasFile('idcard_location')
+            && $request->file('idcard_location')->isValid()
+        ) {
+            $userMeta->idcard_location = $request->file('idcard_location')
+                ->store('tlssavings/app/images/forms');
+        }
+
+        if ($request->hasFile('passport_location')
+            && $request->file('passport_location')->isValid()
+        ) {
+            $userMeta->passport_location = $request->file('passport_location')
+                ->store('tlssavings/app/images/forms');
         }
 
         array_push($details, ['updated_at' => date('Y-m-d H:i:s')]);
+        unset($details['passport_location']);
+        unset($details['signature_location']);
+        unset($details['form_location']);
+        unset($details['utility_bill_location']);
+        unset($details['idcard_location']);
         unset($details['_token']);
         unset($details['id']);
         unset($details['for']);
@@ -79,60 +90,22 @@ class AdminEditController extends Controller
 
         $isUpdated = User_meta::where('id', $id)->update($details);
 
-        $userTable = User::where('wallet_address', $userMeta['wallet_address'])
+        $userTable = User::where('wallet_address',
+            $userMeta['wallet_address'])
             ->update([
                 'first_name' => $request->input('first_name'),
                 'last_name'  => $request->input('last_name'),
                 'avatar'     => $request->input('passport_location'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
-        if ($isUpdated && $userTable) {
+        if ($isUpdated && $userTable && $userMeta->save()) {
             $message = "New Admin was edited successfully";
         } else {
-            $message = $isUpdated.'<br>'.$userTable;
+            $message = $isUpdated . '<br>' . $userTable;
         }
         $data['action'] = 'new admin';
         return $this->getUsers('user', $for, $message);
 
-
-        /*  $user->first_name = $request->input('first_name');
-          $user->last_name = $request->input('last_name');
-          $user->other_name = $request->input('other_name');
-          $user->account_number = $request->input('account_number');
-          $user->wallet_address = $request->input('wallet_address');
-          $user->private_key = $request->input('private_key');
-          $user->dob = date_create($data['dob']);
-          $user->marital_status = $request->input('marital_status');
-          $user->gender = $request->input('gender');
-          $user->phone_no = $request->input('phone_no');
-          $user->nationality = $request->input('nationality');
-          $user->state = $request->input('state');
-          $user->lga = $request->input('lga');
-          $user->residential_address = $request->input('residential_address');
-          $user->contact_address = $request->input('contact_address');
-          $user->id_card_type = $request->input('id_card_type');
-          $user->id_card_no = $request->input('id_card_no');
-          $user->bvn = $request->input('bvn');
-          $user->bank_name = $request->input('bank_name');
-          $user->bank_acc_name = $request->input('bank_acc_name');
-          $user->bank_acc_no = $request->input('bank_acc_no');
-          $user->occupation = $request->input('occupation');
-          $user->next_of_kin = $request->input('next_of_kin');
-          $user->nok_relationship = $request->input('nok_relationship');
-          $user->nok_contact_address = $request->input('nok_contact_address');
-          $user->nok_dob = date_create($data['nok_dob']);
-          $user->nok_gender = $request->input('nok_gender');
-          $user->nok_phone_no = $request->input('nok_phone_no');
-          $user->nok_email = $request->input('nok_email');
-          $user->spouse_name = $request->input('spouse_name');
-          $user->mother_maiden_name = $request->input('mother_maiden_name');
-          $user->office_phone_no = $request->input('office_phone_no');
-          $user->landmark = $request->input('landmark');
-          $user->form_location = $request->input('form_location');
-          $user->signature_location = $request->input('signature_location');
-          $user->utility_bill_location = $request->input('utility_bill_location');
-          $user->idcard_location = $request->input('idcard_location');
-          $user->passport_location = $request->input('passport_location');*/
 
     }
 
@@ -146,7 +119,8 @@ class AdminEditController extends Controller
                 break;
             case 'admin':
                 $data['users'] = User::where('type', 'admin')
-                    ->where('access_level', ' < ', Auth::user()->access_level)
+                    ->where('access_level', ' < ',
+                        Auth::user()->access_level)
                     ->get();
                 break;
             case 'all':
@@ -191,8 +165,9 @@ class AdminEditController extends Controller
         ]);
     }
 
-    public function getAdmin(Request $request)
-    {
+    public function getAdmin(
+        Request $request
+    ) {
         $id = $request->input('id');
 
         $data['admin'] = User::find($id - 9407);
@@ -207,11 +182,13 @@ class AdminEditController extends Controller
 
     }
 
-    public function getUser(Request $request)
-    {
+    public function getUser(
+        Request $request
+    ) {
         $id = $request->input('id');
 
-        $data['user'] = User::join('user_metas', 'users.wallet_address', '=',
+        $data['user'] = User::join('user_metas', 'users.wallet_address',
+            '=',
             'user_metas.wallet_address')->where('users.id', $id - 9407)
             ->select('user_metas.*')->first();
 
@@ -225,16 +202,14 @@ class AdminEditController extends Controller
 
     }
 
-    public function validateAdmin(array $data)
-    {
+    public function validateAdmin(array $data) {
         return Validator::make($data, [
             'name'  => 'required | string | unique:users | max:255',
             'email' => 'required | string | email | max:255 | unique:users',
         ]);
     }
 
-    public function validateUser(array $data)
-    {
+    public function validateUser(array $data) {
         return Validator::make($data, [
             'name'  => 'required | string | unique:users | max:255',
             'email' => 'required | string | email | max:255 | unique:users',

@@ -44,7 +44,8 @@ else $readonly = null;
 
 <div class="row justify-content-center px-5">
     <div class="col-12">
-        <form action="{{url('/admin/edit/user')}}" method="post" enctype="multipart/form-data" id="user-form"  onsubmit="editUser(); return false;">
+        <form action="{{url('/admin/edit/user')}}" method="post" enctype="multipart/form-data" id="user-form"
+              onsubmit="editUser(); return false;">
             {{ csrf_field() }}
             <input {{$readonly}} type="hidden" value="{{$user['id']+1427}}" name="id" id="id">
             <div class="row">
@@ -55,7 +56,7 @@ else $readonly = null;
                             <label for="mega-firstname">Firstname</label>
                             <input {{$readonly}} class="form-control form-control-lg" id="firstname"
                                    name="first_name"
-                                  placeholder="Enter user firstname.." type="text" value="{{$user['first_name']}}" >
+                                   placeholder="Enter user firstname.." type="text" value="{{$user['first_name']}}">
                         </div>
                         @if ($errors->has('first_name'))
                             <span class="invalid-feedback">
@@ -476,12 +477,14 @@ else $readonly = null;
                         <label class="col-12">NOK Gender</label>
                         <div class="col-12">
                             <label class="css-control css-control-primary css-radio mr-10">
-                                <input {{$readonly}} class="css-control-input" name="nok_gender" type="radio" value="female"
+                                <input {{$readonly}} class="css-control-input" name="nok_gender" type="radio"
+                                       value="female"
                                        @if(old('nok_gender')=='female') checked @endif>
                                 <span class="css-control-indicator"></span> Female
                             </label>
                             <label class="css-control css-control-primary css-radio">
-                                <input {{$readonly}} class="css-control-input" name="nok_gender" type="radio" value="male"
+                                <input {{$readonly}} class="css-control-input" name="nok_gender" type="radio"
+                                       value="male"
                                        @if(old('nok_gender')=='male') checked @endif>
                                 <span class="css-control-indicator"></span> Male
                             </label>
@@ -612,12 +615,13 @@ else $readonly = null;
                                 </span>
                         @endif
 
-{{--<input {{$readonly}} type="file" name="file" id="file" />--}}
+                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
 
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="formImage"><img src="{{Storage::url($user['form_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="formImage"><img src="{{Storage::url($user['form_location'])}}"
+                                             style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
@@ -626,7 +630,8 @@ else $readonly = null;
                         <label for="#">Upload Signature</label>
                         <div class="form-group input-group">
                             <label class="input-group-btn"> <span class="btn btn-success">
-									Browse<input {{$readonly}} type="file" name="signature_location" accept=".png,.jpg,.gif"
+									Browse<input {{$readonly}} type="file" name="signature_location"
+                                                 accept=".png,.jpg,.gif"
                                                  style="display: none;" id="signaturelocation"
                                     >
 							</span>
@@ -640,12 +645,13 @@ else $readonly = null;
                                 </span>
                         @endif
                         --}}
-{{--<input {{$readonly}} type="file" name="file" id="file" />--}}
+                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
 
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="signatureImage"><img src="{{Storage::url($user['signature_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="signatureImage"><img src="{{Storage::url($user['signature_location'])}}"
+                                                  style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
@@ -669,11 +675,12 @@ else $readonly = null;
                                 </span>
                         @endif
                         --}}
-{{--<input {{$readonly}} type="file" name="file" id="file" />--}}
+                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="utilityImage"><img src="{{Storage::url($user['utility_bill_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="utilityImage"><img src="{{Storage::url($user['utility_bill_location'])}}"
+                                                style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
@@ -682,7 +689,8 @@ else $readonly = null;
                         <label for="#">Upload ID Card</label>
                         <div class="form-group input-group">
                             <label class="input-group-btn"> <span class="btn btn-dark">
-									Browse<input {{$readonly}} type="file" name="idcard_location" accept=".png,.jpg,.gif"
+									Browse<input {{$readonly}} type="file" name="idcard_location"
+                                                 accept=".png,.jpg,.gif"
                                                  style="display: none;" id="idcardlocation"
                                     >
 							</span>
@@ -696,12 +704,13 @@ else $readonly = null;
                                     </span>
                         @endif
 
-{{--<input {{$readonly}} type="file" name="file" id="file" />--}}
+                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
 
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="idcardImage"><img src="{{Storage::url($user['idcard_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="idcardImage"><img src="{{Storage::url($user['idcard_location'])}}"
+                                               style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
@@ -710,7 +719,8 @@ else $readonly = null;
                         <label for="#">Upload Passport</label>
                         <div class="form-group input-group">
                             <label class="input-group-btn"> <span class="btn btn-danger">
-									Browse<input {{$readonly}} type="file" name="passport_location" accept=".png,.jpg,.gif"
+									Browse<input {{$readonly}} type="file" name="passport_location"
+                                                 accept=".png,.jpg,.gif"
                                                  style="display: none;" id="passportlocation"
                                     >
 							</span>
@@ -724,21 +734,24 @@ else $readonly = null;
                                 </span>
                         @endif
                         --}}
-{{--<input {{$readonly}} type="file" name="file" id="file" />--}}
+                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
 
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="passportImage"><img src="{{Storage::url($user['passport_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="passportImage"><img src="{{Storage::url($user['passport_location'])}}"
+                                                 style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
-            <div class="form-group{{ $errors->has('name') ? ' is-invalid' : '' }} row">
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-check mr-5"></i> Complete Profile
-                    </button>
+            @if (!Auth::user()->access_level < 3)
+                <div class="form-group{{ $errors->has('name') ? ' is-invalid' : '' }} row">
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check mr-5"></i> Update Profile
+                        </button>
+                    </div>
                 </div>
-            </div>
+            @endif
         </form>
     </div>
 </div>
