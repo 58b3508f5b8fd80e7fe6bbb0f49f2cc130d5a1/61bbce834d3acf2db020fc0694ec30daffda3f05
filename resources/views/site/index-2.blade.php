@@ -46,9 +46,9 @@
                     <li class="active"><a href="{{url('index-2')}}" target="_self" title="Home">Home</a></li>
                     <li><a href="{{url('index-3')}}" target="_self" title="About us">About us</a></li>
                     <li><a href="{{url('index-4')}}" target="_self" title="Savings">Savings</a></li>
+                    @guest <li><a href="{{url('/login')}}" target="_blank" title="Login">LOGIN</a></li><li><a href="{{url('/join')}}" target="_blank" title="Join">JOIN</a></li> @endguest
                     <li><a href="{{url('index-5')}}" target="_self" title="Contacts">Contacts</a></li>
-                    <li><a href="http://beta.proofdashboard.com/" target="_blank" title="Wallet">Wallet</a></li>
-                    <li><a href="{{url('index-6')}}" target="_blank" title="NUMA">NUMA</a></li>@guest <li><a href="{{url('/login')}}" target="_blank" title="Login">LOGIN</a></li><li><a href="{{url('/join')}}" target="_blank" title="Join">JOIN</a></li> @endguest
+                    <li><a href="{{url('index-6')}}" target="_blank" title="NUMA">NUMA</a></li>
                     <li><a href="http://touchinglivesskills.xyz/" target="_blank" title="Empowerment">Empowerment</a>
                     </li>
                 </ul>
