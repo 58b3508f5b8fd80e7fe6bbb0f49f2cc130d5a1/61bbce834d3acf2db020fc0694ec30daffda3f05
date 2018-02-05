@@ -20,6 +20,8 @@ class IsUser
     {
         if ($request->user()->type != 'user') {
             return new Response(view('errors.600'));
+        } elseif ($request->user()->type == 'user') {
+            return redirect('home');
         }
 
         $data['totalPNM'] = $this->home()->getTotalPNM();
@@ -34,7 +36,8 @@ class IsUser
         return $next ($request);
     }
 
-    public function home(){
+    public function home()
+    {
         return new HomeController();
     }
 }
