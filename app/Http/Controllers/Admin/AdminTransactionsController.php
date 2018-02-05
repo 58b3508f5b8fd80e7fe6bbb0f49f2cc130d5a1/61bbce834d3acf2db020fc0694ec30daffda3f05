@@ -121,6 +121,15 @@ class AdminTransactionsController extends Controller
         return $withdrawals;
     }
 
+    public function checkPNM($amount)
+    {
+        $balance = $this->admin()->getTotalReserve();
+        if ($balance >= $amount) {
+            return true;
+        }
+        return false;
+    }
+
     public function sharePNM(Request $request)
     {
         $value = $this->admin()->getCurrentValue();
@@ -132,7 +141,8 @@ class AdminTransactionsController extends Controller
         $isUser = User::where('wallet_id', $wallet)->where('type', 'user')
             ->first();
         $checkPin = Hash::check($pin, Auth::user()->pin);
-        if ($checkPin && $isUser) {
+        $checkPNM = $this->checkPNM($pnm);
+        if ($checkPin && $isUser && $checkPNM) {
             $ngn = $pnm * (int)$value;
             $description = "Admin shared $pnm PNM worth $ngn NGN";
             $type = "holding-pnm";
@@ -161,6 +171,10 @@ class AdminTransactionsController extends Controller
                 $data['alert'] = 'danger';
                 $data['message']
                     = "Sorry, the wallet id was not traced to any user";
+            } elseif (!$checkPNM) {
+                $data['alert'] = 'danger';
+                $data['message']
+                    = "Sorry, you don't have sufficient PNM to complete this transaction";
             }
         }
 

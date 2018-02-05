@@ -803,6 +803,7 @@ $states = [
         });
 
         function filePreview(input, id) {
+            $(id).html('');
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {

@@ -18,10 +18,11 @@ class IsUser
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->type != 'user') {
+        if ($request->user()->type == 'admin') {
+            return redirect('admin');
+        }
+        elseif ($request->user()->type != 'user') {
             return new Response(view('errors.600'));
-        } elseif ($request->user()->type == 'user') {
-            return redirect('home');
         }
 
         $data['totalPNM'] = $this->home()->getTotalPNM();

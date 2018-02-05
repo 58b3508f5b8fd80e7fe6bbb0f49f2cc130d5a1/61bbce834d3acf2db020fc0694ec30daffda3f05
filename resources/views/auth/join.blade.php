@@ -31,7 +31,7 @@
                     <div class="col-12">
                         <div class="form-material floating">
                             <input class="form-control" id="wallet" name="wallet" type="text" value="{{old('wallet')}}">
-                            <label for="wallet">Any 6 Characters of Wallet Address</label>
+                            <label for="wallet">Any Last 6 Characters of Wallet Address</label>
                         </div>
                         @if ($errors->has('wallet'))
                             <span class="invalid-feedback">

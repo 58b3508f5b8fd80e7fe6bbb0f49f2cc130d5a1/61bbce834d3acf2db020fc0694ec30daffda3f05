@@ -176,5 +176,63 @@
                 alert('Sorry, an error occurred');
             });
         }
+
+        $(function () {
+
+            // We can attach the `fileselect` event to all file inputs on the page
+            $(document).on('change', ':file', function () {
+                var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                //$('#file-info').val(label);
+                input.trigger('fileselect', [numFiles, label]);
+            });
+
+            // We can watch for our custom `fileselect` event like this
+            $(document).ready(function () {
+                $(':file').on('fileselect', function (event, numFiles, label) {
+
+                    var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                    if (input.length) {
+                        input.val(log);
+                    } else {
+                        if (log) alert(log);
+                    }
+
+                });
+            });
+
+        });
+
+        function filePreview(input, id) {
+            $(id).html('');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(id).siblings('embed').remove();
+                    $(id).after('<embed src="' + e.target.result + '" style = "max-width: 100%; max-height: 20em;"/>');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#formlocation").change(function () {
+            filePreview(this, '#formImage');
+        });
+        $("#signaturelocation").change(function () {
+            filePreview(this, '#signatureImage');
+        });
+        $("#utilitylocation").change(function () {
+            filePreview(this, '#utilityImage');
+        });
+        $("#idcardlocation").change(function () {
+            filePreview(this, '#idcardImage');
+        });
+        $("#passportlocation").change(function () {
+            filePreview(this, '#passportImage');
+        });
+
     </script>
 @endsection

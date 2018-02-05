@@ -17,11 +17,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->type!= 'admin') {
-            return new Response (view('errors.600'));
-        }
-        elseif($request->user()->type== 'admin'){
+        if ($request->user()->type == 'user') {
             return redirect('home');
+        } elseif ($request->user()->type != 'admin') {
+            return new Response (view('errors.600'));
         }
 
         return $next ($request);

@@ -113,7 +113,7 @@ class RegisterController extends Controller
         $accountPending = User_meta::where('account_number', $accountNumber)
             ->where('status', 'unregistered')->first();
         $checkAccount = User_meta::where('account_number', $accountNumber)
-            ->where('wallet_address', 'like', "%$wallet%")
+            ->where('wallet_address', 'like', "%$wallet")
             ->first();
 
         if (!$accountExists) {
