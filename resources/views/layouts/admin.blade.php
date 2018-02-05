@@ -179,6 +179,15 @@
 <script src="{{asset('js/codebase.min-1.4.js')}}"></script>
 <script src="{{asset('js/chart.bundle.min.js')}}"></script>
 <script src="{{asset('js/be_pages_dashboard.js')}}"></script>
+<script>
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+</script>
 @yield('scripts')
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}

@@ -47,11 +47,15 @@
                                 <a href="javascript:void(0)">{{$user->wallet_address}}</a>
                             </td>
                             <td>
-                                <a href="javascript:void(0)">{{$user->private_key}}</a>
+                                <a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip"
+                                   data-original-title="Click me to Copy" title="Click me to copy"
+                                   onclick="copyToClipboard('#wallet')"><span id="wallet">{{$user->private_key}}</span></a>
                             </td>
                         @else
                             <td><a href="javascript:void(0)">{{$user->name}}</a></td>
-                            <td><a href="javascript:void(0)">{{$user->wallet_id}}</a>
+                            <td><a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip"
+                                   data-original-title="Click me to Copy" title="Click me to copy"
+                                   onclick="copyToClipboard('#wallet')"><span id="wallet">{{$user->wallet_id}}</span>   </a>
                             </td>
                         @endif
                         <td>@if($type=='admin') {{ $user->access_level }} @else {{$user->account_number}} @endif</td>

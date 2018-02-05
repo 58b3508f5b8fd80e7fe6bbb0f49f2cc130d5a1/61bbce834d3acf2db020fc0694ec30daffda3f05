@@ -11,7 +11,7 @@
                 <div class="block-content">
                     <div class="block">
                         <div class="alert alert-{{$alert}}">
-                            <p style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
+                            <p class="text-center" style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
                         </div>
                     </div>
                 </div>

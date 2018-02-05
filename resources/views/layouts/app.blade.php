@@ -170,8 +170,8 @@
     </header>
     <main id="main-container">
         <div class="btn-group-justified">
-        <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-            <i class="fa fa-user"></i> Wallet ID: <span class="text-primary">{{Auth::user()->wallet_id}}</span>
+        <button type="button" class="btn btn-dual-secondary text-muted js-tooltip-enabled" data-toggle="tooltip" data-original-title="Click me to Copy" title = "Click me to copy" onclick="copyToClipboard('#wallet')">
+            <i class="fa fa-user"></i> Wallet ID: <span class="text-primary" id="wallet">{{Auth::user()->wallet_id}}</span>
         </button>
         <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
             <i class="fa fa-line-chart"></i> Value per PNM: <span class="text-danger">{{$data['currentValue'] or 0}}
@@ -205,6 +205,15 @@
 <script src="{{asset('js/codebase.min-1.4.js')}}"></script>
 <script src="{{asset('js/chart.bundle.min.js')}}"></script>
 <script src="{{asset('js/be_pages_dashboard.js')}}"></script>
+<script>
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+</script>
 @yield('scripts')
 
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
