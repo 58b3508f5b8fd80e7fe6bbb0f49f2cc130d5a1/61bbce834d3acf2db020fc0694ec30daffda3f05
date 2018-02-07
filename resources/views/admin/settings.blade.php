@@ -147,50 +147,52 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 pull-left">
-                <div class="block">
-                    <div class="block-header block-header-default">
-                        <h2 class="block-title text-center">Admin Settings</h2>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option">
-                                <i class="si si-wrench"></i>
-                            </button>
+            @if(Auth::user()->access_level >= 4)
+                <div class="col-md-12 pull-left">
+                    <div class="block">
+                        <div class="block-header block-header-default">
+                            <h2 class="block-title text-center">Admin Settings</h2>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option">
+                                    <i class="si si-wrench"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="block-content">
-                        <form action="{{url('/admin/settings/app')}}" method="post">
-                            {{csrf_field()}}
-                            <fieldset class="col-md-12 col-md-offset-1">
-                                <legend class="text-center">Application Settings</legend>
-                                @foreach($settings as $setting)
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <div class="form-material form-material-lg form-material-primary floating">
-                                                <input class="form-control form-control-lg text-center" id="current"
-                                                       name="{{$setting->name}}"
-                                                       type="text" placeholder="{{$setting->description}}"
-                                                       value="{{$setting->value}}" title="{{$setting->title}}">
-                                                <label for="current"> {{$setting->title}}</label>
+                        <div class="block-content">
+                            <form action="{{url('/admin/settings/app')}}" method="post">
+                                {{csrf_field()}}
+                                <fieldset class="col-md-12 col-md-offset-1">
+                                    <legend class="text-center">Application Settings</legend>
+                                    @foreach($settings as $setting)
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <div class="form-material form-material-lg form-material-primary floating">
+                                                    <input class="form-control form-control-lg text-center" id="current"
+                                                           name="{{$setting->name}}"
+                                                           type="text" placeholder="{{$setting->description}}"
+                                                           value="{{$setting->value}}" title="{{$setting->title}}">
+                                                    <label for="current"> {{$setting->title}}</label>
+                                                </div>
                                             </div>
                                         </div>
+                                    @endforeach
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <button style="overflow: hidden; position: relative; z-index: 1;"
+                                                    type="submit"
+                                                    class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
+                                                    data-toggle="click-ripple"><span
+                                                        style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"
+                                                        class="click-ripple animate"></span>Update Settings
+                                            </button>
+                                        </div>
                                     </div>
-                                @endforeach
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <button style="overflow: hidden; position: relative; z-index: 1;"
-                                                type="submit"
-                                                class="btn btn-outline-secondary min-width-125 js-click-ripple-enabled"
-                                                data-toggle="click-ripple"><span
-                                                    style="height: 125px; width: 125px; top: -44.5667px; left: 13.1667px;"
-                                                    class="click-ripple animate"></span>Update Settings
-                                        </button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection

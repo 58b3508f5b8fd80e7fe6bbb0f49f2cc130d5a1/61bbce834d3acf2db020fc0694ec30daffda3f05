@@ -119,12 +119,12 @@
                                                 </a>
                                                 <div class="dropdown-divider"></div>
                         --}}
-                        @if(Auth::user()->access_level >= 4)
-                            <a class="dropdown-item" href="{{url('/admin/settings')}}" data-toggle="layout"
-                               data-action="side_overlay_toggle">
-                                <i class="si si-wrench mr-5"></i> Settings
-                            </a>
-                        @endif
+
+                        <a class="dropdown-item" href="{{url('/admin/settings')}}" data-toggle="layout"
+                           data-action="side_overlay_toggle">
+                            <i class="si si-wrench mr-5"></i> Settings
+                        </a>
+
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

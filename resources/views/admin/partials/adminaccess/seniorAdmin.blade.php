@@ -59,6 +59,9 @@
             <li>
                 <a href="{{url('/admin/transactions/verified/ngn')}}">Verified NGN Withdrawal</a>
             </li>
+            <li>
+                <a href="{{url('/admin/transactions/history')}}">History</a>
+            </li>
         </ul>
     </li>
     <li>

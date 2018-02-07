@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('title', 'Transactions History')
 @section('content')
 
     <nav class="breadcrumb bg-white push">
-        <a class="breadcrumb-item" href="{{url('/home')}}">Home</a>
+        <a class="breadcrumb-item" href="{{url('/admin')}}">Admin</a>
         <span class="breadcrumb-item active">Transaction History</span>
     </nav>
     <div class="block">

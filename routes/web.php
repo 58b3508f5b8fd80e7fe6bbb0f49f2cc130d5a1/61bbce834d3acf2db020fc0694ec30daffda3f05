@@ -148,11 +148,17 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminTransactionsController@viewWithdrawal');
                                 Route::get('/transactions/share',
                                     'AdminTransactionsController@viewShare');
+                                Route::get('/transactions/history',
+                                    'AdminTransactionsController@viewTransactions');
                                 // drg >> handling transaction functions
                                 Route::post('/transactions/withdrawal',
                                     'AdminTransactionsController@verifyWithdrawal');
                                 Route::post('/transactions/share',
                                     'AdminTransactionsController@sharePNM');
+                                Route::post('/transactions/share',
+                                    'AdminTransactionsController@sharePNM');
+                                Route::get('/transactions/history',
+                                    'AdminTransactionsController@viewTransactions');
                                 Route::post('/add/user',
                                     'AdminAddController@addUser');
                                 Route::post('/add/user/getlgas',

@@ -207,9 +207,9 @@ class TransactionController extends Controller
         $pin = $request->input('pin');
 
         $ngn = $pnm * (int)$value;
-        $charge = Setting::where('name', 'ngn_conversion_charge')
+        $chargePNM = Setting::where('name', 'pnm_conversion_charge')
             ->value('value');
-        $chargePNM = $charge / (int)$value;
+        $chargeNGN = $chargePNM*$value;
 
         $hasPNM = $this->checkPNM($pnm + $chargePNM);
         $checkPin = Hash::check($pin, Auth::user()->pin);
@@ -217,7 +217,7 @@ class TransactionController extends Controller
         if ($hasPNM && $checkPin && $checkLimit) {
             $description1 = "Conversion of $pnm PNM to $ngn NGN";
             $description2
-                = "$charge NGN ($chargePNM PNM) commission charge for $pnm PNM conversion";
+                = "$chargeNGN NGN ($chargePNM PNM) commission charge for $pnm PNM conversion";
             $type1 = "pnm-ngn";
             $type2 = "pnm-holding";
 
@@ -332,7 +332,6 @@ class TransactionController extends Controller
         $ngn = $pnm * (int)$value;
         $chargePNM = Setting::where('name', 'pnm_transfer_charge')
             ->value('value');
-
         $hasPNM = $this->checkPNM($pnm + $chargePNM);
         $isUser = User::where('wallet_id', $wallet)->where('type', 'user')
             ->first();
@@ -433,9 +432,8 @@ class TransactionController extends Controller
         $pin = $request->input('pin');
 
         $pnm = $ngn / (int)$value;
-        $charge = Setting::where('name', 'ngn_withdrawal_charge')
-            ->value('value');
-        $chargePNM = $charge / (int)$value;
+        $chargePNM = Setting::where('name', 'ngn_withdrawal_charge')
+            ->value('value');;
 
         $hasNGN = $this->checkNGN($ngn);
         $hasPNM = $this->checkPNM($chargePNM);
@@ -445,7 +443,7 @@ class TransactionController extends Controller
         if ($hasNGN && $hasPNM && $checkPin && $checkLimit && $checkDaily) {
             $description1 = "Withdrawal request for $ngn NGN";
             $description2
-                = "$charge NGN ($chargePNM PNM) commission charge for $ngn NGN withdrawal";
+                = "$chargePNM NGN ($chargePNM PNM) commission charge for $ngn NGN withdrawal";
             $type1 = "ngn-bank";
             $type2 = "pnm-holding";
 

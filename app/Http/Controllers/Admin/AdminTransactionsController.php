@@ -187,6 +187,19 @@ class AdminTransactionsController extends Controller
         return view('admin.sharePNM', $data);
     }
 
+    public function viewTransactions()
+    {
+        // drg >> show transaction history
+        $data['value'] = $this->admin()->getCurrentValue();
+        $data['transactions'] = Transaction::where('from',
+            Auth::user()->wallet_id)
+            ->orWhere('to', Auth::user()->wallet_id)
+            ->orWhere('from', Auth::user()->name)
+            ->orWhere('to', Auth::user()->name)->orderBy('updated_at', 'desc')
+            ->get();
+        return view('admin.transactionHistory', $data);
+    }
+
     public function viewVerified($action)
     {
         $data = array();
