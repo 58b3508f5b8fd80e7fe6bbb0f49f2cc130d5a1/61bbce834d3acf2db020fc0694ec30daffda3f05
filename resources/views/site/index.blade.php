@@ -6,17 +6,17 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>About us</title>
+    <title>{{config('app.name')}}</title>
     <base/>
     <meta name="viewport" content="width=992"/>
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
     <!-- Facebook Open Graph -->
-    <meta name="og:title" content="About us"/>
+    <meta name="og:title" content="{{config('app.name')}}"/>
     <meta name="og:description" content=""/>
     <meta name="og:image" content=""/>
     <meta name="og:type" content="article"/>
-    <meta name="og:url" content="about-us')}}"/>
+    <meta name="og:url" content="{{config('app.name')}}"/>
     <!-- Facebook Open Graph end -->
 
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -43,18 +43,10 @@
         <div class="wb_cont_inner">
             <div id="wb_element_instance32" class="wb_element wb-menu">
                 <ul class="hmenu">
-                    <li><a href="{{url('index-2')}}" target="_self" title="Home">Home</a></li>
-                    <li class="active"><a href="{{url('index-3')}}" target="_self" title="About us">About us</a></li>
-                    <li><a href="{{url('index-4')}}" target="_self" title="Savings">Savings</a></li>
-                    <li><a href="{{url('index-5')}}" target="_self" title="Contacts">Contacts</a></li>
-                    <li>
-                        <a href="http://beta.proofdashboard.com/" target="_blank" title="Wallet">Wallet</a></li>
-                    <li><a href="{{url('index-6')}}"
-                           target="_blank" title="NUMA">NUMA</a></li>
+                    <li class="active"><a href="{{url('')}}" target="_self" title="Home">Home</a></li>
                     @guest <li><a href="{{url('/login')}}" target="_blank" title="Login">LOGIN</a></li>
                     <li><a href="{{url('/join')}}" target="_blank" title="Join">JOIN</a></li> @endguest
-                    <li><a href="http://touchinglivesskills.xyz/" target="_blank" title="Empowerment">Empowerment</a>
-                    </li>
+                    @auth <li><a href="{{url('/dashboard')}}" target="_blank" title="Dashboard">Dashboard</a></li> @endauth
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -62,13 +54,13 @@
                 <div class="wb_shp"></div>
             </div>
             <div id="wb_element_instance34" class="wb_element" style=" line-height: normal;"><h1
-                        class="wb-stl-heading1"><span style="background-color:#ffffff;">TLSavings</span></h1>
+                        class="wb-stl-heading1"><span style="background-color:#ffffff;">{{config('app.name')}}</span></h1>
             </div>
             <div id="wb_element_instance35" class="wb_element wb_element_picture"><img alt="gallery/tlsavings jpg"
                                                                                        src="jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
             </div>
         </div>
-        <div class="wb_cont_outer"></div>
+
         <div class="wb_cont_bg"></div>
     </div>
     <div class="vbox wb_container" id="wb_main">
@@ -103,27 +95,7 @@
             </div>
             <div id="wb_element_instance38" class="wb_element" style=" line-height: normal;"><h1
                         class="wb-stl-heading1">About us</h1></div>
-            <div id="wb_element_instance39" class="wb_element" style=" line-height: normal;"><h1
-                        class="wb-stl-heading1">Our team</h1></div>
-            <div id="wb_element_instance40" class="wb_element"><a class="wb_button"
-                                                                  href="{{url('index-3')}}"><span></span></a></div>
-            <div id="wb_element_instance41" class="wb_element"><a class="wb_button"
-                                                                  href="{{url('index-3')}}><span></span></a></div><div id="
-                                                                  wb_element_instance42" class="wb_element"><a
-                        class="wb_button" href="{{url('index-3')}}><span></span></a></div><div id="
-                        wb_element_instance43" class="wb_element"><a class="wb_button"
-                                                                     href="{{url('index-2')}}><span></span></a></div><div id="
-                                                                     wb_element_instance44" class="wb_element"
-                style="width: 100%;">
-                <script type="text/javascript">
-                    $(function () {
-                        $("#wb_element_instance44").hide();
-                    });
-                </script>
-            </div>
         </div>
-        <div class="wb_cont_outer"></div>
-        <div class="wb_cont_bg"></div>
     </div>
     <div class="vbox wb_container" id="wb_footer">
 

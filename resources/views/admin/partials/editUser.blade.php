@@ -596,148 +596,31 @@ else $readonly = null;
             </div>
             <hr>
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="form-group{{ $errors->has('form_location') ? ' is-invalid' : '' }} row">
-                        <label for="#">Upload Form</label>
-                        <div class="form-group input-group">
-                            <label class="input-group-btn"> <span class="btn btn-primary">
-									Browse<input {{$readonly}} type="file" name="form_location" accept=".png,.jpg,.gif"
-                                                 style="display: none;" id="formlocation"
-                                    >
-							</span>
-                            </label><input {{$readonly}} type="text" id="form-info" class="form-control"
-                                           readonly
-                            >
-                        </div>
-                        @if ($errors->has('form_location'))
-                            <span class="invalid-feedback">
-                                    {{ $errors->first('form_location') }}
-                                </span>
-                        @endif
-
-                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
-
-                    </div>
-                </div>
                 <div class="col-md-7 col-xs-12">
                     <div id="formImage"><img src="{{Storage::url($user['form_location'])}}"
                                              style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="form-group{{ $errors->has('signature_location') ? ' is-invalid' : '' }} row">
-                        <label for="#">Upload Signature</label>
-                        <div class="form-group input-group">
-                            <label class="input-group-btn"> <span class="btn btn-success">
-									Browse<input {{$readonly}} type="file" name="signature_location"
-                                                 accept=".png,.jpg,.gif"
-                                                 style="display: none;" id="signaturelocation"
-                                    >
-							</span>
-                            </label><input {{$readonly}} type="text" id="signature-info" class="form-control"
-                                           readonly
-                            >
-                        </div>
-                        @if ($errors->has('signature_location'))
-                            <span class="invalid-feedback">
-                                    {{ $errors->first('signature_location') }}
-                                </span>
-                        @endif
-                        --}}
-                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
-
-                    </div>
-                </div>
                 <div class="col-md-7 col-xs-12">
                     <div id="signatureImage"><img src="{{Storage::url($user['signature_location'])}}"
                                                   style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="form-group{{ $errors->has('utility_bill_location') ? ' is-invalid' : '' }} row">
-                        <label for="#">Upload Utility Bill</label>
-                        <div class="form-group input-group">
-                            <label class="input-group-btn"> <span class="btn btn-warning">
-									Browse<input {{$readonly}} type="file" name="utility_bill_location"
-                                                 accept=".png,.jpg,.gif"
-                                                 style="display: none;" id="utilitylocation"
-                                    >
-							</span>
-                            </label><input {{$readonly}} type="text" id="utility-info" class="form-control"
-                                           readonly
-                            >
-                        </div>
-                        @if ($errors->has('utility_bill_location'))
-                            <span class="invalid-feedback">
-                                    {{ $errors->first('utility_bill_location') }}
-                                </span>
-                        @endif
-                        --}}
-                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
-                    </div>
-                </div>
+
                 <div class="col-md-7 col-xs-12">
                     <div id="utilityImage"><img src="{{Storage::url($user['utility_bill_location'])}}"
                                                 style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="form-group{{ $errors->has('idcard_location') ? ' is-invalid' : '' }} row">
-                        <label for="#">Upload ID Card</label>
-                        <div class="form-group input-group">
-                            <label class="input-group-btn"> <span class="btn btn-dark">
-									Browse<input {{$readonly}} type="file" name="idcard_location"
-                                                 accept=".png,.jpg,.gif"
-                                                 style="display: none;" id="idcardlocation"
-                                    >
-							</span>
-                            </label><input {{$readonly}} type="text" id="idcardno-info" class="form-control"
-                                           readonly
-                            >
-                        </div>
-                        @if ($errors->has('idcard_location'))
-                            <span class="invalid-feedback">
-                                        {{ $errors->first('idcard_location') }}
-                                    </span>
-                        @endif
-
-                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
-
-                    </div>
-                </div>
                 <div class="col-md-7 col-xs-12">
                     <div id="idcardImage"><img src="{{Storage::url($user['idcard_location'])}}"
                                                style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="form-group{{ $errors->has('passport_location') ? ' is-invalid' : '' }} row">
-                        <label for="#">Upload Passport</label>
-                        <div class="form-group input-group">
-                            <label class="input-group-btn"> <span class="btn btn-danger">
-									Browse<input {{$readonly}} type="file" name="passport_location"
-                                                 accept=".png,.jpg,.gif"
-                                                 style="display: none;" id="passportlocation"
-                                    >
-							</span>
-                            </label><input {{$readonly}} type="text" id="file-info" class="form-control"
-                                           readonly
-                            >
-                        </div>
-                        @if ($errors->has('passport_location'))
-                            <span class="invalid-feedback">
-                                    {{ $errors->first('passport_location') }}
-                                </span>
-                        @endif
-                        --}}
-                        {{--<input {{$readonly}} type="file" name="file" id="file" />--}}
-
-                    </div>
-                </div>
                 <div class="col-md-7 col-xs-12">
                     <div id="passportImage"><img src="{{Storage::url($user['passport_location'])}}"
                                                  style="max-width: 100%; max-height: 20em;"></div>

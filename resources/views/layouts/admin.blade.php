@@ -145,8 +145,13 @@
                         <i class="fa fa-times"></i>
                         </button>
                         </span>
-                        <input class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input"
-                               name="search" type="text">
+                        <input class="form-control" placeholder="Enter your search query or hit ESC.." id="page-header-search-input"
+                               name="search" type="text" value="{{$query or null}}" required>
+                        {{--<select class="form-control col-md-3 col-sm-4" id="page-header-search-type"
+                                name="type" title="Select type">
+                            <option value="users">Users</option>
+                            <option value="transactions">Transactions</option>
+                        </select>--}}
                         <span class="input-group-btn">
                         <button type="submit" class="btn btn-secondary">
                         <i class="fa fa-search"></i>

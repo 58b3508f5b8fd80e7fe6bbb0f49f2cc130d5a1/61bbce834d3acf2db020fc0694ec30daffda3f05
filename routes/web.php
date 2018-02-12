@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('site.index-2');
+    return view('site.index');
 });
 
 Route::get('/about-us', function () {
@@ -133,7 +133,7 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
 
 
                         // drg >> search
-                        Route::post('/search');
+                        Route::get('/search','AdminSearchController@index');
 
 
                         Route::post('/settings/password',

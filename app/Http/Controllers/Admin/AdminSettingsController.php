@@ -42,9 +42,7 @@ class AdminSettingsController extends Controller
 
     }
 
-    public function changePassword(
-        Request $request
-    ) {
+    public function changePassword(Request $request) {
         $currentPassword = $request->input('current_password');
         $newPassword = $request->input('new_password');
         $confirmPassword = $request->input('confirm_password');
