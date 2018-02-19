@@ -22,7 +22,7 @@
                     class="wb-stl-heading1"><span style="background-color:#ffffff;">TLSavings</span></h1>
         </div>
         <div id="wb_element_instance35" class="wb_element wb_element_picture"><img alt="gallery/tlsavings jpg"
-                                                                                   src="jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
+                                                                                   src="public/jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
         </div>
     </div>
     <div class="wb_cont_outer"></div>

@@ -104,35 +104,41 @@ class AdminAddController extends Controller
             $data['alert'] = 'danger';
             $data['message'] = "Sorry, the pin you entered was incorrect";
         }
-
-        return view('admin.newPNM', $data);
+        return redirect('admin/add/pnm')->with('data',$data);
+        // return view('admin.newPNM', $data);
     }
 
     public function addAdmin(Request $request)
     {
         $details = $request->all();
+        $admin = false;
         $this->validateAdmin($details)->validate();
         $isAcc = true;
         $acc_no = '';
+        $level = $details['level'] % 17;
+
         while ($isAcc) {
             $acc_no = rand(1, 100000);
             $isAcc = User::where('account_number', $acc_no)->first();
         }
-        $admin = User::create([
-            'first_name'     => $details['first_name'],
-            'last_name'      => $details['last_name'],
-            'wallet_id'      => md5($details['email'] . date('YmdHis')),
-            'name'           => $details['name'],
-            'email'          => $details['email'],
-            'password'       => bcrypt(md5($details['email'])),
-            'pin'            => bcrypt('1234'),
-            'account_number' => $acc_no,
-            'wallet_address' => md5($details['email']),
-            'private_key'    => md5($details['email']),
-            'type'           => 'admin',
-            'status'         => 'active',
-            'access_level'   => $details['level'],
-        ]);
+
+        if (Auth::user()->access_level <= $level + 1) {
+            $admin = User::create([
+                'first_name'     => $details['first_name'],
+                'last_name'      => $details['last_name'],
+                'wallet_id'      => md5($details['email'] . date('YmdHis')),
+                'name'           => $details['name'],
+                'email'          => $details['email'],
+                'password'       => bcrypt(md5($details['email'])),
+                'pin'            => bcrypt('1234'),
+                'account_number' => $acc_no,
+                'wallet_address' => md5($details['email']),
+                'private_key'    => md5($details['email']),
+                'type'           => 'admin',
+                'status'         => 'active',
+                'access_level'   => "$level",
+            ]);
+        }
 
         if ($admin) {
             $data['alert'] = 'success';
@@ -144,7 +150,8 @@ class AdminAddController extends Controller
 
         }
         $data['action'] = 'new admin';
-        return view('admin.newAdmin', $data);
+        return redirect('admin/add/admin')->with('data',$data);
+        // return view('admin.newAdmin', $data);
     }
 
     public function addUser(Request $request)
@@ -170,7 +177,7 @@ class AdminAddController extends Controller
                 && $passportImage->isValid()
             ) {
                 /*$details['form_location'] = str_replace('public',
-                    'storage', $signatureImage->store('public/images/forms'));*/
+                    'storage', $signatureImage->store('images/forms'));*/
                 $details['form_location']
                     = $signatureImage->store('tlssavings/public/images/forms');
                 $details['signature_location']
@@ -195,7 +202,8 @@ class AdminAddController extends Controller
 
         }
         $data['action'] = 'new user';
-        return view('admin.newUser', $data);
+        return redirect('admin/add/user')->with('data',$data);
+        //return view('admin.newUser', $data);
     }
 
     protected function createUsers(array $data)

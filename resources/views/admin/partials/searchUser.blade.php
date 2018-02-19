@@ -108,9 +108,9 @@
                         <th>Private Key</th>
                         <th>Account No.</th>
                         <th>Status</th>
-                        @if(Auth::user()->access_level>=3)
+                        {{--@if(Auth::user()->access_level>=3)
                             <th class="text-center">Actions</th>
-                        @endif
+                        @endif--}}
                     </tr>
                     </thead>
                     <tbody>
@@ -154,7 +154,7 @@
                                                 onclick="viewEditUser({{($user->id+9407)}},'{{''}}')">
                                             <i class="fa fa-pencil"></i>
                                         </button>
-                                        {{--@if(!in_array($action,['registered','unregistered']))--}}
+                                        {{--@if(!in_array($action,['registered','unregistered']))--}}{{--
                                         @if($user->status=='blocked' || $user->status=='pending')
                                             <button data-original-title="Delete" type="button"
                                                     class="btn btn-sm btn-alt-success"
@@ -172,7 +172,7 @@
                                                     onclick="verifyUser({{($user->id+1107)}}, 'block')">
                                                 <i class="fa fa-times"></i>
                                             </button>
-                                        @endif
+                                        @endif--}}
                                         {{--@endif--}}
                                     </div>
                                 </td>

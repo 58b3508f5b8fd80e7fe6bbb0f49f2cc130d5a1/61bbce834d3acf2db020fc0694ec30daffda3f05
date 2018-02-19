@@ -19,15 +19,15 @@
     <meta name="og:url" content="contacts')}}"/>
     <!-- Facebook Open Graph end -->
 
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/mainde0d.js?v=20171208161001" type="text/javascript"></script>
+    <link href="public/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script src="public/css/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="public/css/bootstrap.min.js" type="text/javascript"></script>
+    <script src="public/css/mainde0d.js?v=20171208161001" type="text/javascript"></script>
 
-    <link href="css/font-awesome.min3e6e.css?v=4.7.0" rel="stylesheet" type="text/css"/>
-    <link href="css/site2e13.css?v=20180103162959" rel="stylesheet" type="text/css"/>
-    <link href="css/common0969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
-    <link href="css/30969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
+    <link href="public/css/font-awesome.min3e6e.css?v=4.7.0" rel="stylesheet" type="text/css"/>
+    <link href="public/css/site2e13.css?v=20180103162959" rel="stylesheet" type="text/css"/>
+    <link href="public/css/common0969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
+    <link href="public/css/30969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
     <style type="text/css">.wb_form_site th, .wb_form_site td {
             display: table-cell !important;
         }
@@ -38,7 +38,7 @@
 
     <script type="text/javascript">var currLang = '';</script>
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.min.js"></script>
+    <script src="public/css/html5shiv.min.js"></script>
     <![endif]-->
 </head>
 
@@ -50,14 +50,18 @@
         <div class="wb_cont_inner">
             <div id="wb_element_instance46" class="wb_element wb-menu">
                 <ul class="hmenu">
-                    <li><a href="{{url('index-2')}}" target="_self" title="Home">Home</a></li>
-                    <li><a href="{{url('index-3')}}" target="_self" title="About us">About us</a></li>
-                    <li><a href="{{url('index-4')}}" target="_self" title="Savings">Savings</a></li>
-                    <li class="active"><a href="{{url('index-5')}}" target="_self" title="Contacts">Contacts</a></li>
-                    <li><a href="http://beta.proofdashboard.com/" target="_blank" title="Wallet">Wallet</a></li>
-                    <li><a href="{{url('index-6')}}" target="_blank" title="NUMA">NUMA</a></li>@guest <li><a href="{{url('/login')}}" target="_blank" title="Login">LOGIN</a></li><li><a href="{{url('/join')}}" target="_blank" title="Join">JOIN</a></li> @endguest
+                    <li class="active"><a href="{{url('index-2')}}" target="_self" title="Home">Home</a></li>
+                    <li><a href="{{url('index-5')}}" target="_self" title="Contacts">Contacts</a></li>
+                    <li><a href="{{url('index-6')}}" target="_blank" title="NUMA">NUMA</a></li>
+
+                    @guest
+                        <li><a href="{{url('/login')}}" target="_blank" title="Login">LOGIN</a></li>
+                        <li><a href="{{url('/join')}}" target="_blank" title="Join">JOIN</a></li> @endguest
+                    @auth
+                        <li><a href="{{url('/dashboard')}}" target="_blank" title="Dashboard">Dashboard</a></li>@endauth
                     <li><a href="http://touchinglivesskills.xyz/" target="_blank" title="Empowerment">Empowerment</a>
                     </li>
+
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -68,7 +72,7 @@
                         class="wb-stl-heading1"><span style="background-color:#ffffff;">TLSavings</span></h1>
             </div>
             <div id="wb_element_instance49" class="wb_element wb_element_picture"><img alt="gallery/tlsavings jpg"
-                                                                                       src="jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
+                                                                                       src="public/jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
             </div>
         </div>
         <div class="wb_cont_outer"></div>

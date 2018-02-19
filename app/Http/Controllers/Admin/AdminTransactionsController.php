@@ -178,7 +178,8 @@ class AdminTransactionsController extends Controller
             }
         }
 
-        return view('admin.newPNM', $data);
+        return redirect('admin/transactions/share')->with('data',$data);
+        // return view('admin.newPNM', $data);
     }
 
     public function viewShare()

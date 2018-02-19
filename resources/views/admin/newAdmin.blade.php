@@ -1,3 +1,6 @@
+@php
+    $data = session('data');
+@endphp
 @extends('layouts.admin')
 @section('title', 'Join')
 @section('content')
@@ -12,11 +15,11 @@
             </h3>
         </div>
         <div class="block-content">
-            @if(isset($message))
+            @if(isset($data['message']))
                 <div class="col-sm-12 col-lg-12">
                     <div class="block">
-                        <div class="alert alert-{{$alert}}">
-                            <h2>{{$message}}</h2>
+                        <div class="alert alert-{{$data['alert']}}">
+                            <h2>{{$data['message']}}</h2>
                         </div>
                     </div>
                 </div>
@@ -96,12 +99,14 @@
                         <div class="form-group row">
                             <label class="col-12">Access Level</label>
                             <div class="col-12">
-                                <label class="css-control css-control-primary css-radio mr-10">
-                                    <input class="css-control-input" name="level" type="radio" value="3">
-                                    <span class="css-control-indicator"></span> Senior Admin
-                                </label>
+                                @if(Auth::user()->access_level>=4)
+                                    <label class="css-control css-control-primary css-radio mr-10">
+                                        <input class="css-control-input" name="level" type="radio" value="{{17*31+3}}">
+                                        <span class="css-control-indicator"></span> Senior Admin
+                                    </label>
+                                @endif
                                 <label class="css-control css-control-primary css-radio">
-                                    <input class="css-control-input" name="level" type="radio" value="2">
+                                    <input class="css-control-input" name="level" type="radio" value="{{17*14+2}}">
                                     <span class="css-control-indicator"></span> Admin
                                 </label>
                             </div>
@@ -121,7 +126,7 @@
     </div>
 @endsection
 <script>
-    @if(isset($message))
-    alert('{{$message}}');
+    @if(isset($data['message']))
+    alert('{{$data['message']}}');
     @endif
 </script>

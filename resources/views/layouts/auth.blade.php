@@ -47,9 +47,9 @@
         </div>
     </footer>
 </div>
-<script src="{{url('js/codebase.min-1.4.js')}}"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="{{url('js/op_auth_signup.js')}}"></script>
+<script src="{{url('css/codebase.min-1.4.js')}}"></script>
+<script src="css/jquery.validate.min.js"></script>
+<script src="{{url('css/op_auth_signup.js')}}"></script>
 
 </body>
 

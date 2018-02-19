@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@php $data = session('data'); @endphp @extends('layouts.app')
 @section('title', $title)
 @section('content')
 
@@ -7,11 +7,11 @@
             <small>{!! $title!!}</small>
         </h2>
         <div class="block">
-            @if(isset($message))
+            @if(isset($data['message']))
                 <div class="block-content">
                     <div class="block">
-                        <div class="alert alert-{{$alert}}">
-                            <p style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
+                        <div class="alert alert-{{$data['alert']}}">
+                            <p style="font-size:1.5rem; font-weight: bold;">{{$data['message']}}</p>
                         </div>
                     </div>
                 </div>
@@ -129,8 +129,8 @@
 
         }
 
-        @if(isset($message))
-        alert('{{$message}}');
+        @if(isset($data['message']))
+        alert('{{$data['message']}}');
         @endif
     </script>
 @endsection

@@ -3,12 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
 
 class User_meta extends Model
 {
     //
-    use Searchable;
     protected $fillable
         = [
             'first_name',

@@ -19,19 +19,19 @@
     <meta name="og:url" content="{{config('app.name')}}"/>
     <!-- Facebook Open Graph end -->
 
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/mainde0d.js?v=20171208161001" type="text/javascript"></script>
+    <link href="public/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <script src="public/css/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="public/css/bootstrap.min.js" type="text/javascript"></script>
+    <script src="public/css/mainde0d.js?v=20171208161001" type="text/javascript"></script>
 
-    <link href="css/font-awesome.min3e6e.css?v=4.7.0" rel="stylesheet" type="text/css"/>
-    <link href="css/site2e13.css?v=20180103162959" rel="stylesheet" type="text/css"/>
-    <link href="css/common0969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
-    <link href="css/20969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
+    <link href="public/css/font-awesome.min3e6e.css?v=4.7.0" rel="stylesheet" type="text/css"/>
+    <link href="public/css/site2e13.css?v=20180103162959" rel="stylesheet" type="text/css"/>
+    <link href="public/css/common0969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
+    <link href="public/css/20969.css?ts=1515221880" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript">var currLang = '';</script>
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.min.js"></script>
+    <script src="public/css/html5shiv.min.js"></script>
     <![endif]-->
 </head>
 
@@ -57,7 +57,7 @@
                         class="wb-stl-heading1"><span style="background-color:#ffffff;">{{config('app.name')}}</span></h1>
             </div>
             <div id="wb_element_instance35" class="wb_element wb_element_picture"><img alt="gallery/tlsavings jpg"
-                                                                                       src="jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
+                                                                                       src="public/jpg/f7923973432d866a679e08b1e952e7ec_80x80.jpg">
             </div>
         </div>
 

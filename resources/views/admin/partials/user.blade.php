@@ -65,15 +65,15 @@
                         @if(Auth::user()->access_level>=3)
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <button data-original-title="Edit" type="button"
-                                            class="btn btn-sm btn-alt-primary"
-                                            data-toggle="tooltip"
-                                            title="Edit {{$user->first_name}}"
-                                            onclick="viewEditUser({{($user->id+9407)}},'{{$type}}')">
-                                        <i class="fa fa-pencil"></i>
-                                    </button>
                                     @if(!in_array($action,['registered','unregistered']))
-                                        @if($user->status=='blocked' || $user->status=='pending')
+                                        <button data-original-title="Edit" type="button"
+                                                class="btn btn-sm btn-alt-primary"
+                                                data-toggle="tooltip"
+                                                title="Edit {{$user->first_name}}"
+                                                onclick="viewEditUser({{($user->id+9407)}},'{{$type}}')">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    @if($user->status=='blocked' || $user->status=='pending')
                                             <button data-original-title="Delete" type="button"
                                                     class="btn btn-sm btn-alt-success"
                                                     data-toggle="tooltip"

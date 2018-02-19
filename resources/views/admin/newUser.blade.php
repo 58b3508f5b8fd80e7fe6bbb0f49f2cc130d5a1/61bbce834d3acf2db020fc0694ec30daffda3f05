@@ -1,4 +1,5 @@
 <?php
+$data = session('data');
 $states = [
     'Abia',
     'Adamawa',
@@ -56,11 +57,11 @@ $states = [
             </h3>
         </div>
         <div class="block-content">
-            @if(isset($message))
+            @if(isset($data['message']))
                 <div class="col-sm-12 col-lg-12">
                     <div class="block">
-                        <div class="alert alert-{{$alert}}">
-                            <h2>{{$message}}</h2>
+                        <div class="alert alert-{{$data['alert']}}">
+                            <h2>{{$data['message']}}</h2>
                         </div>
                     </div>
                 </div>
@@ -758,8 +759,8 @@ $states = [
 @section('scripts')
     <script src="{{asset('js/bootstrap-formhelpers.min.js')}}"></script>
     <script>
-        @if(isset($message))
-        alert('{{$message}}');
+        @if(isset($data['message']))
+        alert('{{$data['message']}}');
         @endif
         $.ajaxSetup({
             headers: {

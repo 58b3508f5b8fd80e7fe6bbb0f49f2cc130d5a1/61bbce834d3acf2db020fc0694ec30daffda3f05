@@ -44,7 +44,8 @@ class SettingsController extends Controller
             $data['message']
                 = "The new password and its confirmation do not match";
         }
-        return view('dashboard.settings', $data);
+        return redirect('settings')->with('data', $data);
+        //return view('dashboard.settings', $data);
     }
 
     public function changePin(Request $request)
@@ -77,6 +78,7 @@ class SettingsController extends Controller
             $data['message']
                 = "The new pin and its confirmation do not match";
         }
-        return view('dashboard.settings', $data);
+        return redirect('settings')->with('data', $data);
+        //return view('dashboard.settings', $data);
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@php $data = session('data'); @endphp @extends('layouts.app')
 @section('title', 'Transactions History')
 @section('content')
 
