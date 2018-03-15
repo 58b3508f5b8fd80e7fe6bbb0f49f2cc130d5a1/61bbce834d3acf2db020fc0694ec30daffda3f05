@@ -1,4 +1,4 @@
-<!doctype html>
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">

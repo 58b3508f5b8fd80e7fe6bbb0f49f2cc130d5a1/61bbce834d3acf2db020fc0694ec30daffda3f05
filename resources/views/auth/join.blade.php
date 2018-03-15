@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.auth')
 @section('title', 'Join')
 @section('content')
     <div class="py-30 px-5 text-center">

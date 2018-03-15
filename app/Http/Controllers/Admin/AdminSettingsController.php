@@ -38,11 +38,13 @@ class AdminSettingsController extends Controller
             }
         }
         $data['settings'] = Setting::all();
-        return view('admin.settings', $data);
+        return redirect('admin/settings')->with('data', $data);
+        //return view('admin.settings', $data);
 
     }
 
-    public function changePassword(Request $request) {
+    public function changePassword(Request $request)
+    {
         $currentPassword = $request->input('current_password');
         $newPassword = $request->input('new_password');
         $confirmPassword = $request->input('confirm_password');
@@ -70,12 +72,11 @@ class AdminSettingsController extends Controller
             $data['message']
                 = "The new password and its confirmation do not match";
         }
-        return view('dashboard.settings', $data);
+        return redirect('admin/settings')->with('data', $data);
+//        return view('dashboard.settings', $data);
     }
 
-    public function changePin(
-        Request $request
-    ) {
+    public function changePin(Request $request) {
         $currentPin = $request->input('current_pin');
         $newPin = $request->input('new_pin');
         $confirmPin = $request->input('confirm_pin');
@@ -104,6 +105,7 @@ class AdminSettingsController extends Controller
             $data['message']
                 = "The new pin and its confirmation do not match";
         }
-        return view('dashboard.settings', $data);
+        return redirect('admin/settings')->with('data', $data);
+        //return view('dashboard.settings', $data);
     }
 }

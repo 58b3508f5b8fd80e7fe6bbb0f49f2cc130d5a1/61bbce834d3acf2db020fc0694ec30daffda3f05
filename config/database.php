@@ -1,23 +1,4 @@
 <?php
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-if ( isset ( $url [ "host" ] )&& isset ( $url [ "user" ] ) && isset ( $url [ "pass" ] ) &&
-    isset ( $url [ "path" ] ) )
-{
-    $server = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $db = substr($url["path"], 1);
-    $port = env ( 'DB_PORT', '3306' );
-    $conn = new mysqli($server, $username, $password, $db);
-} else
-{
-    $server = env ( 'DB_HOST' );
-    $port = env ( 'DB_PORT', '3306' );
-    $username = env ( 'DB_USERNAME' );
-    $password = env ( 'DB_PASSWORD' );
-    $db = env ( 'DB_DATABASE' );
-    $conn = env ( 'DB_CONNECTION' );
-}
 
 return [
 
@@ -60,11 +41,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => $server,
-            'port' => $port,
-            'database' => $db,
-            'username' => $username,
-            'password' => $password,
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'u488327959_tlsav'),
+            'username' => env('DB_USERNAME', 'u488327959_tlsav'),
+            'password' => env('DB_PASSWORD', ';A7e[OxIZ4Eyo>/*Q+'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

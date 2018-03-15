@@ -43,14 +43,6 @@ class HomeController extends Controller
 
     public function getTotalPNM()
     {
-//        $credit = Transaction::where('to', Auth::user()->wallet_id)->where(function ($query) {
-//            $query->where('type', 'ngn-pnm')
-//                ->orWhere('type', 'pnm-pnm')
-//                ->orWhere('type', 'pnm-wallet');
-//        })
-//            ->where('remark','credit')
-//            ->where('status', 'successful')
-//            ->sum('amount');
         $credit = Transaction::where('to', Auth::user()->wallet_id)
             ->where('status', 'successful')
             ->sum('amount');

@@ -108,16 +108,16 @@
                         <th>Private Key</th>
                         <th>Account No.</th>
                         <th>Status</th>
-                        @if(Auth::user()->access_level>=3)
+                        {{--@if(Auth::user()->access_level>=3)
                             <th class="text-center">Actions</th>
-                        @endif
+                        @endif--}}
                     </tr>
                     </thead>
                     <tbody>
                     @php
                         $i=0;
                     @endphp
-                    @foreach($results['registered'] as $user)
+                    @foreach($results['unregistered'] as $user)
                         @php
                             $i++;
                          if($user->status=='pending'||$user->status =='unregistered')
@@ -129,7 +129,7 @@
                         @endphp
                         <tr>
                             <td>{{$i}}</td>
-                            <td class="font-w600">{{$user->first_name." ".$user->last_name}}
+                            <td class="font-w600">{{$user->first_name." ". $user->other_name ." ".$user->last_name}}
                             </td>
 
                             <td>
@@ -142,9 +142,12 @@
                                             id="wallet">{{$user->private_key}}</span></a>
                             </td>
                             <td>
+                                <span>{{$user->account_number}}</span>
+                            </td>
+                            <td>
                                 <span class="badge {{$badge}}">{{$user->status}}</span>
                             </td>
-                            @if(Auth::user()->access_level>=3)
+                            {{--@if(Auth::user()->access_level>=3)
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <button data-original-title="Edit" type="button"
@@ -154,7 +157,7 @@
                                                 onclick="viewEditUser({{($user->id+9407)}},'{{''}}')">
                                             <i class="fa fa-pencil"></i>
                                         </button>
-                                        {{--@if(!in_array($action,['registered','unregistered']))--}}
+                                        --}}{{--@if(!in_array($action,['registered','unregistered']))--}}{{----}}{{--
                                         @if($user->status=='blocked' || $user->status=='pending')
                                             <button data-original-title="Delete" type="button"
                                                     class="btn btn-sm btn-alt-success"
@@ -172,11 +175,11 @@
                                                     onclick="verifyUser({{($user->id+1107)}}, 'block')">
                                                 <i class="fa fa-times"></i>
                                             </button>
-                                        @endif
-                                        {{--@endif--}}
+                                        @endif--}}{{--
+                                        --}}{{--@endif--}}{{--
                                     </div>
                                 </td>
-                            @endif
+                            @endif--}}
                         </tr>
                     @endforeach
                     </tbody>

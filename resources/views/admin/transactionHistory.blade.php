@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
 @section('title', 'Transactions History')
 @section('content')
 
@@ -38,8 +38,8 @@
                             <tr>
                                 <td>{{$i}}</td>
                                 <td><a href="{{url('transaction/'.$transaction->transaction_id)}}">{{$transaction->transaction_id}}</a></td>
-                                <td>{{$transaction->amount}}</td>
-                                <td>{{$transaction->amount * $value}}</td>
+                                <td>{{$transaction->amount/100}}</td>
+                                <td>{{$transaction->amount/100 * $value}}</td>
                                 <td>{{$transaction->from}}</td>
                                 <td>{{$transaction->to}}</td>
                                 <td>{{$transaction->type}}</td>

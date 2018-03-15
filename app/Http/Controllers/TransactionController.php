@@ -182,7 +182,7 @@ class TransactionController extends Controller
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->name;
             $transaction->to = Auth::user()->wallet_id;
-            $transaction->amount = $pnm;
+            $transaction->amount = $pnm*100;
             $transaction->value = $value;
             $transaction->description = $description;
             $transaction->type = $type;
@@ -230,7 +230,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->wallet_id;
             $transaction1->to = Auth::user()->name;
-            $transaction1->amount = $pnm;
+            $transaction1->amount = $pnm*100;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -240,7 +240,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM;
+            $transaction2->amount = $chargePNM*100;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;
@@ -355,7 +355,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->wallet_id;
             $transaction1->to = $wallet;
-            $transaction1->amount = $pnm;
+            $transaction1->amount = $pnm*100;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -365,7 +365,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM;
+            $transaction2->amount = $chargePNM*100;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;
@@ -456,7 +456,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->name;
             $transaction1->to = 'user';
-            $transaction1->amount = $pnm;
+            $transaction1->amount = $pnm*100;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -466,7 +466,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM;
+            $transaction2->amount = $chargePNM*100;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;
@@ -537,7 +537,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->wallet_id;
             $transaction1->to = Auth::user()->wallet_address;
-            $transaction1->amount = $pnm;
+            $transaction1->amount = $pnm*100;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -547,7 +547,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM;
+            $transaction2->amount = $chargePNM*100;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;

@@ -1,4 +1,4 @@
-@extends('layouts.error')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.error')
 @section('title', 'Account Suspended')
 @section('content')
     <div class="display-3 text-pulse">

@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.auth')
 @section('title', 'Login')
 @section('content')
     <div class="bg-gd-dusk">

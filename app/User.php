@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Scout\Searchable;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
-    use Searchable;
     /**
      * The attributes that are mass assignable.
      *
@@ -44,6 +44,16 @@ class User extends Authenticatable
             'password',
             'remember_token',
         ];
+
+    public function findForPassport($username)
+    {
+        return $this->where('wallet_id', $username)->first();
+    }
+
+    public function validateForPassportPasswordGrant($password)
+    {
+        return Hash::check($password, $this->pin);
+    }
 }
 
 

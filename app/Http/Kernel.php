@@ -9,6 +9,7 @@ use App\Http\Middleware\IsVerified;
 use App\Http\Middleware\SeniorAdminLevel;
 use App\Http\Middleware\SuperAdminLevel;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Laravel\Passport\Http\Middleware\CreateFreshApiToken;
 
 class Kernel extends HttpKernel
 {
@@ -43,6 +44,7 @@ class Kernel extends HttpKernel
                 \Illuminate\View\Middleware\ShareErrorsFromSession::class,
                 \App\Http\Middleware\VerifyCsrfToken::class,
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
+                CreateFreshApiToken::class
             ],
 
             'api' => [

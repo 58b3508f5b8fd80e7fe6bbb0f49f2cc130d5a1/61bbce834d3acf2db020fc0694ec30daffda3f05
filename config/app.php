@@ -30,6 +30,8 @@ return [
     'designer' => 'GreenWhiteDev',
 
     'designerWebsite' => 'http://greenwhitedev.com',
+    'maintenance'     => env('APP_MAINTENANCE', true),
+    'mtce_end'        => env('APP_MTCE_END', '2018/03/07'),
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +70,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:8000'),
+    'url' => env('APP_URL', 'http://tlsavings.xyz'),
 
     /*
     |--------------------------------------------------------------------------

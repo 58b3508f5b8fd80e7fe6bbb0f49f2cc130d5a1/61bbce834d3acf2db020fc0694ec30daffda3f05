@@ -1,7 +1,7 @@
 @php
     $data= session('stats');
 @endphp
-        <!doctype html>
+        @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp <!doctype html>
 <!--[if lte IE 9]>
 <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -21,10 +21,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
-    <link rel="shortcut icon" href="{{asset('png/favicon.png')}}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('png/favicon-192x192.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('png/apple-touch-icon-180x180.png')}}">
-    <link rel="stylesheet" id="css-main" href="{{asset('css/tlsavings.min.css')}}">
+    <link rel="shortcut icon" href="{{asset($public.'/png/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset($public.'/png/favicon-192x192.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset($public.'/png/apple-touch-icon-180x180.png')}}">
+    <link rel="stylesheet" id="css-main" href="{{asset($public.'/css/tlsavings.min.css')}}">
 </head>
 <body>
 <div id="page-container" class="sidebar-o side-scroll page-header-modern main-content-boxed">
@@ -121,11 +121,12 @@
                             <a href="{{url('/transactions')}}"><i class="si si-compass"></i><span
                                         class="sidebar-mini-hide">Transactions History</span></a>
                         </li>
-                        <li>
+                        {{--<li>
                             <a href="{{url('/faq')}}"><i class="si si-compass"></i><span
                                         class="sidebar-mini-hide">FAQs</span></a>
-                        </li>
+                        </li>--}}
                         <li>
+                            <a href="{{url('/settings')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Settings</span></a>
                             <a href="{{url('/settings')}}"><i class="si si-compass"></i><span class="sidebar-mini-hide">Settings</span></a>
                         </li>
                     </ul>
@@ -178,11 +179,11 @@
                 NGN</span>
         </button>
         <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-            <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM'] or 0}}
+            <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM']/100}}
                 PNM</span>
         </button>
         <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-            &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM'] * $data['currentValue']}}
+            &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM']/100 * $data['currentValue']}}
                 NGN</span>
         </button>
         </div>
@@ -202,9 +203,9 @@
         </div>
     </footer>
 </div>
-<script src="{{asset('js/codebase.min-1.4.js')}}"></script>
-<script src="{{asset('js/chart.bundle.min.js')}}"></script>
-<script src="{{asset('js/be_pages_dashboard.js')}}"></script>
+<script src="{{asset($public.'/js/codebase.min-1.4.js')}}"></script>
+<script src="{{asset($public.'/js/chart.bundle.min.js')}}"></script>
+<script src="{{asset($public.'/js/be_pages_dashboard.js')}}"></script>
 <script>
     function copyToClipboard(element) {
         var $temp = $("<input>");

@@ -12,53 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('site.index');
-});
-
-Route::get('/about-us', function () {
-    return view('site.about-us');
-});
-Route::get('/account-opening', function () {
-    return view('site.account-opening');
-});
-Route::get('/contacts', function () {
-    return view('site.contacts');
-});
-Route::get('/flags', function () {
-    return view('site.flags_matrix');
-});
-Route::get('/hlight-bg', function () {
-    return view('site.hlight_bg');
-});
-Route::get('/icon-logo', function () {
-    return view('site.icon-logo');
-});
-Route::get('/index-2', function () {
-    return view('site.index-2');
-});
-Route::get('/index-3', function () {
-    return view('site.index-3');
-});
-Route::get('/index-4', function () {
-    return view('site.index-4');
-});
-Route::get('/index-5', function () {
-    return view('site.index-5');
-});
-Route::get('/index-6', function () {
-    return view('site.index-6');
-});
-Route::get('/index-7', function () {
-    return view('site.index-7');
-});
-Route::get('/null', function () {
-    return view('site.null');
-});
-Route::get('/numa', function () {
-    return view('site.numa');
-});
-Route::get('/savings', function () {
-    return view('site.savings');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -134,7 +88,10 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
 
                         // drg >> search
                         Route::get('/search','AdminSearchController@index');
-
+                        Route::post('/add/user',
+                            'AdminAddController@addUser');
+                        Route::post('/add/user/getlgas',
+                            'AdminAddController@getLGAs');
 
                         Route::post('/settings/password',
                             'AdminSettingsController@changePassword');
@@ -159,10 +116,8 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminTransactionsController@sharePNM');
                                 Route::get('/transactions/history',
                                     'AdminTransactionsController@viewTransactions');
-                                Route::post('/add/user',
-                                    'AdminAddController@addUser');
-                                Route::post('/add/user/getlgas',
-                                    'AdminAddController@getLGAs');
+                                Route::get('/add/admin',
+                                    'AdminAddController@viewAddAdmin');
                                 Route::post('/users/verify',
                                     'AdminUserController@verifyUser');
                                 Route::post('/edit/user',
@@ -173,21 +128,19 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminEditController@getUser');
                                 Route::post('/edit/user',
                                     'AdminEditController@editUser');
+                                Route::post('/add/admin',
+                                    'AdminAddController@addAdmin');
                                 Route::middleware(['superAdminLevel'])
                                     ->group(function () {
                                         // drg >> add functions
                                         Route::get('users/admin',
                                             'AdminUserController@viewAdmins');
-                                        Route::get('/add/admin',
-                                            'AdminAddController@viewAddAdmin');
                                         Route::get('/add/pnm',
                                             'AdminAddController@viewAddPnm');
 
                                         // drg >> handling settings functions
                                         Route::post('/settings/app',
                                             'AdminSettingsController@updateSettings');
-                                        Route::post('/add/admin',
-                                            'AdminAddController@addAdmin');
                                         Route::post('/add/pnm',
                                             'AdminAddController@addPNM');
                                         Route::post('/edit/viewadmin',

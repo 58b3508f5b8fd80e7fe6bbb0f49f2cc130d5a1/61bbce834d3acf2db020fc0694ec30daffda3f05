@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
 @section('title','Search users')
 
 @section('content')

@@ -1,4 +1,7 @@
-@extends('layouts.admin')
+@php
+$data = session('data');
+@endphp
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
 @section('title', title_case($action))
 @section('content')
     <nav class="breadcrumb bg-white push">
@@ -11,11 +14,11 @@
                 <small>Transaction {{title_case($action)}}</small>
             </h3>
         </div>
-        @if(isset($message))
+        @if(isset($data['message']))
             <div class="block-content">
                 <div class="block">
-                    <div class="alert alert-{{$alert}}">
-                        <p style="font-size:1.5rem; font-weight: bold;">{{$message}}</p>
+                    <div class="alert alert-{{$data['alert']}}">
+                        <p style="font-size:1.5rem; font-weight: bold;">{{$data['message']}}</p>
                     </div>
                 </div>
             </div>
@@ -78,8 +81,8 @@
 @endsection
 @section('scripts')
     <script>
-        @if(isset($message))
-        alert('{{$message}}');
+        @if(isset($data['message']))
+        alert('{{$data['message']}}');
         @endif
     </script>
 @endsection

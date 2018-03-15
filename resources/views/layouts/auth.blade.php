@@ -1,4 +1,4 @@
-<!doctype html>
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp <!doctype html>
 <!--[if lte IE 9]>
 <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -18,10 +18,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
-    <link rel="shortcut icon" href="{{asset('png/favicon.png')}}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('png/favicon-192x192.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('png/apple-touch-icon-180x180.png')}}">
-    <link rel="stylesheet" id="css-main" href="{{asset('css/tlsavings.min.css')}}">
+    <link rel="shortcut icon" href="{{asset($public.'/png/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset($public.'/png/favicon-192x192.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset($public.'/png/apple-touch-icon-180x180.png')}}">
+    <link rel="stylesheet" id="css-main" href="{{asset($public.'/css/tlsavings.min.css')}}">
 </head>
 <body>
 <div id="page-container" class="main-content-boxed">
@@ -47,9 +47,9 @@
         </div>
     </footer>
 </div>
-<script src="{{url('js/codebase.min-1.4.js')}}"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="{{url('js/op_auth_signup.js')}}"></script>
+<script src="{{asset($public.'/js/codebase.min-1.4.js')}}"></script>
+<script src="{{asset($public.'/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset($public.'/js/op_auth_signup.js')}}"></script>
 
 </body>
 

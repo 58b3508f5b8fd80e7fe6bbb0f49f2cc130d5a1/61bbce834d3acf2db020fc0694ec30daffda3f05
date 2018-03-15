@@ -21,7 +21,6 @@ class AdminTransactionsController extends Controller
 
     public function verifyWithdrawal(Request $request)
     {
-
         $id = $request->input('id');
         $action = $request->input('action');
         $type = $request->input('type');
@@ -138,8 +137,8 @@ class AdminTransactionsController extends Controller
         $wallet = $request->input('wallet');
 
         $data['action'] = 'new PNM';
-        $isUser = User::where('wallet_id', $wallet)->where('type', 'user')
-            ->first();
+        $isUser = User::where('wallet_id', $wallet)
+            ->where('wallet_id', '<>', Auth::user()->wallet_id)->first();
         $checkPin = Hash::check($pin, Auth::user()->pin);
         $checkPNM = $this->checkPNM($pnm);
         if ($checkPin && $isUser && $checkPNM) {
@@ -152,7 +151,7 @@ class AdminTransactionsController extends Controller
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->wallet_id;
             $transaction->to = $wallet;
-            $transaction->amount = $pnm;
+            $transaction->amount = $pnm*100;
             $transaction->value = $value;
             $transaction->description = $description;
             $transaction->type = $type;
@@ -178,7 +177,8 @@ class AdminTransactionsController extends Controller
             }
         }
 
-        return view('admin.newPNM', $data);
+        return redirect('admin/transactions/share')->with('data', $data);
+        // return view('admin.newPNM', $data);
     }
 
     public function viewShare()

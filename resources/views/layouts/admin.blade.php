@@ -1,4 +1,4 @@
-<!doctype html>
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp <!doctype html>
 <!--[if lte IE 9]>
 <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
 <!--[if gt IE 9]><!-->
@@ -18,10 +18,10 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <meta name="csrf-token" content="{{csrf_token()}}">
-    <link rel="shortcut icon" href="{{asset('png/favicon.png')}}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('png/favicon-192x192.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('png/apple-touch-icon-180x180.png')}}">
-    <link rel="stylesheet" id="css-main" href="{{asset('css/tlsavings.min.css')}}">
+    <link rel="shortcut icon" href="{{asset($public.'/png/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset($public.'/png/favicon-192x192.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset($public.'/png/apple-touch-icon-180x180.png')}}">
+    <link rel="stylesheet" id="css-main" href="{{asset($public.'/css/tlsavings.min.css')}}">
     @yield('style')
 </head>
 <body>
@@ -181,9 +181,9 @@
     </footer>
 </div>
 
-<script src="{{asset('js/codebase.min-1.4.js')}}"></script>
-<script src="{{asset('js/chart.bundle.min.js')}}"></script>
-<script src="{{asset('js/be_pages_dashboard.js')}}"></script>
+<script src="{{asset($public.'/js/codebase.min-1.4.js')}}"></script>
+<script src="{{asset($public.'/js/chart.bundle.min.js')}}"></script>
+<script src="{{asset($public.'/js/be_pages_dashboard.js')}}"></script>
 <script>
     function copyToClipboard(element) {
         var $temp = $("<input>");

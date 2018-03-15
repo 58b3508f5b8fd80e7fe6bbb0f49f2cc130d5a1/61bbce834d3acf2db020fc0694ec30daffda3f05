@@ -22,39 +22,39 @@ class AdminAddController extends Controller
     protected function validateUser(array $data)
     {
         return Validator::make($data, [
-            'first_name'            => 'required|string|max:255',
-            'last_name'             => 'string|max:255',
+            'first_name'            => 'required|max:255',
+            'last_name'             => 'max:255',
             'other_name'            => 'max:255',
-            'account_number'        => 'required|string|unique:user_metas|max:10',
-            'wallet_address'        => 'required|string|unique:user_metas|max:255',
-            'private_key'           => 'required|string|unique:user_metas|max:255',
-            'dob'                   => 'required|date|max:255',
-            'marital_status'        => 'required|string|max:255',
-            'gender'                => 'required|string|max:255',
-            'phone_no'              => 'required|string|unique:user_metas|max:255',
-            'nationality'           => 'required|string|max:255',
-            'state'                 => 'required|string|max:255',
-            'lga'                   => 'required|string|max:255',
-            'residential_address'   => 'required|string|max:255',
-            'contact_address'       => 'required|string|max:255',
-            'id_card_type'          => 'required|string|max:255',
+            'account_number'        => 'required|unique:user_metas|max:10',
+            'wallet_address'        => 'required|unique:user_metas|max:255',
+            'private_key'           => 'required|unique:user_metas|max:255',
+            'dob'                   => 'date|max:255',
+            'marital_status'        => 'max:255',
+            'gender'                => 'max:255',
+            'phone_no'              => 'unique:user_metas|max:255',
+            'nationality'           => 'max:255',
+            'state'                 => 'max:255',
+            'lga'                   => 'max:255',
+            'residential_address'   => 'max:255',
+            'contact_address'       => 'max:255',
+            'id_card_type'          => 'required|max:255',
             'id_card_no'            => 'required|unique:user_metas|max:255',
             'bvn'                   => 'required|numeric|unique:user_metas',
-            'bank_name'             => 'string|max:255',
-            'bank_acc_name'         => 'string|max:255',
+            'bank_name'             => 'max:255',
+            'bank_acc_name'         => 'max:255',
             'bank_acc_no'           => 'numeric|unique:user_metas',
-            'occupation'            => 'required|string|max:255',
-            'next_of_kin'           => 'required|string|max:255',
-            'nok_relationship'      => 'required|string|max:255',
-            'nok_contact_address'   => 'required|string|max:255',
-            'nok_dob'               => 'required|date|max:255',
-            'nok_gender'            => 'required|string|max:255',
-            'nok_phone_no'          => 'required|string|max:255',
-            'nok_email'             => 'required|string|max:255',
-            'spouse_name'           => 'required|string|max:255',
-            'mother_maiden_name'    => 'required|string|max:255',
-            'office_phone_no'       => 'required|string|max:255',
-            'landmark'              => 'required|string|max:255',
+            'occupation'            => 'max:255',
+            'next_of_kin'           => 'max:255',
+            'nok_relationship'      => 'max:255',
+            'nok_contact_address'   => 'max:255',
+            'nok_dob'               => 'date|max:255',
+            'nok_gender'            => 'max:255',
+            'nok_phone_no'          => 'max:255',
+            'nok_email'             => 'max:255',
+            'spouse_name'           => 'max:255',
+            'mother_maiden_name'    => 'max:255',
+            'office_phone_no'       => 'max:255',
+            'landmark'              => 'max:255',
             'form_location'         => 'required|image',
             'signature_location'    => 'required|image',
             'utility_bill_location' => 'required|image',
@@ -89,7 +89,7 @@ class AdminAddController extends Controller
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->name;
             $transaction->to = Auth::user()->wallet_id;
-            $transaction->amount = $pnm;
+            $transaction->amount = $pnm*100;
             $transaction->value = $value;
             $transaction->description = $description;
             $transaction->type = $type;
@@ -104,35 +104,41 @@ class AdminAddController extends Controller
             $data['alert'] = 'danger';
             $data['message'] = "Sorry, the pin you entered was incorrect";
         }
-
-        return view('admin.newPNM', $data);
+        return redirect('admin/add/pnm')->with('data', $data);
+        // return view('admin.newPNM', $data);
     }
 
     public function addAdmin(Request $request)
     {
         $details = $request->all();
+        $admin = false;
         $this->validateAdmin($details)->validate();
         $isAcc = true;
         $acc_no = '';
+        $level = $details['level'] % 17;
+
         while ($isAcc) {
             $acc_no = rand(1, 100000);
             $isAcc = User::where('account_number', $acc_no)->first();
         }
-        $admin = User::create([
-            'first_name'     => $details['first_name'],
-            'last_name'      => $details['last_name'],
-            'wallet_id'      => md5($details['email'] . date('YmdHis')),
-            'name'           => $details['name'],
-            'email'          => $details['email'],
-            'password'       => bcrypt(md5($details['email'])),
-            'pin'            => bcrypt('1234'),
-            'account_number' => $acc_no,
-            'wallet_address' => md5($details['email']),
-            'private_key'    => md5($details['email']),
-            'type'           => 'admin',
-            'status'         => 'active',
-            'access_level'   => $details['level'],
-        ]);
+
+        if (Auth::user()->access_level <= $level + 1) {
+            $admin = User::create([
+                'first_name'     => $details['first_name'],
+                'last_name'      => $details['last_name'],
+                'wallet_id'      => md5($details['email'] . date('YmdHis')),
+                'name'           => $details['name'],
+                'email'          => $details['email'],
+                'password'       => bcrypt(md5($details['email'])),
+                'pin'            => bcrypt('1234'),
+                'account_number' => $acc_no,
+                'wallet_address' => md5($details['email']),
+                'private_key'    => md5($details['email']),
+                'type'           => 'admin',
+                'status'         => 'active',
+                'access_level'   => "$level",
+            ]);
+        }
 
         if ($admin) {
             $data['alert'] = 'success';
@@ -144,7 +150,8 @@ class AdminAddController extends Controller
 
         }
         $data['action'] = 'new admin';
-        return view('admin.newAdmin', $data);
+        return redirect('admin/add/admin')->with('data', $data);
+        // return view('admin.newAdmin', $data);
     }
 
     public function addUser(Request $request)
@@ -170,7 +177,7 @@ class AdminAddController extends Controller
                 && $passportImage->isValid()
             ) {
                 /*$details['form_location'] = str_replace('public',
-                    'storage', $signatureImage->store('public/images/forms'));*/
+                    'storage', $signatureImage->store('images/forms'));*/
                 $details['form_location']
                     = $signatureImage->store('tlssavings/public/images/forms');
                 $details['signature_location']
@@ -195,51 +202,91 @@ class AdminAddController extends Controller
 
         }
         $data['action'] = 'new user';
-        return view('admin.newUser', $data);
+        return redirect('admin/add/user')->with('data', $data);
+        //return view('admin.newUser', $data);
     }
 
     protected function createUsers(array $data)
     {
         return User_meta::create([
-            'first_name'            => $data['first_name'],
-            'last_name'             => $data['last_name'],
-            'other_name'            => $data['other_name'],
-            'account_number'        => $data['account_number'],
-            'wallet_address'        => $data['wallet_address'],
-            'private_key'           => $data['private_key'],
-            'dob'                   => date_create($data['dob']),
-            'marital_status'        => $data['marital_status'],
-            'gender'                => $data['gender'],
-            'phone_no'              => $data['phone_no'],
-            'nationality'           => $data['nationality'],
-            'state'                 => $data['state'],
-            'lga'                   => $data['lga'],
-            'residential_address'   => $data['residential_address'],
-            'contact_address'       => $data['contact_address'],
-            'id_card_type'          => $data['id_card_type'],
-            'id_card_no'            => $data['id_card_no'],
-            'bvn'                   => $data['bvn'],
-            'bank_name'             => $data['bank_name'],
-            'bank_acc_name'         => $data['bank_acc_name'],
-            'bank_acc_no'           => $data['bank_acc_no'],
-            'occupation'            => $data['occupation'],
-            'next_of_kin'           => $data['next_of_kin'],
-            'nok_relationship'      => $data['nok_relationship'],
-            'nok_contact_address'   => $data['nok_contact_address'],
-            'nok_dob'               => date_create($data['nok_dob']),
-            'nok_gender'            => $data['nok_gender'],
-            'nok_phone_no'          => $data['nok_phone_no'],
-            'nok_email'             => $data['nok_email'],
-            'spouse_name'           => $data['spouse_name'],
-            'mother_maiden_name'    => $data['mother_maiden_name'],
-            'office_phone_no'       => $data['office_phone_no'],
-            'landmark'              => $data['landmark'],
-            'form_location'         => $data['form_location'],
-            'signature_location'    => $data['signature_location'],
-            'utility_bill_location' => $data['utility_bill_location'],
-            'idcard_location'       => $data['idcard_location'],
-            'passport_location'     => $data['passport_location'],
+            'first_name'            => isset($data['first_name'])
+                ? $data['first_name'] : null,
+            'last_name'             => isset($data['last_name'])
+                ? $data['last_name'] : null,
+            'other_name'            => isset($data['other_name'])
+                ? $data['other_name'] : null,
+            'account_number'        => isset($data['account_number'])
+                ? $data['account_number'] : null,
+            'wallet_address'        => isset($data['wallet_address'])
+                ? $data['wallet_address'] : null,
+            'private_key'           => isset($data['private_key'])
+                ? $data['private_key'] : null,
+            'dob'                   => isset($data['dob'])
+                ? date_create($data['dob']) : null,
+            'marital_status'        => isset($data['marital_status'])
+                ? $data['marital_status'] : null,
+            'gender'                => isset($data['gender']) ? $data['gender']
+                : null,
+            'phone_no'              => isset($data['phone_no'])
+                ? $data['phone_no'] : null,
+            'nationality'           => isset($data['nationality'])
+                ? $data['nationality'] : null,
+            'state'                 => isset($data['state']) ? $data['state']
+                : null,
+            'lga'                   => isset($data['lga']) ? $data['lga']
+                : null,
+            'residential_address'   => isset($data['residential_address'])
+                ? $data['residential_address'] : null,
+            'contact_address'       => isset($data['contact_address'])
+                ? $data['contact_address'] : null,
+            'id_card_type'          => isset($data['id_card_type'])
+                ? $data['id_card_type'] : null,
+            'id_card_no'            => isset($data['id_card_no'])
+                ? $data['id_card_no'] : null,
+            'bvn'                   => isset($data['bvn']) ? $data['bvn']
+                : null,
+            'bank_name'             => isset($data['bank_name'])
+                ? $data['bank_name'] : null,
+            'bank_acc_name'         => isset($data['bank_acc_name'])
+                ? $data['bank_acc_name'] : null,
+            'bank_acc_no'           => isset($data['bank_acc_no'])
+                ? $data['bank_acc_no'] : null,
+            'occupation'            => isset($data['occupation'])
+                ? $data['occupation'] : null,
+            'next_of_kin'           => isset($data['next_of_kin'])
+                ? $data['next_of_kin'] : null,
+            'nok_relationship'      => isset($data['nok_relationship'])
+                ? $data['nok_relationship'] : null,
+            'nok_contact_address'   => isset($data['nok_contact_address'])
+                ? $data['nok_contact_address'] : null,
+            'nok_dob'               => isset($data['nok_dob'])
+                ? date_create($data['nok_dob']) : null,
+            'nok_gender'            => isset($data['nok_gender'])
+                ? $data['nok_gender'] : null,
+            'nok_phone_no'          => isset($data['nok_phone_no'])
+                ? $data['nok_phone_no'] : null,
+            'nok_email'             => isset($data['nok_email'])
+                ? $data['nok_email'] : null,
+            'spouse_name'           => isset($data['spouse_name'])
+                ? $data['spouse_name'] : null,
+            'mother_maiden_name'    => isset($data['mother_maiden_name'])
+                ? $data['mother_maiden_name'] : null,
+            'office_phone_no'       => isset($data['office_phone_no'])
+                ? $data['office_phone_no'] : null,
+            'landmark'              => isset($data['landmark'])
+                ? $data['landmark'] : null,
+            'form_location'         => isset($data['form_location'])
+                ? $data['form_location'] : null,
+            'signature_location'    => isset($data['signature_location'])
+                ? $data['signature_location'] : null,
+            'utility_bill_location' => isset($data['utility_bill_location'])
+                ? $data['utility_bill_location'] : null,
+            'idcard_location'       => isset($data['idcard_location'])
+                ? $data['idcard_location'] : null,
+            'passport_location'     => isset($data['passport_location'])
+                ? $data['passport_location'] : null,
             'status'                => 'unregistered'
+
         ]);
     }
 

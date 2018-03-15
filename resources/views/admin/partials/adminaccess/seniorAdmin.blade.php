@@ -36,6 +36,9 @@
                     class="sidebar-mini-hide"> Add New</span></a>
         <ul>
             <li>
+                <a href="{{url('/admin/add/admin')}}">New Admin</a>
+            </li>
+            <li>
                 <a href="{{url('/admin/add/user')}}">New User</a>
             </li>
         </ul>

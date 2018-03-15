@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login', 'API\APIController@login');*/
+
+Route::middleware('auth:api')
+    ->group(function () {
+        Route::put('regcharge', 'API\APIChargeController@charge');
+        Route::get('confirm', 'API\APIController@confirm');
+        Route::get('getTransactions',
+            'API\APIChargeController@getTransactions');
+    });

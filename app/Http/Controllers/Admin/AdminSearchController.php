@@ -14,14 +14,14 @@ class AdminSearchController extends Controller
     {
         $data['results'] = $this->search($request);
         $data['query'] = $request->input('search');
-        return view('admin.searchUsers',$data);
+        return view('admin.searchUsers', $data);
     }
 
     public function search(Request $request)
     {
         $data = null;
         $query = $request->input('search');
-        $type = $request->input('type','users');
+        $type = $request->input('type', 'users');
         $terms = preg_split('/[\s,;:]+/', $query);
         $terms = array_filter($terms);
         switch ($type) {
@@ -41,7 +41,7 @@ class AdminSearchController extends Controller
             function ($query) use ($terms) {
                 for ($i = 0; $i < count($terms); $i++) {
                     $query->where(DB::raw("LOWER(first_name)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        'like', DB::raw("LOWER('%$terms[$i]%')"))
                         ->orWhere(DB::raw("LOWER(last_name)"),
                             'like', DB::raw("LOWER('%$terms[$i]%')"))
                         ->orWhere(
@@ -63,24 +63,17 @@ class AdminSearchController extends Controller
                             DB::raw("LOWER(private_key)"),
                             'like', DB::raw("LOWER('%$terms[$i]%')"));
                 }
-            })->where('type','user')
+            })->where('type', 'user')
             ->orderBy('first_name')
             ->get();
-        $users['unregistered'] = DB::table('users')->where(
+        $users['unregistered'] = DB::table('user_metas')->where(
             function ($query) use ($terms) {
                 for ($i = 0; $i < count($terms); $i++) {
                     $query->where(DB::raw("LOWER(first_name)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        'like', DB::raw("LOWER('%$terms[$i]%')"))
                         ->orWhere(DB::raw("LOWER(last_name)"),
                             'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(name)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(email)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(wallet_id)"),
+                        ->orWhere(DB::raw("LOWER(other_name)"),
                             'like', DB::raw("LOWER('%$terms[$i]%')"))
                         ->orWhere(
                             DB::raw("LOWER(account_number)"),
@@ -90,6 +83,18 @@ class AdminSearchController extends Controller
                             'like', DB::raw("LOWER('%$terms[$i]%')"))
                         ->orWhere(
                             DB::raw("LOWER(private_key)"),
+                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        ->orWhere(DB::raw("LOWER(phone_no)"),
+                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        ->orWhere(DB::raw("LOWER(bvn)"),
+                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        ->orWhere(DB::raw("LOWER(id_card_type)"),
+                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        ->orWhere(DB::raw("LOWER(id_card_no)"),
+                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        ->orWhere(DB::raw("LOWER(bank_acc_no)"),
+                            'like', DB::raw("LOWER('%$terms[$i]%')"))
+                        ->orWhere(DB::raw("LOWER(bank_acc_name)"),
                             'like', DB::raw("LOWER('%$terms[$i]%')"));
                 }
             })

@@ -1,4 +1,4 @@
-@extends('layouts.error')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.error')
 @section('title', '404 - Page not found')
 @section('content')
 
