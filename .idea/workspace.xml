@@ -33049,7 +33049,6 @@
         <option value="$PROJECT_DIR$/resources/views/site/index-2.blade.php" />
         <option value="$PROJECT_DIR$/app/User_meta.php" />
         <option value="$PROJECT_DIR$/app/Transaction.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/resources/views/admin/partials/adminaccess/seniorAdmin.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/IsVerified.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/sharePNM.blade.php" />
@@ -33097,6 +33096,7 @@
         <option value="src:table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.transactions" />
         <option value="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -33552,7 +33552,7 @@
       <workItem from="1520888914948" duration="1361000" />
       <workItem from="1520918620507" duration="10313000" />
       <workItem from="1521050960314" duration="1964000" />
-      <workItem from="1521098483163" duration="5007000" />
+      <workItem from="1521098483163" duration="5107000" />
     </task>
     <task id="LOCAL-00001" summary="Finished off with user's transactions. Now to work on Settings">
       <created>1517041967637</created>
@@ -33565,7 +33565,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="569086000" />
+    <option name="totallyTimeSpent" value="569186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="683" y="27" width="1366" height="741" extended-state="6" />
@@ -33575,7 +33575,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294509" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294509" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3810316" sideWeight="0.48786038" order="7" side_tool="false" content_ui="tabs" x="19" y="44" width="1285" height="625" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3810316" sideWeight="0.48786038" order="7" side_tool="false" content_ui="tabs" x="19" y="44" width="1285" height="625" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294509" sideWeight="0.49544764" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.2518968" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32473445" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
