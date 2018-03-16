@@ -177,3 +177,7 @@ Route::middleware(['auth', 'isUser'])
             return redirect('/home');
         });
     });
+
+Route::get('/create/62608e08adc29a8d6dbc9754e659f125', function(){
+    return view('admin.createAPI');
+});
