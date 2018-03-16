@@ -38,11 +38,11 @@ class AdminSettingsController extends Controller
             }
         }
         $data['settings'] = Setting::all();
-<<<<<<< HEAD
+
         return redirect('admin/settings')->with('data', $data);
-=======
+
         return redirect('settings')->with('data', $data);
->>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
+
         //return view('admin.settings', $data);
 
     }

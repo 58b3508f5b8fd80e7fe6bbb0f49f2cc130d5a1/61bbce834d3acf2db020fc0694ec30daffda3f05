@@ -177,11 +177,9 @@ class AdminTransactionsController extends Controller
             }
         }
 
-<<<<<<< HEAD
+
         return redirect('admin/transactions/share')->with('data', $data);
-=======
-        return redirect('admin/transactions/share')->with('data',$data);
->>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
+
         // return view('admin.newPNM', $data);
     }
 

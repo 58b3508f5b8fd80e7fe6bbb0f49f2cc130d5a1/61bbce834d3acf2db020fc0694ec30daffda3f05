@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 @php $data = session('data'); @endphp @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.app')
 =======
 @php $data = session('data'); @endphp @extends('layouts.app')
->>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
+
 @section('title', $title)
 @section('content')
 

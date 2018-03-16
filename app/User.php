@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-<<<<<<< HEAD
+
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
-=======
->>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
+
 
 class User extends Authenticatable
 {

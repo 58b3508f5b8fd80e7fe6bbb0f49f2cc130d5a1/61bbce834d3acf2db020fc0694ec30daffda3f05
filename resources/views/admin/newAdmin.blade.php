@@ -1,11 +1,11 @@
 @php
     $data = session('data');
 @endphp
-<<<<<<< HEAD
+
 @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
 =======
 @extends('layouts.admin')
->>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
+
 @section('title', 'Join')
 @section('content')
     <nav class="breadcrumb bg-white push">

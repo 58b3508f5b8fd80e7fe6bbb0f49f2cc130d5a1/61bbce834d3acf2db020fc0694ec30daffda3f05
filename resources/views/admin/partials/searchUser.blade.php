@@ -157,11 +157,11 @@
                                                 onclick="viewEditUser({{($user->id+9407)}},'{{''}}')">
                                             <i class="fa fa-pencil"></i>
                                         </button>
-<<<<<<< HEAD
+
                                         --}}{{--@if(!in_array($action,['registered','unregistered']))--}}{{----}}{{--
 =======
                                         {{--@if(!in_array($action,['registered','unregistered']))--}}{{--
->>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
+
                                         @if($user->status=='blocked' || $user->status=='pending')
                                             <button data-original-title="Delete" type="button"
                                                     class="btn btn-sm btn-alt-success"
@@ -179,13 +179,13 @@
                                                     onclick="verifyUser({{($user->id+1107)}}, 'block')">
                                                 <i class="fa fa-times"></i>
                                             </button>
-<<<<<<< HEAD
+
                                         @endif--}}{{--
                                         --}}{{--@endif--}}{{--
 =======
                                         @endif--}}
                                         {{--@endif--}}
->>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
+
                                     </div>
                                 </td>
                             @endif--}}
