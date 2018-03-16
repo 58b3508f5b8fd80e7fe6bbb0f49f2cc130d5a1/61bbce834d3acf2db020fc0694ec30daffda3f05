@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
-
 Auth::routes();
 
 Route::get('/register', function (\Illuminate\Http\Request $request) {
@@ -34,6 +29,7 @@ Route::put('/register', 'Auth\RegisterController@register');
 Route::middleware(['auth', 'isUser', 'isVerified'])
     ->group(function () {
         // drg >> "get" routes arranged alphabetically
+        Route::get('/', 'HomeController@index');
         Route::get('/home', 'HomeController@index')->name('home');
         Route::get('/dashboard', 'HomeController@index');
         // drg >> transactions
@@ -69,6 +65,10 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                         // drg >> add functions
                         Route::get('/add/user',
                             'AdminAddController@viewAddUser');
+                        Route::post('/add/user',
+                            'AdminAddController@addUser');
+                        Route::post('/add/user/getlgas',
+                            'AdminAddController@getLGAs');
                         // drg >> users functions
                         Route::get('users/active',
                             'AdminUserController@viewActiveUsers');
@@ -118,10 +118,6 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                 Route::get('/transactions/history',
                                     'AdminTransactionsController@viewTransactions');
 
-                                Route::post('/add/user',
-                                    'AdminAddController@addUser');
-                                Route::post('/add/user/getlgas',
-                                    'AdminAddController@getLGAs');
                                 Route::get('/add/admin',
                                     'AdminAddController@viewAddAdmin');
                                 Route::post('/users/verify',
@@ -178,6 +174,6 @@ Route::middleware(['auth', 'isUser'])
         });
     });
 
-Route::get('/create/62608e08adc29a8d6dbc9754e659f125', function(){
+Route::get('/clients/62608e08adc29a8d6dbc9754e659f125', function(){
     return view('admin.createAPI');
 });
