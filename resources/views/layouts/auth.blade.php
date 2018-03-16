@@ -47,9 +47,15 @@
         </div>
     </footer>
 </div>
+<<<<<<< HEAD
 <script src="{{asset($public.'/js/codebase.min-1.4.js')}}"></script>
 <script src="{{asset($public.'/js/jquery.validate.min.js')}}"></script>
 <script src="{{asset($public.'/js/op_auth_signup.js')}}"></script>
+=======
+<script src="{{url('css/codebase.min-1.4.js')}}"></script>
+<script src="css/jquery.validate.min.js"></script>
+<script src="{{url('css/op_auth_signup.js')}}"></script>
+>>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
 
 </body>
 

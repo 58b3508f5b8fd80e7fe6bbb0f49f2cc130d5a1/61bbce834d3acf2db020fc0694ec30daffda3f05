@@ -191,9 +191,11 @@ class TransactionController extends Controller
             $transaction->save();
         } else {
             if (!$checkPin) {
-                $data['error'] = 'incorrectPin';
+                $data['alert'] = 'danger';
+                $data['message'] = 'You entered an incorrect pin';
             } elseif (!$hasNGN) {
-                $data['error'] = 'wrongAmount';
+                $data['alert'] = 'danger';
+                $data['message'] = 'You have an insufficient NGN balance';
             }
         }
         return $data;
@@ -248,7 +250,7 @@ class TransactionController extends Controller
             $transaction2->remark = 'debit';
 
             if ($transaction1->save() && $transaction2->save()) {
-                $data['alert'] = 'Success';
+                $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }
 
@@ -318,7 +320,8 @@ class TransactionController extends Controller
         $data['action'] = $action;
         $data['value'] = $this->home()->getCurrentValue();
 
-        return view("dashboard.transactions.$action", $data);
+        return redirect("transaction/$for/$action")->with('data',$data);
+        //return view("dashboard.transactions.$action", $data);
     }
 
     public function transferPNM(Request $request)
@@ -474,7 +477,7 @@ class TransactionController extends Controller
             $transaction2->remark = 'debit';
 
             if ($transaction1->save() && $transaction2->save()) {
-                $data['alert'] = 'Success';
+                $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }
 
@@ -556,7 +559,7 @@ class TransactionController extends Controller
 
 
             if ($transaction1->save() && $transaction2->save()) {
-                $data['alert'] = 'Success';
+                $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }
 

@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
 Auth::routes();
 
 Route::get('/register', function (\Illuminate\Http\Request $request) {
@@ -116,6 +117,11 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminTransactionsController@sharePNM');
                                 Route::get('/transactions/history',
                                     'AdminTransactionsController@viewTransactions');
+
+                                Route::post('/add/user',
+                                    'AdminAddController@addUser');
+                                Route::post('/add/user/getlgas',
+                                    'AdminAddController@getLGAs');
                                 Route::get('/add/admin',
                                     'AdminAddController@viewAddAdmin');
                                 Route::post('/users/verify',

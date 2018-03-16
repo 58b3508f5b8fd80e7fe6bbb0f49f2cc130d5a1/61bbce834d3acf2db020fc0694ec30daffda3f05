@@ -104,7 +104,11 @@ class AdminAddController extends Controller
             $data['alert'] = 'danger';
             $data['message'] = "Sorry, the pin you entered was incorrect";
         }
+<<<<<<< HEAD
         return redirect('admin/add/pnm')->with('data', $data);
+=======
+        return redirect('admin/add/pnm')->with('data',$data);
+>>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
         // return view('admin.newPNM', $data);
     }
 
@@ -150,7 +154,11 @@ class AdminAddController extends Controller
 
         }
         $data['action'] = 'new admin';
+<<<<<<< HEAD
         return redirect('admin/add/admin')->with('data', $data);
+=======
+        return redirect('admin/add/admin')->with('data',$data);
+>>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
         // return view('admin.newAdmin', $data);
     }
 
@@ -202,7 +210,11 @@ class AdminAddController extends Controller
 
         }
         $data['action'] = 'new user';
+<<<<<<< HEAD
         return redirect('admin/add/user')->with('data', $data);
+=======
+        return redirect('admin/add/user')->with('data',$data);
+>>>>>>> 7482e2606e5a637078a50a4885642a5ae9c274bc
         //return view('admin.newUser', $data);
     }
 
