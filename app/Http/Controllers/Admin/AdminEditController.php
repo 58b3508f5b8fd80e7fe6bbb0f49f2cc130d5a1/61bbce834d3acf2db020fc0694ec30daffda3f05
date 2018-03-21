@@ -95,7 +95,6 @@ class AdminEditController extends Controller
             ->update([
                 'first_name' => $request->input('first_name'),
                 'last_name'  => $request->input('last_name'),
-                'avatar'     => $request->input('passport_location'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
         if ($isUpdated && $userTable && $userMeta->save()) {

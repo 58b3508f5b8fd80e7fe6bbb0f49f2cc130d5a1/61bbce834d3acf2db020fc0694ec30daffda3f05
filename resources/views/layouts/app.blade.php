@@ -193,8 +193,7 @@
         <div class="content py-20 font-size-xs clearfix">
             <div class="float-right">
                 <i class="fa fa-gear fa-spin text-success"></i> Designed by <a class="font-w600"
-                                                                               href="{{config('app.designerWebsite')}}"
-                                                                               target="_blank">{{config('app.designer')}}</a>
+                                                                               href="{{config('app.designerWebsite')}}"target="_blank">{{config('app.designer')}}</a>
             </div>
             <div class="float-left">
                 <a class="font-w600" href="{{url('/')}}" target="_blank"></a>{{ config('app.name') }} &copy; <span

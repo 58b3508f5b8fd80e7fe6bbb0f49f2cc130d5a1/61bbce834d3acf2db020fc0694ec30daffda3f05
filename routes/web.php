@@ -153,7 +153,6 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                             });
                     });
             });
-
         });
 
     });

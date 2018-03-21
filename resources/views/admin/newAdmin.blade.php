@@ -3,8 +3,6 @@
 @endphp
 
 @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
-=======
-@extends('layouts.admin')
 
 @section('title', 'Join')
 @section('content')
@@ -129,8 +127,10 @@
         </div>
     </div>
 @endsection
-<script>
-    @if(isset($data['message']))
-    alert('{{$data['message']}}');
-    @endif
-</script>
+@section('scripts')
+    <script>
+        @if(isset($data['message']))
+        alert('{{$data['message']}}');
+        @endif
+    </script>
+@endsection

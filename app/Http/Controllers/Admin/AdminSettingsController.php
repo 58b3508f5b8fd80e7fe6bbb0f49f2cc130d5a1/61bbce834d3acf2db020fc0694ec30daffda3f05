@@ -41,7 +41,7 @@ class AdminSettingsController extends Controller
 
         return redirect('admin/settings')->with('data', $data);
 
-        return redirect('settings')->with('data', $data);
+
 
         //return view('admin.settings', $data);
 

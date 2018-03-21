@@ -45,10 +45,11 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        if (Auth::user()->type =='admin' )
+        if (Auth::user()->type == 'admin') {
             return '/admin';
-        else
+        } else {
             return '/dashboard';
+        }
 
     }
 }

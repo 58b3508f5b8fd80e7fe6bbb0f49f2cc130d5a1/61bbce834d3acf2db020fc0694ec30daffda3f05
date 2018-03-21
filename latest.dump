@@ -1,6 +1,6 @@
 -- MySQL dump 10.16  Distrib 10.1.22-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: tlsavings
+-- Host: 127.0.0.1    Database: touchinglives
 -- ------------------------------------------------------
 -- Server version	10.1.22-MariaDB-
 
@@ -16,6 +16,64 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `centres`
+--
+
+DROP TABLE IF EXISTS `centres`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `centres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `centre_id` varchar(45) DEFAULT NULL,
+  `zone` varchar(255) DEFAULT NULL,
+  `centre` varchar(255) DEFAULT NULL,
+  `coordinator` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `centres`
+--
+
+LOCK TABLES `centres` WRITE;
+/*!40000 ALTER TABLE `centres` DISABLE KEYS */;
+INSERT INTO `centres` VALUES (1,'','Akwa Ibom state','Abak Center 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(2,'','Akwa Ibom state','Abak Center 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(3,'','Akwa Ibom state','Abak center 3',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(4,'','Akwa Ibom state','Eket center 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(5,'','Akwa Ibom state','Eket center 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(6,'','Akwa Ibom state','Essien Udim center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(7,'','Akwa Ibom state','Etinan center 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(8,'','Akwa Ibom state','Esit Eket',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(9,'','Akwa Ibom state','Ibesikpo center 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(10,'','Akwa Ibom state','Ibesikpo center 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(11,'','Akwa Ibom state','Ibeno center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(12,'','Akwa Ibom state','Ibiono center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(13,'','Akwa Ibom state','Ika center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(14,'','Akwa Ibom state','Ikono center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(15,'','Akwa Ibom state','Ikot Ekpene center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(16,'','Akwa Ibom state','Ikot Abasi center ',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(17,'','Akwa Ibom state','Ini center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(18,'','Akwa Ibom state','Itu center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(19,'','Akwa Ibom state','Nsit Atai center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(20,'','Akwa Ibom state','Nsit Ibom center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(21,'','Akwa Ibom state','Nsit Ubium Center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(22,'','Akwa Ibom state','Obot Akara Centre',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(23,'','Akwa Ibom state','Onna center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(24,'','Akwa Ibom state','Oron center 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(25,'','Akwa Ibom state','Oron center 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(26,'','Akwa Ibom state','Oron center 3',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(27,'','Akwa Ibom state','Oron center 4',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(28,'','Akwa Ibom state','Oron center 5',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(29,'','Akwa Ibom state','Oruk Anam center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(30,'','Akwa Ibom state','Uyo center 1(Abak Rd)',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(31,'','Akwa Ibom state','Uyo center 2(Nwaniba)',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(32,'','Akwa Ibom state','Uyo center 3(hospital Rd)',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(33,'','Akwa Ibom state','Uyo center 4(Anua Obio)',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(34,'','Akwa Ibom state','Uyo center 5(Ikot Okubo)',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(35,'','Akwa Ibom state','Uyo center 6(Ikot Akpanabia)',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(36,'','Akwa Ibom state','Uruan center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(37,'','Rivers state','Phalga',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(38,'','Rivers state','Obia Okpor',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(39,'','Rivers state','Rumuomasi',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(40,'','Rivers state','Elelenwo',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(41,'','Rivers state','Igbo Etche',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(42,'','Rivers state','Abuloma',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(43,'','Rivers state','Kaa',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(44,'','Rivers state','Gokana',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(45,'','Rivers state','Khana 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(46,'','Rivers state','Khana 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(47,'','Rivers state','Okirika',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(48,'','Rivers state','Boni',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(49,'','Bayelsa state','Yenegua',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(50,'','Delta state','Warri 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(51,'','Delta state','Warri 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(52,'','Delta state','Warri 3',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(53,'','Delta state','Asaba 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(54,'','Delta state','Asaba 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(55,'','Edo state','Benin ',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(56,'','Abia State','Aba',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(57,'','Abia State','Umuahia',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(58,'','Imo state','Owerri',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(59,'','Cross Rivers state','calabar 1',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(60,'','Cross Rivers state','calabar 2',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(61,'','Cross Rivers state','calabar 3',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(62,'','Cross Rivers state','calabar 4',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(63,'','Cross Rivers state','calabar 5',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(64,'','Cross Rivers state','Obudu ',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05'),(65,'','Cross Rivers state','Ikom center',NULL,'2018-03-21 05:32:05','2018-03-21 05:32:05');
+/*!40000 ALTER TABLE `centres` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `emails`
+--
+
+DROP TABLE IF EXISTS `emails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `emails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `emails`
+--
+
+LOCK TABLES `emails` WRITE;
+/*!40000 ALTER TABLE `emails` DISABLE KEYS */;
+INSERT INTO `emails` VALUES (1,'nvictor','nduvictor@gmail.com','Im in charge of covert ops','Test Particular tense','2018-03-15 20:30:28','2018-03-15 20:30:28'),(2,'nvictor','nduvictor@gmail.com','Im in charge of covert ops','Test Particular tense','2018-03-15 20:37:16','2018-03-15 20:37:16'),(3,'nvictor','nduvictor@gmail.com','Im in charge of covert ops','Test Particular tense','2018-03-15 20:39:04','2018-03-15 20:39:04');
+/*!40000 ALTER TABLE `emails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -24,10 +82,10 @@ DROP TABLE IF EXISTS `migrations`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +94,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (8,'2014_10_12_000000_create_users_table',1),(9,'2014_10_12_100000_create_password_resets_table',1),(10,'2016_06_01_000001_create_oauth_auth_codes_table',1),(11,'2016_06_01_000002_create_oauth_access_tokens_table',1),(12,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(13,'2016_06_01_000004_create_oauth_clients_table',1),(14,'2016_06_01_000005_create_oauth_personal_access_clients_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,9 +106,10 @@ DROP TABLE IF EXISTS `password_resets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -59,136 +119,50 @@ CREATE TABLE `password_resets` (
 
 LOCK TABLES `password_resets` WRITE;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
-INSERT INTO `password_resets` VALUES ('junior@tlsavings.com','$2y$10$irbCOtG.OS7h/fCIxJK.7eLJ6nRvPHTEPaW8wcdUlM9AQQbxpyERS','2018-01-30 23:00:50'),('nduovictor@gmail.com','$2y$10$YTzUM6Ezp.k0Tr2c4Ldye.OAapqP0u7VrjgxiCGQp4id1RRvXTso2','2018-01-31 13:26:53');
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `settings`
+-- Table structure for table `registrations`
 --
 
-DROP TABLE IF EXISTS `settings`;
+DROP TABLE IF EXISTS `registrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `settings` (
+CREATE TABLE `registrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `settings`
---
-
-LOCK TABLES `settings` WRITE;
-/*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'current_pnm_value','Current PNM Value','1000','This is the equivalent of one PNM in NGN','2018-01-19 11:14:32','2018-02-05 05:35:34'),(2,'check_profit_start','Check Profit Start','2018-01-24 07:56:19','Date to start commision check','2018-01-24 07:55:18','2018-02-05 05:35:34'),(3,'ngn_withdrawal_charge','Withdrawal Charge','300','This is the charge for each withdrawal','2018-01-24 07:55:18','2018-02-05 05:35:34'),(4,'ngn_conversion_charge','NGN Conversion Charge','200','This is the charge for each NGN conversion to PNM','2018-01-24 07:58:11','2018-02-05 05:35:34'),(5,'check_shared_start','Check Shared Start','2018-01-24 07:56:19','Date to start shared PNM check','2018-01-24 08:36:41','2018-02-05 05:35:34'),(6,'ngn_withdrawal_limit','NGN Withdrawal Limit','50000','This is the ngn withdrawal limit per transaction ','2018-01-24 12:51:03','2018-02-05 05:35:34'),(7,'pnm_withdrawal_charge','Charge for PNM Withdrawals','0.5','This is the charge for PNM withdrawals','2018-01-26 10:23:45','2018-02-05 05:35:34'),(8,'pnm_transfer_charge','Charge for PNM Transfer','1','This is the charge for each PNM transfer','2018-01-27 07:36:03','2018-02-05 05:35:34'),(9,'pnm_conversion_charge','PNM Conversion Charge','1','This is the charge for each NGN conversion to PNM','2018-01-24 07:58:11','2018-02-05 05:35:34'),(10,'ngn_withdrawal_duration','NGN Withdrawal Duration','3-4 Working Days','This is the durations required for NGN withdrawal processing','2018-02-03 21:29:14','2018-02-05 05:35:34'),(11,'pnm_withdrawal_limit','PNM Withdrawal Limit','40','This is the PNM withdrawal limit per transaction ','2018-01-24 12:51:03','2018-02-05 05:35:34'),(12,'pnm_withdrawal_duration','PNM Withdrawal Duration','3-4 Working Days','This is the durations required for PNM withdrawal processing','2018-02-03 21:29:14','2018-02-05 05:35:34'),(13,'pnm_daily_withdrawal_limit','PNM Daily Withdrawal Limit','3','Sets the limit of daily PNM withdrawals','2018-02-05 02:46:00','2018-02-05 05:35:34'),(14,'ngn_daily_withdrawal_limit','NGN Daily Withdrawal Limit','3','Sets the limit of daily NGN withdrawals','2018-02-05 02:46:00','2018-02-05 05:35:34'),(15,'pnm_transfer_limit','PNM Transfer Limit','10','Sets the PNM transfer limit','2018-02-05 03:08:03','2018-02-05 05:35:34'),(16,'pnm_conversion_limit','PNM Conversion Limit','10','Sets the PNM conversion limit','2018-02-05 03:08:03','2018-02-05 05:35:34');
-/*!40000 ALTER TABLE `settings` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `transactions`
---
-
-DROP TABLE IF EXISTS `transactions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `transactions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `transaction_id` varchar(32) NOT NULL,
-  `from` varchar(45) NOT NULL,
-  `to` varchar(45) NOT NULL,
-  `amount` float NOT NULL DEFAULT '0',
-  `value` float DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
-  `status` enum('pending','requested','successful','failed') NOT NULL DEFAULT 'pending',
-  `remark` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `transactions`
---
-
-LOCK TABLES `transactions` WRITE;
-/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_metas`
---
-
-DROP TABLE IF EXISTS `user_metas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_metas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wallet_id` varchar(255) NOT NULL,
+  `reg_id` varchar(255) NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `other_name` varchar(255) DEFAULT NULL,
-  `wallet_address` varchar(40) NOT NULL,
-  `private_key` varchar(64) NOT NULL,
-  `account_number` varchar(185) NOT NULL,
-  `residential_address` text,
-  `dob` date DEFAULT NULL,
-  `marital_status` enum('single','married','divorced') DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `dob` datetime DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
   `gender` enum('male','female') DEFAULT NULL,
-  `contact_address` text,
-  `phone_no` varchar(45) DEFAULT NULL,
+  `phone_no` varchar(255) DEFAULT NULL,
   `nationality` varchar(255) DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
-  `lga` varchar(255) DEFAULT NULL,
-  `id_card_type` varchar(255) DEFAULT NULL,
-  `id_card_no` varchar(255) DEFAULT NULL,
-  `bvn` varchar(255) DEFAULT NULL,
-  `occupation` varchar(255) DEFAULT NULL,
-  `bank_name` varchar(255) DEFAULT NULL,
-  `bank_acc_no` varchar(255) DEFAULT NULL,
-  `bank_acc_name` varchar(255) DEFAULT NULL,
-  `form_location` varchar(255) DEFAULT NULL,
-  `signature_location` varchar(255) DEFAULT NULL,
-  `utility_bill_location` varchar(255) DEFAULT NULL,
-  `idcard_location` varchar(255) DEFAULT NULL,
-  `passport_location` varchar(255) DEFAULT NULL,
-  `nok_contact_address` varchar(255) DEFAULT NULL,
-  `nok_email` varchar(255) DEFAULT NULL,
-  `nok_gender` enum('male','female') DEFAULT NULL,
-  `nok_dob` date DEFAULT NULL,
-  `nok_phone_no` varchar(255) DEFAULT NULL,
-  `nok_relationship` varchar(255) DEFAULT NULL,
-  `next_of_kin` varchar(255) DEFAULT NULL,
-  `spouse_name` varchar(255) DEFAULT NULL,
-  `mother_maiden_name` varchar(255) DEFAULT NULL,
-  `office_phone_no` varchar(255) DEFAULT NULL,
-  `landmark` varchar(255) DEFAULT NULL,
-  `status` enum('registered','unregistered','pending') NOT NULL DEFAULT 'pending',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `state_origin` varchar(255) DEFAULT NULL,
+  `lga_origin` varchar(255) DEFAULT NULL,
+  `village` varchar(255) DEFAULT NULL,
+  `programme` varchar(255) DEFAULT NULL,
+  `zone` varchar(255) DEFAULT NULL,
+  `centre` varchar(255) DEFAULT NULL,
+  `status` enum('pending','registered','canceled') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_metas_private_key_uindex` (`private_key`),
-  UNIQUE KEY `user_metas_account_number_uindex` (`account_number`),
-  UNIQUE KEY `user_metas_wallet_address_uindex` (`wallet_address`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `registrations_reg_id_uindex` (`reg_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_metas`
+-- Dumping data for table `registrations`
 --
 
-LOCK TABLES `user_metas` WRITE;
-/*!40000 ALTER TABLE `user_metas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_metas` ENABLE KEYS */;
+LOCK TABLES `registrations` WRITE;
+/*!40000 ALTER TABLE `registrations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -200,31 +174,20 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `name` varchar(185) NOT NULL,
-  `email` varchar(185) NOT NULL,
-  `wallet_id` varchar(40) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `pin` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT 'tlssavings/public/images/default-user.png',
-  `account_number` varchar(45) NOT NULL,
-  `wallet_address` varchar(45) NOT NULL,
-  `private_key` varchar(45) NOT NULL,
-  `type` enum('user','admin') NOT NULL DEFAULT 'user',
-  `access_level` enum('5','4','3','2','1') NOT NULL DEFAULT '1',
-  `status` enum('active','pending','blocked') DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `access_level` enum('1','2','3','4') COLLATE utf8mb4_unicode_ci DEFAULT '1',
+  `status` enum('pending','active','blocked') COLLATE utf8mb4_unicode_ci DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_private_key_uindex` (`private_key`),
-  UNIQUE KEY `users_account_number_uindex` (`account_number`),
-  UNIQUE KEY `users_name_uindex` (`name`),
-  UNIQUE KEY `users_email_uindex` (`email`),
-  UNIQUE KEY `users_wallet_id_uindex` (`wallet_id`),
-  UNIQUE KEY `users_wallet_address_uindex` (`wallet_address`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +196,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'Super','Admin','super','admin@tlsavings.com','78278190','$2y$10$P/R4IT5G/Oi1Oh2cAYNYaeJdHKqKVQbZuNyj218vNo2oZElsqUY0i','$2y$10$vn2VXuZNEYDHocJgMZJPVOL0STFoVfdkLxXTg1WlUqfffaFzslAbi','4CfPc96iEwfRIm7o0OmgwTmQJpMojjqKPzlf7iowL2dkCoxvtX0dcTW6QQK1','tlssavings/public/images/default-user.png','0000000000','3293489208','124354542','admin','4','active','2018-01-21 10:57:29','2018-02-02 06:50:42');
+INSERT INTO `users` VALUES (1,'Super','Admin','super','admin@touchinglivesskills.com','$2y$10$mJwt8KQMfv6tXN27W/5eG.QGDyv0AayEvDQUmM0F6.vZKg16OYOW2',NULL,'admin','4','active','2018-03-21 10:10:47','2018-03-21 10:08:09');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -246,4 +209,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-05  8:00:51
+-- Dump completed on 2018-03-21 12:43:37

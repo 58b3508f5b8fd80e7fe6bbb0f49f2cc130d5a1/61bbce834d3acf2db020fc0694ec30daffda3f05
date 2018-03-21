@@ -186,7 +186,7 @@
                                         @endif--}}
                                         {{--@endif--}}
 
-                                    </div>
+                                    {{--</div>
                                 </td>
                             @endif--}}
                         </tr>
