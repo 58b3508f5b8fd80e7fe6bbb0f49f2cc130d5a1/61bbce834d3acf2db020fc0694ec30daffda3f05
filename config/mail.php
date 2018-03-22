@@ -25,7 +25,7 @@ return [ /*
          |
          */
 
-         'host' => env ( 'MAIL_HOST', 'smtp.sendgrid.net' ),
+         'host' => env ( 'MAIL_HOST', 'mx1.hostinger.com' ),
 
          /*
          |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [ /*
          */
 
          'from' => [ 'address' => env ( 'MAIL_FROM_ADDRESS', 'greenwhitedev@gmail.com' ), 'name' => env (
-             'MAIL_FROM_NAME', 'noreply@tlssavings.com' ) ],
+             'MAIL_FROM_NAME', 'no-reply@tlsavings.xyz' ) ],
 
          /*
          |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [ /*
          |
          */
 
-         'username' => env('MAIL_USERNAME','app86844026@heroku.com'),
+         'username' => env('MAIL_USERNAME','no-reply@tlsavings.xyz'),
 
          /*
          |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [ /*
          |
          */
 
-         'password' =>  env('MAIL_PASSWORD','m2etw4qn2061'),
+         'password' =>  env('MAIL_PASSWORD',';:oggYrp/4O3nLHF;['),
 
          /*
          |--------------------------------------------------------------------------
