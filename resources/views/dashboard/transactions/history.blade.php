@@ -1,7 +1,5 @@
 
 @php $data = session('data'); @endphp @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.app')
-=======
-@php $data = session('data'); @endphp @extends('layouts.app')
 
 @section('title', 'Transactions History')
 @section('content')

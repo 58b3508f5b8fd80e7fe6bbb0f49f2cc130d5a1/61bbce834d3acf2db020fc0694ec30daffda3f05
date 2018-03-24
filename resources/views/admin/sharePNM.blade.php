@@ -3,8 +3,7 @@ $data = session('data');
 @endphp
 
 @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
-=======
-@extends('layouts.admin')
+
 
 @section('title', title_case($action))
 @section('content')

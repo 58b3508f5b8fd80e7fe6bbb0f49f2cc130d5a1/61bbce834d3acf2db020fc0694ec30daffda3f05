@@ -3,8 +3,6 @@
 @endphp
 
 @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.app')
-=======
-@extends('layouts.app')
 
 @section('title', 'Settings')
 @section('content')
