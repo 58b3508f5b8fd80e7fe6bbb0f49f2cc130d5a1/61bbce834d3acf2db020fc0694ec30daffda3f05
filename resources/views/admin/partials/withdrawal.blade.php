@@ -46,9 +46,9 @@
                         <a href="javascript:void (0)">{{$withdrawal->transaction_id}}</a>
                     </td>
                     @if($action == 'pnm')
-                        <td>{{$withdrawal->amount/100}}</td>
+                        <td>{{$withdrawal->amount/100000}}</td>
                     @elseif($action == 'ngn')
-                        <td>{{$withdrawal->amount/100 * $withdrawal->value}}</td>
+                        <td>{{$withdrawal->amount/100000 * $withdrawal->value}}</td>
                     @endif
                     <td>{{$withdrawal->from}}</td>
                     <td>{{$withdrawal->to}}</td>

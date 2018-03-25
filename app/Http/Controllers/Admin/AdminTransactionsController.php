@@ -151,7 +151,7 @@ class AdminTransactionsController extends Controller
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->wallet_id;
             $transaction->to = $wallet;
-            $transaction->amount = $pnm*100;
+            $transaction->amount = $pnm*100000;
             $transaction->value = $value;
             $transaction->description = $description;
             $transaction->type = $type;

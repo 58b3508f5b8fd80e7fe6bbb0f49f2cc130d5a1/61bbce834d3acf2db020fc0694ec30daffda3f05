@@ -315,7 +315,7 @@
     </column>
     <column id="86" parent="21" name="amount">
       <Position>5</Position>
-      <DataType>float|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>

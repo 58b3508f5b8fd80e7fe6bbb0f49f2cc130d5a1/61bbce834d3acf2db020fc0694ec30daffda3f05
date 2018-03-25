@@ -179,11 +179,11 @@
                 NGN</span>
         </button>
         <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-            <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM']/100}}
+            <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM']/100000}}
                 PNM</span>
         </button>
         <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
-            &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM']/100 * $data['currentValue']}}
+            &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM']/100000 * $data['currentValue']}}
                 NGN</span>
         </button>
         </div>

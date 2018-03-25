@@ -37,15 +37,23 @@
                         <tbody>
                         @php $i=1; @endphp
                         @foreach($transactions as $transaction)
+                            @php
+                                if($transaction->status=='successful')
+                                    $status ='success';
+                                elseif($transaction->status=='failed')
+                                    $status ='danger';
+                                else
+                                    $status ='warning';
+                            @endphp
                             <tr>
                                 <td>{{$i}}</td>
                                 <td><a href="{{url('transaction/'.$transaction->transaction_id)}}">{{$transaction->transaction_id}}</a></td>
-                                <td>{{$transaction->amount/100}}</td>
-                                <td>{{$transaction->amount/100 * $value}}</td>
+                                <td>{{$transaction->amount/100000}}</td>
+                                <td>{{$transaction->amount/100000 * $value}}</td>
                                 <td>{{$transaction->from}}</td>
                                 <td>{{$transaction->to}}</td>
                                 <td>{{$transaction->type}}</td>
-                                <td>{{$transaction->status}}</td>
+                                <td><span class="badge badge-sm badge-{{$status}}">{{$transaction->status}}</span></td>
                                 <td>{{date('d-m-Y',strtotime($transaction->created_at))}}</td>
                             </tr>
                             @php $i++; @endphp
