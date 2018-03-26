@@ -78,7 +78,7 @@ return [ /*
          |
          */
 
-         'username' => env('MAIL_USERNAME','no-reply@tlsavings.xyz'),
+         'username' => env('MAIL_USERNAME','noreply@tlsavings.xyz'),
 
          /*
          |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [ /*
          |
          */
 
-         'password' =>  env('MAIL_PASSWORD',';:oggYrp/4O3nLHF;['),
+         'password' =>  env('MAIL_PASSWORD','mIhD>lR;p#3Ofx9gr;'),
 
          /*
          |--------------------------------------------------------------------------
