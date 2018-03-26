@@ -25,6 +25,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="{{asset($public.'/png/favicon-192x192.png')}}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset($public.'/png/apple-touch-icon-180x180.png')}}">
     <link rel="stylesheet" id="css-main" href="{{asset($public.'/css/tlsavings.min.css')}}">
+    <link rel="stylesheet" id="css-main" href="{{asset($public.'/js/datatables.min.css')}}">
 </head>
 <body>
 <div id="page-container" class="sidebar-o side-scroll page-header-modern main-content-boxed">
@@ -205,6 +206,12 @@
 <script src="{{asset($public.'/js/codebase.min-1.4.js')}}"></script>
 <script src="{{asset($public.'/js/chart.bundle.min.js')}}"></script>
 <script src="{{asset($public.'/js/be_pages_dashboard.js')}}"></script>
+<script src="{{asset($public.'/js/datatables.min.js')}}"></script>
+<script>
+    $(document).ready( function () {
+        $('#general-table').DataTable();
+    } );
+</script>
 <script>
     function copyToClipboard(element) {
         var $temp = $("<input>");

@@ -6,7 +6,7 @@
 <div class="block-content">
     @if(isset($users) && sizeof($users)>0)
         <div class="table-responsive">
-            <table class="table table-striped table-vcenter">
+            <table id="general-table" class="table table-striped table-vcenter">
                 <thead>
                 <tr>
                     <th
@@ -30,13 +30,23 @@
                 @endphp
                 @foreach($users as $user)
                     @php
+                        if($action=='registered' || $action=='unregistered'){
+                            $wallet1 = substr($user->wallet_address,0,6 );
+                            $wallet2 = substr($user->wallet_address,-6);
+                            $private1 = substr($user->private_key,0,6 );
+                            $private2 = substr($user->private_key,-6);
+                        }
+                        else{
+                            $wallet1 = substr($user->wallet_id,0,6 );
+                            $wallet2 = substr($user->wallet_id,-6);
+                        }
                         $i++;
-                     if($user->status=='pending'||$user->status =='unregistered')
-                        $badge ="badge-warning";
-                    elseif ($user->status=='active'||$user->status =='registered')
-                        $badge ="badge-success";
-                    elseif ($user->status=='blocked')
-                        $badge ="badge-danger";
+                        if($user->status=='pending'||$user->status =='unregistered')
+                            $badge ="badge-warning";
+                        elseif ($user->status=='active'||$user->status =='registered')
+                            $badge ="badge-success";
+                        elseif ($user->status=='blocked')
+                            $badge ="badge-danger";
                     @endphp
                     <tr>
                         <td>{{$i}}</td>
@@ -44,18 +54,38 @@
                         </td>
                         @if($action=='registered' || $action=='unregistered')
                             <td>
-                                <a href="javascript:void(0)">{{$user->wallet_address}}</a>
+                                <a href="javascript:void(0)">
+                                    @if (strlen($user->wallet_address) > 15)
+                                        {{"$wallet1......$wallet2"}}
+                                    @else
+                                        {{$user->wallet_address}}
+                                    @endif
+                                </a>
                             </td>
                             <td>
                                 <a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip"
                                    data-original-title="Click me to Copy" title="Click me to copy"
-                                   onclick="copyToClipboard('#wallet{{$i}}')"><span id="wallet{{$i}}">{{$user->private_key}}</span></a>
+                                   onclick="copyToClipboard('#wallet{{$i}}')">
+                                        @if (strlen($user->wallet_id) > 15)
+                                            {{"$private1......$private2"}}
+                                            <span id="wallet{{$i}}" style="display:none;">{{$user->private_key}}</span>
+                                        @else
+                                            <span id="wallet{{$i}}">{{$user->private_key}}</span>
+                                        @endif
+                                    </a>
                             </td>
                         @else
                             <td><a href="javascript:void(0)">{{$user->name}}</a></td>
                             <td><a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip"
                                    data-original-title="Click me to Copy" title="Click me to copy"
-                                   onclick="copyToClipboard('#wallet{{$i}}')"><span id="wallet{{$i}}">{{$user->wallet_id}}</span>   </a>
+                                   onclick="copyToClipboard('#wallet{{$i}}')">
+                                        @if (strlen($user->wallet_id) > 15)
+                                            {{"$wallet1......$wallet2"}}
+                                            <span id="wallet{{$i}}" style="display:none;">{{$user->wallet_id}}</span>
+                                        @else
+                                            <span id="wallet{{$i}}">{{$user->wallet_id}}</span>
+                                        @endif
+                                    </a>
                             </td>
                         @endif
                         <td>@if($type=='admin') {{ $user->access_level }} @else {{$user->account_number}} @endif</td>
@@ -73,7 +103,7 @@
                                                 onclick="viewEditUser({{($user->id+9407)}},'{{$type}}')">
                                             <i class="fa fa-pencil"></i>
                                         </button>
-                                    @if($user->status=='blocked' || $user->status=='pending')
+                                        @if($user->status=='blocked' || $user->status=='pending')
                                             <button data-original-title="Delete" type="button"
                                                     class="btn btn-sm btn-alt-success"
                                                     data-toggle="tooltip"

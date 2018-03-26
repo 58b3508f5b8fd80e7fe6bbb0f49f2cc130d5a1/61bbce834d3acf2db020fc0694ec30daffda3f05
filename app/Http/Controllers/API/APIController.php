@@ -12,31 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class APIController extends Controller
 {
-    //
-    public function login(Request $request)
-    {
-        try {
-            if (Auth::attempt([
-                'email'    => $request->get('email'),
-                'password' => $request->get('password')
-            ])
-            ) {
-                $user = Auth::user();
-                $success['token'] = $user->createToken('MyApp')->accessToken;
-                return response()->json(['success' => $success],
-                    200);
-            } else {
-                return response()->json([
-                    'error'    => 'Unauthorisable',
-                    'email'    => $request->get('email'),
-                    'password' => $request->get('password')
-                ], 401);
-            }
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 403);
-        }
-    }
-
     public function charge()
     {
         try {
@@ -47,11 +22,15 @@ class APIController extends Controller
         }
     }
 
-    public function confirm(){
+    public function confirm()
+    {
         return response()->json([
-            'user'=>Auth::user(),
-            'amount'=>Setting::where('name', 'registration_charge')
-            ->value('value')
+            'user'   => Auth::user(),
+            'amount' => Setting::where('name', 'registration_charge')
+                ->value('value'),
+            'pnm'    => Setting::where('name',
+                'current_pnm_value')
+                ->value('value'),
         ], 200);
     }
 
@@ -60,6 +39,4 @@ class APIController extends Controller
         $value = Setting::where('name', 'current_pnm_value')->value('value');
         return $value;
     }
-
-
 }

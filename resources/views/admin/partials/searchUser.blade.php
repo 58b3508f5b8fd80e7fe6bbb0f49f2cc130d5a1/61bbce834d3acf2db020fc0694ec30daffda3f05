@@ -8,7 +8,7 @@
         </div>
         <div class="block-content">
             <div class="table-responsive">
-                <table class="table table-striped table-vcenter">
+                <table id="general-table" class="table table-striped table-vcenter">
                     <thead>
                     <tr>
                         <th>S/No.</th>
@@ -99,7 +99,7 @@
         </div>
         <div class="block-content">
             <div class="table-responsive">
-                <table class="table table-striped table-vcenter">
+                <table id="general-table" class="table table-striped table-vcenter">
                     <thead>
                     <tr>
                         <th>S/No.</th>

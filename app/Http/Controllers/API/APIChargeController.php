@@ -47,7 +47,8 @@ class APIChargeController extends Controller
             $hasPNM = $this->checkPNM($pnm);
 
             if ($hasPNM) {
-                $description1 = "Payment for Touching Lives Skills registration";
+                $description1
+                    = "Payment for Touching Lives Skills registration";
                 $type1 = "wallet-holding";
 
                 $transaction1 = new Transaction();
@@ -58,7 +59,7 @@ class APIChargeController extends Controller
                 $transaction1->transaction_id = $transactionID;
                 $transaction1->from = Auth::user()->wallet_id;
                 $transaction1->to = Auth::user()->wallet_address;
-                $transaction1->amount = $pnm*100000;
+                $transaction1->amount = $pnm * 100000;
                 $transaction1->value = $value;
                 $transaction1->description = $description1;
                 $transaction1->type = $type1;
@@ -80,11 +81,14 @@ class APIChargeController extends Controller
 
 
             return response()->json([
-                'status'          => $status,
-                'data'            => $data,
-                'user'            => Auth::user(),
-                'amount'          => Setting::where('name',
+                'status'         => $status,
+                'data'           => $data,
+                'user'           => Auth::user(),
+                'amount'         => Setting::where('name',
                     'registration_charge')
+                    ->value('value'),
+                'pnm'            => Setting::where('name',
+                    'current_pnm_value')
                     ->value('value'),
                 'transaction_id' => $transactionID,
             ], 200);
@@ -93,27 +97,26 @@ class APIChargeController extends Controller
         }
 
 
-}
+    }
 
-public function getTotalPNM()
-{
-    $credit = Transaction::where('to', Auth::user()->wallet_id)
-        ->where('status', 'successful')
-        ->sum('amount');
-    $debit = Transaction::where('from', Auth::user()->wallet_id)
-        ->where('remark', 'debit')->where(function ($query) {
-            $query->where('status', 'successful')
-                ->orWhere('status', 'requested');
-        })
-        ->sum('amount');
-    $total = $credit - $debit;
-    return $total;
-}
+    public function getTotalPNM()
+    {
+        $credit = Transaction::where('to', Auth::user()->wallet_id)
+            ->where('status', 'successful')
+            ->sum('amount');
+        $debit = Transaction::where('from', Auth::user()->wallet_id)
+            ->where('remark', 'debit')->where(function ($query) {
+                $query->where('status', 'successful')
+                    ->orWhere('status', 'requested');
+            })
+            ->sum('amount');
+        $total = $credit - $debit;
+        return $total;
+    }
 
-public
-function getTransactions()
-{
-    return response()->json(['error' => 'wow']);
-    //Transaction::where('from', Auth::user()->wallet_id)->get();
-}
+    public function getTransactions()
+    {
+        return response()->json(['error' => 'wow']);
+        //Transaction::where('from', Auth::user()->wallet_id)->get();
+    }
 }
