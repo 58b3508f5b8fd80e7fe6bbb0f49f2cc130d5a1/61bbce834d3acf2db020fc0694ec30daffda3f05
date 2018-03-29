@@ -15,7 +15,6 @@ class AdminEditController extends Controller
     //
     public function editAdmin(Request $request)
     {
-        $details = $request->all();
         $for = $request->input('for');
         $id = $request->input('id');
         $admin = User::find($id - 1427);

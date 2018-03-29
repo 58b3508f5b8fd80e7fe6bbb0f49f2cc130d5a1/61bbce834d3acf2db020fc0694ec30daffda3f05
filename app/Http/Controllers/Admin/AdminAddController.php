@@ -124,7 +124,7 @@ class AdminAddController extends Controller
             $isAcc = User::where('account_number', $acc_no)->first();
         }
 
-        if (Auth::user()->access_level <= $level + 1) {
+        if (Auth::user()->access_level >= $level + 1) {
             $admin = User::create([
                 'first_name'     => $details['first_name'],
                 'last_name'      => $details['last_name'],

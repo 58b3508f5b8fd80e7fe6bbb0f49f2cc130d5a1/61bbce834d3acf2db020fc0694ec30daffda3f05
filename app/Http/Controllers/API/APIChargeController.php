@@ -58,7 +58,7 @@ class APIChargeController extends Controller
 
                 $transaction1->transaction_id = $transactionID;
                 $transaction1->from = Auth::user()->wallet_id;
-                $transaction1->to = Auth::user()->wallet_address;
+                $transaction1->to = 'holding';
                 $transaction1->amount = $pnm * 100000;
                 $transaction1->value = $value;
                 $transaction1->description = $description1;
