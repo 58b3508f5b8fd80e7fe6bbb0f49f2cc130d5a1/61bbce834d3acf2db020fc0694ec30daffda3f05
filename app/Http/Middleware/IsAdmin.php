@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Admin\AdminController;
 use Closure;
 use Illuminate\Http\Response;
 
@@ -23,6 +24,18 @@ class IsAdmin
             return new Response (view('errors.600'));
         }
 
+        $data['totalPNM'] = $this->admin()->getTotalPNM();
+        $data['totalReserveValue'] = $this->admin()->getTotalReserveValue();
+        //$data['transactionCommission'] = $this->admin()->getTransactionCommission();
+        $data['currentValue'] = $this->admin()->getCurrentValue();
+        //$data['sharedPNM'] = $this->admin()->getSharedPNM();
+
+        $request->session()->flash('stats', $data);
+
         return $next ($request);
+    }
+    
+    public function admin(){
+        return new AdminController();
     }
 }

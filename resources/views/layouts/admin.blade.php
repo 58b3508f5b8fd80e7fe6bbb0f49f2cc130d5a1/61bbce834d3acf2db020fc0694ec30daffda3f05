@@ -1,3 +1,6 @@
+@php
+    $data= session('stats');
+@endphp
 @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp <!doctype html>
 <!--[if lte IE 9]>
 <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
@@ -146,7 +149,8 @@
                         <i class="fa fa-times"></i>
                         </button>
                         </span>
-                        <input class="form-control" placeholder="Enter your search query or hit ESC.." id="page-header-search-input"
+                        <input class="form-control" placeholder="Enter your search query or hit ESC.."
+                               id="page-header-search-input"
                                name="search" type="text" value="{{$query or null}}" required>
                         {{--<select class="form-control col-md-3 col-sm-4" id="page-header-search-type"
                                 name="type" title="Select type">
@@ -165,6 +169,26 @@
 
     </header>
     <main id="main-container">
+        <div class="btn-group-justified text-center bg-body-light">
+            <button type="button" class="btn btn-dual-secondary text-muted js-tooltip-enabled" data-toggle="tooltip"
+                    data-original-title="Click me to Copy" title="Click me to copy"
+                    onclick="copyToClipboard('#wallet')">
+                <i class="fa fa-user"></i> Wallet ID: <span class="text-primary"
+                                                            id="wallet">{{Auth::user()->wallet_id}}</span>
+            </button>
+            <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+                <i class="fa fa-line-chart"></i> Value per PNM: <span class="text-danger">{{$data['currentValue'] or 0}}
+                    NGN</span>
+            </button>
+            <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+                <i class="si si-fire"></i> Total PNM: <span class="text-success">{{$data['totalPNM']/100000}}
+                    PNM</span>
+            </button>
+            <button type="button" class="btn btn-dual-secondary text-muted" data-toggle="layout">
+                &#8358; NGN Value: <span class="text-corporate">{{$data['totalPNM']/100000 * $data['currentValue']}}
+                    NGN</span>
+            </button>
+        </div>
         @yield('content')
     </main>
     <footer id="page-footer" class="opacity-0">
@@ -187,9 +211,9 @@
 <script src="{{asset($public.'/js/be_pages_dashboard.js')}}"></script>
 <script src="{{asset($public.'/js/datatables.min.js')}}"></script>
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#general-table').DataTable();
-    } );
+    });
 </script>
 <script>
     function copyToClipboard(element) {

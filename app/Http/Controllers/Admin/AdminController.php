@@ -13,9 +13,11 @@ class AdminController extends Controller
     //
     public function index()
     {
+        $data['totalPNM'] = $this->getTotalPNM();
         $data['totalReserve'] = $this->getTotalReserve();
         $data['totalReserveValue'] = $this->getTotalReserveValue();
         $data['transactionCommission'] = $this->getTransactionCommission();
+        $data['currentValue'] = $this->getCurrentValue();
         $data['sharedPNM'] = $this->getSharedPNM();
         return view('admin.index', $data);
     }
@@ -40,15 +42,22 @@ class AdminController extends Controller
 
     public function getTotalReserve()
     {
-        $transactionCommission = $this->getTransactionCommission();
-        $addedPNM = Transaction::where('from', Auth::user()->name)
+        //$transactionCommission = $this->getTransactionCommission();
+        /*$addedPNM = Transaction::where('from', Auth::user()->name)
             ->where('to', Auth::user()->wallet_id)
             ->where('type', 'admin-holding')->where('remark', 'credit')
             ->where('status', 'successful')
+            ->sum('amount');*/
+        //$sharedPNM = $this->getSharedPNM();
+        /*$credit = $addedPNM;// $transactionCommission + $addedPNM;
+        $reserve = $credit - $sharedPNM;*/
+        $credit = Transaction::where('to', Auth::user()->wallet_id)
+            ->where('status', 'successful')
             ->sum('amount');
-        $sharedPNM = $this->getSharedPNM();
-        $credit = $transactionCommission + $addedPNM;
-        $reserve = $credit - $sharedPNM;
+        $debit = Transaction::where('from', Auth::user()->wallet_id)
+            ->where('status', 'successful')
+            ->sum('amount');
+        $reserve = $credit - $debit;
         return $reserve;
     }
 
@@ -59,6 +68,18 @@ class AdminController extends Controller
             ->where('type', 'holding-pnm')->where('status', 'successful')
             ->sum('amount');
         return $pnm;
+    }
+
+    public function getTotalPNM()
+    {
+        $credit = Transaction::where('to', Auth::user()->wallet_id)
+            ->where('status', 'successful')
+            ->sum('amount');
+        $debit = Transaction::where('from', Auth::user()->wallet_id)
+            ->where('status', 'successful')
+            ->sum('amount');
+        $total = $credit - $debit;
+        return $total;
     }
 
     public function getTransactionCommission()

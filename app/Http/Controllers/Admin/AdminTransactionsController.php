@@ -19,6 +19,39 @@ class AdminTransactionsController extends Controller
         return new AdminController();
     }
 
+    public function verifyTransaction(Request $request)
+    {
+        $id = $request->input('id');
+        $action = $request->input('action');
+        $transaction = Transaction::find($id - 1127);
+        $message = '';
+
+        switch ($action) {
+            case('approve'):
+                $transaction->status = 'successful';
+                $message
+                    = 'Transaction has been approved successfully.';
+                break;
+            case('revoke'):
+                $transaction->status = 'failed';
+                $message = 'The transaction has been revoked';
+                break;
+        }
+
+        if ($transaction->save()) {
+            $search = new AdminSearchController;
+            $data = $search->search($request);
+            $html = View::make('admin.partials.search', $data);
+            $html = $html->render();
+
+            return response()->json([
+                'status'  => 'success',
+                'message' => $message,
+                'html'    => $html
+            ]);
+        }
+    }
+
     public function verifyWithdrawal(Request $request)
     {
         $id = $request->input('id');
@@ -151,7 +184,7 @@ class AdminTransactionsController extends Controller
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->wallet_id;
             $transaction->to = $wallet;
-            $transaction->amount = $pnm*100000;
+            $transaction->amount = $pnm * 100000;
             $transaction->value = $value;
             $transaction->description = $description;
             $transaction->type = $type;

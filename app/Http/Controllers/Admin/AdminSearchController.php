@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Setting;
 use App\User_meta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminSearchController extends Controller
@@ -12,26 +14,25 @@ class AdminSearchController extends Controller
     //
     public function index(Request $request)
     {
-        $data['results'] = $this->search($request);
+        $data = $this->search($request);
         $data['query'] = $request->input('search');
-        return view('admin.searchUsers', $data);
+        return view('admin.search', $data);
     }
 
     public function search(Request $request)
     {
         $data = null;
         $query = $request->input('search');
-        $type = $request->input('type', 'users');
+
         $terms = preg_split('/[\s,;:]+/', $query);
         $terms = array_filter($terms);
-        switch ($type) {
-            case('users'):
-                $data = $this->users($terms);
-                break;
-            case('transactions'):
-                $data = $this->transactions($terms);
-                break;
-        }
+
+        $data['users'] = $this->users($terms);
+
+        $data['transactions'] = $this->transactions($terms);
+
+        $data['value'] = Setting::where('name', 'current_pnm_value')
+            ->value('value');
         return $data;
     }
 
@@ -98,7 +99,7 @@ class AdminSearchController extends Controller
                             'like', DB::raw("LOWER('%$terms[$i]%')"));
                 }
             })
-            ->orderBy('first_name')
+            ->orderBy('updated_at')
             ->where('status', 'unregistered')
             ->get();
         return $users;
@@ -106,37 +107,18 @@ class AdminSearchController extends Controller
 
     public function transactions($terms)
     {
-        $userMetas = DB::table('users')->where(
+
+        $userMetas = DB::table('transactions')->where(
             function ($query) use ($terms) {
                 for ($i = 0; $i < count($terms); $i++) {
-
-                    $query->where('student_reg_no', 'like',
-                        "%$terms[$i]%")
-                        ->orWhere(DB::raw("LOWER(first_name)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(DB::raw("LOWER(last_name)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(name)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(email)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(wallet_id)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(account_number)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(wallet_address)"),
-                            'like', DB::raw("LOWER('%$terms[$i]%')"))
-                        ->orWhere(
-                            DB::raw("LOWER(private_key)"),
+                    $query->orWhere(DB::raw("LOWER(transaction_id)"),
+                        'like',
+                        DB::raw("LOWER('%$terms[$i]%')"))
+                        ->orWhere(DB::raw("LOWER(type)"),
                             'like', DB::raw("LOWER('%$terms[$i]%')"));
                 }
             })
-            ->orderBy('first_name')
+            ->orderBy('updated_at', 'desc')
             ->get();
         return $userMetas;
     }

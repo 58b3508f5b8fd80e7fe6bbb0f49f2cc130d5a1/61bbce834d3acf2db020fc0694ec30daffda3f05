@@ -1,6 +1,9 @@
 @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
 @section('title', title_case($action).' users')
 @section('style')
+    {{--<link href="{{asset($public.'/css/glDatePicker.flatwhite.css')}}" rel="stylesheet" media="screen">--}}
+    <link href="{{asset($public.'/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" media="screen">
+
     @if($type=='user')
         <style>
             .modal-dialog {
@@ -42,11 +45,107 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="{{asset($public.'/js/loadingoverlay.min.js')}}"></script>--}}
+
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+
+        $('#user-modal').on('shown.bs.modal', function () {
+            $("#state").change(function () {
+                var data = {'state': $('#state').val()};
+                $.post('/admin/add/user/getlgas', data, function (result) {
+                    $('#lga').html(result.html);
+                });
+            });
+
+            $(function () {
+
+                // We can attach the `fileselect` event to all file inputs on the page
+                $(document).on('change', ':file', function () {
+                    var input = $(this),
+                        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    //$('#file-info').val(label);
+                    input.trigger('fileselect', [numFiles, label]);
+                });
+
+                // We can watch for our custom `fileselect` event like this
+                $(document).ready(function () {
+                    $(':file').on('fileselect', function (event, numFiles, label) {
+
+                        var input = $(this).parents('.input-group').find(':text'),
+                            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                        if (input.length) {
+                            input.val(log);
+                        } else {
+                            if (log) alert(log);
+                        }
+
+                    });
+                });
+
+            });
+
+            function filePreview(input, id) {
+                $(id).html('');
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(id).siblings('embed').remove();
+                        $(id).after('<embed src="' + e.target.result + '" style = "max-width: 100%; max-height: 20em;"/>');
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#formlocation").change(function () {
+                filePreview(this, '#formImage');
+            });
+            $("#signaturelocation").change(function () {
+                filePreview(this, '#signatureImage');
+            });
+            $("#utilitylocation").change(function () {
+                filePreview(this, '#utilityImage');
+            });
+            $("#idcardlocation").change(function () {
+                filePreview(this, '#idcardImage');
+            });
+            $("#passportlocation").change(function () {
+                filePreview(this, '#passportImage');
+            });
+
+            $('#user-form').on('submit', function (e) {
+                e.preventDefault();
+                var form = e.target;
+                var data = new FormData(form);
+                $(".modal").LoadingOverlay("show");
+                $.ajax({
+                    url: form.action,
+                    method: form.method,
+                    contentType: false,
+                    data: data,
+                    processData: false,
+                    success: function (result) {
+                        $(".modal").LoadingOverlay("hide");
+                        alert(result.message);
+
+                        $('#user-modal').modal('hide');
+
+                        $('#users').fadeOut(300);
+                        $('#users').html(result.html);
+                        $('#users').fadeIn(300);
+                    },
+                    error: function () {
+                        alert('Sorry, an error occurred');
+                    }
+                });
+                return false;
+            })
         });
 
         @if($type=='admin')
@@ -90,10 +189,14 @@
         }
 
         @elseif ($type == 'user')
-        function viewEditUser(id, type) {
+        function changeSelect(selector, value) {
+            $(selector).val(value);
+        }
+
+        function viewEditUser(id, action) {
             var data = {
                 'id': id,
-                'type': type,
+                'action': action,
             };
             $.post('/admin/edit/viewuser', data, function (result) {
                 $('#user').html(result.html);
@@ -103,7 +206,8 @@
             });
         }
 
-        function editUser() {
+
+        /*function editUser() {
             var data = {
                 'id': $("input[name=id]").val(),
                 'first_name': $("input[name=first_name]").val(),
@@ -114,6 +218,7 @@
                 'private_key': $("input[name=private_key]").val(),
                 'marital_status': $("input[name=marital_status]").val(),
                 'gender': $("input[name=gender]").val(),
+                'dob': $("input[name=dob]").val(),
                 'phone_no': $("input[name=phone_no]").val(),
                 'nationality': $("input[name=nationality]").val(),
                 'state': $("input[name=state]").val(),
@@ -132,6 +237,7 @@
                 'nok_contact_address': $("input[name=nok_contact_address]").val(),
                 'nok_gender': $("input[name=nok_gender]").val(),
                 'nok_phone_no': $("input[name=nok_phone_no]").val(),
+                'nok_dob': $("input[name=nok_dob]").val(),
                 'nok_email': $("input[name=nok_email]").val(),
                 'spouse_name': $("input[name=spouse_name]").val(),
                 'mother_maiden_name': $("input[name=mother_maiden_name]").val(),
@@ -142,7 +248,7 @@
                 'utility_bill_location': $("input[name=utility_bill_location]").val(),
                 'idcard_location': $("input[name=idcard_location]").val(),
                 'passport_location': $("input[name=passport_location]").val(),
-                'for': '{{$action}}',
+                'for': '{{$action}}'
             };
 
             $.post('/admin/edit/user', data, function (result) {
@@ -157,6 +263,7 @@
                 alert('Sorry, an error occurred');
             });
         }
+*/
 
         @endif
         function verifyUser(id, action) {
@@ -177,62 +284,6 @@
             });
         }
 
-        $(function () {
-
-            // We can attach the `fileselect` event to all file inputs on the page
-            $(document).on('change', ':file', function () {
-                var input = $(this),
-                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                //$('#file-info').val(label);
-                input.trigger('fileselect', [numFiles, label]);
-            });
-
-            // We can watch for our custom `fileselect` event like this
-            $(document).ready(function () {
-                $(':file').on('fileselect', function (event, numFiles, label) {
-
-                    var input = $(this).parents('.input-group').find(':text'),
-                        log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                    if (input.length) {
-                        input.val(log);
-                    } else {
-                        if (log) alert(log);
-                    }
-
-                });
-            });
-
-        });
-
-        function filePreview(input, id) {
-            $(id).html('');
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $(id).siblings('embed').remove();
-                    $(id).after('<embed src="' + e.target.result + '" style = "max-width: 100%; max-height: 20em;"/>');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#formlocation").change(function () {
-            filePreview(this, '#formImage');
-        });
-        $("#signaturelocation").change(function () {
-            filePreview(this, '#signatureImage');
-        });
-        $("#utilitylocation").change(function () {
-            filePreview(this, '#utilityImage');
-        });
-        $("#idcardlocation").change(function () {
-            filePreview(this, '#idcardImage');
-        });
-        $("#passportlocation").change(function () {
-            filePreview(this, '#passportImage');
-        });
 
     </script>
 @endsection

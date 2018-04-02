@@ -7,6 +7,7 @@ use App\User_meta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
@@ -36,13 +37,14 @@ class AdminEditController extends Controller
     public function editUser(Request $request)
     {
         $details = $request->all();
-        $for = $request->input('for');
+        $for = null;
         $id = (int)$request->input('id') - 1427;
         $userMeta = User_meta::find($id);
 
         if ($request->hasFile('form_location')
             && $request->file('form_location')->isValid()
         ) {
+            Storage::delete($userMeta->form_location);
             $userMeta->form_location = $request->file('form_location')
                 ->store('tlssavings/app/images/forms');
         }
@@ -50,38 +52,43 @@ class AdminEditController extends Controller
         if ($request->hasFile('signature_location')
             && $request->file('signature_location')->isValid()
         ) {
+            Storage::delete($userMeta->signature_location);
             $userMeta->signature_location = $request->file('signature_location')
-                ->store('tlssavings/app/images/forms');
+                ->store('tlssavings/app/images/signatures');
         }
 
         if ($request->hasFile('utility_bill_location')
             && $request->file('utility_bill_location')->isValid()
         ) {
+            Storage::delete($userMeta->utility_bill_location);
             $userMeta->utility_bill_location
                 = $request->file('utility_bill_location')
-                ->store('tlssavings/app/images/forms');
+                ->store('tlssavings/app/images/utility_bills');
         }
 
         if ($request->hasFile('idcard_location')
             && $request->file('idcard_location')->isValid()
         ) {
+            Storage::delete($userMeta->idcard_location);
             $userMeta->idcard_location = $request->file('idcard_location')
-                ->store('tlssavings/app/images/forms');
+                ->store('tlssavings/app/images/idcards');
         }
 
         if ($request->hasFile('passport_location')
             && $request->file('passport_location')->isValid()
         ) {
+            Storage::delete($userMeta->passport_location);
             $userMeta->passport_location = $request->file('passport_location')
-                ->store('tlssavings/app/images/forms');
+                ->store('tlssavings/app/images/passport');
         }
 
         array_push($details, ['updated_at' => date('Y-m-d H:i:s')]);
-        unset($details['passport_location']);
+
         unset($details['signature_location']);
         unset($details['form_location']);
         unset($details['utility_bill_location']);
         unset($details['idcard_location']);
+        unset($details['passport_location']);
         unset($details['_token']);
         unset($details['id']);
         unset($details['for']);
@@ -98,8 +105,9 @@ class AdminEditController extends Controller
             ]);
         if ($isUpdated && $userTable && $userMeta->save()) {
             $message = "New Admin was edited successfully";
+            $for = $userMeta->status;
         } else {
-            $message = $isUpdated . '<br>' . $userTable;
+            $message = $isUpdated . ' < br>' . $userTable;
         }
         $data['action'] = 'new admin';
         return $this->getUsers('user', $for, $message);
@@ -180,18 +188,24 @@ class AdminEditController extends Controller
 
     }
 
-    public function getUser(
-        Request $request
-    ) {
+    public function getUser(Request $request)
+    {
         $id = $request->input('id');
-
-        $data['user'] = User::join('user_metas', 'users.wallet_address',
-            '=',
-            'user_metas.wallet_address')->where('users.id', $id - 9407)
-            ->select('user_metas.*')->first();
+        $action = $request->input('action');
+        $data = null;
+        if (!in_array($action, ['registered', 'unregistered'])) {
+            $data['user'] = User::join('user_metas', 'users.wallet_address',
+                '
+                = ',
+                'user_metas.wallet_address')->where('users.id', $id - 9407)
+                ->select('user_metas .*')->first();
+        } else {
+            $data['user'] = User_meta::where('id', $id - 9407)->first();
+        }
 
         $html = View::make('admin.partials.editUser', $data);
         $html = $html->render();
+
 
         return response()->json([
             'status' => 'success',
@@ -200,14 +214,16 @@ class AdminEditController extends Controller
 
     }
 
-    public function validateAdmin(array $data) {
+    public function validateAdmin(array $data)
+    {
         return Validator::make($data, [
             'name'  => 'required | string | unique:users | max:255',
             'email' => 'required | string | email | max:255 | unique:users',
         ]);
     }
 
-    public function validateUser(array $data) {
+    public function validateUser(array $data)
+    {
         return Validator::make($data, [
             'name'  => 'required | string | unique:users | max:255',
             'email' => 'required | string | email | max:255 | unique:users',

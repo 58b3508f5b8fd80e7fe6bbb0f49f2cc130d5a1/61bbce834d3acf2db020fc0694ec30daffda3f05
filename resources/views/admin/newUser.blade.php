@@ -43,7 +43,7 @@ $states = [
 @php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
 @section('title', title_case($action).' users')
 @section('style')
-    <link href="{{asset($public.'/css/bootstrap-formhelpers.min.css')}}" rel="stylesheet" media="screen">
+    <link href="{{asset($public.'/css/glDatePicker.flatwhite.css')}}" rel="stylesheet" media="screen">
 @endsection
 @section('content')
     <nav class="breadcrumb bg-white push">
@@ -157,10 +157,8 @@ $states = [
                     <div class="col-md-4 col-xs-12">
                         <div class="form-group{{ $errors->has('dob') ? ' is-invalid' : '' }} row">
                             <label for="dob">Date of birth</label>
-                            <div id="dob" class=" col-12 bfh-datepicker" data-name="dob" data-format="y-m-d"
-                                 data-date="today" data-placeholder="YYYY/MM/DD"
-                                 data-class="form-control form-control-lg ">
-                            </div>
+                            <input type="text" id="dob" name="dob" class="form-control form-control-lg"
+                                   placeholder="YYYY/MM/DD"/>
                             @if ($errors->has('dob'))
                                 <span class="invalid-feedback">
                                 {{ $errors->first('dob') }}
@@ -476,14 +474,12 @@ $states = [
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2 col-xs-6">
+                    <div class="col-md-3 col-xs-6">
                         <div class="form-group{{ $errors->has('nok_dob') ? ' is-invalid' : '' }} row">
                             <div class="col-12">
                                 <label for="mega-nokdob">NOK Date of birth</label>
-                                <div id="nok-dob" class=" col-12 bfh-datepicker" data-name="nok_dob" data-format="y-m-d"
-                                     data-date="today" data-placeholder="YYYY/MM/DD"
-                                     data-class="form-control form-control-lg ">
-                                </div>
+                                <input type="text" id="nok-dob" name="nok_dob" class="form-control form-control-lg"
+                                       placeholder="YYYY/MM/DD"/>
                                 @if ($errors->has('nok_dob'))
                                     <span class="invalid-feedback">
                                         {{ $errors->first('nok_dob') }}
@@ -530,7 +526,7 @@ $states = [
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-3 col-xs-12">
                         <div class="form-group{{ $errors->has('nok_email') ? ' is-invalid' : '' }} row">
                             <div class="col-12">
                                 <label for="mega-nokemail">NOK Email</label>
@@ -725,12 +721,10 @@ $states = [
                             <div class="form-group input-group">
                                 <label class="input-group-btn"> <span class="btn btn-danger">
 									Browse<input type="file" name="passport_location" accept=".png,.jpg,.gif"
-                                                 style="display: none;" id="passportlocation"
-                                        >
+                                                 style="display: none;" id="passportlocation">
 							</span>
                                 </label><input type="text" id="file-info" class="form-control"
-                                               readonly
-                                >
+                                               readonly>
                             </div>
                             @if ($errors->has('passport_location'))
                                 <span class="invalid-feedback">
@@ -757,7 +751,7 @@ $states = [
     <div id="demo"></div>
 @endsection
 @section('scripts')
-    <script src="{{asset($public.'/js/bootstrap-formhelpers.min.js')}}"></script>
+    <script src="{{asset($public.'/js/glDatePicker.min.js')}}"></script>
     <script>
         @if(isset($data['message']))
         alert('{{$data['message']}}');
@@ -765,6 +759,33 @@ $states = [
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $('#dob').glDatePicker({
+            cssName: 'flatwhite',
+            onClick: function(target, cell, date, data) {
+                target.val(date.getFullYear() + '-' +
+                    date.getMonth() + '-' +
+                    date.getDate());
+
+                if(data != null) {
+                    alert(data.message + '\n' + date);
+                }
+            }
+        });
+
+        $('#nok-dob').glDatePicker({
+            cssName: 'flatwhite',
+            onClick: function(target, cell, date, data) {
+                target.val(date.getFullYear() + '-' +
+                    date.getMonth() + '-' +
+                    date.getDate());
+
+                if(data != null) {
+                    alert(data.message + '\n' + date);
+                }
             }
         });
 

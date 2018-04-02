@@ -66,26 +66,26 @@
                                 <a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip"
                                    data-original-title="Click me to Copy" title="Click me to copy"
                                    onclick="copyToClipboard('#wallet{{$i}}')">
-                                        @if (strlen($user->wallet_id) > 15)
-                                            {{"$private1......$private2"}}
-                                            <span id="wallet{{$i}}" style="display:none;">{{$user->private_key}}</span>
-                                        @else
-                                            <span id="wallet{{$i}}">{{$user->private_key}}</span>
-                                        @endif
-                                    </a>
+                                    @if (strlen($user->wallet_id) > 15)
+                                        {{"$private1......$private2"}}
+                                        <span id="wallet{{$i}}" style="display:none;">{{$user->private_key}}</span>
+                                    @else
+                                        <span id="wallet{{$i}}">{{$user->private_key}}</span>
+                                    @endif
+                                </a>
                             </td>
                         @else
                             <td><a href="javascript:void(0)">{{$user->name}}</a></td>
                             <td><a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip"
                                    data-original-title="Click me to Copy" title="Click me to copy"
                                    onclick="copyToClipboard('#wallet{{$i}}')">
-                                        @if (strlen($user->wallet_id) > 15)
-                                            {{"$wallet1......$wallet2"}}
-                                            <span id="wallet{{$i}}" style="display:none;">{{$user->wallet_id}}</span>
-                                        @else
-                                            <span id="wallet{{$i}}">{{$user->wallet_id}}</span>
-                                        @endif
-                                    </a>
+                                    @if (strlen($user->wallet_id) > 15)
+                                        {{"$wallet1......$wallet2"}}
+                                        <span id="wallet{{$i}}" style="display:none;">{{$user->wallet_id}}</span>
+                                    @else
+                                        <span id="wallet{{$i}}">{{$user->wallet_id}}</span>
+                                    @endif
+                                </a>
                             </td>
                         @endif
                         <td>@if($type=='admin') {{ $user->access_level }} @else {{$user->account_number}} @endif</td>
@@ -95,14 +95,14 @@
                         @if(Auth::user()->access_level>=3)
                             <td class="text-center">
                                 <div class="btn-group">
+                                    <button data-original-title="Edit" type="button"
+                                            class="btn btn-sm btn-alt-primary"
+                                            data-toggle="tooltip"
+                                            title="Edit {{$user->first_name}}"
+                                            onclick="viewEditUser({{($user->id+9407)}},'{{$action}}')">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
                                     @if(!in_array($action,['registered','unregistered']))
-                                        <button data-original-title="Edit" type="button"
-                                                class="btn btn-sm btn-alt-primary"
-                                                data-toggle="tooltip"
-                                                title="Edit {{$user->first_name}}"
-                                                onclick="viewEditUser({{($user->id+9407)}},'{{$type}}')">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
                                         @if($user->status=='blocked' || $user->status=='pending')
                                             <button data-original-title="Delete" type="button"
                                                     class="btn btn-sm btn-alt-success"

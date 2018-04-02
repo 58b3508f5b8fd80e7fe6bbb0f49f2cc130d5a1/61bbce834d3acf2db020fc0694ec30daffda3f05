@@ -109,6 +109,8 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                 Route::get('/transactions/history',
                                     'AdminTransactionsController@viewTransactions');
                                 // drg >> handling transaction functions
+                                Route::post('/transactions/verify',
+                                    'AdminTransactionsController@verifyTransaction');
                                 Route::post('/transactions/withdrawal',
                                     'AdminTransactionsController@verifyWithdrawal');
                                 Route::post('/transactions/share',

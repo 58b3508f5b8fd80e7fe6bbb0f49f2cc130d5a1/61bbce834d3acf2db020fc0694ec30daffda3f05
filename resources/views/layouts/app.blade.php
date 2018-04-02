@@ -171,7 +171,7 @@
 
     </header>
     <main id="main-container">
-        <div class="btn-group-justified">
+        <div class="btn-group-justified text-center bg-body-light">
         <button type="button" class="btn btn-dual-secondary text-muted js-tooltip-enabled" data-toggle="tooltip" data-original-title="Click me to Copy" title = "Click me to copy" onclick="copyToClipboard('#wallet')">
             <i class="fa fa-user"></i> Wallet ID: <span class="text-primary" id="wallet">{{Auth::user()->wallet_id}}</span>
         </button>
