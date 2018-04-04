@@ -78,7 +78,7 @@ class AdminUserController extends Controller
                     break;
             }
 
-            $data['action'] = $action;
+            $data['action'] = $for;
             $html = View::make('admin.partials.user', $data);
             $html = $html->render();
 
