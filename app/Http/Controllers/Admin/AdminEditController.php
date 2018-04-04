@@ -195,10 +195,8 @@ class AdminEditController extends Controller
         $data = null;
         if (!in_array($action, ['registered', 'unregistered'])) {
             $data['user'] = User::join('user_metas', 'users.wallet_address',
-                '
-                = ',
-                'user_metas.wallet_address')->where('users.id', $id - 9407)
-                ->select('user_metas .*')->first();
+                '=', 'user_metas.wallet_address')->where('users.id', $id - 9407)
+                ->select('user_metas.*')->first();
         } else {
             $data['user'] = User_meta::where('id', $id - 9407)->first();
         }
