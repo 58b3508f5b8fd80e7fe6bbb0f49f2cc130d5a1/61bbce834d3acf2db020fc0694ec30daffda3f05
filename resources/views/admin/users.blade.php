@@ -206,6 +206,7 @@
             };
             $(".modal").LoadingOverlay("show");
             $.post('/admin/edit/viewuser', data, function (result) {
+                $(".modal").LoadingOverlay("hide");
                 $('#user').html(result.html);
                 $('#user-modal').modal('show');
             }).fail(function () {

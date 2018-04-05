@@ -76,8 +76,9 @@ class TransactionController extends Controller
             ->value('value');
         $number = Transaction::where('type', 'ngn-bank')
             ->where('from', Auth::user()->name)
-            ->whereDate('created_at', DB::raw('CURDATE()'))->where('status', 'successful')->count();
-        if ($number / 100000 < $limit) {
+            ->whereDate('created_at', DB::raw('CURDATE()'))
+            ->where('status', 'successful')->count();
+        if ($number < $limit) {
             return true;
         }
         return false;
@@ -90,7 +91,7 @@ class TransactionController extends Controller
         $number = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
                 DB::raw('CURDATE()'))->where('status', 'successful')->count();
-        if ($number / 100000 < $limit) {
+        if ($number < $limit) {
             return true;
         }
         return false;
@@ -114,12 +115,13 @@ class TransactionController extends Controller
         return false;
     }
 
-    public function checkNGNLimit($ngn)
+    public function checkNGNWithdrawalLimit($ngn)
     {
         $limit = Setting::where('name', 'ngn_withdrawal_limit')->value('value');
         $amount = Transaction::where('type', 'ngn-bank')
             ->where('from', Auth::user()->name)
-            ->whereDate('created_at', DB::raw('CURDATE()'))->where('status', 'successful')->sum('amount');
+            ->whereDate('created_at', DB::raw('CURDATE()'))
+            ->where('status', 'successful')->sum('amount');
 
         if ($amount / 100000 + $ngn <= $limit) {
             return true;
@@ -132,7 +134,8 @@ class TransactionController extends Controller
         $limit = Setting::where('name', 'pnm_withdrawal_limit')->value('value');
         $amount = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
-                DB::raw('CURDATE()'))->where('status', 'successful')->sum('amount');
+                DB::raw('CURDATE()'))->where('status', 'successful')
+            ->sum('amount');
         if ($amount / 100000 + $pnm <= $limit) {
             return true;
         }
@@ -158,7 +161,8 @@ class TransactionController extends Controller
             ->value('value');
         $amount = Transaction::where('type', 'pnm-ngn')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
-                DB::raw('CURDATE()'))->where('status', 'successful')->sum('amount');
+                DB::raw('CURDATE()'))->where('status', 'successful')
+            ->sum('amount');
         //echo "$amount ". ($amount/100000) + $pnm. " $pnm $limit";
         if ($amount / 100000 + $pnm <= $limit) {
             return true;
@@ -461,7 +465,7 @@ class TransactionController extends Controller
         $hasNGN = $this->checkNGN($ngn);
         $hasPNM = $this->checkPNM($chargePNM);
         $checkPin = Hash::check($pin, Auth::user()->pin);
-        $checkLimit = $this->checkNGNLimit($ngn);
+        $checkLimit = $this->checkNGNWithdrawalLimit($ngn);
         $checkDaily = $this->checkDailyNGNWithdrawals();
         if ($hasNGN && $hasPNM && $checkPin && $checkLimit && $checkDaily) {
             $description1 = "Withdrawal request for $ngn NGN";
