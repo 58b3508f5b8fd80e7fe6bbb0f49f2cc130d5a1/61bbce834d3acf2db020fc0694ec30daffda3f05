@@ -76,8 +76,8 @@ class TransactionController extends Controller
             ->value('value');
         $number = Transaction::where('type', 'ngn-bank')
             ->where('from', Auth::user()->name)
-            ->whereDate('created_at', DB::raw('CURDATE()'))->count();
-        if ($number < $limit) {
+            ->whereDate('created_at', DB::raw('CURDATE()'))->where('status', 'successful')->count();
+        if ($number / 100000 < $limit) {
             return true;
         }
         return false;
@@ -89,8 +89,8 @@ class TransactionController extends Controller
             ->value('value');
         $number = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
-                DB::raw('CURDATE()'))->count();
-        if ($number < $limit) {
+                DB::raw('CURDATE()'))->where('status', 'successful')->count();
+        if ($number / 100000 < $limit) {
             return true;
         }
         return false;
@@ -99,7 +99,7 @@ class TransactionController extends Controller
     public function checkNGN($amount)
     {
         $balance = $this->home()->getTotalNGN();
-        if ($balance >= $amount) {
+        if ($balance / 100000 >= $amount) {
             return true;
         }
         return false;
@@ -107,7 +107,7 @@ class TransactionController extends Controller
 
     public function checkPNM($amount)
     {
-        $balance = $this->home()->getTotalPNM();
+        $balance = $this->home()->getTotalPNM() / 100000;
         if ($balance >= $amount) {
             return true;
         }
@@ -119,21 +119,21 @@ class TransactionController extends Controller
         $limit = Setting::where('name', 'ngn_withdrawal_limit')->value('value');
         $amount = Transaction::where('type', 'ngn-bank')
             ->where('from', Auth::user()->name)
-            ->whereDate('created_at', DB::raw('CURDATE()'))->sum('amount');
+            ->whereDate('created_at', DB::raw('CURDATE()'))->where('status', 'successful')->sum('amount');
 
-        if ($amount + $ngn <= $limit) {
+        if ($amount / 100000 + $ngn <= $limit) {
             return true;
         }
         return false;
     }
 
-    public function checkPNMLimit($pnm)
+    public function checkPNMWithdrawalLimit($pnm)
     {
         $limit = Setting::where('name', 'pnm_withdrawal_limit')->value('value');
         $amount = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
-                DB::raw('CURDATE()'))->sum('amount');
-        if ($amount + $pnm <= $limit) {
+                DB::raw('CURDATE()'))->where('status', 'successful')->sum('amount');
+        if ($amount / 100000 + $pnm <= $limit) {
             return true;
         }
         return false;
@@ -144,8 +144,23 @@ class TransactionController extends Controller
         $limit = Setting::where('name', 'pnm_transfer_limit')->value('value');
         $amount = Transaction::where('type', 'pnm-pnm')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
-                DB::raw('CURDATE()'))->sum('amount');
-        if ($amount + $pnm <= $limit) {
+                DB::raw('CURDATE()'))->where('status', 'successful')
+            ->sum('amount');
+        if ($amount / 100000 + $pnm <= $limit) {
+            return true;
+        }
+        return false;
+    }
+
+    public function checkDailyPNMConversionLimit($pnm)
+    {
+        $limit = Setting::where('name', 'pnm_daily_conversion_limit')
+            ->value('value');
+        $amount = Transaction::where('type', 'pnm-ngn')
+            ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
+                DB::raw('CURDATE()'))->where('status', 'successful')->sum('amount');
+        //echo "$amount ". ($amount/100000) + $pnm. " $pnm $limit";
+        if ($amount / 100000 + $pnm <= $limit) {
             return true;
         }
         return false;
@@ -154,10 +169,7 @@ class TransactionController extends Controller
     public function checkPNMConversionLimit($pnm)
     {
         $limit = Setting::where('name', 'pnm_conversion_limit')->value('value');
-        $amount = Transaction::where('type', 'pnm-ngn')
-            ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
-                DB::raw('CURDATE()'))->sum('amount');
-        if ($amount + $pnm <= $limit) {
+        if ($pnm <= $limit) {
             return true;
         }
         return false;
@@ -182,13 +194,17 @@ class TransactionController extends Controller
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->name;
             $transaction->to = Auth::user()->wallet_id;
-            $transaction->amount = $pnm*100000;
+            $transaction->amount = $pnm * 100000;
             $transaction->value = $value;
             $transaction->description = $description;
             $transaction->type = $type;
             $transaction->status = 'successful';
             $transaction->remark = 'credit';
-            $transaction->save();
+
+            if ($transaction->save()) {
+                $data['alert'] = 'success';
+                $data['message'] = 'Your transaction request was successful';
+            }
         } else {
             if (!$checkPin) {
                 $data['alert'] = 'danger';
@@ -211,12 +227,13 @@ class TransactionController extends Controller
         $ngn = $pnm * (int)$value;
         $chargePNM = Setting::where('name', 'pnm_conversion_charge')
             ->value('value');
-        $chargeNGN = $chargePNM*$value;
+        $chargeNGN = $chargePNM * $value;
 
         $hasPNM = $this->checkPNM($pnm + $chargePNM);
         $checkPin = Hash::check($pin, Auth::user()->pin);
         $checkLimit = $this->checkPNMConversionLimit($pnm);
-        if ($hasPNM && $checkPin && $checkLimit) {
+        $checkDailyLimit = $this->checkDailyPNMConversionLimit($pnm);
+        if ($hasPNM && $checkPin && $checkLimit && $checkDailyLimit) {
             $description1 = "Conversion of $pnm PNM to $ngn NGN";
             $description2
                 = "$chargeNGN NGN ($chargePNM PNM) commission charge for $pnm PNM conversion";
@@ -232,7 +249,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->wallet_id;
             $transaction1->to = Auth::user()->name;
-            $transaction1->amount = $pnm*100000;
+            $transaction1->amount = $pnm * 100000;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -242,7 +259,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM*100000;
+            $transaction2->amount = $chargePNM * 100000;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;
@@ -261,10 +278,14 @@ class TransactionController extends Controller
             } elseif (!$hasPNM) {
                 $data['alert'] = 'danger';
                 $data['message'] = 'You have an insufficient PNM balance';
-            } elseif (!$checkLimit) {
+            } elseif (!$checkDailyLimit) {
                 $data['alert'] = 'danger';
                 $data['message']
                     = 'You cannot exceed your daily conversion limit';
+            } elseif (!$checkLimit) {
+                $data['alert'] = 'danger';
+                $data['message']
+                    = 'You cannot exceed your conversion limit per transaction';
             }
         }
         return $data;
@@ -320,8 +341,7 @@ class TransactionController extends Controller
         $data['action'] = $action;
         $data['value'] = $this->home()->getCurrentValue();
 
-        return redirect("transaction/$for/$action")->with('data',$data);
-        //return view("dashboard.transactions.$action", $data);
+        return redirect("transaction/$for/$action")->with('data', $data);
     }
 
     public function transferPNM(Request $request)
@@ -358,7 +378,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->wallet_id;
             $transaction1->to = $wallet;
-            $transaction1->amount = $pnm*100000;
+            $transaction1->amount = $pnm * 100000;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -368,7 +388,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM*100000;
+            $transaction2->amount = $chargePNM * 100000;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;
@@ -396,7 +416,7 @@ class TransactionController extends Controller
             } elseif (!$checkLimit) {
                 $data['alert'] = 'danger';
                 $data['message']
-                    = 'You cannot exceed the withdrawal limit';
+                    = 'You cannot exceed the transfer limit per transaction';
             }
         }
         return $data;
@@ -459,7 +479,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->name;
             $transaction1->to = 'user';
-            $transaction1->amount = $pnm*100000;
+            $transaction1->amount = $pnm * 100000;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -469,7 +489,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM*100000;
+            $transaction2->amount = $chargePNM * 100000;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;
@@ -522,7 +542,7 @@ class TransactionController extends Controller
         $hasPNM = $this->checkPNM($pnm + $chargePNM);
 
         $checkPin = Hash::check($pin, Auth::user()->pin);
-        $checkLimit = $this->checkPNMLimit($pnm);
+        $checkLimit = $this->checkPNMWithdrawalLimit($pnm);
         $checkDaily = $this->checkDailyNGNWithdrawals();
         if ($hasPNM && $checkPin && $checkLimit && $checkDaily) {
             $description1 = "Withdrawal request for $pnm PNM";
@@ -540,7 +560,7 @@ class TransactionController extends Controller
             $transaction1->transaction_id = $transactionID;
             $transaction1->from = Auth::user()->wallet_id;
             $transaction1->to = Auth::user()->wallet_address;
-            $transaction1->amount = $pnm*100000;
+            $transaction1->amount = $pnm * 100000;
             $transaction1->value = $value;
             $transaction1->description = $description1;
             $transaction1->type = $type1;
@@ -550,7 +570,7 @@ class TransactionController extends Controller
             $transaction2->transaction_id = $transactionID;
             $transaction2->from = Auth::user()->wallet_id;
             $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM*100000;
+            $transaction2->amount = $chargePNM * 100000;
             $transaction2->value = $value;
             $transaction2->description = $description2;
             $transaction2->type = $type2;

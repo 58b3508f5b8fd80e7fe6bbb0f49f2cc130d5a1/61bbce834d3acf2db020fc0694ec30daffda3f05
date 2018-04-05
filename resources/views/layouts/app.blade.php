@@ -209,7 +209,7 @@
 <script src="{{asset($public.'/js/datatables.min.js')}}"></script>
 <script>
     $(document).ready( function () {
-        $('#general-table').DataTable();
+        $('.table').DataTable();
     } );
 </script>
 <script>

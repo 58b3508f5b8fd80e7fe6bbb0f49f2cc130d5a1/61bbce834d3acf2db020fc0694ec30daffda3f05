@@ -52,7 +52,7 @@ class HomeController extends Controller
                     ->orWhere('status', 'requested');
             })
             ->sum('amount');
-        $total = $credit - $debit;
+        $total = ($credit - $debit);
         return $total;
     }
 

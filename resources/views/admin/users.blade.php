@@ -138,7 +138,7 @@
 
                         $('#users').fadeOut(300);
                         $('#users').html(result.html);
-                        $('#general-table').DataTable();
+                        $('.table').DataTable();
                         $('#users').fadeIn(300);
                     },
                     error: function () {
@@ -158,7 +158,7 @@
             };
             $.post('/admin/edit/viewadmin', data, function (result) {
                 $('#user').html(result.html);
-                $('#general-table').DataTable();
+                $('.table').DataTable();
                 $('#user-modal').modal('show');
             }).fail(function () {
                 alert('Sorry, an error occurred');
@@ -186,7 +186,7 @@
 
                 $('#users').fadeOut(300);
                 $('#users').html(result.html);
-                $('#general-table').DataTable();
+                $('.table').DataTable();
                 $('#users').fadeIn(300);
             }).fail(function () {
                 $(".modal").LoadingOverlay("hide");
@@ -227,7 +227,7 @@
                 alert(result.message);
                 $('#users').fadeOut(300);
                 $('#users').html(result.html);
-                $('#general-table').DataTable();
+                $('.table').DataTable();
                 $('#users').fadeIn(300);
             }).fail(function () {
                 $(".modal").LoadingOverlay("hide");
