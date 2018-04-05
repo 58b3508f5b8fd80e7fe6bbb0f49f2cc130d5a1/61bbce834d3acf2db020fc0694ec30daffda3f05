@@ -70,28 +70,29 @@ class TransactionController extends Controller
         return view("dashboard.transactions.$action", $data);
     }
 
-    public function checkDailyNGNWithdrawals()
+    public function checkDailyNGNWithdrawals( $ngn)
     {
         $limit = Setting::where('name', 'ngn_daily_withdrawal_limit')
             ->value('value');
-        $number = Transaction::where('type', 'ngn-bank')
+        $amount = Transaction::where('type', 'ngn-bank')
             ->where('from', Auth::user()->name)
             ->whereDate('created_at', DB::raw('CURDATE()'))
-            ->where('status', 'successful')->count();
-        if ($number < $limit) {
+            ->where('status', 'requested')->sum(DB::raw('amount*value'));
+        if ($amount / 100000 +$ngn < $limit) {
             return true;
         }
         return false;
     }
 
-    public function checkDailyPNMWithdrawals()
+    public function checkDailyPNMWithdrawals($pnm)
     {
         $limit = Setting::where('name', 'pnm_daily_withdrawal_limit')
             ->value('value');
-        $number = Transaction::where('type', 'pnm-wallet')
+        $amount = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
-                DB::raw('CURDATE()'))->where('status', 'successful')->count();
-        if ($number < $limit) {
+                DB::raw('CURDATE()'))->where('status', 'requested')
+            ->sum('amount');
+        if ($amount/100000 +$pnm < $limit) {
             return true;
         }
         return false;
@@ -118,12 +119,8 @@ class TransactionController extends Controller
     public function checkNGNWithdrawalLimit($ngn)
     {
         $limit = Setting::where('name', 'ngn_withdrawal_limit')->value('value');
-        $amount = Transaction::where('type', 'ngn-bank')
-            ->where('from', Auth::user()->name)
-            ->whereDate('created_at', DB::raw('CURDATE()'))
-            ->where('status', 'successful')->sum('amount');
 
-        if ($amount / 100000 + $ngn <= $limit) {
+        if ($ngn <= $limit) {
             return true;
         }
         return false;
@@ -466,7 +463,7 @@ class TransactionController extends Controller
         $hasPNM = $this->checkPNM($chargePNM);
         $checkPin = Hash::check($pin, Auth::user()->pin);
         $checkLimit = $this->checkNGNWithdrawalLimit($ngn);
-        $checkDaily = $this->checkDailyNGNWithdrawals();
+        $checkDaily = $this->checkDailyNGNWithdrawals($ngn);
         if ($hasNGN && $hasPNM && $checkPin && $checkLimit && $checkDaily) {
             $description1 = "Withdrawal request for $ngn NGN";
             $description2
@@ -547,7 +544,7 @@ class TransactionController extends Controller
 
         $checkPin = Hash::check($pin, Auth::user()->pin);
         $checkLimit = $this->checkPNMWithdrawalLimit($pnm);
-        $checkDaily = $this->checkDailyNGNWithdrawals();
+        $checkDaily = $this->checkDailyPNMWithdrawals($pnm);
         if ($hasPNM && $checkPin && $checkLimit && $checkDaily) {
             $description1 = "Withdrawal request for $pnm PNM";
             $description2
