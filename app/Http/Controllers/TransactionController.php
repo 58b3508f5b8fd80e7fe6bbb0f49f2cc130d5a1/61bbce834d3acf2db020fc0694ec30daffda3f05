@@ -457,7 +457,7 @@ class TransactionController extends Controller
 
         $pnm = $ngn / (int)$value;
         $chargePNM = Setting::where('name', 'ngn_withdrawal_charge')
-            ->value('value');;
+            ->value('value');
 
         $hasNGN = $this->checkNGN($ngn);
         $hasPNM = $this->checkPNM($chargePNM);
