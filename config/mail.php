@@ -51,8 +51,8 @@ return [ /*
          |
          */
 
-         'from' => [ 'address' => env ( 'MAIL_FROM_ADDRESS', 'greenwhitedev@gmail.com' ), 'name' => env (
-             'MAIL_FROM_NAME', 'no-reply@tlsavings.xyz' ) ],
+         'from' => [ 'address' => env ( 'MAIL_FROM_ADDRESS', 'noreply@tlsavings.xyz' ), 'name' => env (
+             'MAIL_FROM_NAME', 'noreply@tlsavings.xyz' ) ],
 
          /*
          |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [ /*
          |
          */
 
-         'password' =>  env('MAIL_PASSWORD','mIhD>lR;p#3Ofx9gr;'),
+         'password' =>  env('MAIL_PASSWORD','E]I&OiTC/6AHmA6i$2'),
 
          /*
          |--------------------------------------------------------------------------
