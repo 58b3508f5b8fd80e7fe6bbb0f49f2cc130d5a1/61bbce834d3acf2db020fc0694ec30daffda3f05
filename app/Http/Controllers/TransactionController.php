@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Setting;
 use App\Transaction;
 use App\User;
+use App\User_meta;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -70,7 +72,7 @@ class TransactionController extends Controller
         return view("dashboard.transactions.$action", $data);
     }
 
-    public function checkDailyNGNWithdrawals( $ngn)
+    public function checkDailyNGNWithdrawals($ngn)
     {
         $limit = Setting::where('name', 'ngn_daily_withdrawal_limit')
             ->value('value');
@@ -78,7 +80,7 @@ class TransactionController extends Controller
             ->where('from', Auth::user()->name)
             ->whereDate('created_at', DB::raw('CURDATE()'))
             ->where('status', 'requested')->sum(DB::raw('amount*value'));
-        if ($amount / 100000 +$ngn < $limit) {
+        if ($amount / 100000 + $ngn < $limit) {
             return true;
         }
         return false;
@@ -92,7 +94,7 @@ class TransactionController extends Controller
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
                 DB::raw('CURDATE()'))->where('status', 'requested')
             ->sum('amount');
-        if ($amount/100000 +$pnm < $limit) {
+        if ($amount / 100000 + $pnm < $limit) {
             return true;
         }
         return false;
@@ -189,20 +191,15 @@ class TransactionController extends Controller
             $pnm = $ngn / (int)$value;
             $description = "Conversion of $ngn NGN to $pnm PNM";
             $type = "ngn-pnm";
-            $transaction = new Transaction();
+
             $transactionID = md5(Auth::user()->wallet_id . $ngn . $pnm
                 . date('YFlHisuA'));
-            $transaction->transaction_id = $transactionID;
-            $transaction->from = Auth::user()->name;
-            $transaction->to = Auth::user()->wallet_id;
-            $transaction->amount = $pnm * 100000;
-            $transaction->value = $value;
-            $transaction->description = $description;
-            $transaction->type = $type;
-            $transaction->status = 'successful';
-            $transaction->remark = 'credit';
 
-            if ($transaction->save()) {
+            $trans = $this->transaction($transactionID,
+                Auth::user()->name, Auth::user()->wallet_id,
+                $pnm, $description,
+                $type, 'successful', 'credit');
+            if ($trans) {
                 $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }
@@ -237,37 +234,23 @@ class TransactionController extends Controller
         if ($hasPNM && $checkPin && $checkLimit && $checkDailyLimit) {
             $description1 = "Conversion of $pnm PNM to $ngn NGN";
             $description2
-                = "$chargeNGN NGN ($chargePNM PNM) commission charge for $pnm PNM conversion";
+                = "$chargePNM PNM commission charge for $pnm PNM conversion";
             $type1 = "pnm-ngn";
             $type2 = "pnm-holding";
-
-            $transaction1 = new Transaction();
-            $transaction2 = new Transaction();
 
             $transactionID = md5(Auth::user()->wallet_id . $pnm . $ngn
                 . date('YFlHisuA'));
 
-            $transaction1->transaction_id = $transactionID;
-            $transaction1->from = Auth::user()->wallet_id;
-            $transaction1->to = Auth::user()->name;
-            $transaction1->amount = $pnm * 100000;
-            $transaction1->value = $value;
-            $transaction1->description = $description1;
-            $transaction1->type = $type1;
-            $transaction1->status = 'successful';
-            $transaction1->remark = 'debit';
+            $trans1 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, Auth::user()->name,
+                $pnm, $description1,
+                $type1, 'successful', 'debit');
+            $trans2 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, 'holding',
+                $chargePNM, $description2,
+                $type2, 'successful', 'debit');
 
-            $transaction2->transaction_id = $transactionID;
-            $transaction2->from = Auth::user()->wallet_id;
-            $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM * 100000;
-            $transaction2->value = $value;
-            $transaction2->description = $description2;
-            $transaction2->type = $type2;
-            $transaction2->status = 'successful';
-            $transaction2->remark = 'debit';
-
-            if ($transaction1->save() && $transaction2->save()) {
+            if ($trans1 && $trans2) {
                 $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }
@@ -345,6 +328,72 @@ class TransactionController extends Controller
         return redirect("transaction/$for/$action")->with('data', $data);
     }
 
+    public function transaction(
+        $transactionID,
+        $from,
+        $to,
+        $amount,
+        $description,
+        $type,
+        $status,
+        $remark
+    ) {
+
+        $client = new Client;
+
+        $value = $this->home()->getCurrentValue();
+        $transaction = new Transaction();
+        $transaction->transaction_id = $transactionID;
+        $transaction->from = $from;
+        $transaction->to = $to;
+        $transaction->amount = $amount * 100000;
+        $transaction->value = $value;
+        $transaction->description = $description;
+        $transaction->type = $type;
+        $transaction->status = $status;
+        $transaction->remark = $remark;
+        $save = $transaction->save();
+        try {
+            if ($type == 'pnm-pnm') {
+                $message
+                    = "Wallet credit!\nAmt: $amount\nDesc: $description is $status.\nDate: "
+                    . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0,
+                        6)
+                    . '...' . substr($transactionID, -6);
+                $response = $client->request('post',
+                    'https://www.bulksmsnigeria.com/api/v1/sms/create', [
+                        'query' => [
+                            'api_token' => 'VhvIIGSo31lbQcF1Emftg0C5LfhnLJ4z7BJmW4gBRbrPmSPUBOaqod83INGo',
+                            'from'      => config('app.nameAbbr'),
+                            'to'        => User::where('wallet_id', $to)
+                                ->first()->phone_no,
+                            'body'      => substr($message, 0, 159)
+                        ]
+                    ]);
+                echo $response->getBody();
+            }
+            $message
+                = "Wallet $remark!\nAmt: $amount\nDesc: $description\nDate: "
+                . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0, 6)
+                . '...' . substr($transactionID, -6) . "\nBal: " . $this->home()
+                    ->getTotalPNM() / 100000;
+            $response = $client->request('post',
+                'https://www.bulksmsnigeria.com/api/v1/sms/create', [
+                    'query' => [
+                        'api_token' => 'VhvIIGSo31lbQcF1Emftg0C5LfhnLJ4z7BJmW4gBRbrPmSPUBOaqod83INGo',
+                        'from'      => config('app.nameAbbr'),
+                        'to'        => Auth::user()->phone_no,
+                        'body'      => substr($message, 0, 160)
+                    ]
+                ]);
+
+            echo $response->getBody();
+        } catch (\Exception $e) {
+
+        }
+        return $save;
+    }
+
     public function transferPNM(Request $request)
     {
         $value = $this->home()->getCurrentValue();
@@ -357,47 +406,36 @@ class TransactionController extends Controller
         $chargePNM = Setting::where('name', 'pnm_transfer_charge')
             ->value('value');
         $hasPNM = $this->checkPNM($pnm + $chargePNM);
-        $isUser = User::where('wallet_id', $wallet)->where('type', 'user')
+        $isUser = User::where('wallet_id', $wallet)
+            ->where('wallet_id', '<>', Auth::user()->wallet_id)
+            ->where('type', 'user')
             ->first();
 
         $checkPin = Hash::check($pin, Auth::user()->pin);
         $checkLimit = $this->checkPNMTransferLimit($pnm);
         if ($hasPNM && $checkPin && $isUser && $checkLimit) {
-            $description1 = "$pnm PNM transfer from " . Auth::user()->pin
-                . " to $wallet";
+            $description1 = "$pnm PNM transfer from "
+                . substr(Auth::user()->wallet_id, 0, 6) . '...'
+                . substr(Auth::user()->wallet_id, -6)
+                . " to " . substr($wallet, 0, 6) . '...' . substr($wallet, -6);
             $description2
                 = "$chargePNM commission charge for $pnm PNM transfer";
             $type1 = "pnm-pnm";
             $type2 = "pnm-holding";
 
-            $transaction1 = new Transaction();
-            $transaction2 = new Transaction();
-
             $transactionID = md5(Auth::user()->wallet_id . $pnm . $ngn
                 . date('YFlHisuA'));
 
-            $transaction1->transaction_id = $transactionID;
-            $transaction1->from = Auth::user()->wallet_id;
-            $transaction1->to = $wallet;
-            $transaction1->amount = $pnm * 100000;
-            $transaction1->value = $value;
-            $transaction1->description = $description1;
-            $transaction1->type = $type1;
-            $transaction1->status = 'successful';
-            $transaction1->remark = 'debit';
+            $trans1 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, $wallet,
+                $pnm, $description1,
+                $type1, 'successful', 'debit');
+            $trans2 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, 'holding',
+                $chargePNM, $description2,
+                $type2, 'successful', 'debit');
 
-            $transaction2->transaction_id = $transactionID;
-            $transaction2->from = Auth::user()->wallet_id;
-            $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM * 100000;
-            $transaction2->value = $value;
-            $transaction2->description = $description2;
-            $transaction2->type = $type2;
-            $transaction2->status = 'successful';
-            $transaction2->remark = 'debit';
-
-
-            if ($transaction1->save() && $transaction2->save()) {
+            if ($trans1 && $trans2) {
                 $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }
@@ -413,11 +451,11 @@ class TransactionController extends Controller
             } elseif (!$isUser) {
                 $data['alert'] = 'danger';
                 $data['message']
-                    = 'The Wallet ID entered does not match any user in our record';
+                    = 'The Wallet ID entered does not match any valid user in our record';
             } elseif (!$checkLimit) {
                 $data['alert'] = 'danger';
                 $data['message']
-                    = 'You cannot exceed the transfer limit per transaction';
+                    = 'You cannot exceed the transfer daily limit of transaction';
             }
         }
         return $data;
@@ -471,33 +509,19 @@ class TransactionController extends Controller
             $type1 = "ngn-bank";
             $type2 = "pnm-holding";
 
-            $transaction1 = new Transaction();
-            $transaction2 = new Transaction();
-
             $transactionID = md5(Auth::user()->wallet_id . $pnm . $ngn
                 . date('YFlHisuA'));
 
-            $transaction1->transaction_id = $transactionID;
-            $transaction1->from = Auth::user()->name;
-            $transaction1->to = 'user';
-            $transaction1->amount = $pnm * 100000;
-            $transaction1->value = $value;
-            $transaction1->description = $description1;
-            $transaction1->type = $type1;
-            $transaction1->status = 'requested';
-            $transaction1->remark = 'debit';
+            $trans1 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, 'user',
+                $pnm, $description1,
+                $type1, 'requested', 'debit');
+            $trans2 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, 'holding',
+                $chargePNM, $description2,
+                $type2, 'requested', 'debit');
 
-            $transaction2->transaction_id = $transactionID;
-            $transaction2->from = Auth::user()->wallet_id;
-            $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM * 100000;
-            $transaction2->value = $value;
-            $transaction2->description = $description2;
-            $transaction2->type = $type2;
-            $transaction2->status = 'requested';
-            $transaction2->remark = 'debit';
-
-            if ($transaction1->save() && $transaction2->save()) {
+            if ($trans1 && $trans2) {
                 $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }
@@ -552,34 +576,19 @@ class TransactionController extends Controller
             $type1 = "pnm-wallet";
             $type2 = "pnm-holding";
 
-            $transaction1 = new Transaction();
-            $transaction2 = new Transaction();
-
             $transactionID = md5(Auth::user()->wallet_id . $pnm . $ngn
                 . date('YFlHisuA'));
 
-            $transaction1->transaction_id = $transactionID;
-            $transaction1->from = Auth::user()->wallet_id;
-            $transaction1->to = Auth::user()->wallet_address;
-            $transaction1->amount = $pnm * 100000;
-            $transaction1->value = $value;
-            $transaction1->description = $description1;
-            $transaction1->type = $type1;
-            $transaction1->status = 'requested';
-            $transaction1->remark = 'debit';
+            $trans1 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, Auth::user()->wallet_address,
+                $pnm, $description1,
+                $type1, 'requested', 'debit');
+            $trans2 = $this->transaction($transactionID,
+                Auth::user()->wallet_id, 'holding',
+                $chargePNM, $description2,
+                $type2, 'requested', 'debit');
 
-            $transaction2->transaction_id = $transactionID;
-            $transaction2->from = Auth::user()->wallet_id;
-            $transaction2->to = 'holding';
-            $transaction2->amount = $chargePNM * 100000;
-            $transaction2->value = $value;
-            $transaction2->description = $description2;
-            $transaction2->type = $type2;
-            $transaction2->status = 'requested';
-            $transaction2->remark = 'debit';
-
-
-            if ($transaction1->save() && $transaction2->save()) {
+            if ($trans1 && $trans2) {
                 $data['alert'] = 'success';
                 $data['message'] = 'Your transaction request was successful';
             }

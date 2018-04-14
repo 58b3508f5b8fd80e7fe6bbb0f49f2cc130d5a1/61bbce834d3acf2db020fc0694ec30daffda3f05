@@ -86,9 +86,8 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                         // drg >> settings functions
                         Route::get('settings', 'AdminSettingsController@index');
 
-
                         // drg >> search
-                        Route::get('/search','AdminSearchController@index');
+                        Route::get('/search', 'AdminSearchController@index');
                         Route::post('/add/user',
                             'AdminAddController@addUser');
                         Route::post('/add/user/getlgas',
@@ -175,6 +174,29 @@ Route::middleware(['auth', 'isUser'])
         });
     });
 
-Route::get('/clients/62608e08adc29a8d6dbc9754e659f125', function(){
+Route::get('/clients/62608e08adc29a8d6dbc9754e659f125', function () {
     return view('admin.createAPI');
+});
+
+Route::get('debug', function () {
+    echo \App\User::where('wallet_address', Auth::user()->wallet_address)
+        ->value('phone_no');
+    /*$client = new \GuzzleHttp\Client();
+    try {
+        $message
+            = "Wallet debit! \nAmt: 3 PNM \nDesc: 3 PNM transfer from bee318...818857 to 7190f5...fcb42b \nDate: 14-04-2018 08:38 \nID: e356f5...3ccdc1 \nBal: 15.90361 PNM";
+        $response = $client->request('post',
+            'https://www.bulksmsnigeria.com/api/v1/sms/create', [
+                'query' => [
+                    'api_token' => 'VhvIIGSo31lbQcF1Emftg0C5LfhnLJ4z7BJmW4gBRbrPmSPUBOaqod83INGo',
+                    'from'      => 'TLSavings',
+                    'to'        => '08116690476',
+                    'body'      => $message
+                ]
+            ]);
+
+        $response->getBody();
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }*/
 });
