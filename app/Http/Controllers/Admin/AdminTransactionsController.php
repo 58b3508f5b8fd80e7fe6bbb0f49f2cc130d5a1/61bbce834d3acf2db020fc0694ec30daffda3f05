@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\SendSMS;
 use App\Transaction;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -215,6 +217,53 @@ class AdminTransactionsController extends Controller
 
         // return view('admin.newPNM', $data);
     }
+
+    public function transaction(
+        $transactionID,
+        $from,
+        $to,
+        $amount,
+        $description,
+        $type,
+        $status,
+        $remark
+    ) {
+
+        $client = new Client();
+
+        $value = $this->home()->getCurrentValue();
+        $transaction = new Transaction();
+        $transaction->transaction_id = $transactionID;
+        $transaction->from = $from;
+        $transaction->to = $to;
+        $transaction->amount = $amount * 100000;
+        $transaction->value = $value;
+        $transaction->description = $description;
+        $transaction->type = $type;
+        $transaction->status = $status;
+        $transaction->remark = $remark;
+        $save = $transaction->save();
+
+
+        if ($type == 'pnm-pnm') {
+            $message
+                = "Wallet credit!\nAmt: $amount\nDesc: $description is $status.\nDate: "
+                . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0,
+                    6)
+                . '...' . substr($transactionID, -6);
+            new SendSMS(User::where('wallet_id', $to)
+                ->value('phone_no'), $message);
+        }
+        $message
+            = "Wallet $remark!\nAmt: $amount\nDesc: $description\nDate: "
+            . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0, 6)
+            . '...' . substr($transactionID, -6) . "\nBal: " . $this->home()
+                ->getTotalPNM() / 100000;
+        new SendSMS(Auth::user()->phone_no, $message);
+
+        return $save;
+    }
+
 
     public function viewShare()
     {

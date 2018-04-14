@@ -40,7 +40,7 @@ class AdminEditController extends Controller
         $for = null;
         $id = (int)$request->input('id') - 1427;
         $userMeta = User_meta::find($id);
-
+        $passport = $details['passport_location'];
         if ($request->hasFile('form_location')
             && $request->file('form_location')->isValid()
         ) {
@@ -78,8 +78,9 @@ class AdminEditController extends Controller
             && $request->file('passport_location')->isValid()
         ) {
             Storage::delete($userMeta->passport_location);
-            $userMeta->passport_location = $request->file('passport_location')
+            $passport = $request->file('passport_location')
                 ->store('tlssavings/app/images/passport');
+            $userMeta->passport_location = $passport;
         }
 
         array_push($details, ['updated_at' => date('Y-m-d H:i:s')]);
@@ -101,6 +102,8 @@ class AdminEditController extends Controller
             ->update([
                 'first_name' => $request->input('first_name'),
                 'last_name'  => $request->input('last_name'),
+                'phone'      => $request->input('phone_no'),
+                'avatar'     => $passport,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
         if ($isUpdated && $userTable && $userMeta->save()) {
