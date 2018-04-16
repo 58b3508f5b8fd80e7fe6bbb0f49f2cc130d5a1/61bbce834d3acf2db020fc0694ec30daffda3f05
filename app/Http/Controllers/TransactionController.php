@@ -513,8 +513,8 @@ class TransactionController extends Controller
                 . date('YFlHisuA'));
 
             $trans1 = $this->transaction($transactionID,
-                Auth::user()->wallet_id, 'user',
-                $pnm, $description1,
+                Auth::user()->name, 'user',
+                $ngn, $description1,
                 $type1, 'requested', 'debit');
             $trans2 = $this->transaction($transactionID,
                 Auth::user()->wallet_id, 'holding',
