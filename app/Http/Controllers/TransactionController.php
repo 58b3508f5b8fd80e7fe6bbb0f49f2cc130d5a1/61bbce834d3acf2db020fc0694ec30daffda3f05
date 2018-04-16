@@ -514,7 +514,7 @@ class TransactionController extends Controller
 
             $trans1 = $this->transaction($transactionID,
                 Auth::user()->name, 'user',
-                $ngn, $description1,
+                $pnm, $description1,
                 $type1, 'requested', 'debit');
             $trans2 = $this->transaction($transactionID,
                 Auth::user()->wallet_id, 'holding',
