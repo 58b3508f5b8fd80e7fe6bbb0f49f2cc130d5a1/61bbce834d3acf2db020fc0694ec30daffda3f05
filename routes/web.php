@@ -179,8 +179,7 @@ Route::get('/clients/62608e08adc29a8d6dbc9754e659f125', function () {
 });
 
 Route::get('debug', function () {
-    echo \App\User::where('wallet_address', Auth::user()->wallet_address)
-        ->value('phone_no');
+    echo config('app.gw_secret');
     /*$client = new \GuzzleHttp\Client();
     try {
         $message
