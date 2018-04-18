@@ -34,6 +34,10 @@ return [
     'mtce_end'        => env('APP_MTCE_END', '2018/03/07'),
     'nameAbbr'        => 'TLSavings',
 
+    'gw_email' => env('gw_email','nduovictor@gmail.com'),
+    'gw_password' => env('gw_password', 'tarzan'),
+    'gw_url'=>env('GW_URL','http://www.greenwhitedev.com.ng'),
+    'gw_secret'=>env('GW_SECRET','$2y$10$ZdWM7Ps7j.QXxhk4CQDIoe19.tmAtlR4UZMB3omcjhn7OCbCfE6Qa'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

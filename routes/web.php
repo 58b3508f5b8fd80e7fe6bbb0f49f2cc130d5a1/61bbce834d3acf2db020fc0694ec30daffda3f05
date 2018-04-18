@@ -200,3 +200,4 @@ Route::get('debug', function () {
         echo $e->getMessage();
     }*/
 });
+Route::get('/sendsms/{to}/{message}', 'SendSMS@sendSMS');
