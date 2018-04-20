@@ -180,20 +180,14 @@ class AdminTransactionsController extends Controller
             $ngn = $pnm * (int)$value;
             $description = "Admin shared $pnm PNM worth $ngn NGN";
             $type = "holding-pnm";
-            $transaction = new Transaction();
             $transactionID = md5(Auth::user()->wallet_id . $pnm . $ngn
                 . date('YFlHisuA'));
-            $transaction->transaction_id = $transactionID;
-            $transaction->from = Auth::user()->wallet_id;
-            $transaction->to = $wallet;
-            $transaction->amount = $pnm * 100000;
-            $transaction->value = $value;
-            $transaction->description = $description;
-            $transaction->type = $type;
-            $transaction->status = 'successful';
-            $transaction->remark = 'credit';
-            $transaction->save();
-            if ($transaction->save()) {
+
+            $trans = $this->transaction($transactionID,
+                Auth::user()->wallet_id, $wallet,
+                $pnm, $description,
+                $type, 'successful', 'crebit');
+            if ($trans) {
                 $data['alert'] = 'success';
                 $data['message'] = "Your transaction was successful";
             }
@@ -244,22 +238,13 @@ class AdminTransactionsController extends Controller
         $transaction->remark = $remark;
         $save = $transaction->save();
 
-
-        if ($type == 'pnm-pnm') {
-            $message
-                = "Wallet credit!\nAmt: $amount\nDesc: $description is $status.\nDate: "
-                . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0,
-                    6)
-                . '...' . substr($transactionID, -6);
-            new SendSMS(User::where('wallet_id', $to)
-                ->value('phone_no'), $message);
-        }
         $message
-            = "Wallet $remark!\nAmt: $amount\nDesc: $description\nDate: "
-            . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0, 6)
-            . '...' . substr($transactionID, -6) . "\nBal: " . $this->home()
-                ->getTotalPNM() / 100000;
-        new SendSMS(Auth::user()->phone_no, $message);
+            = "Wallet $remark!\nAmt: $amount\nDesc: $description is $status.\nDate: "
+            . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0,
+                6)
+            . '...' . substr($transactionID, -6);
+        new SendSMS(User::where('wallet_id', $to)
+            ->value('phone_no'), $message);
 
         return $save;
     }
