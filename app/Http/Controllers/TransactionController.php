@@ -377,17 +377,8 @@ class TransactionController extends Controller
                 . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0, 6)
                 . '...' . substr($transactionID, -6) . "\nBal: " . $this->home()
                     ->getTotalPNM() / 100000;
-            $response = $client->request('post',
-                'https://www.bulksmsnigeria.com/api/v1/sms/create', [
-                    'query' => [
-                        'api_token' => 'VhvIIGSo31lbQcF1Emftg0C5LfhnLJ4z7BJmW4gBRbrPmSPUBOaqod83INGo',
-                        'from'      => config('app.nameAbbr'),
-                        'to'        => Auth::user()->phone_no,
-                        'body'      => substr($message, 0, 160)
-                    ]
-                ]);
-
-            echo $response->getBody();
+            $sms = new SendSMS();
+            $response = $sms->sendSMS(Auth::user()->phone_no, $message);
         } catch (\Exception $e) {
 
         }
