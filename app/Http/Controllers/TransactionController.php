@@ -360,17 +360,9 @@ class TransactionController extends Controller
                     . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0,
                         6)
                     . '...' . substr($transactionID, -6);
-                $response = $client->request('post',
-                    'https://www.bulksmsnigeria.com/api/v1/sms/create', [
-                        'query' => [
-                            'api_token' => 'VhvIIGSo31lbQcF1Emftg0C5LfhnLJ4z7BJmW4gBRbrPmSPUBOaqod83INGo',
-                            'from'      => config('app.nameAbbr'),
-                            'to'        => User::where('wallet_id', $to)
-                                ->first()->phone_no,
-                            'body'      => substr($message, 0, 159)
-                        ]
-                    ]);
-                echo $response->getBody();
+                $sms = new SendSMS();
+                $response = $sms->sendSMS(User::where('wallet_id', $to)
+                    ->first()->phone_no, $message);
             }
             $message
                 = "Wallet $remark!\nAmt: $amount\nDesc: $description\nDate: "
