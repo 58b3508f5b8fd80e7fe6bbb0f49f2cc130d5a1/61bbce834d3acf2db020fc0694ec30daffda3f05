@@ -40,7 +40,7 @@ class AdminEditController extends Controller
         $for = null;
         $id = (int)$request->input('id') - 1427;
         $userMeta = User_meta::find($id);
-        $passport = $details['passport_location'];
+        $passport = $userMeta->passport_location;
         if ($request->hasFile('form_location')
             && $request->file('form_location')->isValid()
         ) {
@@ -102,7 +102,7 @@ class AdminEditController extends Controller
             ->update([
                 'first_name' => $request->input('first_name'),
                 'last_name'  => $request->input('last_name'),
-                'phone'      => $request->input('phone_no'),
+                'phone_no'      => $request->input('phone_no'),
                 'avatar'     => $passport,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
