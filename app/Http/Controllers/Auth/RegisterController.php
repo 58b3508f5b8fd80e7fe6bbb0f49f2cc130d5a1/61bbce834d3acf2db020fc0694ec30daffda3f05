@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'email'          => $data['email'],
             'password'       => bcrypt($data['password']),
             'pin'            => bcrypt($data['pin']),
-            'phone_no'       => $data['phone_no'],
+            'phone_no'       => $user->phone_no,
             'account_number' => $user->account_number,
             'wallet_address' => $user->wallet_address,
             'private_key'    => $user->private_key,
