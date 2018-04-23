@@ -223,8 +223,6 @@ class AdminTransactionsController extends Controller
         $remark
     ) {
 
-        $client = new Client();
-
         $value = $this->admin()->getCurrentValue();
         $transaction = new Transaction();
         $transaction->transaction_id = $transactionID;
@@ -243,8 +241,9 @@ class AdminTransactionsController extends Controller
             . date('d-m-Y H:i') . "\nID: " . substr($transactionID, 0,
                 6)
             . '...' . substr($transactionID, -6);
-        new SendSMS(User::where('wallet_id', $to)
-            ->value('phone_no'), $message);
+        $to = User::where('wallet_id', $to)->value('phone_no');
+        $sms = new SendSMS();
+        $response =  $sms->sendSMS($to, $message);
 
         return $save;
     }
