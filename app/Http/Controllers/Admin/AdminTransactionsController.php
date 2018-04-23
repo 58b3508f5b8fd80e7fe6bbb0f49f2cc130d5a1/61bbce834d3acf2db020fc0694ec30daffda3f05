@@ -225,7 +225,7 @@ class AdminTransactionsController extends Controller
 
         $client = new Client();
 
-        $value = $this->home()->getCurrentValue();
+        $value = $this->admin()->getCurrentValue();
         $transaction = new Transaction();
         $transaction->transaction_id = $transactionID;
         $transaction->from = $from;
