@@ -186,7 +186,7 @@ class AdminTransactionsController extends Controller
             $trans = $this->transaction($transactionID,
                 Auth::user()->wallet_id, $wallet,
                 $pnm, $description,
-                $type, 'successful', 'crebit');
+                $type, 'successful', 'credit');
             if ($trans) {
                 $data['alert'] = 'success';
                 $data['message'] = "Your transaction was successful";
