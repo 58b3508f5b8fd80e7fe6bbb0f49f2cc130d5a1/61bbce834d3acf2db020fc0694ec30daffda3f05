@@ -4,12 +4,7 @@
     <list default="true" id="7d803a88-2fc0-4199-959f-2a0dba854fc2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SendSMS.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SendSMS.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/partials/editUser.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/partials/editUser.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/users.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/users.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,7 +55,7 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="SendSMS.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="SendSMS.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SendSMS.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="272">
@@ -91,8 +86,8 @@
           <file leaf-file-name="AdminTransactionsController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="245" column="50" lean-forward="false" selection-start-line="244" selection-start-column="8" selection-end-line="245" selection-end-column="50" />
+                <state relative-caret-position="176">
+                  <caret line="191" column="0" lean-forward="true" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
                   <folding>
                     <element signature="e#46#79#0#PHP" expanded="true" />
                   </folding>
@@ -103,8 +98,8 @@
           <file leaf-file-name="AdminAddController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="160">
-                  <caret line="206" column="53" lean-forward="true" selection-start-line="200" selection-start-column="0" selection-end-line="206" selection-end-column="53" />
+                <state relative-caret-position="128">
+                  <caret line="204" column="114" lean-forward="false" selection-start-line="204" selection-start-column="114" selection-end-line="204" selection-end-column="114" />
                   <folding>
                     <element signature="e#46#79#0#PHP" expanded="true" />
                   </folding>
@@ -115,8 +110,8 @@
           <file leaf-file-name="AdminEditController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="400">
-                  <caret line="233" column="48" lean-forward="false" selection-start-line="233" selection-start-column="48" selection-end-line="233" selection-end-column="48" />
+                <state relative-caret-position="384">
+                  <caret line="232" column="204" lean-forward="false" selection-start-line="232" selection-start-column="204" selection-end-line="232" selection-end-column="204" />
                   <folding>
                     <element signature="e#46#79#0#PHP" expanded="true" />
                   </folding>
@@ -142,11 +137,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RegisterController.php" pinned="false" current-in-tab="false">
+          <file leaf-file-name="RegisterController.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1472">
-                  <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
+                <state relative-caret-position="446">
+                  <caret line="97" column="108" lean-forward="false" selection-start-line="97" selection-start-column="108" selection-end-line="97" selection-end-column="108" />
                   <folding />
                 </state>
               </provider>
@@ -159,8 +154,8 @@
           <file leaf-file-name="users.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/resources/views/admin/users.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="214" column="42" lean-forward="false" selection-start-line="214" selection-start-column="42" selection-end-line="214" selection-end-column="42" />
+                <state relative-caret-position="304">
+                  <caret line="210" column="14" lean-forward="true" selection-start-line="210" selection-start-column="14" selection-end-line="210" selection-end-column="14" />
                   <folding>
                     <marker date="1524608792007" expanded="true" signature="4014:4048" ph="..." />
                   </folding>
@@ -326,14 +321,14 @@
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/partials/editUser.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SendSMS.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/users.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
       </list>
     </option>
   </component>
@@ -546,7 +541,7 @@
       <workItem from="1524243474465" duration="4059000" />
       <workItem from="1524475086090" duration="15168000" />
       <workItem from="1524576448132" duration="612000" />
-      <workItem from="1524598980992" duration="6804000" />
+      <workItem from="1524598980992" duration="7188000" />
     </task>
     <task id="LOCAL-00001" summary="Finished off with user's transactions. Now to work on Settings">
       <created>1517041967637</created>
@@ -688,11 +683,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524494292968</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="upgrade">
+      <created>1524608845123</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1524608845123</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="803513000" />
+    <option name="totallyTimeSpent" value="803897000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -1046,24 +1048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1472">
-          <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="206" column="53" lean-forward="true" selection-start-line="200" selection-start-column="0" selection-end-line="206" selection-end-column="53" />
-          <folding>
-            <element signature="e#46#79#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -1108,36 +1092,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="233" column="48" lean-forward="false" selection-start-line="233" selection-start-column="48" selection-end-line="233" selection-end-column="48" />
-          <folding>
-            <element signature="e#46#79#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="245" column="50" lean-forward="false" selection-start-line="244" selection-start-column="8" selection-end-line="245" selection-end-column="50" />
-          <folding>
-            <element signature="e#46#79#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/users.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="214" column="42" lean-forward="false" selection-start-line="214" selection-start-column="42" selection-end-line="214" selection-end-column="42" />
-          <folding>
-            <marker date="1524608792007" expanded="true" signature="4014:4048" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SendSMS.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1145,6 +1099,54 @@
           <folding>
             <element signature="e#40#62#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/users.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="210" column="14" lean-forward="true" selection-start-line="210" selection-start-column="14" selection-end-line="210" selection-end-column="14" />
+          <folding>
+            <marker date="1524608792007" expanded="true" signature="4014:4048" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="191" column="0" lean-forward="true" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+          <folding>
+            <element signature="e#46#79#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="204" column="114" lean-forward="false" selection-start-line="204" selection-start-column="114" selection-end-line="204" selection-end-column="114" />
+          <folding>
+            <element signature="e#46#79#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="232" column="204" lean-forward="false" selection-start-line="232" selection-start-column="204" selection-end-line="232" selection-end-column="204" />
+          <folding>
+            <element signature="e#46#79#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="97" column="108" lean-forward="false" selection-start-line="97" selection-start-column="108" selection-end-line="97" selection-end-column="108" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -200,9 +200,9 @@ class AdminAddController extends Controller
         if ($user) {
             $sms = new SendSMS();
             $to = $details['phone_no'];
-            $message = "Hello " . $details['first_name']
+            $message = "Dear " . $details['first_name']
                 . ",\nYour account with " . config('app.name')
-                . " has been created successfully. Your account details will be sent to your email. Welcome to "
+                . " has been created successfully. Please visit any of our branches to get your login/registration details. Welcome to "
                 . config('app.name');
             $response = $sms->sendSMS($to, $message);
             $data['alert'] = 'success';
