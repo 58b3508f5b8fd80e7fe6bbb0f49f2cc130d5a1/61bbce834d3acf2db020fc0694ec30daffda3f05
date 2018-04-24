@@ -131,6 +131,8 @@ Route::middleware(['auth', 'isAdmin', 'isVerified'])
                                     'AdminEditController@getUser');
                                 Route::post('/edit/user',
                                     'AdminEditController@editUser');
+                                Route::post('/edit/user/account',
+                                    'AdminEditController@linkAccount');
                                 Route::post('/add/admin',
                                     'AdminAddController@addAdmin');
                                 Route::middleware(['superAdminLevel'])

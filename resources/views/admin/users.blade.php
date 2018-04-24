@@ -199,6 +199,26 @@
             $(selector).val(value);
         }
 
+        function linkAccount() {
+            $('#linkAccButton').attr('class', 'fa fa-spinner fa-spin');
+
+            var data = {
+                'id': $('#id').val(),
+                'bvn': $('#bvn').val(),
+                'bank_name': $('#bankname').val(),
+                'acc_name': $('#bankaccname').val(),
+                'acc_no': $('#bankaccno').val()
+            };
+            $.post('/admin/edit/user/account', data, function (result) {
+                alert(result.message);
+                $('#linkAccButton').attr('class', 'fa fa-link');
+                $('.modal').modal('hide');
+            }).fail(function () {
+                alert('Sorry, an error occurred');
+            });
+
+        }
+
         function viewEditUser(id, action) {
             var data = {
                 'id': id,
@@ -235,6 +255,8 @@
                 alert('Sorry, an error occurred');
             });
         }
+
+
 
     </script>
 @endsection

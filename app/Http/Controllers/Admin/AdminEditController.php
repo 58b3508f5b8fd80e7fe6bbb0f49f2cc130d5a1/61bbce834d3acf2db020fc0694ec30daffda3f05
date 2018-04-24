@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\SendSMS;
 use App\User;
 use App\User_meta;
 use Illuminate\Http\Request;
@@ -102,7 +103,7 @@ class AdminEditController extends Controller
             ->update([
                 'first_name' => $request->input('first_name'),
                 'last_name'  => $request->input('last_name'),
-                'phone_no'      => $request->input('phone_no'),
+                'phone_no'   => $request->input('phone_no'),
                 'avatar'     => $passport,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
@@ -213,6 +214,28 @@ class AdminEditController extends Controller
             'html'   => $html
         ]);
 
+    }
+
+    public function linkAccount(Request $request)
+    {
+        $id = (int)$request->input('id') - 1427;
+        $userMeta = User_meta::find($id);
+        $userMeta->bvn = $request->bvn;
+        $userMeta->bank_name = $request->bank_name;
+        $userMeta->bank_acc_name = $request->acc_name;
+        $userMeta->bank_acc_no = $request->acc_no;
+
+        if ($userMeta->save()) {
+            $sms = new SendSMS();
+            $to = $userMeta->phone_no;
+            $message = "Hello " . $userMeta->first_name
+                . ",\nYour account with " . config('app.name')
+                . " has been linked to the bank successfully.\nBank Name: $userMeta->bank_name,\nAcc. Name: $userMeta->bank_acc_name,\nAcc. No: $userMeta->bank_acc_no.\nPlese contact us for more enquiries.\n".config('app.name');
+            $resp = $sms->sendSMS($to, $message);
+            return response()->json([
+                'message' => 'Account has been linked successfully'
+            ]);
+        }
     }
 
     public function validateAdmin(array $data)

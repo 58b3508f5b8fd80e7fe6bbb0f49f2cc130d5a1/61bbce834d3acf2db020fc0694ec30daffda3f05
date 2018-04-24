@@ -22,7 +22,7 @@ class SendSMS extends Controller
                     'message' => $message
                 ]
             ]);
-        echo $response->getBody();
+        $send = $response->getBody();
         return true;
     }
 }

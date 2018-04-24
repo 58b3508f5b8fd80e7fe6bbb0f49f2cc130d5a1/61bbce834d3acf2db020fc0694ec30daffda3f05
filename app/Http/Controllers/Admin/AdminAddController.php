@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\SendSMS;
 use App\Transaction;
 use App\User;
 use App\User_meta;
@@ -89,7 +90,7 @@ class AdminAddController extends Controller
             $transaction->transaction_id = $transactionID;
             $transaction->from = Auth::user()->name;
             $transaction->to = Auth::user()->wallet_id;
-            $transaction->amount = $pnm*100000;
+            $transaction->amount = $pnm * 100000;
             $transaction->value = $value;
             $transaction->description = $description;
             $transaction->type = $type;
@@ -197,9 +198,15 @@ class AdminAddController extends Controller
 
         $user = $this->createUsers($details);
         if ($user) {
+            $sms = new SendSMS();
+            $to = $details['phone_no'];
+            $message = "Hello " . $details['first_name']
+                . ",\nYour account with " . config('app.name')
+                . " has been created successfully. Your account details will be sent to your email. Welcome to "
+                . config('app.name');
+            $response = $sms->sendSMS($to, $message);
             $data['alert'] = 'success';
             $data['message'] = "User was created successfully";
-
         } else {
             $data['alert'] = 'danger';
             $data['message'] = "There was an error in creating the user";

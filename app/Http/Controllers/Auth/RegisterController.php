@@ -74,7 +74,7 @@ class RegisterController extends Controller
         $changeStatus = User_meta::find($data['find'] - 1147);
         $changeStatus->status = 'registered';
         $changeStatus->save();
-        return User::create([
+        $create = User::create([
             'first_name'     => $user->first_name,
             'last_name'      => $user->last_name,
             'wallet_id'      => md5($user->wallet_address . $data['email']
@@ -92,6 +92,13 @@ class RegisterController extends Controller
             'avatar'         => $user->passport_location,
             'access_level'   => '1'
         ]);
+        $sms = new SendSMS();
+        $to = $user->phone_no;
+        $message = "Hello " . $user->first_name
+            . ",\nYour registration on TLSavings is now complete. You will recieve a confirmation email from us. Thank you\n"
+            . config('app.name');
+        $response = $sms->sendSMS($to, $message);
+        return $create;
     }
 
     public function join(Request $request)

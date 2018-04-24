@@ -342,7 +342,7 @@ else $readonly = null;
                 </div>
             </div>
             <div class="row block">
-                <div class="col-md-3 col-xs-6">
+                <div class="col-md-2 col-xs-6">
                     <div class="form-group{{ $errors->has('bvn') ? ' is-invalid' : '' }} row">
                         <div class="col-12">
                             <label for="bvn">BVN</label>
@@ -389,7 +389,7 @@ else $readonly = null;
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-xs-6">
+                <div class="col-md-2 col-xs-6">
                     <div class="form-group{{ $errors->has('bank_acc_no') ? ' is-invalid' : '' }} row">
                         <div class="col-12">
                             <label for="bankaccno">Bank Account No.</label>
@@ -401,6 +401,13 @@ else $readonly = null;
                                         {{ $errors->first('bank_acc_no') }}
                                     </span>
                             @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <div class="form-group row" style="margin-top:25px">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-alt-success btn-lg" onclick="linkAccount()"><i class="fa fa-link" id="linkAccButton"></i> Link</button>
                         </div>
                     </div>
                 </div>
