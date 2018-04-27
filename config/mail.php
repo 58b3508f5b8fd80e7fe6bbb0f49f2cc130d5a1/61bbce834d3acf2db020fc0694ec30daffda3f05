@@ -12,7 +12,7 @@ return [ /*
           * | "ses", "sparkpost", "log"
           * |
           */
-         'driver' => env ( 'MAIL_DRIVER', 'smtp' ),
+         'driver' => env('MAIL_DRIVER', 'smtp'),
 
          /*
          |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ return [ /*
          |
          */
 
-         'host' => env ( 'MAIL_HOST', 'mx1.hostinger.com' ),
+         'host' => env('MAIL_HOST', 'mx1.hostinger.com'),
 
          /*
          |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [ /*
          |
          */
 
-         'port' => env ( 'MAIL_PORT', 587 ),
+         'port' => env('MAIL_PORT', 587),
 
          /*
          |--------------------------------------------------------------------------
@@ -51,8 +51,10 @@ return [ /*
          |
          */
 
-         'from' => [ 'address' => env ( 'MAIL_FROM_ADDRESS', 'noreply@tlsavings.xyz' ), 'name' => env (
-             'MAIL_FROM_NAME', 'noreply@tlsavings.xyz' ) ],
+         'from' => [
+             'address' => env('MAIL_FROM_ADDRESS', 'noreply@tlsavings.xyz'),
+             'name'    => env('MAIL_FROM_NAME', 'noreply@tlsavings.xyz')
+         ],
 
          /*
          |--------------------------------------------------------------------------
@@ -65,7 +67,7 @@ return [ /*
          |
          */
 
-         'encryption' => env ( 'MAIL_ENCRYPTION', 'tls' ),
+         'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
          /*
          |--------------------------------------------------------------------------
@@ -78,7 +80,7 @@ return [ /*
          |
          */
 
-         'username' => env('MAIL_USERNAME','noreply@tlsavings.xyz'),
+         'username' => env('MAIL_USERNAME', 'noreply@tlsavings.xyz'),
 
          /*
          |--------------------------------------------------------------------------
@@ -91,7 +93,7 @@ return [ /*
          |
          */
 
-         'password' =>  env('MAIL_PASSWORD','E]I&OiTC/6AHmA6i$2'),
+         'password' => env('MAIL_PASSWORD', 'E]I&OiTC/6AHmA6i$2'),
 
          /*
          |--------------------------------------------------------------------------
@@ -104,4 +106,5 @@ return [ /*
          |
          */
 
-         'sendmail' => '/usr/sbin/sendmail -bs' ];
+         'sendmail' => '/usr/sbin/sendmail -bs'
+];

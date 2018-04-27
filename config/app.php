@@ -29,12 +29,12 @@ return [
 
     'designer' => 'GreenWhiteDev',
 
-    'designerWebsite' => 'http://greenwhitedev.com.ng',
+    'designerWebsite' => 'https://greenwhitedev.com.ng',
     'maintenance'     => env('APP_MAINTENANCE', false),
     'mtce_end'        => env('APP_MTCE_END', '2018/03/07'),
     'nameAbbr'        => 'TLSavings',
 
-    'gw_url'=>env('GW_URL','http://www.greenwhitedev.com.ng'),
+    'gw_url'=>env('GW_URL','https://greenwhitedev.com.ng'),
     'gw_secret'=>env('GW_SECRET','$2y$10$H5mdrjrob6fR6AKZV1tS3O6/fIa09KiEN7t0LvSFKXWp8yA5Ehf72'),
     /*
     |--------------------------------------------------------------------------
