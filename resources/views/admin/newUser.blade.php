@@ -131,7 +131,7 @@ $states = [
                                 <input class="form-control form-control-lg" id="mega-walletaddress"
                                        name="wallet_address"
                                        placeholder="Enter user wallet address.." type="text"
-                                       value="{{old('wallet_address')}}">
+                                       value="{{md5(date('Y-m-d s-i-H'))}}">
                             </div>
                             @if ($errors->has('wallet_address'))
                                 <span class="invalid-feedback">
@@ -145,7 +145,7 @@ $states = [
                                 <input class="form-control form-control-lg" id="mega-privatekey"
                                        name="private_key"
                                        placeholder="Enter user private key.." type="text"
-                                       value="{{old('private_key')}}">
+                                       value="{{md5(date('Y-m-d H-i-s'))}}">
                             </div>
                             @if ($errors->has('private_key'))
                                 <span class="invalid-feedback">
