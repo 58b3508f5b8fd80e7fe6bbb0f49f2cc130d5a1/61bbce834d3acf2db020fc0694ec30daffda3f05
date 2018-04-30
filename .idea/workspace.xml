@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d803a88-2fc0-4199-959f-2a0dba854fc2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/power_queries" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/newUser.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/newUser.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/users.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/users.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -78,23 +76,25 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php">
+          <file leaf-file-name="AdminAddController.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="608">
-                  <caret line="42" column="20" lean-forward="false" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
-                  <folding />
+                <state relative-caret-position="0">
+                  <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+                  <folding>
+                    <element signature="e#46#79#0#PHP" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="AdminAddController.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
+          <file leaf-file-name="RegisterController.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1184">
-                  <caret line="82" column="24" lean-forward="false" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+                <state relative-caret-position="176">
+                  <caret line="84" column="56" lean-forward="false" selection-start-line="84" selection-start-column="56" selection-end-line="84" selection-end-column="56" />
                   <folding>
-                    <element signature="e#46#79#0#PHP" expanded="true" />
+                    <element signature="e#45#78#0#PHP" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -130,11 +130,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="newUser.blade.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="newUser.blade.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/resources/views/admin/newUser.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="286">
-                  <caret line="133" column="69" lean-forward="false" selection-start-line="133" selection-start-column="69" selection-end-line="133" selection-end-column="69" />
+                <state relative-caret-position="192">
+                  <caret line="413" column="49" lean-forward="true" selection-start-line="413" selection-start-column="49" selection-end-line="413" selection-end-column="49" />
                   <folding>
                     <marker date="1525101253999" expanded="true" signature="45883:45917" ph="..." />
                   </folding>
@@ -204,7 +204,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Auth::user()</find>
       <find>/transactions'</find>
       <find>viewT</find>
       <find>wallet if</find>
@@ -234,6 +233,7 @@
       <find>bvn</find>
       <find>Mail::to</find>
       <find>wallet</find>
+      <find>bank</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;p class=&quot;wb-stl-normal&quot; style=&quot;text-align: justify;&quot;&gt;</replace>
@@ -334,7 +334,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/SendSMS.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
         <option value="$PROJECT_DIR$/config/mail.php" />
         <option value="$PROJECT_DIR$/config/filesystems.php" />
         <option value="$PROJECT_DIR$/config/database.php" />
@@ -344,6 +343,7 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/resources/views/admin/users.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/newUser.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
       </list>
     </option>
   </component>
@@ -406,7 +406,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="SearchEverywhereHistoryKey" value="user&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;database&#9;FILE&#9;file:///var/www/html/tlsavings/config/database.php&#10;apich&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIChargeController.php&#10;add&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;transaction&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;mail&#9;FILE&#9;file:///var/www/html/tlsavings/config/mail.php&#10;env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;app&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/app.blade.php&#10;users&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;editu&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/editUser.blade.php&#10;adminA&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;register&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;admined&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;transa&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;transac&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;.en&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;histor&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/transactionHistory.blade.php&#10;sett&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/settings.blade.php&#10;app.p&#9;FILE&#9;file:///var/www/html/tlsavings/config/app.php&#10;.env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;api.php&#9;FILE&#9;file:///var/www/html/tlsavings/routes/api.php&#10;api.p&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIController.php&#10;apicon&#9;null&#9;null&#10;api&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIChargeController.php&#10;createA&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/createAPI.blade.php&#10;wit&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/withdrawal.blade.php&#10;trans&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;edit&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;regist&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;smsc&#9;null&#9;null&#10;admin&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;composer&#9;FILE&#9;file:///var/www/html/tlsavings/composer.json&#10;htacc&#9;FILE&#9;file:///var/www/html/tlsavings/public/.htaccess&#10;htacc\&#9;FILE&#9;file:///var/www/html/tlsavings/.htaccess&#10;us&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;new&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;edi&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;addcon&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;re&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;search&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/search.blade.php&#10;usercon&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminUserController.php&#10;adminTra&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;home&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/HomeController.php&#10;history&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/history.blade.php&#10;transactionc&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;we&#9;FILE&#9;file:///var/www/html/tlsavings/routes/web.php&#10;searc&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminSearchController.php&#10;ne&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;ed&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/editUser.blade.php&#10;edituser&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/editUser.blade.php" />
+    <property name="SearchEverywhereHistoryKey" value="re&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;add&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;user&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;database&#9;FILE&#9;file:///var/www/html/tlsavings/config/database.php&#10;apich&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIChargeController.php&#10;transaction&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;mail&#9;FILE&#9;file:///var/www/html/tlsavings/config/mail.php&#10;env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;app&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/app.blade.php&#10;users&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;editu&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/editUser.blade.php&#10;adminA&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;register&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;admined&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;transa&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;transac&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;.en&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;histor&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/transactionHistory.blade.php&#10;sett&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/settings.blade.php&#10;app.p&#9;FILE&#9;file:///var/www/html/tlsavings/config/app.php&#10;.env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;api.php&#9;FILE&#9;file:///var/www/html/tlsavings/routes/api.php&#10;api.p&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIController.php&#10;apicon&#9;null&#9;null&#10;api&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIChargeController.php&#10;createA&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/createAPI.blade.php&#10;wit&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/withdrawal.blade.php&#10;trans&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;edit&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;regist&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;smsc&#9;null&#9;null&#10;admin&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;composer&#9;FILE&#9;file:///var/www/html/tlsavings/composer.json&#10;htacc&#9;FILE&#9;file:///var/www/html/tlsavings/public/.htaccess&#10;htacc\&#9;FILE&#9;file:///var/www/html/tlsavings/.htaccess&#10;us&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;new&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;edi&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;addcon&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;search&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/search.blade.php&#10;usercon&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminUserController.php&#10;adminTra&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;home&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/HomeController.php&#10;history&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/history.blade.php&#10;transactionc&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;we&#9;FILE&#9;file:///var/www/html/tlsavings/routes/web.php&#10;searc&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminSearchController.php&#10;ne&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;ed&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/editUser.blade.php&#10;edituser&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/editUser.blade.php" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../tlsavings (1)/app/Http/Controllers/TransactionController.php" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
@@ -555,7 +555,7 @@
       <workItem from="1524838386776" duration="1304000" />
       <workItem from="1524908655201" duration="1356000" />
       <workItem from="1525067714182" duration="1891000" />
-      <workItem from="1525096255872" duration="1961000" />
+      <workItem from="1525096255872" duration="2943000" />
     </task>
     <task id="LOCAL-00001" summary="Finished off with user's transactions. Now to work on Settings">
       <created>1517041967637</created>
@@ -718,11 +718,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524809241477</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="upgrade">
+      <created>1525101263871</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1525101263871</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="817318000" />
+    <option name="totallyTimeSpent" value="818300000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -737,7 +744,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294509" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Copy/Paste" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16540213" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3061564" sideWeight="0.48786038" order="7" side_tool="false" content_ui="tabs" x="19" y="44" width="1285" height="625" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3061564" sideWeight="0.48786038" order="7" side_tool="false" content_ui="tabs" x="19" y="44" width="1285" height="625" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39933443" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1036,13 +1043,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="848">
@@ -1055,16 +1055,6 @@
         <state relative-caret-position="1296">
           <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1184">
-          <caret line="82" column="24" lean-forward="false" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
-          <folding>
-            <element signature="e#46#79#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1156,10 +1146,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/newUser.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="133" column="69" lean-forward="false" selection-start-line="133" selection-start-column="69" selection-end-line="133" selection-end-column="69" />
+        <state relative-caret-position="192">
+          <caret line="413" column="49" lean-forward="true" selection-start-line="413" selection-start-column="49" selection-end-line="413" selection-end-column="49" />
           <folding>
             <marker date="1525101253999" expanded="true" signature="45883:45917" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+          <folding>
+            <element signature="e#46#79#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="84" column="56" lean-forward="false" selection-start-line="84" selection-start-column="56" selection-end-line="84" selection-end-column="56" />
+          <folding>
+            <element signature="e#45#78#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
