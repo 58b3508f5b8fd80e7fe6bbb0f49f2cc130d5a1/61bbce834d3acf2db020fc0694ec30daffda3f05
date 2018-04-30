@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'TLSavings'),
+    'name' => env('APP_NAME'),
 
     'description' => 'TLSavings official currency is the Pneuma Coin (NUMA COIN). We accept other currencies but they are exchanged to Pneuma before payment is made to an individuals account. To learn more about Pneuma visit the NUMA page above. Our vision is to encourage savings and interest on savings. We have several savings opportunity to encourage individuals save funds for big projects and get good interest rates on their savings. To learn more visit the savings page.',
     /*
@@ -34,8 +34,8 @@ return [
     'mtce_end'        => env('APP_MTCE_END', '2018/03/07'),
     'nameAbbr'        => 'TLSavings',
 
-    'gw_url'=>env('GW_URL','https://greenwhitedev.com.ng'),
-    'gw_secret'=>env('GW_SECRET','$2y$10$H5mdrjrob6fR6AKZV1tS3O6/fIa09KiEN7t0LvSFKXWp8yA5Ehf72'),
+    'gw_url'=>env('GW_URL'),
+    'gw_secret'=>env('GW_SECRET'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -125,8 +125,7 @@ return [
     |
     */
 
-    'key'    => env('APP_KEY',
-        'base64:TY624bq4E1bTO5OWZ2eCy0BJdJEBS4hHke6pJkU+JUU='),
+    'key'    => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
 
     /*
