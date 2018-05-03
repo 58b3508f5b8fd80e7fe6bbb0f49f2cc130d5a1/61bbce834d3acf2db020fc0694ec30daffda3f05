@@ -45,9 +45,47 @@ else $readonly = null;
 <div class="row block justify-content-center px-5">
     <div class="col-12">
         <form action="{{url('/admin/edit/user')}}" method="post" enctype="multipart/form-data" id="user-form"
-              {{--onsubmit="editUser(); return false;"--}}>
+                {{--onsubmit="editUser(); return false;"--}}>
             {{ csrf_field() }}
             <input {{$readonly}} type="hidden" value="{{$user['id']+1427}}" name="id" id="id">
+            @if (Auth::user()->access_level >= 4)
+                <div class="row block">
+                    <div class="col-md-12 col-xs-12">
+
+                        <div class="form-group{{ $errors->has('type') ? ' is-invalid' : '' }} row">
+                            <legend class="text-center">User Type</legend>
+                            <div class="col-12 text-center">
+                                <label class="css-control css-control-primary css-radio">
+                                    <input {{$readonly}} class="css-control-input" name="grade" type="radio"
+                                           value="student" id="student"
+                                           onchange="changeSelect('input[name=type]','student')"
+                                           @if($user['grade']=='student') checked @endif >
+                                    <span class="css-control-indicator"></span> Student
+                                </label>
+                                <label class="css-control css-control-primary css-radio">
+                                    <input {{$readonly}} class="css-control-input" name="grade" type="radio"
+                                           value="staff" id="staff"
+                                           onchange="changeSelect('input[name=type]','staff')"
+                                           @if($user['grade']=='staff') checked @endif>
+                                    <span class="css-control-indicator"></span> Staff
+                                </label>
+                                <label class="css-control css-control-primary css-radio">
+                                    <input {{$readonly}} class="css-control-input" name="grade" type="radio"
+                                           value="partner" id="partner"
+                                           onchange="changeSelect('input[name=type]','partner')"
+                                           @if($user['grade']=='partner') checked @endif>
+                                    <span class="css-control-indicator"></span> Partner
+                                </label>
+                            </div>
+                            @if ($errors->has('first_name'))
+                                <span class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row block">
                 <div class="col-md-4 col-xs-12">
 
@@ -407,7 +445,9 @@ else $readonly = null;
                 <div class="col-md-2 col-xs-6">
                     <div class="form-group row" style="margin-top:25px">
                         <div class="col-12">
-                            <button type="button" class="btn btn-alt-success btn-lg" onclick="linkAccount()"><i class="fa fa-link" id="linkAccButton"></i> Link</button>
+                            <button type="button" class="btn btn-alt-success btn-lg" onclick="linkAccount()"><i
+                                        class="fa fa-link" id="linkAccButton"></i> Link
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -647,7 +687,8 @@ else $readonly = null;
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="signatureImage"><img src="{{Storage::url($user['signature_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="signatureImage"><img src="{{Storage::url($user['signature_location'])}}"
+                                                  style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row block">
@@ -674,7 +715,8 @@ else $readonly = null;
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="utilityImage"><img src="{{Storage::url($user['utility_bill_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="utilityImage"><img src="{{Storage::url($user['utility_bill_location'])}}"
+                                                style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row block">
@@ -700,7 +742,8 @@ else $readonly = null;
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="idcardImage"><img src="{{Storage::url($user['idcard_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="idcardImage"><img src="{{Storage::url($user['idcard_location'])}}"
+                                               style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             <div class="row block">
@@ -724,7 +767,8 @@ else $readonly = null;
                     </div>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <div id="passportImage"><img src="{{Storage::url($user['passport_location'])}}" style="max-width: 100%; max-height: 20em;"></div>
+                    <div id="passportImage"><img src="{{Storage::url($user['passport_location'])}}"
+                                                 style="max-width: 100%; max-height: 20em;"></div>
                 </div>
             </div>
             {{--<div class="row block block">

@@ -42,6 +42,12 @@ class AdminEditController extends Controller
         $id = (int)$request->input('id') - 1427;
         $userMeta = User_meta::find($id);
         $passport = $userMeta->passport_location;
+        $grade = $userMeta->grade;
+        // drg >> to change user type, for only super admin
+        if (Auth::user()->access_level >= 4) {
+            $userMeta->grade = $details['grade'];
+            $grade = $details['grade'];
+        }
         if ($request->hasFile('form_location')
             && $request->file('form_location')->isValid()
         ) {
@@ -93,6 +99,7 @@ class AdminEditController extends Controller
         unset($details['passport_location']);
         unset($details['_token']);
         unset($details['id']);
+        unset($details['grade']);
         unset($details['for']);
         unset($details[0]);
 
@@ -105,17 +112,16 @@ class AdminEditController extends Controller
                 'last_name'  => $request->input('last_name'),
                 'phone_no'   => $request->input('phone_no'),
                 'avatar'     => $passport,
+                'grade'      => $grade,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
         if ($isUpdated && $userTable && $userMeta->save()) {
-            $message = "New Admin was edited successfully";
-            $for = $userMeta->status;
+            $message = "User was edited successfully";
         } else {
             $message = $isUpdated . ' < br>' . $userTable;
         }
-        $data['action'] = 'new admin';
+        $data['action'] = 'new user';
         return $this->getUsers('user', $for, $message);
-
 
     }
 
@@ -230,7 +236,8 @@ class AdminEditController extends Controller
             $to = $userMeta->phone_no;
             $message = "Hello " . $userMeta->first_name
                 . ",\nYour account with " . config('app.name')
-                . " has been linked to the bank successfully.\nBank Name: $userMeta->bank_name,\nAcc. Name: $userMeta->bank_acc_name,\nAcc. No: $userMeta->bank_acc_no.\nPlese contact us for more enquiries.\n".config('app.name');
+                . " has been linked to the bank successfully.\nBank Name: $userMeta->bank_name,\nAcc. Name: $userMeta->bank_acc_name,\nAcc. No: $userMeta->bank_acc_no.\nPlese contact us for more enquiries.\n"
+                . config('app.name');
             $resp = $sms->sendSMS($to, $message);
             return response()->json([
                 'message' => 'Account has been linked successfully'
