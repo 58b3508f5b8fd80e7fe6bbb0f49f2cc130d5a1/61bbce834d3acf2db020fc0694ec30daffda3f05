@@ -13,7 +13,7 @@
                     <div class="block-content">
                         <div class="block">
                             <div class="alert alert-info">
-                                <p class="text-center" style="font-size:1.5rem; font-weight: bold;">NGN Withdrawal</p>
+                                <p class="text-center" style="font-size:1.5rem; font-weight: bold;">{{$title}}</p>
                                 <p>Please Note:</p>
                                 <ul>
                                     <li>This withdrawal might take {{$duration}}.</li>
@@ -23,7 +23,7 @@
                                     <li>Your maximum withdrawal per day is {{$max_daily_withdrawal}}</li>
                                     <li>You will be charged a commission of {{$commission}} PNM for this transaction.
                                     </li>
-                                    <li>A message alert will be sent to your phone on your every transaction.</li>
+                                    <li>A message alert will be sent to your phone on every transaction.</li>
                                 </ul>
                                 <p>Thanks<br>{{config('app.name')}}</p>
 

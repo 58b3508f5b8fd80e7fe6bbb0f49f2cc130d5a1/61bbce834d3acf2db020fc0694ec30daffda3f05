@@ -59,6 +59,8 @@ class TransactionController extends Controller
                         $data['commission']=Setting::where('name', 'ngn_withdrawal_charge')
                             ->value('value');
                         break;
+                    default:
+                        return view('errors.404');
                 }
                 break;
             case('pnm'):
@@ -80,9 +82,27 @@ class TransactionController extends Controller
                         $data['duration'] = Setting::where('name',
                             'pnm_withdrawal_duration')
                             ->value('value');
+                        $data['duration'] = Setting::where('name',
+                            'pnm_withdrawal_duration')
+                            ->value('value');
+                        $data['max_withdrawal'] = Setting::where('name',
+                            $grade.'_pnm_withdrawal_limit')
+                            ->value('value');
+                        $data['max_daily_withdrawal'] = Setting::where('name',
+                            $grade.'_pnm_daily_withdrawal_limit')
+                            ->value('value');
+                        $data['pnm_balance']=$this->checkPNM();
+                        $data['ngn_balance']=$this->checkNGN();
+                        $data['today']=$this->checkDailyNGNWithdrawals();
+                        $data['commission']=Setting::where('name', 'ngn_withdrawal_charge')
+                              ->value('value');
                         break;
+                    default:
+                        return view('errors.404');
                 }
                 break;
+            default:
+                return view('errors.404');
         }
         return view("dashboard.transactions.$action", $data);
     }
