@@ -23,6 +23,7 @@ class TransactionController extends Controller
 
     public function index($for, $action)
     {
+        $grade = Auth::user()->grade;
         $data = [
             'for'    => $for,
             'action' => $action,
@@ -42,6 +43,20 @@ class TransactionController extends Controller
                             = "<i class='si si-fire'></i> NGN to Bank <i class='fa fa-institution'></i>";
                         $data['duration'] = Setting::where('name',
                             'ngn_withdrawal_duration')
+                            ->value('value');
+                        $data['duration'] = Setting::where('name',
+                            'ngn_withdrawal_duration')
+                            ->value('value');
+                        $data['max_withdrawal'] = Setting::where('name',
+                            $grade.'_ngn_withdrawal_limit')
+                            ->value('value');
+                        $data['max_daily_withdrawal'] = Setting::where('name',
+                            $grade.'_ngn_daily_withdrawal_limit')
+                            ->value('value');
+                        $data['pnm_balance']=$this->checkPNM();
+                        $data['ngn_balance']=$this->checkNGN();
+                        $data['today']=$this->checkDailyNGNWithdrawals();
+                        $data['commission']=Setting::where('name', 'ngn_withdrawal_charge')
                             ->value('value');
                         break;
                 }
@@ -72,15 +87,20 @@ class TransactionController extends Controller
         return view("dashboard.transactions.$action", $data);
     }
 
-    public function checkDailyNGNWithdrawals($ngn)
+    public function checkDailyNGNWithdrawals($ngn=null)
     {
-        $limit = Setting::where('name', 'ngn_daily_withdrawal_limit')
+        $grade = Auth::user()->grade;
+        $limit = Setting::where('name', $grade.'_ngn_daily_withdrawal_limit')
             ->value('value');
         $amount = Transaction::where('type', 'ngn-bank')
             ->where('from', Auth::user()->name)
             ->whereDate('created_at', DB::raw('CURDATE()'))
             ->where('status', 'requested')->sum(DB::raw('amount*value'));
-        if ($amount / 100000 + $ngn < $limit) {
+        $amount=$amount / 100000;
+        if ($ngn===null){
+            return $amount;
+        }
+        elseif ($amount + $ngn < $limit) {
             return true;
         }
         return false;
@@ -88,7 +108,8 @@ class TransactionController extends Controller
 
     public function checkDailyPNMWithdrawals($pnm)
     {
-        $limit = Setting::where('name', 'pnm_daily_withdrawal_limit')
+        $grade = Auth::user()->grade;
+        $limit = Setting::where('name', $grade.'_pnm_daily_withdrawal_limit')
             ->value('value');
         $amount = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
@@ -100,19 +121,25 @@ class TransactionController extends Controller
         return false;
     }
 
-    public function checkNGN($amount)
+    public function checkNGN($amount=null)
     {
-        $balance = $this->home()->getTotalNGN();
-        if ($balance / 100000 >= $amount) {
+        $balance = $this->home()->getTotalNGN() / 100000;
+        if ($amount===null){
+            return $balance;
+        }
+        elseif ($balance >= $amount) {
             return true;
         }
         return false;
     }
 
-    public function checkPNM($amount)
+    public function checkPNM($amount=null)
     {
         $balance = $this->home()->getTotalPNM() / 100000;
-        if ($balance >= $amount) {
+        if($amount === null){
+            return $balance;
+        }
+        elseif ($balance >= $amount) {
             return true;
         }
         return false;
@@ -120,7 +147,9 @@ class TransactionController extends Controller
 
     public function checkNGNWithdrawalLimit($ngn)
     {
-        $limit = Setting::where('name', 'ngn_withdrawal_limit')->value('value');
+        $grade = Auth::user()->grade;
+        $limit = Setting::where('name', $grade . '_ngn_withdrawal_limit')
+            ->value('value');
 
         if ($ngn <= $limit) {
             return true;
@@ -130,7 +159,9 @@ class TransactionController extends Controller
 
     public function checkPNMWithdrawalLimit($pnm)
     {
-        $limit = Setting::where('name', 'pnm_withdrawal_limit')->value('value');
+        $grade = Auth::user()->grade;
+        $limit = Setting::where('name', $grade . '_pnm_withdrawal_limit')
+            ->value('value');
         $amount = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
                 DB::raw('CURDATE()'))->where('status', 'successful')
@@ -143,7 +174,9 @@ class TransactionController extends Controller
 
     public function checkPNMTransferLimit($pnm)
     {
-        $limit = Setting::where('name', 'pnm_transfer_limit')->value('value');
+        $grade = Auth::user()->grade;
+        $limit = Setting::where('name', $grade.'_pnm_transfer_limit')->value('value');
+
         $amount = Transaction::where('type', 'pnm-pnm')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
                 DB::raw('CURDATE()'))->where('status', 'successful')
@@ -156,7 +189,8 @@ class TransactionController extends Controller
 
     public function checkDailyPNMConversionLimit($pnm)
     {
-        $limit = Setting::where('name', 'pnm_daily_conversion_limit')
+        $grade = Auth::user()->grade;
+        $limit = Setting::where('name', $grade.'_pnm_daily_conversion_limit')
             ->value('value');
         $amount = Transaction::where('type', 'pnm-ngn')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
@@ -171,7 +205,8 @@ class TransactionController extends Controller
 
     public function checkPNMConversionLimit($pnm)
     {
-        $limit = Setting::where('name', 'pnm_conversion_limit')->value('value');
+        $grade = Auth::user()->grade;
+        $limit = Setting::where('name', $grade.'_pnm_conversion_limit')->value('value');
         if ($pnm <= $limit) {
             return true;
         }
