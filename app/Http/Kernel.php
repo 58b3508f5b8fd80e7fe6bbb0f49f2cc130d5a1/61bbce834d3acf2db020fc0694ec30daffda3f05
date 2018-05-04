@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminLevel;
+use App\Http\Middleware\CheckMaintenance;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use App\Http\Middleware\IsVerified;
@@ -75,6 +76,6 @@ class Kernel extends HttpKernel
             'adminLevel'=> AdminLevel::class,
             'seniorAdminLevel'=>SeniorAdminLevel::class,
             'superAdminLevel'=>SuperAdminLevel::class,
-
+            'checkMaintenance' => CheckMaintenance::class,
         ];
 }

@@ -30,7 +30,7 @@ return [
     'designer' => 'GreenWhiteDev',
 
     'designerWebsite' => 'https://greenwhitedev.com.ng',
-    'maintenance'     => env('APP_MAINTENANCE', false),
+    'maintenance'     => env('APP_MAINTENANCE'),
     'mtce_end'        => env('APP_MTCE_END', '2018/03/07'),
     'nameAbbr'        => 'TLSavings',
 
