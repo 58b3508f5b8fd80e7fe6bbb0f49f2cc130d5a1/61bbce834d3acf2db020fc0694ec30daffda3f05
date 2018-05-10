@@ -19,7 +19,7 @@
                             <div class="col-12">
                                 <div class="form-material floating">
                                     <input class="form-control" id="login-username" name="name"
-                                           value={{old('name')}} type="text" required>
+                                           value="{{old('name')}}" type="text" required>
                                     <label for="login-username">Username</label>
                                 </div>
                                 @if ($errors->has('name'))
