@@ -5,3 +5,9 @@ Homestead.json
 npm-debug.log
 yarn-error.log
 
+/pay/node_modules
+/pay/Homestead.yaml
+/pay/Homestead.json
+/pay/.env
+/pay/npm-debug.log
+/pay/yarn-error.log

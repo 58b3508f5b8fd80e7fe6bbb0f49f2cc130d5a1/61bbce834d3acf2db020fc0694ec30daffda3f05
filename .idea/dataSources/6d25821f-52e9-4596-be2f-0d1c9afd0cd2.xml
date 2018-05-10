@@ -614,9 +614,9 @@
       <Position>9</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="154" parent="23" name="phone_no">
+    <column id="154" parent="23" name="secret_id">
       <Position>10</Position>
-      <DataType>varchar(45)|0</DataType>
+      <DataType>varchar(255)|0</DataType>
     </column>
     <column id="155" parent="23" name="avatar">
       <Position>11</Position>
@@ -672,56 +672,60 @@
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
-    <index id="165" parent="23" name="users_account_number_uindex">
+    <column id="165" parent="23" name="phone_no">
+      <Position>21</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <index id="166" parent="23" name="users_account_number_uindex">
       <ColNames>account_number</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="166" parent="23" name="users_email_uindex">
+    <index id="167" parent="23" name="users_email_uindex">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="167" parent="23" name="users_name_uindex">
+    <index id="168" parent="23" name="users_name_uindex">
       <ColNames>name</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="168" parent="23" name="users_private_key_uindex">
+    <index id="169" parent="23" name="users_private_key_uindex">
       <ColNames>private_key</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="169" parent="23" name="users_wallet_address_uindex">
+    <index id="170" parent="23" name="users_wallet_address_uindex">
       <ColNames>wallet_address</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="170" parent="23" name="users_wallet_id_uindex">
+    <index id="171" parent="23" name="users_wallet_id_uindex">
       <ColNames>wallet_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="171" parent="23" name="PRIMARY">
+    <key id="172" parent="23" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="172" parent="23" name="users_name_uindex">
+    <key id="173" parent="23" name="users_name_uindex">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>users_name_uindex</UnderlyingIndexName>
     </key>
-    <key id="173" parent="23" name="users_email_uindex">
+    <key id="174" parent="23" name="users_email_uindex">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>users_email_uindex</UnderlyingIndexName>
     </key>
-    <key id="174" parent="23" name="users_wallet_id_uindex">
+    <key id="175" parent="23" name="users_wallet_id_uindex">
       <ColNames>wallet_id</ColNames>
       <UnderlyingIndexName>users_wallet_id_uindex</UnderlyingIndexName>
     </key>
-    <key id="175" parent="23" name="users_account_number_uindex">
+    <key id="176" parent="23" name="users_account_number_uindex">
       <ColNames>account_number</ColNames>
       <UnderlyingIndexName>users_account_number_uindex</UnderlyingIndexName>
     </key>
-    <key id="176" parent="23" name="users_wallet_address_uindex">
+    <key id="177" parent="23" name="users_wallet_address_uindex">
       <ColNames>wallet_address</ColNames>
       <UnderlyingIndexName>users_wallet_address_uindex</UnderlyingIndexName>
     </key>
-    <key id="177" parent="23" name="users_private_key_uindex">
+    <key id="178" parent="23" name="users_private_key_uindex">
       <ColNames>private_key</ColNames>
       <UnderlyingIndexName>users_private_key_uindex</UnderlyingIndexName>
     </key>

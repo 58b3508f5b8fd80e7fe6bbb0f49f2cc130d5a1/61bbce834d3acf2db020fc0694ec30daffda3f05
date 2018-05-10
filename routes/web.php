@@ -189,25 +189,17 @@ Route::middleware(['checkMaintenance'])->group(function () {
     });
 
     Route::get('debug', function () {
-        echo config('app.gw_secret');
-        /*$client = new \GuzzleHttp\Client();
-        try {
-            $message
-                = "Wallet debit! \nAmt: 3 PNM \nDesc: 3 PNM transfer from bee318...818857 to 7190f5...fcb42b \nDate: 14-04-2018 08:38 \nID: e356f5...3ccdc1 \nBal: 15.90361 PNM";
-            $response = $client->request('post',
-                'https://www.bulksmsnigeria.com/api/v1/sms/create', [
-                    'query' => [
-                        'api_token' => 'VhvIIGSo31lbQcF1Emftg0C5LfhnLJ4z7BJmW4gBRbrPmSPUBOaqod83INGo',
-                        'from'      => 'TLSavings',
-                        'to'        => '08116690476',
-                        'body'      => $message
-                    ]
-                ]);
+        $users=\App\User::get();
 
-            $response->getBody();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }*/
+        foreach($users as $user){
+            echo strlen($user->wallet_id)."<br>";
+            /*\Illuminate\Support\Facades\DB::table('users')
+                ->where('wallet_id', $user->wallet_id)
+                ->where('type','user')
+                ->update(['secret_id' => \Illuminate\Support\Facades\Hash::make($user->wallet_id)]);
+            echo "$user->email --- $user->wallet_id --- ".Hash::make($user->wallet_id)." <br>";*/
+        }
+
     });
 });
 Route::get('/maintenance', function () {
@@ -217,4 +209,4 @@ Route::get('/maintenance', function () {
         return redirect('/');
     }
 });
-Route::get('/sendsms/{to}/{message}', 'SendSMS@sendSMS');
+//Route::get('/sendsms/{to}/{message}', 'SendSMS@sendSMS');

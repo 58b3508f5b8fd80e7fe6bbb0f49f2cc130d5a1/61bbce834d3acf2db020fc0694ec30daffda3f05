@@ -49,7 +49,10 @@ class User extends Authenticatable
 
     public function findForPassport($username)
     {
-        return $this->where('wallet_id', $username)->first();
+        if(strlen($username)>=32) {
+            return $this->where('wallet_id', $username)->first();
+        }
+        return $this->where('name', $username)->first();
     }
 
     public function validateForPassportPasswordGrant($password)

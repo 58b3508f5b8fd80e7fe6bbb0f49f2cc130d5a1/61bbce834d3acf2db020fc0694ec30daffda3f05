@@ -27,6 +27,7 @@ return [
     |
     */
 
+    'developer' => 'greenwhitedev@gmail.com',
     'designer' => 'GreenWhiteDev',
 
     'designerWebsite' => 'https://greenwhitedev.com.ng',

@@ -1,0 +1,74 @@
+-- MySQL dump 10.16  Distrib 10.1.22-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 127.0.0.1    Database: tlsavings
+-- ------------------------------------------------------
+-- Server version	10.1.22-MariaDB-
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `name` varchar(185) NOT NULL,
+  `email` varchar(185) NOT NULL,
+  `wallet_id` varchar(40) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `pin` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `phone_no` varchar(45) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT 'tlssavings/public/images/default-user.png',
+  `account_number` varchar(45) NOT NULL,
+  `wallet_address` varchar(45) NOT NULL,
+  `private_key` varchar(45) NOT NULL,
+  `type` enum('user','admin') NOT NULL DEFAULT 'user',
+  `access_level` enum('5','4','3','2','1') NOT NULL DEFAULT '1',
+  `status` enum('active','pending','blocked') DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_private_key_uindex` (`private_key`),
+  UNIQUE KEY `users_account_number_uindex` (`account_number`),
+  UNIQUE KEY `users_name_uindex` (`name`),
+  UNIQUE KEY `users_email_uindex` (`email`),
+  UNIQUE KEY `users_wallet_id_uindex` (`wallet_id`),
+  UNIQUE KEY `users_wallet_address_uindex` (`wallet_address`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (4,'Super','Admin','super','admin@tlsavings.com','78278190','$2y$10$P/R4IT5G/Oi1Oh2cAYNYaeJdHKqKVQbZuNyj218vNo2oZElsqUY0i','$2y$10$vn2VXuZNEYDHocJgMZJPVOL0STFoVfdkLxXTg1WlUqfffaFzslAbi','nqUTRmqOdPpH9mzcwaEmb4CR8MIN9lAymwjAVIWdJJ54TnKwgHOHmD1xoSAO',NULL,'tlssavings/public/images/default-user.png','0000000000','3293489208','124354542','admin','4','active','2018-01-21 10:57:29','2018-04-23 14:30:02'),(11,'Victoria','Ndu','nvictor','nduvictor@gmail.com','bee318b23e412833148f77ce15818857','$2y$10$I3fIh3F.xe2d2ZcKvptaQOo1pRGbhBM02dfoxKiuvamsJZVB703Nu','$2y$10$CKQROooukC19sba8FqCjMeoK4E1EeH9ueJ.AL0WGZzQEaTgffY/Ni','lvH2iyym4APojU5snzlsI12BoLvSE1vbEZHMsSe0mpmxyJiKKG95HZ3cCbqB','08116690476','tlssavings/public/images/passport/AMrn22d7eUIHgPrV7rNp6OBrAImA0RCllejr5fm4.jpeg','2013212111','bd82dd2a8b944f131d0a53bc1b473029','hjwehnsidoj8932784y3uhjj5489437yhjhj3','user','1','active','2018-02-05 08:26:42','2018-04-23 12:43:59'),(12,'Chioma','Nwanna','chioma','tweenmailer@gmail.com','d0fe1d7190f5f1f3ab65c078ebfcb42b','$2y$10$ZBNbZmSngTQJUMeOTRdhEu0hO/uHoA4vBbbvt.78S5PkltNXrt0Oe','$2y$10$PlG9/RRejogdzUODX43okOqOX4vHMChGEcu8GaxGAdrkBM.NEWsn.',NULL,'07038606396','tlssavings/public/images/passport/AMrn22d7eUIHgPrV7rNp6OBrAImA0RCllejr5fm4.jpeg','3004211939','dklfssopi238473yu2h3j2312kewdjk12','1jk2133902i3on2iewiw203923jkfdsod','user','1','active','2018-02-05 16:27:54','2018-04-23 13:16:52'),(13,'Testing','Application','terminal','greenwhitedev@gmail.com','a7e31a818c456a6fc940f892912d8fd8','$2y$10$Hg8ZzyGuu2sfQeNCy.2wQuLyHYbsTYE1tQIyRuYJ4uU/oVMwkQpFm','$2y$10$IkW4SVUlynbU/3DlkntaBegbuRLW4H1TOrsp1gWMGaYz8d9ACueiW','jEZDygeL4rWCbsVIXD3bc5fa3X6tgCidLEgq888RoSXa2UzZ27xcJAw5jkXW',NULL,'tlssavings/public/images/default-user.png','19692','a28d7ff7a13b83cda9960abd75b58c17','a28d7ff7a13b83cda9960abd75b58c17','admin','3','active','2018-02-16 05:49:22','2018-03-14 21:10:54'),(16,'Aminatu salah','Ndu','20122040025','nduovictor@gmail.com','4c928bc45c05f83d8dc984dfef10b9e8','$2y$10$wOZFooIt/b1AxWHC47xtueOnxCXMJcvdbmlov16fmNzcjSZhyjLyu','$2y$10$XPo9.BLLoJDgq0IVteZeOuvYdmCq.wOXq.VWW4qIAYtI1JixERjrq',NULL,NULL,'tlssavings/public/images/default-user.png','31356','dda9da8b7cab5c0eff819bf453c893ab','dda9da8b7cab5c0eff819bf453c893ab','admin','3','active','2018-02-16 06:04:29','2018-04-02 06:22:52'),(17,'Developer','Dev','greenwhitedev','admin@greenwhitedev.com','101','$2y$10$P/R4IT5G/Oi1Oh2cAYNYaeJdHKqKVQbZuNyj218vNo2oZElsqUY0i','$2y$10$vn2VXuZNEYDHocJgMZJPVOL0STFoVfdkLxXTg1WlUqfffaFzslAbi','ogydbN71EfMALH8WAyj4GZpSRdqUqufNs8brz3rezriCHzBzyAoLN1Mz3JLO',NULL,'tlssavings/public/images/default-user.png','111111111','101','101','admin','5','active','2018-01-21 10:57:29','2018-03-13 11:19:48'),(18,'Timothy','Okoro','amadi','tweenmail@gmail.com','356728ebe6c5a01801c6112c5647c306','$2y$10$exyEPaClGP9O9lX5HSLkfucxiicy6Y8isVbqHvcnpUsms90F3QJEa','$2y$10$iMuALk6vd2NNJlAYcmD8AeqWvYo9f0Yux.mnRwfwYOH0HjtUQ9pia','Ok9Hfkwf2BYa2DCYa6CzoSSapbpQsX4QBMzcaX3GtqNHHVlEWgTrJJNriY2C',NULL,'tlssavings/public/images/passport/6KZg28QOcDDewZlO7wUXNtUBrY2hifDXigvI4cFf.png','9367738765','dklfssopi238473yu2h3j2312kewdjk12u','kjhgsvd5678923hkejhgh98378','user','1','active','2018-04-23 13:33:31','2018-04-23 15:36:59');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-04-24 23:10:21

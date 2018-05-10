@@ -45,7 +45,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{asset($public.'/js/loadingoverlay.min.js')}}"></script>--}}
+    <script src="{{asset($public.'/js/loadingoverlay.min.js')}}"></script>
 
     <script>
         $.ajaxSetup({

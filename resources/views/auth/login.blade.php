@@ -18,7 +18,8 @@
                         <div class="form-group{{ $errors->has('name') ? ' is-invalid' : '' }} row">
                             <div class="col-12">
                                 <div class="form-material floating">
-                                    <input class="form-control" id="login-username" name="name" type="text" required>
+                                    <input class="form-control" id="login-username" name="name"
+                                           value={{old('name')}} type="text" required>
                                     <label for="login-username">Username</label>
                                 </div>
                                 @if ($errors->has('name'))
@@ -45,7 +46,8 @@
                         <div class="form-group row text-center">
                             <div class="col-12">
                                 <label class="css-control css-control-primary css-checkbox">
-                                    <input class="css-control-input" id="remember" name="remember"  {{ old('remember') ? 'checked' : '' }} type="checkbox">
+                                    <input class="css-control-input" id="remember" name="remember"
+                                           {{ old('remember') ? 'checked' : '' }} type="checkbox">
                                     <span class="css-control-indicator"></span>
                                     Remember me
                                 </label>

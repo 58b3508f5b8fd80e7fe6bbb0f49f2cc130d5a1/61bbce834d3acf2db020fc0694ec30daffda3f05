@@ -25,4 +25,6 @@ Route::middleware('auth:api')
         Route::get('confirm', 'API\APIController@confirm');
         Route::get('getTransactions',
             'API\APIChargeController@getTransactions');
+
+        Route::post('tlpay', 'API\TLPayController@charge');
     });

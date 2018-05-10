@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SendSMS;
 use App\Setting;
 use App\Transaction;
 use Illuminate\Http\Request;
@@ -47,26 +49,34 @@ class APIChargeController extends Controller
             $hasPNM = $this->checkPNM($pnm);
 
             if ($hasPNM) {
-                $description1
+                $description
                     = "Payment for Touching Lives Skills registration";
-                $type1 = "wallet-holding";
+                $type = "wallet-holding";
 
-                $transaction1 = new Transaction();
+                $transaction = new Transaction();
 
                 $transactionID = md5(Auth::user()->wallet_id . $pnm . $ngn
                     . date('YFlHisuA'));
+                $amount = $pnm * 100000;
+                $transaction->transaction_id = $transactionID;
+                $transaction->from = Auth::user()->wallet_id;
+                $transaction->to = 'holding';
+                $transaction->amount = $amount;
+                $transaction->value = $value;
+                $transaction->description = $description;
+                $transaction->type = $type;
+                $transaction->status = 'successful';
+                $transaction->remark = 'debit';
 
-                $transaction1->transaction_id = $transactionID;
-                $transaction1->from = Auth::user()->wallet_id;
-                $transaction1->to = 'holding';
-                $transaction1->amount = $pnm * 100000;
-                $transaction1->value = $value;
-                $transaction1->description = $description1;
-                $transaction1->type = $type1;
-                $transaction1->status = 'successful';
-                $transaction1->remark = 'debit';
-
-                if ($transaction1->save()) {
+                if ($transaction->save()) {
+                    $message
+                        = "Wallet debit!\nAmt: $amount\nDesc: $description\nDate: "
+                        . date('d-m-Y H:i') . "\nID: " . substr($transactionID,
+                            0, 6)
+                        . '...' . substr($transactionID, -6) . "\nBal: "
+                        . $this->getTotalPNM() / 100000;
+                    $sms = new SendSMS();
+                    $response = $sms->sendSMS(Auth::user()->phone_no, $message);
                     $status = true;
                     $data['alert'] = 'success';
                     $data['message'] = 'Your payment was successful';
@@ -117,4 +127,5 @@ class APIChargeController extends Controller
         return response()->json(['error' => 'wow']);
         //Transaction::where('from', Auth::user()->wallet_id)->get();
     }
+
 }
