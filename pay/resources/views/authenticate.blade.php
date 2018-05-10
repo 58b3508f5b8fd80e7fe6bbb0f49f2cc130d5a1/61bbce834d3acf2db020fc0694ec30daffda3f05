@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <label for="pin"></label>
                                     <input id="pin" class="form-control" type="password" name="pin"
-                                           placeholder="Enter Pin">
+                                           placeholder="Enter Pin" max="4">
                                 </div>
                             </div>
                             <div class="form-group text-center">

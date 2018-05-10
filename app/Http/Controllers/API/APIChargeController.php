@@ -51,7 +51,7 @@ class APIChargeController extends Controller
             if ($hasPNM) {
                 $description
                     = "Payment for Touching Lives Skills registration";
-                $type = "wallet-holding";
+                $type = "wallet-tlskills";
 
                 $transaction = new Transaction();
 
@@ -70,7 +70,7 @@ class APIChargeController extends Controller
 
                 if ($transaction->save()) {
                     $message
-                        = "Wallet debit!\nAmt: $amount\nDesc: $description\nDate: "
+                        = "Wallet debit!\nAmt: ".($amount/100000)."\nDesc: $description\nDate: "
                         . date('d-m-Y H:i') . "\nID: " . substr($transactionID,
                             0, 6)
                         . '...' . substr($transactionID, -6) . "\nBal: "
