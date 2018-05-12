@@ -96,7 +96,7 @@ class RegisterController extends Controller
         $sms = new SendSMS();
         $to = $user->phone_no;
         $message = "Hello " . $user->first_name
-            . ",\nYour registration on TLSavings is now complete. Please contact us for any further enquiry. Thank you for choosing "
+            . ",\nYour registration on TLSavings is now complete. You can login via https://bit.ly/2jR2wJ9.\nPlease contact any of our agents, or any of our centres close to you for more information. Thank you for choosing "
             . config('app.name').".";
         $response = $sms->sendSMS($to, $message);
         return $create;

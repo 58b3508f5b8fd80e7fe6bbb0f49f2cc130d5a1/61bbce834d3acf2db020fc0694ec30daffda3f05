@@ -11,6 +11,7 @@
 |
 */
 
+ini_set('max_execution_time', 10800);
 Auth::routes();
 Route::middleware(['checkMaintenance'])->group(function () {
     Route::get('/register', function (\Illuminate\Http\Request $request) {
@@ -188,18 +189,16 @@ Route::middleware(['checkMaintenance'])->group(function () {
         return view('admin.createAPI');
     });
 
-    Route::get('debug', function () {
-        $users=\App\User::get();
-
-        foreach($users as $user){
-            echo strlen($user->wallet_id)."<br>";
-            /*\Illuminate\Support\Facades\DB::table('users')
-                ->where('wallet_id', $user->wallet_id)
-                ->where('type','user')
-                ->update(['secret_id' => \Illuminate\Support\Facades\Hash::make($user->wallet_id)]);
-            echo "$user->email --- $user->wallet_id --- ".Hash::make($user->wallet_id)." <br>";*/
+    Route::get('sendbulksms', function () {
+        $users = \App\User_meta::get();
+        foreach ($users as $user) {
+            $message
+                = "Dear $user->first_name,\nYour TLSavings Account Number is: $user->account_number."
+                . "\n\nPlease contact any of our agents, or any of our centres close to you for more information.";
+            $sms = new \App\Http\Controllers\SendSMS();
+            $response = $sms->sendSMS($user->phone_no, $message);
+            echo "Sent to $user->phone_no <br><hr><br>";
         }
-
     });
 });
 Route::get('/maintenance', function () {

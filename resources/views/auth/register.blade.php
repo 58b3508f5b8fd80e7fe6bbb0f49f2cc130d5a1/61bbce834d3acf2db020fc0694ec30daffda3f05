@@ -2,7 +2,7 @@
 @section('title', 'Join')
 @section('content')
     <div class="py-30 px-5 text-center">
-        <a class="link-effect font-w700" href="index-2.html">
+        <a class="link-effect font-w700" href="{{url('')}}">
             <i class="si si-fire"></i>
             <span class="font-size-xl text-primary-dark">{{config('app.name')}}</span>
         </a>

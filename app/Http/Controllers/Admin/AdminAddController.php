@@ -202,7 +202,10 @@ class AdminAddController extends Controller
             $to = $details['phone_no'];
             $message = "Dear " . $details['first_name']
                 . ",\nYour account with " . config('app.name')
-                . " has been created successfully. Please visit any of our branches to get your login/registration details. Welcome to "
+                . " has been created. Please complete your"
+                . "registration via https://bit.ly/2rzQXKY with these required details:\nWallet Address: "
+                . substr($user->wallet_address, -6)
+                . "\nTLSavings Acc No: $user->account_number\nWelcome to "
                 . config('app.name');
             $response = $sms->sendSMS($to, $message);
             $data['alert'] = 'success';

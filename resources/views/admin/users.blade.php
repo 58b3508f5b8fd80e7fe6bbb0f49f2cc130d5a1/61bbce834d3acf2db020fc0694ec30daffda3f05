@@ -58,7 +58,7 @@
             $("#state").change(function () {
                 var data = {'state': $('#state').val()};
                 $.post('/admin/add/user/getlgas', data, function (result) {
-                    $('#lga').html(result.html);
+                    $('#lga')i.html(result.html);
                 });
             });
 
