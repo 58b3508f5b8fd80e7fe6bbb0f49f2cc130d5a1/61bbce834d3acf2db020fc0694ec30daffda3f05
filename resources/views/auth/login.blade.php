@@ -4,7 +4,7 @@
     <div class="bg-gd-dusk">
         <div class="hero-static content content-full bg-white js-appear-enabled animated fadeIn" data-toggle="appear">
             <div class="py-30 px-5 text-center">
-                <a class="link-effect font-w700" href="index-2.html">
+                <a class="link-effect font-w700" href="{{url('')}}">
                     <i class="si si-fire"></i>
                     <span class="font-size-xl text-primary-dark">{{config('app.name')}}</span>
                 </a>
