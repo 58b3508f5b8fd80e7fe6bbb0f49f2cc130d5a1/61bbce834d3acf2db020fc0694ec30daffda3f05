@@ -58,7 +58,7 @@
             $("#state").change(function () {
                 var data = {'state': $('#state').val()};
                 $.post('/admin/add/user/getlgas', data, function (result) {
-                    $('#lga')i.html(result.html);
+                    $('#lga').html(result.html);
                 });
             });
 
@@ -123,7 +123,7 @@
                 e.preventDefault();
                 var form = e.target;
                 var data = new FormData(form);
-                data['for']= '{{$action}}';
+                data['for'] = '{{$action}}';
                 $(".modal").LoadingOverlay("show");
                 $.ajax({
                     url: form.action,
@@ -220,7 +220,7 @@
 
         }
 
-        //$2y$10$T.ENDFSLg5O6oMPywQ/qouoIQTd9iKmh8n03uAIiZ7kVGATf4ulZO
+
         function viewEditUser(id, action) {
             var data = {
                 'id': id,

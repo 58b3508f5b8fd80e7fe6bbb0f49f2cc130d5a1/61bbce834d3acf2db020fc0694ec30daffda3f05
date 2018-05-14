@@ -13,7 +13,7 @@ class SendSMS extends Controller
     {
         $http = new Client();
 
-        $response = $http->request('post',
+        $response = $http->request('postos',
             config('app.gw_url') . '/api/sms/send', [
                 'form_params' => [
                     'secret'  => config('app.gw_secret'),

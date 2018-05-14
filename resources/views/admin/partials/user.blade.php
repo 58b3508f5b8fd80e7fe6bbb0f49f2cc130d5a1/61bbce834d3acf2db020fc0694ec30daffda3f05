@@ -66,11 +66,11 @@
                                 <a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip"
                                    data-original-title="Click me to Copy" title="Click me to copy"
                                    onclick="copyToClipboard('#wallet{{$i}}')">
-                                    @if (strlen($user->wallet_id) > 15)
+                                    @if (strlen($user->private_key) > 15)
                                         {{"$private1......$private2"}}
-                                        <span id="wallet{{$i}}" style="display:none;">{{$user->private_key}}</span>
+
                                     @else
-                                        <span id="wallet{{$i}}">{{$user->private_key}}</span>
+                                        {{$user->private_key}}
                                     @endif
                                 </a>
                             </td>
