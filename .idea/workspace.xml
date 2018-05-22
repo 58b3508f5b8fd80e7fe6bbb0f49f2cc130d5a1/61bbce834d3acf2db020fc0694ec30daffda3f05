@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d803a88-2fc0-4199-959f-2a0dba854fc2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php" />
-    </list>
+    <list default="true" id="7d803a88-2fc0-4199-959f-2a0dba854fc2" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,8 +86,8 @@
           <file leaf-file-name="AdminAddController.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="382">
-                  <caret line="205" column="59" lean-forward="false" selection-start-line="205" selection-start-column="59" selection-end-line="205" selection-end-column="59" />
+                <state relative-caret-position="78">
+                  <caret line="186" column="22" lean-forward="false" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -462,7 +458,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="SearchEverywhereHistoryKey" value="Edi&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;users&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;edit&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;use&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;add&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;app.&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/app.blade.php&#10;login&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/login.blade.php&#10;loginc&#9;null&#9;null&#10;nv&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;newad&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newAdmin.blade.php&#10;admin&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;newuse&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;register&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/register.blade.php&#10;re&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;we&#9;FILE&#9;file:///var/www/html/tlsavings/routes/web.php&#10;en&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;api&#9;FILE&#9;file:///var/www/html/tlsavings/routes/api.php&#10;.log&#9;FILE&#9;file:///var/www/html/tlsavings/storage/logs/laravel.log&#10;lo&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/login.blade.php&#10;auth&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/auth.blade.php&#10;app&#9;FILE&#9;file:///var/www/html/tlsavings/config/app.php&#10;.bla&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;home&#9;null&#9;null&#10;tlpay&#9;null&#9;null&#10;authser&#9;null&#9;null&#10;authse&#9;null&#9;null&#10;registe&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;user&#9;null&#9;null&#10;transa&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;.env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;sms&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/SendSMS.php&#10;gree&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/GreenWhiteController.php&#10;ker&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Kernel.php&#10;env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;kern&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Kernel.php&#10;addus&#9;FILE&#9;file:///var/www/html/tlsavings/vendor/rackspace/php-opencloud/samples/Identity/add_user.php&#10;convert&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/convert.blade.php&#10;transac&#9;FILE&#9;file:///var/www/html/tlsavings (1)/app/Http/Controllers/TransactionController.php&#10;with&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/withdraw.blade.php&#10;database&#9;FILE&#9;file:///var/www/html/tlsavings/config/database.php&#10;apich&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIChargeController.php&#10;transaction&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;mail&#9;FILE&#9;file:///var/www/html/tlsavings/config/mail.php&#10;editu&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/partials/editUser.blade.php&#10;adminA&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;admined&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;.en&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;histor&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/transactionHistory.blade.php&#10;sett&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/settings.blade.php&#10;app.p&#9;FILE&#9;file:///var/www/html/tlsavings/config/app.php" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/settings.csv" />
@@ -634,7 +630,7 @@
       <workItem from="1526919914515" duration="736000" />
       <workItem from="1526978688895" duration="701000" />
       <workItem from="1526989587180" duration="648000" />
-      <workItem from="1527017638670" duration="426000" />
+      <workItem from="1527017638670" duration="659000" />
     </task>
     <task id="LOCAL-00001" summary="Finished off with user's transactions. Now to work on Settings">
       <created>1517041967637</created>
@@ -860,11 +856,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526088359090</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="upgrade sms functionality">
+      <created>1527018079814</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1527018079814</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="924569000" />
+    <option name="totallyTimeSpent" value="924802000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1356" height="741" extended-state="0" />
@@ -1283,18 +1286,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="205" column="59" lean-forward="false" selection-start-line="205" selection-start-column="59" selection-end-line="205" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="254" column="0" lean-forward="true" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="186" column="22" lean-forward="false" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
           <folding />
         </state>
       </provider>
