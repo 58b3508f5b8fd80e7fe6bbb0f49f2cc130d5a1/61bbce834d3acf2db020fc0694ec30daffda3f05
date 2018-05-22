@@ -236,8 +236,8 @@ class AdminEditController extends Controller
             $to = $userMeta->phone_no;
             $message = "Hello " . $userMeta->first_name
                 . ",\nYour account with " . config('app.name')
-                . " has been linked to the bank successfully.\nBank Name: $userMeta->bank_name,\nAcc. Name: $userMeta->bank_acc_name,\nAcc. No: $userMeta->bank_acc_no.\nPlese contact us for more enquiries.\n"
-                . config('app.name');
+                . " has been linked to the bank successfully.\nBank Name: $userMeta->bank_name,\nAcc. Name: $userMeta->bank_acc_name,\nAcc. No: $userMeta->bank_acc_no.\nPlease contact us for more enquiries.\n"
+                . config('app.name').".";
             $resp = $sms->sendSMS($to, $message);
             return response()->json([
                 'message' => 'Account has been linked successfully'
