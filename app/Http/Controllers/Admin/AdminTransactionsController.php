@@ -27,20 +27,30 @@ class AdminTransactionsController extends Controller
         $action = $request->input('action');
         $transaction = Transaction::find($id - 1127);
         $message = '';
-
-        switch ($action) {
-            case('approve'):
-                $transaction->status = 'successful';
-                $message
-                    = 'Transaction has been approved successfully.';
-                break;
-            case('revoke'):
-                $transaction->status = 'failed';
-                $message = 'The transaction has been revoked';
-                break;
+        $verify = false;
+        if ($transaction) {
+            switch ($action) {
+                case('approve'):
+                    $verify = Transaction::where('transaction_id',
+                        $transaction->transaction_id)->update([
+                        'status'     => 'successful',
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+                    $message
+                        = 'Transaction has been approved successfully.';
+                    break;
+                case('revoke'):
+                    $verify = Transaction::where('transaction_id',
+                        $transaction->transaction_id)->update([
+                        'status'     => 'successful',
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+                    $message = 'The transaction has been revoked';
+                    break;
+            }
         }
 
-        if ($transaction->save()) {
+        if ($verify) {
             $search = new AdminSearchController;
             $data = $search->search($request);
             $html = View::make('admin.partials.search', $data);

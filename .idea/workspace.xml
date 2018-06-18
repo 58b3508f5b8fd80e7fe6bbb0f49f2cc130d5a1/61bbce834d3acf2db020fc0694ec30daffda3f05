@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7d803a88-2fc0-4199-959f-2a0dba854fc2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/partials/adminaccess/seniorAdmin.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/partials/adminaccess/seniorAdmin.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/partials/adminaccess/superAdmin.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/partials/adminaccess/superAdmin.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,34 +64,34 @@
           <file leaf-file-name="AdminAddController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="17936">
+                <state relative-caret-position="0">
                   <caret line="1129" column="13" lean-forward="false" selection-start-line="1129" selection-start-column="13" selection-end-line="1129" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TransactionController.php" pinned="false" current-in-tab="false">
+          <file leaf-file-name="TransactionController.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2592">
-                  <caret line="170" column="29" lean-forward="false" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
+                <state relative-caret-position="244">
+                  <caret line="240" column="66" lean-forward="false" selection-start-line="240" selection-start-column="66" selection-end-line="240" selection-end-column="66" />
                   <folding>
-                    <marker date="1525867309727" expanded="true" signature="935:942" ph="..." />
-                    <marker date="1525867309727" expanded="true" signature="2694:2701" ph="..." />
-                    <marker date="1525867309727" expanded="true" signature="12776:12783" ph="..." />
-                    <marker date="1525867309727" expanded="true" signature="13062:13069" ph="..." />
-                    <marker date="1525867309727" expanded="true" signature="13520:13527" ph="..." />
+                    <marker date="1529321524043" expanded="true" signature="935:942" ph="..." />
+                    <marker date="1529321524043" expanded="true" signature="2734:2741" ph="..." />
+                    <marker date="1529321524043" expanded="true" signature="13158:13165" ph="..." />
+                    <marker date="1529321524043" expanded="true" signature="13444:13451" ph="..." />
+                    <marker date="1529321524043" expanded="true" signature="13902:13909" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="AdminTransactionsController.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="AdminTransactionsController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="478">
-                  <caret line="156" column="49" lean-forward="false" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
+                <state relative-caret-position="16">
+                  <caret line="41" column="31" lean-forward="true" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
                   <folding />
                 </state>
               </provider>
@@ -122,7 +121,7 @@
             <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="256">
-                  <caret line="84" column="92" lean-forward="true" selection-start-line="84" selection-start-column="92" selection-end-line="84" selection-end-column="92" />
+                  <caret line="84" column="92" lean-forward="false" selection-start-line="84" selection-start-column="92" selection-end-line="84" selection-end-column="92" />
                   <folding />
                 </state>
               </provider>
@@ -132,7 +131,7 @@
             <entry file="file://$PROJECT_DIR$/resources/views/admin/partials/adminaccess/admin.blade.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="414">
-                  <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+                  <caret line="58" column="13" lean-forward="false" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
                   <folding />
                 </state>
               </provider>
@@ -152,17 +151,7 @@
             <entry file="file://$PROJECT_DIR$/resources/views/admin/partials/adminaccess/superAdmin.blade.php">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="254">
-                  <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="login.blade.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/resources/views/auth/login.blade.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="144">
-                  <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+                  <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -175,7 +164,7 @@
           <file leaf-file-name="app.blade.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1168">
+                <state relative-caret-position="0">
                   <caret line="73" column="43" lean-forward="false" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
                   <folding>
                     <marker date="1522871210899" expanded="true" signature="9204:9245" ph="..." />
@@ -188,39 +177,9 @@
           <file leaf-file-name="web.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/routes/web.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="107" column="88" lean-forward="false" selection-start-line="107" selection-start-column="88" selection-end-line="107" selection-end-column="88" />
+                <state relative-caret-position="416">
+                  <caret line="220" column="41" lean-forward="true" selection-start-line="220" selection-start-column="41" selection-end-line="220" selection-end-column="41" />
                   <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="oauth_clients" pinned="false" current-in-tab="false">
-            <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.oauth_clients">
-              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-                <state>
-                  <filtering enabled="true" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="transactions" pinned="false" current-in-tab="false">
-            <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.transactions">
-              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-                <state>
-                  <filtering enabled="true" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="newUser.blade.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/resources/views/admin/newUser.blade.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="13312">
-                  <caret line="832" column="14" lean-forward="false" selection-start-line="832" selection-start-column="14" selection-end-line="832" selection-end-column="14" />
-                  <folding>
-                    <marker date="1525101253999" expanded="true" signature="45883:45917" ph="..." />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -407,7 +366,6 @@
         <option value="$PROJECT_DIR$/public/js/codebase.min-1.4.js" />
         <option value="$PROJECT_DIR$/public/js/datatables.min.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/API/APIController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/API/TLPayController.php" />
@@ -427,8 +385,9 @@
         <option value="$PROJECT_DIR$/storage/logs/laravel.log" />
         <option value="$PROJECT_DIR$/resources/views/admin/partials/adminaccess/seniorAdmin.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/partials/adminaccess/superAdmin.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TransactionController.php" />
       </list>
     </option>
   </component>
@@ -532,7 +491,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
-    <property name="SearchEverywhereHistoryKey" value="tra&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php&#10;admin&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/admin.blade.php&#10;AdminTra&#9;null&#9;null&#10;transa&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;log&#9;FILE&#9;file:///var/www/html/tlsavings/storage/logs/laravel.log&#10;user&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;searc&#9;null&#9;null&#10;compo&#9;FILE&#9;file:///var/www/html/tlsavings/composer.json&#10;artisan&#9;FILE&#9;file:///var/www/html/tlsavings/artisan&#10;isuser&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Middleware/IsUser.php&#10;sms&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/SendSMS.php&#10;app&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/app.blade.php&#10;composer&#9;FILE&#9;file:///var/www/html/tlsavings/composer.json&#10;env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;Edi&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;users&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;edit&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;use&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;add&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;app.&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/app.blade.php&#10;login&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/login.blade.php&#10;loginc&#9;null&#9;null&#10;nv&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;newad&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newAdmin.blade.php&#10;newuse&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;register&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/register.blade.php&#10;re&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;we&#9;FILE&#9;file:///var/www/html/tlsavings/routes/web.php&#10;en&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;api&#9;FILE&#9;file:///var/www/html/tlsavings/routes/api.php&#10;.log&#9;FILE&#9;file:///var/www/html/tlsavings/storage/logs/laravel.log&#10;lo&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/login.blade.php&#10;auth&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/auth.blade.php&#10;.bla&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;home&#9;null&#9;null&#10;tlpay&#9;null&#9;null&#10;authser&#9;null&#9;null&#10;authse&#9;null&#9;null&#10;registe&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;.env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;gree&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/GreenWhiteController.php&#10;ker&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Kernel.php&#10;kern&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Kernel.php&#10;addus&#9;FILE&#9;file:///var/www/html/tlsavings/vendor/rackspace/php-opencloud/samples/Identity/add_user.php&#10;convert&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/convert.blade.php&#10;transac&#9;FILE&#9;file:///var/www/html/tlsavings (1)/app/Http/Controllers/TransactionController.php&#10;with&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/withdraw.blade.php&#10;database&#9;FILE&#9;file:///var/www/html/tlsavings/config/database.php&#10;apich&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIChargeController.php&#10;transaction&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminTransactionsController.php" />
+    <property name="SearchEverywhereHistoryKey" value="tra&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;Transa&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;admin&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/admin.blade.php&#10;AdminTra&#9;null&#9;null&#10;transa&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/TransactionController.php&#10;log&#9;FILE&#9;file:///var/www/html/tlsavings/storage/logs/laravel.log&#10;user&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;searc&#9;null&#9;null&#10;compo&#9;FILE&#9;file:///var/www/html/tlsavings/composer.json&#10;artisan&#9;FILE&#9;file:///var/www/html/tlsavings/artisan&#10;isuser&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Middleware/IsUser.php&#10;sms&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/SendSMS.php&#10;app&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/app.blade.php&#10;composer&#9;FILE&#9;file:///var/www/html/tlsavings/composer.json&#10;env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;Edi&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;users&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;edit&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminEditController.php&#10;use&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;add&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Admin/AdminAddController.php&#10;app.&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/app.blade.php&#10;login&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/login.blade.php&#10;loginc&#9;null&#9;null&#10;nv&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;newad&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newAdmin.blade.php&#10;newuse&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/newUser.blade.php&#10;register&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/register.blade.php&#10;re&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;we&#9;FILE&#9;file:///var/www/html/tlsavings/routes/web.php&#10;en&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;api&#9;FILE&#9;file:///var/www/html/tlsavings/routes/api.php&#10;.log&#9;FILE&#9;file:///var/www/html/tlsavings/storage/logs/laravel.log&#10;lo&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/auth/login.blade.php&#10;auth&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/layouts/auth.blade.php&#10;.bla&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/admin/users.blade.php&#10;home&#9;null&#9;null&#10;tlpay&#9;null&#9;null&#10;authser&#9;null&#9;null&#10;authse&#9;null&#9;null&#10;registe&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/Auth/RegisterController.php&#10;.env&#9;FILE&#9;file:///var/www/html/tlsavings/.env&#10;gree&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/GreenWhiteController.php&#10;ker&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Kernel.php&#10;kern&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Kernel.php&#10;addus&#9;FILE&#9;file:///var/www/html/tlsavings/vendor/rackspace/php-opencloud/samples/Identity/add_user.php&#10;convert&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/convert.blade.php&#10;transac&#9;FILE&#9;file:///var/www/html/tlsavings (1)/app/Http/Controllers/TransactionController.php&#10;with&#9;FILE&#9;file:///var/www/html/tlsavings/resources/views/dashboard/transactions/withdraw.blade.php&#10;database&#9;FILE&#9;file:///var/www/html/tlsavings/config/database.php&#10;apich&#9;FILE&#9;file:///var/www/html/tlsavings/app/Http/Controllers/API/APIChargeController.php" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/settings.csv" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
@@ -725,7 +684,7 @@
       <workItem from="1528704612968" duration="3559000" />
       <workItem from="1528840594764" duration="1583000" />
       <workItem from="1529251631645" duration="3747000" />
-      <workItem from="1529312879940" duration="4082000" />
+      <workItem from="1529312879940" duration="7619000" />
     </task>
     <task id="LOCAL-00001" summary="Finished off with user's transactions. Now to work on Settings">
       <created>1517041967637</created>
@@ -962,7 +921,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="969357000" />
+    <option name="totallyTimeSpent" value="972894000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -1173,6 +1132,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1286,7 +1246,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1168">
+        <state relative-caret-position="0">
           <caret line="73" column="43" lean-forward="false" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
           <folding>
             <marker date="1522871210899" expanded="true" signature="9204:9245" ph="..." />
@@ -1312,46 +1272,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.oauth_clients">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.transactions">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminAddController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17936">
+        <state relative-caret-position="0">
           <caret line="1129" column="13" lean-forward="false" selection-start-line="1129" selection-start-column="13" selection-end-line="1129" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2592">
-          <caret line="170" column="29" lean-forward="false" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
-          <folding>
-            <marker date="1525867309727" expanded="true" signature="935:942" ph="..." />
-            <marker date="1525867309727" expanded="true" signature="2694:2701" ph="..." />
-            <marker date="1525867309727" expanded="true" signature="12776:12783" ph="..." />
-            <marker date="1525867309727" expanded="true" signature="13062:13069" ph="..." />
-            <marker date="1525867309727" expanded="true" signature="13520:13527" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1366,7 +1291,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/admin.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
-          <caret line="84" column="92" lean-forward="true" selection-start-line="84" selection-start-column="92" selection-end-line="84" selection-end-column="92" />
+          <caret line="84" column="92" lean-forward="false" selection-start-line="84" selection-start-column="92" selection-end-line="84" selection-end-column="92" />
           <folding />
         </state>
       </provider>
@@ -1374,7 +1299,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/admin/partials/adminaccess/admin.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
-          <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+          <caret line="58" column="13" lean-forward="false" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1390,24 +1315,59 @@
     <entry file="file://$PROJECT_DIR$/resources/views/admin/partials/adminaccess/superAdmin.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
-          <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+          <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.oauth_clients">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="107" column="88" lean-forward="false" selection-start-line="107" selection-start-column="88" selection-end-line="107" selection-end-column="88" />
+        <state relative-caret-position="416">
+          <caret line="220" column="41" lean-forward="true" selection-start-line="220" selection-start-column="41" selection-end-line="220" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.transactions">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/bfa2242c/6d25821f-52e9-4596-be2f-0d1c9afd0cd2/tlsavings.users">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminTransactionsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="156" column="49" lean-forward="false" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
+        <state relative-caret-position="16">
+          <caret line="41" column="31" lean-forward="true" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="240" column="66" lean-forward="false" selection-start-line="240" selection-start-column="66" selection-end-line="240" selection-end-column="66" />
+          <folding>
+            <marker date="1529321524043" expanded="true" signature="935:942" ph="..." />
+            <marker date="1529321524043" expanded="true" signature="2734:2741" ph="..." />
+            <marker date="1529321524043" expanded="true" signature="13158:13165" ph="..." />
+            <marker date="1529321524043" expanded="true" signature="13444:13451" ph="..." />
+            <marker date="1529321524043" expanded="true" signature="13902:13909" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

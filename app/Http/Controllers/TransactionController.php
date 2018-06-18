@@ -48,15 +48,16 @@ class TransactionController extends Controller
                             'ngn_withdrawal_duration')
                             ->value('value');
                         $data['max_withdrawal'] = Setting::where('name',
-                            $grade.'_ngn_withdrawal_limit')
+                            $grade . '_ngn_withdrawal_limit')
                             ->value('value');
                         $data['max_daily_withdrawal'] = Setting::where('name',
-                            $grade.'_ngn_daily_withdrawal_limit')
+                            $grade . '_ngn_daily_withdrawal_limit')
                             ->value('value');
-                        $data['pnm_balance']=$this->checkPNM();
-                        $data['ngn_balance']=$this->checkNGN();
-                        $data['today']=$this->checkDailyNGNWithdrawals();
-                        $data['commission']=Setting::where('name', 'ngn_withdrawal_charge')
+                        $data['pnm_balance'] = $this->checkPNM();
+                        $data['ngn_balance'] = $this->checkNGN();
+                        $data['today'] = $this->checkDailyNGNWithdrawals();
+                        $data['commission'] = Setting::where('name',
+                            'ngn_withdrawal_charge')
                             ->value('value');
                         break;
                     default:
@@ -86,16 +87,17 @@ class TransactionController extends Controller
                             'pnm_withdrawal_duration')
                             ->value('value');
                         $data['max_withdrawal'] = Setting::where('name',
-                            $grade.'_pnm_withdrawal_limit')
+                            $grade . '_pnm_withdrawal_limit')
                             ->value('value');
                         $data['max_daily_withdrawal'] = Setting::where('name',
-                            $grade.'_pnm_daily_withdrawal_limit')
+                            $grade . '_pnm_daily_withdrawal_limit')
                             ->value('value');
-                        $data['pnm_balance']=$this->checkPNM();
-                        $data['ngn_balance']=$this->checkNGN();
-                        $data['today']=$this->checkDailyNGNWithdrawals();
-                        $data['commission']=Setting::where('name', 'ngn_withdrawal_charge')
-                              ->value('value');
+                        $data['pnm_balance'] = $this->checkPNM();
+                        $data['ngn_balance'] = $this->checkNGN();
+                        $data['today'] = $this->checkDailyNGNWithdrawals();
+                        $data['commission'] = Setting::where('name',
+                            'ngn_withdrawal_charge')
+                            ->value('value');
                         break;
                     default:
                         return view('errors.404');
@@ -107,20 +109,19 @@ class TransactionController extends Controller
         return view("dashboard.transactions.$action", $data);
     }
 
-    public function checkDailyNGNWithdrawals($ngn=null)
+    public function checkDailyNGNWithdrawals($ngn = null)
     {
         $grade = Auth::user()->grade;
-        $limit = Setting::where('name', $grade.'_ngn_daily_withdrawal_limit')
+        $limit = Setting::where('name', $grade . '_ngn_daily_withdrawal_limit')
             ->value('value');
         $amount = Transaction::where('type', 'ngn-bank')
             ->where('from', Auth::user()->name)
             ->whereDate('created_at', DB::raw('CURDATE()'))
             ->where('status', 'requested')->sum(DB::raw('amount*value'));
-        $amount=$amount / 100000;
-        if ($ngn===null){
+        $amount = $amount / 100000;
+        if ($ngn === null) {
             return $amount;
-        }
-        elseif ($amount + $ngn < $limit) {
+        } elseif ($amount + $ngn < $limit) {
             return true;
         }
         return false;
@@ -129,7 +130,7 @@ class TransactionController extends Controller
     public function checkDailyPNMWithdrawals($pnm)
     {
         $grade = Auth::user()->grade;
-        $limit = Setting::where('name', $grade.'_pnm_daily_withdrawal_limit')
+        $limit = Setting::where('name', $grade . '_pnm_daily_withdrawal_limit')
             ->value('value');
         $amount = Transaction::where('type', 'pnm-wallet')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
@@ -141,25 +142,23 @@ class TransactionController extends Controller
         return false;
     }
 
-    public function checkNGN($amount=null)
+    public function checkNGN($amount = null)
     {
         $balance = $this->home()->getTotalNGN() / 100000;
-        if ($amount===null){
+        if ($amount === null) {
             return $balance;
-        }
-        elseif ($balance >= $amount) {
+        } elseif ($balance >= $amount) {
             return true;
         }
         return false;
     }
 
-    public function checkPNM($amount=null)
+    public function checkPNM($amount = null)
     {
         $balance = $this->home()->getTotalPNM() / 100000;
-        if($amount === null){
+        if ($amount === null) {
             return $balance;
-        }
-        elseif ($balance >= $amount) {
+        } elseif ($balance >= $amount) {
             return true;
         }
         return false;
@@ -195,7 +194,8 @@ class TransactionController extends Controller
     public function checkPNMTransferLimit($pnm)
     {
         $grade = Auth::user()->grade;
-        $limit = Setting::where('name', $grade.'_pnm_transfer_limit')->value('value');
+        $limit = Setting::where('name', $grade . '_pnm_transfer_limit')
+            ->value('value');
 
         $amount = Transaction::where('type', 'pnm-pnm')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
@@ -210,7 +210,7 @@ class TransactionController extends Controller
     public function checkDailyPNMConversionLimit($pnm)
     {
         $grade = Auth::user()->grade;
-        $limit = Setting::where('name', $grade.'_pnm_daily_conversion_limit')
+        $limit = Setting::where('name', $grade . '_pnm_daily_conversion_limit')
             ->value('value');
         $amount = Transaction::where('type', 'pnm-ngn')
             ->where('from', Auth::user()->wallet_id)->whereDate('created_at',
@@ -226,11 +226,22 @@ class TransactionController extends Controller
     public function checkPNMConversionLimit($pnm)
     {
         $grade = Auth::user()->grade;
-        $limit = Setting::where('name', $grade.'_pnm_conversion_limit')->value('value');
+        $limit = Setting::where('name', $grade . '_pnm_conversion_limit')
+            ->value('value');
         if ($pnm <= $limit) {
             return true;
         }
         return false;
+    }
+
+    public function checkStudent()
+    {
+        $check = false;
+        if (Auth::user()->grade == 'student') {
+            $check = Transaction::where('from', Auth::user()->name)
+                ->where('type', 'ngn-bank')->first();
+        }
+        return !$check;
     }
 
     public function convertNGN(Request $request)
@@ -537,10 +548,13 @@ class TransactionController extends Controller
 
         $hasNGN = $this->checkNGN($ngn);
         $hasPNM = $this->checkPNM($chargePNM);
+        $checkStudent = $this->checkStudent();
         $checkPin = Hash::check($pin, Auth::user()->pin);
         $checkLimit = $this->checkNGNWithdrawalLimit($ngn);
         $checkDaily = $this->checkDailyNGNWithdrawals($ngn);
-        if ($hasNGN && $hasPNM && $checkPin && $checkLimit && $checkDaily) {
+        if ($hasNGN && $hasPNM && $checkPin && $checkLimit && $checkDaily
+            && $checkStudent
+        ) {
             $description1 = "Withdrawal request for $ngn NGN";
             $description2
                 = "$chargePNM NGN ($chargePNM PNM) commission charge for $ngn NGN withdrawal";
@@ -566,7 +580,11 @@ class TransactionController extends Controller
 
 
         } else {
-            if (!$checkPin) {
+            if (!$checkStudent) {
+                $data['alert'] = 'danger';
+                $data['message']
+                    = 'Your withdrawal request has been restricted as a student';
+            } elseif (!$checkPin) {
                 $data['alert'] = 'danger';
                 $data['message'] = 'You entered an incorrect pin';
             } elseif (!$hasNGN) {

@@ -206,8 +206,8 @@ Route::get('/maintenance', function () {
     }
 });
 //Route::get('/sendsms/{to}/{message}', 'SendSMS@sendSMS');
-/*Route::get('test', function(){
-    $transactions= \App\Transaction::where('type','ngn-bank')->where('status','failed')->pluck('transaction_id');
+Route::get('test', function(){
+    /*$transactions= \App\Transaction::where('type','ngn-bank')->where('status','failed')->pluck('transaction_id');
 
     $update = \App\Transaction::where('type','pnm-holding')->whereIn('transaction_id',$transactions);
 
@@ -217,5 +217,8 @@ Route::get('/maintenance', function () {
     $commissions = \App\Transaction::where('type','pnm-holding')->whereIn('transaction_id',$transactions)->pluck('status');
     foreach($commissions as $commission){
         echo "$commission<br>";
-    }
-});*/
+    }*/
+    if (Auth::user()->grade == 'student') {
+        echo Auth::user()->grade;
+    }else {echo 'big';}
+});
