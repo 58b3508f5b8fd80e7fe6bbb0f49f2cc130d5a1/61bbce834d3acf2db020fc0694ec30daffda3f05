@@ -11,7 +11,6 @@
 |
 */
 
-ini_set('max_execution_time', 10800);
 Auth::routes();
 Route::middleware(['checkMaintenance'])->group(function () {
     Route::get('/register', function (\Illuminate\Http\Request $request) {
@@ -190,15 +189,13 @@ Route::middleware(['checkMaintenance'])->group(function () {
     });
 
     Route::get('sendbulksms', function () {
-        $users = \App\User_meta::get();
-        foreach ($users as $user) {
-            $message
-                = "Dear $user->first_name,\nYour TLSavings Account Number is: $user->account_number."
-                . "\n\nPlease contact any of our agents, or any of our centres close to you for more information.";
-            $sms = new \App\Http\Controllers\SendSMS();
-            $response = $sms->sendSMS($user->phone_no, $message);
-            echo "Sent to $user->phone_no <br><hr><br>";
-        }
+        $user = Auth::user();
+        $message
+            = "Dear $user->first_name,\nYour TLSavings Account Number is: $user->account_number."
+            . "\n\nPlease contact any of our agents, or any of our centres close to you for more information.";
+        $sms = new \App\Http\Controllers\SendSMS();
+        $response = $sms->sendSMS($user->phone_no, $message);
+        echo "Sent to $user->phone_no <br><hr><br>";
     });
 });
 Route::get('/maintenance', function () {
@@ -209,3 +206,16 @@ Route::get('/maintenance', function () {
     }
 });
 //Route::get('/sendsms/{to}/{message}', 'SendSMS@sendSMS');
+Route::get('test', function(){
+    $transactions= \App\Transaction::where('type','ngn-bank')->where('status','failed')->pluck('transaction_id');
+
+    $update = \App\Transaction::where('type','pnm-holding')->whereIn('transaction_id',$transactions)->update(['status'=>'failed']);
+
+    //print_r($transactions);
+    //print_r($commissions);
+    //echo "<br>";
+    $commissions = \App\Transaction::where('type','pnm-holding')->whereIn('transaction_id',$transactions)->pluck('status');
+    foreach($commissions as $commission){
+        echo "$commission<br>";
+    }
+});

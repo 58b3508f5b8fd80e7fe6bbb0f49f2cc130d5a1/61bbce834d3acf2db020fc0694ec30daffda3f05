@@ -62,30 +62,40 @@ class AdminTransactionsController extends Controller
         $for = $request->input('for');
         $transaction = Transaction::find($id - 1127);
         $message = '';
-
-        switch ($action) {
-            case('approve'):
-                $transaction->status = 'successful';
-                $message
-                    = 'Transaction has been approved successfully.';
-                break;
-            case('revoke'):
-                $transaction->status = 'failed';
-                $message = 'The transaction has been revoked';
-                break;
+        $verify = false;
+        if ($transaction) {
+            switch ($action) {
+                case('approve'):
+                    $verify = Transaction::where('transaction_id',
+                        $transaction->transaction_id)->update([
+                        'status'     => 'successful',
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+                    $message
+                        = 'Transaction has been approved successfully.';
+                    break;
+                case('revoke'):
+                    $verify = Transaction::where('transaction_id',
+                        $transaction->transaction_id)->update([
+                        'status'     => 'successful',
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+                    $message = 'The transaction has been revoked';
+                    break;
+            }
+        }
+        if ($for == 'verified') {
+            $data['withdrawals'] = $this->getVerified($type);
+        } elseif ($for == 'requested') {
+            $data['withdrawals'] = $this->getWithdrawals($type);
         }
 
-        if ($transaction->save()) {
-            if ($for == 'verified') {
-                $data['withdrawals'] = $this->getVerified($type);
-            } elseif ($for == 'requested') {
-                $data['withdrawals'] = $this->getWithdrawals($type);
-            }
-            $data['value'] = $this->admin()->getCurrentValue();
-            $data['action'] = $action;
-            $html = View::make('admin.partials.withdrawal', $data);
-            $html = $html->render();
+        $data['value'] = $this->admin()->getCurrentValue();
+        $data['action'] = $action;
+        $html = View::make('admin.partials.withdrawal', $data);
+        $html = $html->render();
 
+        if ($verify) {
             return response()->json([
                 'status'  => 'success',
                 'message' => $message,
@@ -93,13 +103,11 @@ class AdminTransactionsController extends Controller
             ]);
         }
 
-
         return response()->json([
-            'status'  => 'failed',
-            'message' => 'Sorry, an error occurred.'
+            'status'  => 'success',
+            'message' => 'Oops an error occurred',
+            'html'    => $html
         ]);
-
-
     }
 
     public function getVerified($action)
@@ -243,7 +251,7 @@ class AdminTransactionsController extends Controller
             . '...' . substr($transactionID, -6);
         $to = User::where('wallet_id', $to)->value('phone_no');
         $sms = new SendSMS();
-        $response =  $sms->sendSMS($to, $message);
+        $response = $sms->sendSMS($to, $message);
 
         return $save;
     }

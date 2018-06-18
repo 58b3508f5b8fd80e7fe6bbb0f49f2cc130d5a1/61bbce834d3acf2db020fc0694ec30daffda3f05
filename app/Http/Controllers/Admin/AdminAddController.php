@@ -1123,7 +1123,7 @@ class AdminAddController extends Controller
             ["Zamfara", "Birnin Magaji/Kiyaw"],
             ["Zamfara", "Bukkuyum"],
             ["Zamfara", "Bungudu"],
-            ["Zamfara", "Gummi"],
+            ["Zamfara", "Gummi"],   
             ["Zamfara", "Gusau"],
             ["Zamfara", "Kaura Namoda"],
             ["Zamfara", "Maradun"],
