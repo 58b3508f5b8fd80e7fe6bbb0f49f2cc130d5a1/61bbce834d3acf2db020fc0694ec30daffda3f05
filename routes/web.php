@@ -105,7 +105,7 @@ Route::middleware(['checkMaintenance'])->group(function () {
                             Route::middleware(['seniorAdminLevel'])
                                 ->group(function () {
 
-                                    Route::get('/transactions/withdrawal/{action}',
+                                    Route::get('/transactions/withdrawal/{action}/{grade?}',
                                         'AdminTransactionsController@viewWithdrawal');
                                     Route::get('/transactions/share',
                                         'AdminTransactionsController@viewShare');
@@ -206,10 +206,10 @@ Route::get('/maintenance', function () {
     }
 });
 //Route::get('/sendsms/{to}/{message}', 'SendSMS@sendSMS');
-Route::get('test', function(){
+/*Route::get('test', function(){
     $transactions= \App\Transaction::where('type','ngn-bank')->where('status','failed')->pluck('transaction_id');
 
-    $update = \App\Transaction::where('type','pnm-holding')->whereIn('transaction_id',$transactions)->update(['status'=>'failed']);
+    $update = \App\Transaction::where('type','pnm-holding')->whereIn('transaction_id',$transactions);
 
     //print_r($transactions);
     //print_r($commissions);
@@ -218,4 +218,4 @@ Route::get('test', function(){
     foreach($commissions as $commission){
         echo "$commission<br>";
     }
-});
+});*/

@@ -131,17 +131,18 @@ class AdminTransactionsController extends Controller
         return $withdrawals;
     }
 
-    public function getWithdrawals($action)
+    public function getWithdrawals($action,$grade)
     {
         $withdrawals = array();
         switch ($action) {
             case 'pnm':
-                $withdrawals = Transaction::leftJoin('users', 'users.wallet_id',
+                $withdrawals = Transaction::join('users', 'users.wallet_id',
                     '=', 'transactions.from')
-                    ->leftJoin('user_metas', 'user_metas.wallet_address',
+                    ->join('user_metas', 'user_metas.wallet_address',
                         '=', 'users.wallet_address')
                     ->where('transactions.type', 'pnm-wallet')
                     ->where('transactions.status', 'requested')
+                    ->where('users.grade',$grade)
                     ->select("transactions.*", "user_metas.bank_name",
                         "user_metas.wallet_address", "user_metas.bank_acc_no")
                     ->orderBy('transactions.updated_at', 'desc')->get();
@@ -153,6 +154,7 @@ class AdminTransactionsController extends Controller
                         '=', 'users.wallet_address')
                     ->where('transactions.type', 'ngn-bank')
                     ->where('transactions.status', 'requested')
+                    ->where('users.grade',$grade)
                     ->select("transactions.*", "user_metas.bank_name",
                         "user_metas.wallet_address", "user_metas.bank_acc_no")
                     ->orderBy('transactions.updated_at', 'desc')->get();
@@ -286,10 +288,10 @@ class AdminTransactionsController extends Controller
         return view('admin.withdrawals', $data);
     }
 
-    public function viewWithdrawal($action)
+    public function viewWithdrawal($action, $grade='student')
     {
         $data = array();
-        $data['withdrawals'] = $this->getWithdrawals($action);
+        $data['withdrawals'] = $this->getWithdrawals($action, $grade);
         $data['value'] = $this->admin()->getCurrentValue();
         $data['type'] = 'requested';
         $data['action'] = $action;
