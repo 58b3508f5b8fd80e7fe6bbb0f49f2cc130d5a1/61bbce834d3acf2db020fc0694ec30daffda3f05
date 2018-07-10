@@ -1,4 +1,5 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp
+@extends('layouts.admin')
 @section('title', strtoupper($action). ' withdrawals')
 @section('content')
 
@@ -39,6 +40,7 @@
 
                 $('#withdrawals').fadeOut(300);
                 $('#withdrawals').html(result.html);
+                $('.table').DataTable();
                 $('#withdrawals').fadeIn(300);
             }).fail(function () {
                 alert('Sorry, an error occurred');

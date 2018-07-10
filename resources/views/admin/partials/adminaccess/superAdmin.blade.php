@@ -69,10 +69,13 @@
                 <a href="{{url('/admin/transactions/withdrawal/ngn/partner')}}">Approve Partner NGN Withdrawal</a>
             </li>
             <li>
-                <a href="{{url('/admin/transactions/verified/pnm')}}">Verified PNM Withdrawals</a>
+                <a href="{{url('/admin/transactions/verified/ngn/student')}}">Verified Student NGN Withdrawal</a>
             </li>
             <li>
-                <a href="{{url('/admin/transactions/verified/ngn')}}">Verified NGN Withdrawal</a>
+                <a href="{{url('/admin/transactions/verified/ngn/staff')}}">Verified Staff NGN Withdrawal</a>
+            </li>
+            <li>
+                <a href="{{url('/admin/transactions/verified/ngn/partner')}}">Verified Partner NGN Withdrawal</a>
             </li>
             <li>
                 <a href="{{url('/admin/transactions/history')}}">History</a>

@@ -69,7 +69,7 @@ class AdminTransactionsController extends Controller
         $id = $request->input('id');
         $action = $request->input('action');
         $type = $request->input('type');
-        $grade= $request->input('grade');
+        $grade = $request->input('grade');
         $for = $request->input('for');
         $transaction = Transaction::find($id - 1127);
         $message = '';
@@ -98,11 +98,11 @@ class AdminTransactionsController extends Controller
         if ($for == 'verified') {
             $data['withdrawals'] = $this->getVerified($type);
         } elseif ($for == 'requested') {
-            $data['withdrawals'] = $this->getWithdrawals($type,$grade);
+            $data['withdrawals'] = $this->getWithdrawals($type, $grade);
         }
 
         $data['value'] = $this->admin()->getCurrentValue();
-        $data['action'] = $action;
+        $data['action'] = $type;
         $html = View::make('admin.partials.withdrawal', $data);
         $html = $html->render();
 
@@ -121,7 +121,7 @@ class AdminTransactionsController extends Controller
         ]);
     }
 
-    public function getVerified($action)
+    public function getVerified($action, $grade)
     {
         $withdrawals = array();
         $status = '';
@@ -132,9 +132,17 @@ class AdminTransactionsController extends Controller
                     ->orderBy('updated_at', 'desc')->get();
                 break;
             case 'ngn':
-                $withdrawals = Transaction::where('type', 'ngn-bank')
-                    ->where('status', '<>', 'requested')
-                    ->orderBy('updated_at', 'desc')->get();
+                $withdrawals = Transaction::leftJoin('users', 'users.name',
+                    '=', 'transactions.from')
+                    ->leftJoin('user_metas', 'user_metas.wallet_address',
+                        '=', 'users.wallet_address')
+                    ->where('transactions.type', 'ngn-bank')
+                    ->where('transactions.status', '<>', 'requested')
+                    ->where('transactions.status', '<>', 'pending')
+                    ->where('users.grade', $grade)
+                    ->select("transactions.*", "user_metas.bank_name",
+                        "user_metas.wallet_address", "user_metas.bank_acc_no")
+                    ->orderBy('transactions.updated_at', 'desc')->get();
                 break;
             default:
                 break;
@@ -142,7 +150,7 @@ class AdminTransactionsController extends Controller
         return $withdrawals;
     }
 
-    public function getWithdrawals($action,$grade)
+    public function getWithdrawals($action, $grade)
     {
         $withdrawals = array();
         switch ($action) {
@@ -153,7 +161,7 @@ class AdminTransactionsController extends Controller
                         '=', 'users.wallet_address')
                     ->where('transactions.type', 'pnm-wallet')
                     ->where('transactions.status', 'requested')
-                    ->where('users.grade',$grade)
+                    ->where('users.grade', $grade)
                     ->select("transactions.*", "user_metas.bank_name",
                         "user_metas.wallet_address", "user_metas.bank_acc_no")
                     ->orderBy('transactions.updated_at', 'desc')->get();
@@ -165,7 +173,7 @@ class AdminTransactionsController extends Controller
                         '=', 'users.wallet_address')
                     ->where('transactions.type', 'ngn-bank')
                     ->where('transactions.status', 'requested')
-                    ->where('users.grade',$grade)
+                    ->where('users.grade', $grade)
                     ->select("transactions.*", "user_metas.bank_name",
                         "user_metas.wallet_address", "user_metas.bank_acc_no")
                     ->orderBy('transactions.updated_at', 'desc')->get();
@@ -289,22 +297,23 @@ class AdminTransactionsController extends Controller
         return view('admin.transactionHistory', $data);
     }
 
-    public function viewVerified($action)
+    public function viewVerified($action, $grade)
     {
         $data = array();
-        $data['withdrawals'] = $this->getVerified($action);
+        $data['withdrawals'] = $this->getVerified($action, $grade);
         $data['value'] = $this->admin()->getCurrentValue();
+        $data['grade'] = $grade;
         $data['type'] = 'verified';
         $data['action'] = $action;
         return view('admin.withdrawals', $data);
     }
 
-    public function viewWithdrawal($action, $grade='student')
+    public function viewWithdrawal($action, $grade = 'student')
     {
         $data = array();
         $data['withdrawals'] = $this->getWithdrawals($action, $grade);
         $data['value'] = $this->admin()->getCurrentValue();
-        $data['grade']= $grade;
+        $data['grade'] = $grade;
         $data['type'] = 'requested';
         $data['action'] = $action;
         return view('admin.withdrawals', $data);

@@ -62,7 +62,7 @@ Route::middleware(['checkMaintenance'])->group(function () {
                             Route::get('', 'AdminController@index');
                             Route::get('/dashboard', 'AdminController@index');
                             // drg >> transaction functions
-                            Route::get('/transactions/verified/{action}',
+                            Route::get('/transactions/verified/{grade}/{action}',
                                 'AdminTransactionsController@viewVerified');
                             // drg >> add functions
                             Route::get('/add/user',
