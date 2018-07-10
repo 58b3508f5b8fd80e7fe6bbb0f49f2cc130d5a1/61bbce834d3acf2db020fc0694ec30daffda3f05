@@ -1,0 +1,4 @@
+SELECT *
+FROM user_metas
+WHERE wallet_address NOT IN (SELECT wallet_address
+                             FROM users)

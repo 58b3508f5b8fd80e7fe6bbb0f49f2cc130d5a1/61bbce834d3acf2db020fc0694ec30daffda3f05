@@ -69,6 +69,7 @@ class AdminTransactionsController extends Controller
         $id = $request->input('id');
         $action = $request->input('action');
         $type = $request->input('type');
+        $grade= $request->input('grade');
         $for = $request->input('for');
         $transaction = Transaction::find($id - 1127);
         $message = '';
@@ -97,7 +98,7 @@ class AdminTransactionsController extends Controller
         if ($for == 'verified') {
             $data['withdrawals'] = $this->getVerified($type);
         } elseif ($for == 'requested') {
-            $data['withdrawals'] = $this->getWithdrawals($type);
+            $data['withdrawals'] = $this->getWithdrawals($type,$grade);
         }
 
         $data['value'] = $this->admin()->getCurrentValue();
@@ -303,6 +304,7 @@ class AdminTransactionsController extends Controller
         $data = array();
         $data['withdrawals'] = $this->getWithdrawals($action, $grade);
         $data['value'] = $this->admin()->getCurrentValue();
+        $data['grade']= $grade;
         $data['type'] = 'requested';
         $data['action'] = $action;
         return view('admin.withdrawals', $data);

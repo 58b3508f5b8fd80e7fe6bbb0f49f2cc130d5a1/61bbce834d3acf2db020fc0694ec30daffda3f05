@@ -8,7 +8,7 @@
     </nav>
     <div class="block">
         <div class="block-header block-header-default">
-            <h3 class="block-title">Withdrawals
+            <h3 class="block-title">{{title_case($grade)}} Withdrawals
                 <small>{{strtoupper($action)}}</small>
             </h3>
         </div>
@@ -30,7 +30,8 @@
                 'id': id,
                 'action': action,
                 'type': '{{$action}}',
-                'for': '{{$type}}'
+                'for': '{{$type}}',
+                'grade': '{{$grade}}'
             };
             $.post('/admin/transactions/withdrawal', data, function (result) {
 
