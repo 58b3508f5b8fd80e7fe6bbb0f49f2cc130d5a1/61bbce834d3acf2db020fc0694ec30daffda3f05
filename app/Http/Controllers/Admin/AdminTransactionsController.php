@@ -96,7 +96,7 @@ class AdminTransactionsController extends Controller
             }
         }
         if ($for == 'verified') {
-            $data['withdrawals'] = $this->getVerified($type);
+            $data['withdrawals'] = $this->getVerified($type,grade);
         } elseif ($for == 'requested') {
             $data['withdrawals'] = $this->getWithdrawals($type, $grade);
         }

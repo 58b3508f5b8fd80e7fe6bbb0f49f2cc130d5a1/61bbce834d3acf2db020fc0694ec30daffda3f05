@@ -68,6 +68,7 @@ class APIChargeController extends Controller
                 $transaction->status = 'successful';
                 $transaction->remark = 'debit';
 
+                $response = $sms->sendSMS(Auth::user()->phone_no, $message);
                 if ($transaction->save()) {
                     $message
                         = "Wallet debit!\nAmt: ".($amount/100000)."\nDesc: $description\nDate: "
@@ -76,7 +77,7 @@ class APIChargeController extends Controller
                         . '...' . substr($transactionID, -6) . "\nBal: "
                         . $this->getTotalPNM() / 100000;
                     $sms = new SendSMS();
-                    $response = $sms->sendSMS(Auth::user()->phone_no, $message);
+
                     $status = true;
                     $data['alert'] = 'success';
                     $data['message'] = 'Your payment was successful';
