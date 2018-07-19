@@ -42,7 +42,7 @@ class AdminTransactionsController extends Controller
                 case('revoke'):
                     $verify = Transaction::where('transaction_id',
                         $transaction->transaction_id)->update([
-                        'status'     => 'successful',
+                        'status'     => 'failed',
                         'updated_at' => date('Y-m-d H:i:s')
                     ]);
                     $message = 'The transaction has been revoked';
@@ -186,7 +186,7 @@ class AdminTransactionsController extends Controller
 
     public function checkPNM($amount)
     {
-        $balance = $this->admin()->getTotalReserve();
+        $balance = $this->admin()->getTotalReserve()/100000;
         if ($balance >= $amount) {
             return true;
         }
@@ -205,6 +205,7 @@ class AdminTransactionsController extends Controller
             ->where('wallet_id', '<>', Auth::user()->wallet_id)->first();
         $checkPin = Hash::check($pin, Auth::user()->pin);
         $checkPNM = $this->checkPNM($pnm);
+
         if ($checkPin && $isUser && $checkPNM) {
             $ngn = $pnm * (int)$value;
             $description = "Admin shared $pnm PNM worth $ngn NGN";
@@ -231,7 +232,7 @@ class AdminTransactionsController extends Controller
             } elseif (!$checkPNM) {
                 $data['alert'] = 'danger';
                 $data['message']
-                    = "Sorry, you don't have sufficient PNM to complete this transaction";
+                    = "Sorry, you do not have sufficient PNM to complete this transaction";
             }
         }
 
