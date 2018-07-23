@@ -68,6 +68,8 @@ class APIChargeController extends Controller
                 $transaction->status = 'successful';
                 $transaction->remark = 'debit';
 
+                $sms = new SendSMS();
+
                 $response = $sms->sendSMS(Auth::user()->phone_no, $message);
                 if ($transaction->save()) {
                     $message
@@ -76,7 +78,6 @@ class APIChargeController extends Controller
                             0, 6)
                         . '...' . substr($transactionID, -6) . "\nBal: "
                         . $this->getTotalPNM() / 100000;
-                    $sms = new SendSMS();
 
                     $status = true;
                     $data['alert'] = 'success';
