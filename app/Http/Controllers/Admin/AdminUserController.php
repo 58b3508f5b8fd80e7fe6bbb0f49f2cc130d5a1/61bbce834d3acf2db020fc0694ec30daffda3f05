@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use Yajra\DataTables\DataTables;
 
 class AdminUserController extends Controller
 {
@@ -25,11 +26,11 @@ class AdminUserController extends Controller
         switch ($action) {
             case('approve'):
                 $admin->status = 'active';
-                $message = 'Admin has been activated successfully.';
+                $message = 'User has been activated successfully.';
                 break;
             case('block'):
                 $admin->status = 'blocked';
-                $message = 'The admin has been blocked';
+                $message = 'The user has been blocked';
                 break;
         }
 
@@ -158,10 +159,111 @@ class AdminUserController extends Controller
         return view('admin.users', $data);
     }
 
+    public function dataTableActiveUsers(DataTables $dataTables)
+    {
+        $users = User::query()->where('type', 'user')->where('status', 'active')
+            ->orderBy('status')
+            ->orderBy('full_name')
+            ->select(DB::raw('id+1107 as uid'),
+                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+                'name', 'wallet_id', 'account_number', 'status');
+        return $dataTables->eloquent($users)
+            ->editColumn('wallet_id', function (User $user) {
+                return $this->trimLongID($user->wallet_id);
+            })->toJson();
+    }
+
+    public function dataTableAllUsers(DataTables $dataTables)
+    {
+        $users = User::query()->where('type', 'user')->orderBy('status')
+            ->orderBy('full_name')
+            ->select(DB::raw('id+1107 as uid'),
+                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+                'name', 'wallet_id', 'account_number', 'status');
+        return $dataTables->eloquent($users)
+            ->editColumn('wallet_id', function (User $user) {
+                return $this->trimLongID($user->wallet_id);
+            })->toJson();
+    }
+
+    public function dataTableBlockedUsers(DataTables $dataTables)
+    {
+        $users = User::query()->where('type', 'user')
+            ->where('status', 'blocked')
+            ->orderBy('status')
+            ->orderBy('full_name')
+            ->select(DB::raw('id+1107 as uid'),
+                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+                'name', 'wallet_id', 'account_number', 'status');
+        return $dataTables->eloquent($users)
+            ->editColumn('wallet_id', function (User $user) {
+                return $this->trimLongID($user->wallet_id);
+            })->toJson();
+    }
+
+    public function dataTableRegisteredUsers(DataTables $dataTables)
+    {
+        $users = User_meta::query()->where('status', 'registered')
+            ->orderBy('status')
+            ->orderBy('full_name')
+            ->select(DB::raw('id+1107 as uid'),
+                DB::raw("concat(first_name,' ',last_name) as full_name"),'private_key as wallet',
+                'wallet_address as name', 'private_key as wallet_id',
+                'account_number', 'status');
+        return $dataTables->eloquent($users)
+            ->editColumn('name', function (User_meta $user) {
+                return $this->trimLongID($user->name);
+            })->editColumn('wallet_id', function (User_meta $user) {
+                return $this->trimLongID($user->wallet_id);
+            })->toJson();
+    }
+
+    public function dataTableUnregisteredUsers(DataTables $dataTables)
+    {
+        $users = User_meta::where('status', 'unregistered')
+            ->orWhere('status', 'pending')->orderBy('status')
+            ->orderBy('full_name')
+            ->select(DB::raw('id+1107 as uid'),
+                DB::raw("concat(first_name,' ',last_name) as full_name"),'private_key as wallet',
+                'wallet_address as name', 'private_key as wallet_id',
+                'account_number', 'status');
+        return $dataTables->eloquent($users)
+            ->editColumn('name', function (User_meta $user) {
+                return $this->trimLongID($user->name);
+            })->editColumn('wallet_id', function (User_meta $user) {
+                return $this->trimLongID($user->wallet_id);
+            })->toJson();
+    }
+
+    public function dataTableSuspendedUsers(DataTables $dataTables)
+    {
+        $users = User::query()->where('type', 'user')
+            ->where('status', 'pending')
+            ->orderBy('status')
+            ->orderBy('full_name')
+            ->select(DB::raw('id+1107 as uid'),
+                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+                'name', 'wallet_id', 'account_number', 'status');
+        return $dataTables->eloquent($users)
+            ->editColumn('wallet_id', function (User $user) {
+                return $this->trimLongID($user->wallet_id);
+            })->toJson();
+    }
+
     public function suspend()
     {
         $data['action'] = 'all';
         $data['users'] = User::where('type', 'user')->get();
         return view('admin.users', $data);
+    }
+
+    public function trimLongID($string)
+    {
+        if (strlen($string) > 15) {
+            $trim1 = substr($string, 0, 6);
+            $trim2 = substr($string, -6);
+            return "$trim1......$trim2";
+        }
+        return $string;
     }
 }

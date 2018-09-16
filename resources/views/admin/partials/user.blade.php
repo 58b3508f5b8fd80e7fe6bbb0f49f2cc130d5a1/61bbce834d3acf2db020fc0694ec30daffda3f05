@@ -9,9 +9,6 @@
             <table id="general-table" class="table table-striped table-vcenter">
                 <thead>
                 <tr>
-                    <th
-                    >S/No.
-                    </th>
                     <th>Name</th>
                     <th>@if($action=='registered' || $action=='unregistered')Wallet Address @else
                             Username @endif</th>
@@ -24,7 +21,7 @@
                     @endif
                 </tr>
                 </thead>
-                <tbody>
+                {{--<tbody>
                 @php
                     $i=0;
                 @endphp
@@ -127,7 +124,7 @@
                         @endif
                     </tr>
                 @endforeach
-                </tbody>
+                </tbody>--}}
             </table>
         </div>
     @else

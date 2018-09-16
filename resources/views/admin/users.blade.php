@@ -1,9 +1,12 @@
-@php    $public='';    if(config('app.env') == 'production')    $public ='public'; @endphp @extends('layouts.admin')
+@php    $public='';    if(config('app.env') == 'production')    $public ='public';
+@endphp
+@extends('layouts.admin')
 @section('title', title_case($action).' users')
 @section('style')
     {{--<link href="{{asset($public.'/css/glDatePicker.flatwhite.css')}}" rel="stylesheet" media="screen">--}}
     <link href="{{asset($public.'/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" media="screen">
-
+    <link rel="stylesheet" href="{{asset($public.'/css/dataTables.min.css')}}">
+    <link rel="stylesheet" href="{{asset($public.'/css/buttons.dataTables.min.css')}}">
     @if($type=='user')
         <style>
             .modal-dialog {
@@ -46,13 +49,23 @@
 @endsection
 @section('scripts')
     <script src="{{asset($public.'/js/loadingoverlay.min.js')}}"></script>
-
+    <script src="{{asset($public.'/js/buttons.min.js')}}"></script>
+    <script src="{{asset($public.'/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset($public.'/js/dataTables.select.min.js')}}"></script>
+    <script src="{{asset($public.'/js/dataTables.editor.min.js')}}"></script>
+    <script src="{{asset($public.'/js/jszip.min.js')}}"></script>
+    <script src="{{asset($public.'/js/pdfmake.min.js')}}"></script>
+    <script src="{{asset($public.'/js/vfs_fonts.js')}}"></script>
+    <script src="{{asset($public.'/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset($public.'/js/buttons.print.min.js')}}"></script>
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        doDataTable();
 
         $('#user-modal').on('shown.bs.modal', function () {
             $("#state").change(function () {
@@ -139,7 +152,7 @@
 
                         $('#users').fadeOut(300);
                         $('#users').html(result.html);
-                        $('.table').DataTable();
+                        doDataTable();
                         $('#users').fadeIn(300);
                     },
                     error: function () {
@@ -250,7 +263,7 @@
                 alert(result.message);
                 $('#users').fadeOut(300);
                 $('#users').html(result.html);
-                $('.table').DataTable();
+                doDataTable();
                 $('#users').fadeIn(300);
             }).fail(function () {
                 $(".modal").LoadingOverlay("hide");
@@ -258,6 +271,93 @@
             });
         }
 
+        function doDataTable() {
+            $('.table').DataTable({
+                dom: 'lBfrtip',
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "{{url()->current()}}",
+                    type: "POST"
+                },
+                columns: [
+                    {data: 'full_name', name: 'full_name'},
+                    {data: 'name', name: 'name'},
+                    {data: 'wallet_id', name: 'wallet_id'},
+                    {data: 'account_number', name: 'account_number'},
+                    {data: 'status', name: 'status'}
+                ],
+                @if(Auth::user()->access_level>=3)
+                buttons: [
+                    'excel',
+                    'pdf',
+                    'print'
+                ],
+                @endif
+                "columnDefs": [
+                    {
+                        className: "font-w600",
+                        "targets": [0]
+                    },
+                    {
+                        className: "text-center",
+                        "targets": [1, 2, 3, 4, 5]
+                    },
 
+                        @if(Auth::user()->access_level>=3)
+                    {
+                        "orderable": false,
+                        "targets": 5,
+
+                        "data": "uid",
+                        "render": function (data, type, row, meta) {
+                            let html = "<div class='btn-group'><button data-original-title='Edit " + row.full_name + "' type='button' class='btn btn-sm btn-alt-info js-tooltip-enabled' data-toggle='tooltip' title=''" + 'onclick="viewEditUser(' + "'" + data + "'," + "'{{$action}}')" + '"> <i class="fa fa-pencil"></i> </button>';
+                            @if(!in_array($action,['registered','unregistered']))
+                            if (row.status === 'active') {
+                                html = html.concat("<button data-original-title='Block ", row.full_name, "' type='button' class='btn btn-sm btn-alt-danger js-tooltip-enabled' data-toggle='tooltip' title=''", 'onclick="verifyUser(', "'", data, "',", "'block')", '"> <i class="fa fa-times"></i> </button>');
+                            }
+                            else {
+                                html = html.concat("<button data-original-title='Block ", row.full_name, data, "' type='button' class='btn btn-sm btn-alt-success js-tooltip-enabled' data-toggle='tooltip' title=''", 'onclick="verifyUser(', "'", data, "',", "'approve')", '"> <i class="fa fa-check"></i> </button>');
+                            }
+                            @endif
+                                return html.concat('</div>');
+                        }
+
+                    },
+                        @endif
+                    {
+                        "targets": 4,
+                        "data": "status",
+                        "render": function (data, type, row, meta) {
+                            let badge = '';
+                            if (data === 'active' || data === 'registered') {
+                                badge = 'badge-success';
+                            } else if (data === 'pending' || data === 'unregistered') {
+                                badge = 'badge-warning';
+                            }
+                            if (data === 'blocked') {
+                                badge = 'badge-danger';
+                            }
+                            let html = '<span class="badge ' + badge + '">' + data + '</span>';
+                            return html;
+                        }
+
+                    },
+                    {
+                        "targets": [2],
+                        "data": "wallet",
+                        "render": function (data, type, row, meta) {
+                            let html = '           <a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip" data-original-title="Click me to Copy" title="Click me to copy"' + 'onclick="copyText(' + "'" + row.wallet + "'"+ ')">' + row.wallet_id + "</a>";
+                            return html;
+                        }
+
+                    }
+                ],
+
+                "aLengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]],
+                "iDisplayLength": 25,
+                responsive: true
+            });
+        }
     </script>
 @endsection

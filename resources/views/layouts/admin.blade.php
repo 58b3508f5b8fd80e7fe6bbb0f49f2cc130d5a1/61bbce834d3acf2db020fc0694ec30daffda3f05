@@ -223,6 +223,13 @@
         document.execCommand("copy");
         $temp.remove();
     }
+    function copyText(text) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val(text).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
 </script>
 @yield('scripts')
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
