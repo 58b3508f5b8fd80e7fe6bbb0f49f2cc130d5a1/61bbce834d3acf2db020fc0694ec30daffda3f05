@@ -163,7 +163,7 @@ class AdminUserController extends Controller
     {
         $users = User::query()->where('type', 'user')->where('status', 'active')
             ->orderBy('status')
-            ->orderBy('created_at')
+            ->orderBy('created_at','desc')
             ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
@@ -176,7 +176,7 @@ class AdminUserController extends Controller
     public function dataTableAllUsers(DataTables $dataTables)
     {
         $users = User::query()->where('type', 'user')->orderBy('status')
-            ->orderBy('created_at')
+            ->orderBy('created_at','desc')
             ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
@@ -191,7 +191,7 @@ class AdminUserController extends Controller
         $users = User::query()->where('type', 'user')
             ->where('status', 'blocked')
             ->orderBy('status')
-            ->orderBy('created_at')
+            ->orderBy('created_at','desc')
             ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
@@ -205,7 +205,7 @@ class AdminUserController extends Controller
     {
         $users = User_meta::query()->where('status', 'registered')
             ->orderBy('status')
-            ->orderBy('created_at')
+            ->orderBy('created_at','desc')
             ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','private_key as wallet',
                 'wallet_address', 'private_key',
@@ -240,7 +240,7 @@ class AdminUserController extends Controller
         $users = User::query()->where('type', 'user')
             ->where('status', 'pending')
             ->orderBy('status')
-            ->orderBy('created_at')
+            ->orderBy('created_at','desc')
             ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
