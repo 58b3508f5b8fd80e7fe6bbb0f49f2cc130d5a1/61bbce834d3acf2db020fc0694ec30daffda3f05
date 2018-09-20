@@ -164,7 +164,7 @@ class AdminUserController extends Controller
         $users = User::query()->where('type', 'user')->where('status', 'active')
             ->orderBy('status')
             ->orderBy('created_at')
-            ->select(DB::raw('id+1107 as uid'),
+            ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
         return $dataTables->eloquent($users)
@@ -192,7 +192,7 @@ class AdminUserController extends Controller
             ->where('status', 'blocked')
             ->orderBy('status')
             ->orderBy('created_at')
-            ->select(DB::raw('id+1107 as uid'),
+            ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
         return $dataTables->eloquent($users)
@@ -223,7 +223,7 @@ class AdminUserController extends Controller
         $users = User_meta::where('status', 'unregistered')
             ->orWhere('status', 'pending')->orderBy('status')
             ->orderBy('created_at', 'desc')
-            ->select(DB::raw('id+1107 as uid'),
+            ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','private_key as wallet',
                 'wallet_address as name', 'private_key as wallet_id',
                 'account_number', 'status');
@@ -241,7 +241,7 @@ class AdminUserController extends Controller
             ->where('status', 'pending')
             ->orderBy('status')
             ->orderBy('created_at')
-            ->select(DB::raw('id+1107 as uid'),
+            ->select(DB::raw('id+1107 as id'),
                 'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
         return $dataTables->eloquent($users)

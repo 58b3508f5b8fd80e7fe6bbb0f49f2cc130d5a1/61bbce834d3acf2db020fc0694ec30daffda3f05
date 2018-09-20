@@ -200,7 +200,7 @@ class AdminEditController extends Controller
 
     public function getUser(Request $request)
     {
-        $id = $request->input('id');
+        $id = (int) $request->input('id');
         $action = $request->input('action');
         $data = null;
         if (!in_array($action, ['registered', 'unregistered'])) {
