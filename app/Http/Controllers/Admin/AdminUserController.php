@@ -222,7 +222,7 @@ class AdminUserController extends Controller
     {
         $users = User_meta::where('status', 'unregistered')
             ->orWhere('status', 'pending')->orderBy('status')
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->select(DB::raw('id+1107 as uid'),
                 'first_name','last_name','private_key as wallet',
                 'wallet_address as name', 'private_key as wallet_id',
