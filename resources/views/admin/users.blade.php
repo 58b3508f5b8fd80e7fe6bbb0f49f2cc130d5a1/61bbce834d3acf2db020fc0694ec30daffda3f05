@@ -281,10 +281,22 @@
                     type: "POST"
                 },
                 columns: [
-                    {data: 'full_name', name: 'full_name'},
-                    {data: 'name', name: 'name'},
+                    {data: 'first_name', name: 'first_name'},
+                    {data: 'last_name', name: 'last_name'},
+                        @if(!in_array($action,['registered','unregistered']))
+                    {
+                        data: 'name', name: 'name'
+                    },
                     {data: 'wallet_id', name: 'wallet_id'},
-                    {data: 'account_number', name: 'account_number'},
+                        @else
+                    {
+                        data: 'wallet_address', name: 'wallet_address'
+                    },
+                    {data: 'private_key', name: 'private_key'},
+                        @endif
+                    {
+                        data: 'account_number', name: 'account_number'
+                    },
                     {data: 'status', name: 'status'}
                 ],
                 @if(Auth::user()->access_level>=3)
@@ -297,27 +309,26 @@
                 "columnDefs": [
                     {
                         className: "font-w600",
-                        "targets": [0]
+                        "targets": [0, 1],
                     },
                     {
                         className: "text-center",
-                        "targets": [1, 2, 3, 4, 5]
+                        "targets": [2, 3, 4, 5, 6]
                     },
-
                         @if(Auth::user()->access_level>=3)
                     {
                         "orderable": false,
-                        "targets": 5,
+                        "targets": 6,
 
-                        "data": "uid",
+                        "data": "id",
                         "render": function (data, type, row, meta) {
-                            let html = "<div class='btn-group'><button data-original-title='Edit " + row.full_name + "' type='button' class='btn btn-sm btn-alt-info js-tooltip-enabled' data-toggle='tooltip' title=''" + 'onclick="viewEditUser(' + "'" + data + "'," + "'{{$action}}')" + '"> <i class="fa fa-pencil"></i> </button>';
+                            let html = "<div class='btn-group'><button data-original-title='Edit " + row.first_name + "' type='button' class='btn btn-sm btn-alt-info js-tooltip-enabled' data-toggle='tooltip' title=''" + 'onclick="viewEditUser(' + "'" + data + "'," + "'{{$action}}')" + '"> <i class="fa fa-pencil"></i> </button>';
                             @if(!in_array($action,['registered','unregistered']))
                             if (row.status === 'active') {
-                                html = html.concat("<button data-original-title='Block ", row.full_name, "' type='button' class='btn btn-sm btn-alt-danger js-tooltip-enabled' data-toggle='tooltip' title=''", 'onclick="verifyUser(', "'", data, "',", "'block')", '"> <i class="fa fa-times"></i> </button>');
+                                html = html.concat("<button data-original-title='Block ", row.first_name, "' type='button' class='btn btn-sm btn-alt-danger js-tooltip-enabled' data-toggle='tooltip' title=''", 'onclick="verifyUser(', "'", data, "',", "'block')", '"> <i class="fa fa-times"></i> </button>');
                             }
                             else {
-                                html = html.concat("<button data-original-title='Block ", row.full_name, data, "' type='button' class='btn btn-sm btn-alt-success js-tooltip-enabled' data-toggle='tooltip' title=''", 'onclick="verifyUser(', "'", data, "',", "'approve')", '"> <i class="fa fa-check"></i> </button>');
+                                html = html.concat("<button data-original-title='Block ", row.first_name, data, "' type='button' class='btn btn-sm btn-alt-success js-tooltip-enabled' data-toggle='tooltip' title=''", 'onclick="verifyUser(', "'", data, "',", "'approve')", '"> <i class="fa fa-check"></i> </button>');
                             }
                             @endif
                                 return html.concat('</div>');
@@ -326,7 +337,7 @@
                     },
                         @endif
                     {
-                        "targets": 4,
+                        "targets": 5,
                         "data": "status",
                         "render": function (data, type, row, meta) {
                             let badge = '';
@@ -344,10 +355,10 @@
 
                     },
                     {
-                        "targets": [2],
+                        "targets": [3],
                         "data": "wallet",
                         "render": function (data, type, row, meta) {
-                            let html = '           <a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip" data-original-title="Click me to Copy" title="Click me to copy"' + 'onclick="copyText(' + "'" + row.wallet + "'"+ ')">' + row.wallet_id + "</a>";
+                            let html = '           <a href="javascript:void(0)" class="js-tooltip-enabled" data-toggle="tooltip" data-original-title="Click me to Copy" title="Click me to copy"' + 'onclick="copyText(' + "'" + row.wallet + "'" + ')">' + @if(!in_array($action,['registered','unregistered'])) row.wallet_id @else row.private_key @endif + "</a>";
                             return html;
                         }
 

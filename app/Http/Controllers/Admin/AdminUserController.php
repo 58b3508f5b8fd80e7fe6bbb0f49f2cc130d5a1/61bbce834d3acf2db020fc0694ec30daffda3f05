@@ -163,9 +163,9 @@ class AdminUserController extends Controller
     {
         $users = User::query()->where('type', 'user')->where('status', 'active')
             ->orderBy('status')
-            ->orderBy('full_name')
+            ->orderBy('created_at')
             ->select(DB::raw('id+1107 as uid'),
-                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+                'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
         return $dataTables->eloquent($users)
             ->editColumn('wallet_id', function (User $user) {
@@ -176,9 +176,9 @@ class AdminUserController extends Controller
     public function dataTableAllUsers(DataTables $dataTables)
     {
         $users = User::query()->where('type', 'user')->orderBy('status')
-            ->orderBy('full_name')
-            ->select(DB::raw('id+1107 as uid'),
-                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+            ->orderBy('created_at')
+            ->select(DB::raw('id+1107 as id'),
+                'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
         return $dataTables->eloquent($users)
             ->editColumn('wallet_id', function (User $user) {
@@ -191,9 +191,9 @@ class AdminUserController extends Controller
         $users = User::query()->where('type', 'user')
             ->where('status', 'blocked')
             ->orderBy('status')
-            ->orderBy('full_name')
+            ->orderBy('created_at')
             ->select(DB::raw('id+1107 as uid'),
-                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+                'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
         return $dataTables->eloquent($users)
             ->editColumn('wallet_id', function (User $user) {
@@ -205,16 +205,16 @@ class AdminUserController extends Controller
     {
         $users = User_meta::query()->where('status', 'registered')
             ->orderBy('status')
-            ->orderBy('full_name')
-            ->select(DB::raw('id+1107 as uid'),
-                DB::raw("concat(first_name,' ',last_name) as full_name"),'private_key as wallet',
-                'wallet_address as name', 'private_key as wallet_id',
+            ->orderBy('created_at')
+            ->select(DB::raw('id+1107 as id'),
+                'first_name','last_name','private_key as wallet',
+                'wallet_address', 'private_key',
                 'account_number', 'status');
         return $dataTables->eloquent($users)
-            ->editColumn('name', function (User_meta $user) {
-                return $this->trimLongID($user->name);
-            })->editColumn('wallet_id', function (User_meta $user) {
-                return $this->trimLongID($user->wallet_id);
+            ->editColumn('wallet_address', function (User_meta $user) {
+                return $this->trimLongID($user->wallet_address);
+            })->editColumn('private_key', function (User_meta $user) {
+                return $this->trimLongID($user->private_key);
             })->toJson();
     }
 
@@ -222,9 +222,9 @@ class AdminUserController extends Controller
     {
         $users = User_meta::where('status', 'unregistered')
             ->orWhere('status', 'pending')->orderBy('status')
-            ->orderBy('full_name')
+            ->orderBy('created_at')
             ->select(DB::raw('id+1107 as uid'),
-                DB::raw("concat(first_name,' ',last_name) as full_name"),'private_key as wallet',
+                'first_name','last_name','private_key as wallet',
                 'wallet_address as name', 'private_key as wallet_id',
                 'account_number', 'status');
         return $dataTables->eloquent($users)
@@ -240,9 +240,9 @@ class AdminUserController extends Controller
         $users = User::query()->where('type', 'user')
             ->where('status', 'pending')
             ->orderBy('status')
-            ->orderBy('full_name')
+            ->orderBy('created_at')
             ->select(DB::raw('id+1107 as uid'),
-                DB::raw("concat(first_name,' ',last_name) as full_name"),'wallet_id as wallet',
+                'first_name','last_name','wallet_id as wallet',
                 'name', 'wallet_id', 'account_number', 'status');
         return $dataTables->eloquent($users)
             ->editColumn('wallet_id', function (User $user) {

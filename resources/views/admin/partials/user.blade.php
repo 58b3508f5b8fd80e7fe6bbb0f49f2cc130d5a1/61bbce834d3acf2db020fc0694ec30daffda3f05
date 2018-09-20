@@ -6,10 +6,11 @@
 <div class="block-content">
     @if(isset($users) && sizeof($users)>0)
         <div class="table-responsive">
-            <table id="general-table" class="table table-striped table-vcenter">
+            <table id="general-table" class="table table-striped table-vcenter" style="width:100% !important;">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>F. Name</th>
+                    <th>L. Name</th>
                     <th>@if($action=='registered' || $action=='unregistered')Wallet Address @else
                             Username @endif</th>
                     <th>@if($action=='registered' || $action=='unregistered')Private Key @else Wallet
