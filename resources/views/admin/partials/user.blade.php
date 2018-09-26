@@ -22,7 +22,7 @@
                     @endif
                 </tr>
                 </thead>
-                {{--<tbody>
+                <tbody>
                 @php
                     $i=0;
                 @endphp
@@ -125,7 +125,7 @@
                         @endif
                     </tr>
                 @endforeach
-                </tbody>--}}
+                </tbody>
             </table>
         </div>
     @else
