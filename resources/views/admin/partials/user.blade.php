@@ -127,6 +127,9 @@
                 @endforeach
                 </tbody>
             </table>
+            <div class="block-content">
+                {{$users->links()}}
+            </div>
         </div>
     @else
         <div class="col-sm-12 col-lg-12">
