@@ -118,48 +118,57 @@ class AdminEditController extends Controller
     {
         switch ($for) {
             case 'active':
-                $data['users'] = User::where('type', 'user')
+                $users = User::where('type', 'user')
                     ->where('status', 'active')
                     ->orderBy('created_at', 'desc')->paginate(800);
+                $users->withPath("/admin/users/active");
                 break;
             case 'admin':
-                $data['users'] = User::where('type', 'admin')
+                $users = User::where('type', 'admin')
                     ->where('access_level', ' < ',
                         Auth::user()->access_level)
                     ->orderBy('created_at', 'desc')->paginate(800);
+                $users->withPath("/admin/users/admin");
                 break;
             case 'all':
-                $data['users'] = User::where('type', 'user')
-                    ->orderBy('status')
-                    ->orderBy('first_name')->orderBy('created_at', 'desc')
+                $users = User::where('type', 'user')
+                    ->orderBy('created_at', 'desc')
                     ->paginate(800);
+                $users->withPath("/admin/users/all");
+
                 break;
             case 'blocked':
-                $data['users'] = User::where('type', 'user')
+                $users = User::where('type', 'user')
                     ->where('status', 'blocked')
                     ->orderBy('created_at', 'desc')->paginate(800);
+                $users->withPath("/admin/users/blocked");
                 break;
             case 'registered':
-                $data['users'] = User_meta::where('status', 'registered')
+                $users = User_meta::where('status', 'registered')
                     ->orderBy('created_at', 'desc')->paginate(800);
+                $users->withPath("/admin/users/registered");
                 break;
             case 'unregistered':
-                $data['users'] = User_meta::where('status', 'unregistered')
+                $users = User_meta::where('status', 'unregistered')
                     ->orWhere('status', 'pending')
                     ->orderBy('created_at', 'desc')->paginate(800);
+                $users->withPath("/admin/users/unregistered");
                 break;
             case 'suspended':
-                $data['users'] = User::where('type', 'user')
+                $users = User::where('type', 'user')
                     ->where('status', 'pending')
                     ->orderBy('created_at', 'desc')->paginate(800);
+                $users->withPath("/admin/users/suspended");
                 break;
             default:
-                $data['users'] = User::where('type', 'user')
+                $users = User::where('type', 'user')
                     ->orderBy('status')
-                    ->orderBy('first_name')->orderBy('created_at', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->paginate(800);
+                $users->withPath("/admin/users/all");
                 break;
         }
+        $data['users'] = $users;
         $data['action'] = $for;
         $data['type'] = $type;
         $html = View::make('admin.partials.user', $data);

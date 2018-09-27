@@ -113,8 +113,8 @@ class AdminUserController extends Controller
     {
         $data['action'] = 'all';
         $data['type'] = 'user';
-        $data['users'] = User::where('type', 'user')->orderBy('status')
-            ->orderBy('created_at', 'desc')->paginate(800);
+        $data['users'] = User::where('type', 'user')
+            ->orderBy('created_at', 'desc')->paginate(1);
         return view('admin.users', $data);
     }
 
