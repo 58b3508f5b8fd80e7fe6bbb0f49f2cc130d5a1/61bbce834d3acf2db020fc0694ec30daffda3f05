@@ -95,75 +95,63 @@ class AdminUserController extends Controller
         $data['action'] = 'active';
         $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->where('status', 'active')
-            ->orderBy('created_at', 'desc')->paginate($count);
+            ->orderBy('created_at', 'desc')->paginate(800);
         return view('admin.users', $data);
     }
 
     public function viewAdmins(Request $request)
     {
-        $page = $request->page ?: 1;
-        $count = 800 * $page;
         $data['action'] = 'admin';
         $data['type'] = 'admin';
         $data['users'] = User::where('type', 'admin')
             ->where('access_level', '<', Auth::user()->access_level)
-            ->orderBy('created_at', 'desc')->paginate($count);
+            ->orderBy('created_at', 'desc')->paginate(800);
         return view('admin.users', $data);
     }
 
     public function viewAllUsers(Request $request)
     {
-        $page = $request->page ?: 1;
-        $count = 1 * $page;
         $data['action'] = 'all';
         $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->orderBy('status')
-            ->orderBy('created_at', 'desc')->paginate($count);
+            ->orderBy('created_at', 'desc')->paginate(800);
         return view('admin.users', $data);
     }
 
     public function viewBlockedUsers(Request $request)
     {
-        $page = $request->page ?: 1;
-        $count = 800 * $page;
         $data['action'] = 'blocked';
         $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->where('status', 'blocked')
-            ->orderBy('created_at', 'desc')->paginate($count);
+            ->orderBy('created_at', 'desc')->paginate(800);
         return view('admin.users', $data);
     }
 
     public function viewRegisteredUsers(Request $request)
     {
-        $page = $request->page ?: 1;
-        $count = 800 * $page;
         $data['action'] = 'registered';
         $data['type'] = 'user';
         $data['users'] = User_meta::where('status', 'registered')
-            ->orderBy('created_at', 'desc')->paginate($count);
+            ->orderBy('created_at', 'desc')->paginate(800);
         return view('admin.users', $data);
     }
 
     public function viewUnregisteredUsers(Request $request)
     {
-        $page = $request->page ?: 1;
-        $count = 800 * $page;
         $data['action'] = 'unregistered';
         $data['type'] = 'user';
         $data['users'] = User_meta::where('status', 'unregistered')
             ->orWhere('status', 'pending')->orderBy('created_at', 'desc')
-            ->paginate($count);
+            ->paginate(800);
         return view('admin.users', $data);
     }
 
     public function viewSuspendedUsers(Request $request)
     {
-        $page = $request->page ?: 1;
-        $count = 800 * $page;
         $data['action'] = 'suspended';
         $data['type'] = 'user';
         $data['users'] = User::where('type', 'user')->where('status', 'pending')
-            ->orderBy('created_at', 'desc')->paginate($count);
+            ->orderBy('created_at', 'desc')->paginate(800);
         return view('admin.users', $data);
     }
 

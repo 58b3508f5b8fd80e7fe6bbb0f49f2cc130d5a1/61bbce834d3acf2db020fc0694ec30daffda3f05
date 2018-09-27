@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d803a88-2fc0-4199-959f-2a0dba854fc2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminUserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminUserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/partials/user.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/partials/user.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,8 +53,8 @@
           <file leaf-file-name="AdminUserController.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminUserController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="130" column="80" lean-forward="false" selection-start-line="130" selection-start-column="80" selection-end-line="130" selection-end-column="80" />
+                <state relative-caret-position="136">
+                  <caret line="116" column="57" lean-forward="false" selection-start-line="116" selection-start-column="57" selection-end-line="116" selection-end-column="57" />
                   <folding>
                     <element signature="e#46#59#0#PHP" expanded="true" />
                   </folding>
@@ -67,8 +65,8 @@
           <file leaf-file-name="AdminEditController.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="508">
-                  <caret line="202" column="20" lean-forward="false" selection-start-line="202" selection-start-column="20" selection-end-line="202" selection-end-column="20" />
+                <state relative-caret-position="272">
+                  <caret line="242" column="24" lean-forward="true" selection-start-line="242" selection-start-column="24" selection-end-line="242" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
@@ -114,8 +112,8 @@
           <file leaf-file-name="user.blade.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/resources/views/admin/partials/user.blade.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="236">
-                  <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+                <state relative-caret-position="219">
+                  <caret line="129" column="39" lean-forward="true" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
                   <folding>
                     <marker date="1538034551935" expanded="true" signature="1275:2258" ph="..." />
                     <marker date="1538034551935" expanded="true" signature="1328:1645" ph="..." />
@@ -184,8 +182,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>css-control-input</find>
-      <find>view::make</find>
       <find>getWithdrawals</find>
       <find>verified</find>
       <find>withdrawal</find>
@@ -214,10 +210,10 @@
       <find>(500</find>
       <find>-&gt;orderBy('create')</find>
       <find>-&gt;paginate($count)</find>
+      <find>;;</find>
+      <find>paginate($count)</find>
     </findStrings>
     <replaceStrings>
-      <replace>&lt;div class=&quot;row block block-bordered&quot;&gt;</replace>
-      <replace>']==</replace>
       <replace>-</replace>
       <replace>class=&quot;row block</replace>
       <replace>transaction</replace>
@@ -246,6 +242,8 @@
       <replace>($count</replace>
       <replace>800</replace>
       <replace>-&gt;orderBy('created_at','desc')-&gt;paginate($count)</replace>
+      <replace>;</replace>
+      <replace>paginate(800)</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/../mahadum/app/Http</dir>
@@ -602,7 +600,7 @@
       <workItem from="1537427737925" duration="6369000" />
       <workItem from="1537569007094" duration="399000" />
       <workItem from="1537997925462" duration="1083000" />
-      <workItem from="1538033726509" duration="1605000" />
+      <workItem from="1538033726509" duration="2676000" />
     </task>
     <task id="LOCAL-00001" summary="Finished off with user's transactions. Now to work on Settings">
       <created>1517041967637</created>
@@ -839,7 +837,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1050913000" />
+    <option name="totallyTimeSpent" value="1051984000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1326" height="741" extended-state="0" />
@@ -1233,14 +1231,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="202" column="20" lean-forward="false" selection-start-line="202" selection-start-column="20" selection-end-line="202" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/users.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -1253,8 +1243,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/partials/user.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+        <state relative-caret-position="219">
+          <caret line="129" column="39" lean-forward="true" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
           <folding>
             <marker date="1538034551935" expanded="true" signature="1275:2258" ph="..." />
             <marker date="1538034551935" expanded="true" signature="1328:1645" ph="..." />
@@ -1263,10 +1253,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminEditController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="242" column="24" lean-forward="true" selection-start-line="242" selection-start-column="24" selection-end-line="242" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminUserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="130" column="80" lean-forward="false" selection-start-line="130" selection-start-column="80" selection-end-line="130" selection-end-column="80" />
+        <state relative-caret-position="136">
+          <caret line="116" column="57" lean-forward="false" selection-start-line="116" selection-start-column="57" selection-end-line="116" selection-end-column="57" />
           <folding>
             <element signature="e#46#59#0#PHP" expanded="true" />
           </folding>
