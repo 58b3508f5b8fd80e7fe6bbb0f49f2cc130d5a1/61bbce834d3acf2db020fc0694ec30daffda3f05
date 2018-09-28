@@ -199,16 +199,6 @@ Route::middleware(['checkMaintenance'])->group(function () {
     Route::get('/clients/62608e08adc29a8d6dbc9754e659f125', function () {
         return view('admin.createAPI');
     });
-
-    Route::get('sendbulksms', function () {
-        $user = Auth::user();
-        $message
-            = "Dear $user->first_name,\nYour TLSavings Account Number is: $user->account_number."
-            . "\n\nPlease contact any of our agents, or any of our centres close to you for more information.";
-        $sms = new \App\Http\Controllers\SendSMS();
-        $response = $sms->sendSMS($user->phone_no, $message);
-        echo "Sent to $user->phone_no <br><hr><br>";
-    });
 });
 Route::get('/maintenance', function () {
     if (config('app.maintenance') == true) {
@@ -217,7 +207,144 @@ Route::get('/maintenance', function () {
         return redirect('/');
     }
 });
-//Route::get('/sendsms/{to}/{message}', 'SendSMS@sendSMS');
-Route::get('test', function(){
+Route::get('/sendaccountcreationsms',
+    function (\Illuminate\Http\Request $request) {
 
-});
+        $url = url('/sendemergencysms');
+        $csrf = csrf_field();
+
+        if (isset($request->send)) {
+            $limit = $request->limit;
+            $offset = $request->offset;
+            echo "Last Limit <em>$limit</em><br>Last offset <em>$offset</em><br>";
+            $newOffset = $limit + $offset;
+            echo "
+<form action='$url' id='messageForm'>
+$csrf
+Limit: <input name='limit' value='$limit'> <br>
+Offset: <input name='offset' value='$newOffset'> <br>
+Send: <input name='send' type='checkbox' checked>
+<input type='submit'>
+</form><br><br></hr>";
+
+            $toSend = \App\User_meta::where('created_at', '>',
+                '2018-07-31 08:37:56')
+                ->limit($limit)->offset($offset)->get();
+            $sending = count($toSend);
+
+            if ($sending > 0) {
+                echo "<br>Sending: " . $sending;
+
+                echo "<table><tr><th>S/No</th><th>Name</th><th>Wallet_address</th><th>Phone_no</th><th>Messge</th></tr>";
+                $i = 1;
+                foreach ($toSend as $send) {
+                    $sms = new \App\Http\Controllers\SendSMS();
+                    $to = $send->phone_no;
+                    $message = "Dear " . $send->first_name
+                        . ",\nYour account with " . config('app.name')
+                        . " has been created. Please complete your "
+                        . "registration via https://bit.ly/2rzQXKY with these required details:\nWallet Address: "
+                        . substr($send->wallet_address, -6)
+                        . "\nTLSavings Acc No: $send->account_number\nWelcome to "
+                        . config('app.name');
+                    $response = $sms->sendSMS($to, $message);
+                    echo "<tr><td>$i</td><td>$send->first_name</td><td>$send->wallet_address</td><td>$send->phone_no</td><td>$message</td></tr>";
+                    $i++;
+                }
+                echo "</table>";
+                $_SESSION['sentsms'] = isset($_SESSION['sentsms'])
+                    ? $_SESSION['sentsms'] + $i : 0;
+                echo "<br>Sent: " . $_SESSION['sentsms'];
+
+                echo "<script>
+            setTimeout(function(){  document.getElementById('messageForm').submit(); }, 5000);
+            </script>";
+
+            } else {
+                echo "<em>sent all messages</em>";
+            }
+        } else {
+            echo "
+<form action='$url'>
+$csrf
+Limit: <input name='limit' value='100'> <br>
+Offset: <input name='offset' value='0'> <br>
+Send: <input name='send' type='checkbox'>
+<input type='submit'>
+</form><br><br></hr>";
+
+        }
+
+    });
+Route::get('/sendadmintransfersms',
+    function (\Illuminate\Http\Request $request) {
+
+        $url = url('/sendemergencysms');
+        $csrf = csrf_field();
+
+        if (isset($request->send)) {
+            $limit = $request->limit;
+            $offset = $request->offset;
+            echo "Last Limit <em>$limit</em><br>Last offset <em>$offset</em><br>";
+            $newOffset = $limit + $offset;
+            echo "
+<form action='$url' id='messageForm'>
+$csrf
+Limit: <input name='limit' value='$limit'> <br>
+Offset: <input name='offset' value='$newOffset'> <br>
+Send: <input name='send' type='checkbox' checked>
+<input type='submit'>
+</form><br><br></hr>";
+
+            $toSend = \App\Transaction::where('created_at', '>',
+                '2018-07-31 08:37:56')->where('created_at', '<', '2018-09-28')
+                ->where('from', '767ee95ff9af1351d42f4232878ebef6')
+                ->limit($limit)->offset($offset)->get();
+            $sending = count($toSend);
+
+            if ($sending > 0) {
+                echo "<br>Sending: " . $sending;
+
+                echo "<table><tr><th>S/No</th><th>Name</th><th>Wallet_address</th><th>Phone_no</th><th>Messge</th></tr>";
+                $i = 1;
+                foreach ($toSend as $send) {
+
+                    $message
+                        = "Wallet $send->remark!\nAmt: $send->amount\nDesc: $send->description is $send->status.\nDate: "
+                        . date('d-m-Y H:i', strtotime($send->created_at)) . "\nID: " . substr($send->transaction_id,
+                            0,
+                            6)
+                        . '...' . substr($send->transaction_id, -6);
+                    $to = \App\User::where('wallet_id', $send->to)->value('phone_no');
+                    $sms = new \App\Http\Controllers\SendSMS();
+                    $response = $sms->sendSMS($to, $message);
+
+                    echo "<tr><td>$i</td><td>$send->first_name</td><td>$send->wallet_address</td><td>$send->phone_no</td><td>$message</td></tr>";
+                    $i++;
+                }
+                echo "</table>";
+                $_SESSION['sentsms'] = isset($_SESSION['sentsms'])
+                    ? $_SESSION['sentsms'] + $i : 0;
+                echo "<br>Sent: " . $_SESSION['sentsms'];
+
+                echo "<script>
+            setTimeout(function(){  document.getElementById('messageForm').submit(); }, 5000);
+            </script>";
+
+            } else {
+                echo "<em>sent all messages</em>";
+            }
+        } else {
+            echo "
+<form action='$url'>
+$csrf
+Limit: <input name='limit' value='100'> <br>
+Offset: <input name='offset' value='0'> <br>
+Send: <input name='send' type='checkbox'>
+<input type='submit'>
+</form><br><br></hr>";
+
+        }
+
+    });
+
